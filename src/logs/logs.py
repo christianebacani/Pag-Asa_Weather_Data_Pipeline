@@ -8,6 +8,7 @@ import pandas as pd
 from datetime import datetime
 from ingest.ingest import scrape_daily_weather_forecast
 from ingest.ingest import scrape_weather_outlook_selected_ph_cities
+from ingest.ingest import scrape_asian_cities_weather_forecast
 
 def generate_logs_from_job(job: str) -> None:
     '''
@@ -27,6 +28,7 @@ def generate_logs_from_job(job: str) -> None:
 if __name__ == '__main__':
     '''
     daily_weather_forecast_data = scrape_daily_weather_forecast('https://www.pagasa.dost.gov.ph/weather#daily-weather-forecast')
+    weather_outlook_selected_ph_cities_data = scrape_weather_outlook_selected_ph_cities('https://www.pagasa.dost.gov.ph/weather/weather-outlook-selected-philippine-cities')
     '''
-    scrape_weather_outlook_selected_ph_cities('https://www.pagasa.dost.gov.ph/weather/weather-outlook-selected-philippine-cities')
+    scrape_asian_cities_weather_forecast('https://www.pagasa.dost.gov.ph/weather/weather-asian-cities-weather-forecast')
     generate_logs_from_job('INGEST')
