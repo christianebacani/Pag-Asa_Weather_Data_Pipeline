@@ -124,3 +124,15 @@ def scrape_weather_outlook_for_selected_ph_cities_data(url: str) -> None | dict:
     soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object
     row_weather_page = soup.find('div', attrs={'class': 'row weather-page'})
     list_of_row_tags = row_weather_page.find_all('div', attrs={'class': 'row'})
+    
+    # Scrape weather outlook for selected ph cities issued datetime
+    validity = list_of_row_tags[0].find('div', attrs={'class': 'validity'})
+    list_of_bold_tags = validity.find_all('b')
+
+    if list_of_bold_tags == []:
+        issued_datetime = ''
+        time_of_validity = ''
+
+    else:
+        issued_datetime = str(list_of_bold_tags[0].text)
+        issued_datetime = ' '.join(issued_datetime.split())
