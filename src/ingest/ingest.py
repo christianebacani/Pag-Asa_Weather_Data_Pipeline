@@ -182,10 +182,16 @@ def scrape_weather_outlook_for_selected_ph_cities_data(url: str) -> None | dict:
             weather_outlook_chances_of_rain.append(chances_of_rain)
         
         # Store all the scraped weather outlook for selected ph cities data to a dictionary for better readability instead of using separate arrays
-        weather_outlook = {}
-        weather_outlook['weather_outlook_dates'] = weather_outlook_dates
-        weather_outlook['weather_outlook_temperatures'] = weather_outlook_temperatures
-        weather_outlook['weather_outlook_chances_of_rain'] = weather_outlook_chances_of_rain
-        result[city] = weather_outlook
-    
+        result[city] = {}
+        result[city]['weather_outlook_dates'] = weather_outlook_dates
+        result[city]['weather_outlook_temperatures'] = weather_outlook_temperatures
+        result[city]['weather_outlook_chances_of_rain'] = weather_outlook_chances_of_rain
+
     return result
+
+def scrape_asian_cities_weather_forecast_data(url: str) -> None | dict:
+    '''
+        Scrape function to perform web-scraping
+        to ingest asian cities weather forecast
+        from the Website of Pag-Asa (https://www.pagasa.dost.gov.ph/)
+    '''
