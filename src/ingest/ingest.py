@@ -142,13 +142,14 @@ def scrape_weather_outlook_for_selected_ph_cities_data(url: str) -> None | dict:
     outlook_ph_cities = list_of_row_tags[0].find('div', attrs={'class': 'panel-group', 'id': 'outlook-phil-cities'})
     ph_cities = outlook_ph_cities.find_all('div', attrs={'class': 'panel panel-default panel-pagasa'})
 
-    weather_outlook_of_ph_cities = {}
-
+    result = {}
+    result['issued_datetime'] = issued_datetime
+    result['time_of_validity'] = time_of_validity
+ 
     for ph_city in ph_cities:
         # Get the city name
         city = str(ph_city.find('div', attrs={'class': 'panel-title'}).text)
         city = ' '.join(city.split())
-        weather_outlook_of_ph_cities[city] = {}
 
         table = ph_city.find('table', attrs={'class': 'table'})
 
@@ -163,7 +164,28 @@ def scrape_weather_outlook_for_selected_ph_cities_data(url: str) -> None | dict:
             table_header = ' '.join(table_header.split())
             weather_outlook_dates.append(table_header)
 
-        weather_outlook_of_ph_cities[city] = {'dates': weather_outlook_dates}
-
         tbody = table.find('tbody')
-        table_rows = tbody.find_all('tr', attrs={'class': 'mobile-view-tr'})
+        desktop_view_table_row = tbody.find('tr', attrs={'class': 'desktop-view-tr'})
+        table_datas = desktop_view_table_row.find_all('td')
+
+        weather_outlook_temperatures = []
+        weather_outlook_chances_of_rain = []
+
+        for table_data in table_datas:
+            # Scrape weather outlook temperatures
+            temperatures = str(table_data.find('div', attrs={'class': 'weather-values'}).text)
+            temperatures = temperatures.split()
+            weather_outlook_temperatures.append(temperatures)
+
+            # Scrape weather outlook chances of rain
+            chances_of_rain = str(table_data.find('span', attrs={'style': 'font-weight:bold; color: rgb(9, 73, 156);'}).text)
+            weather_outlook_chances_of_rain.append(chances_of_rain)
+        
+        # Store all the scraped weather outlook for selected ph cities data to a dictionary for better readability instead of using separate arrays
+        weather_outlook = {}
+        weather_outlook['weather_outlook_dates'] = weather_outlook_dates
+        weather_outlook['weather_outlook_temperatures'] = weather_outlook_temperatures
+        weather_outlook['weather_outlook_chances_of_rain'] = weather_outlook_chances_of_rain
+        result[city] = weather_outlook
+    
+    return result
