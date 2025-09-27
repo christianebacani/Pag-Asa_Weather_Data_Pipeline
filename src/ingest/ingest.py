@@ -136,3 +136,34 @@ def scrape_weather_outlook_for_selected_ph_cities_data(url: str) -> None | dict:
     else:
         issued_datetime = str(list_of_bold_tags[0].text)
         issued_datetime = ' '.join(issued_datetime.split())
+        time_of_validity = str(list_of_bold_tags[1].text)
+    
+    # Scrape weather outlook for selected ph cities
+    outlook_ph_cities = list_of_row_tags[0].find('div', attrs={'class': 'panel-group', 'id': 'outlook-phil-cities'})
+    ph_cities = outlook_ph_cities.find_all('div', attrs={'class': 'panel panel-default panel-pagasa'})
+
+    weather_outlook_of_ph_cities = {}
+
+    for ph_city in ph_cities:
+        # Get the city name
+        city = str(ph_city.find('div', attrs={'class': 'panel-title'}).text)
+        city = ' '.join(city.split())
+        weather_outlook_of_ph_cities[city] = {}
+
+        table = ph_city.find('table', attrs={'class': 'table'})
+
+        # Get the weather outlook dates
+        thead = table.find('thead', attrs={'class': 'desktop-view-thead'})
+        table_headers = thead.find_all('th', attrs={'class': 'text-center'})
+
+        weather_outlook_dates = []
+
+        for table_header in table_headers:
+            table_header = str(table_header.text)
+            table_header = ' '.join(table_header.split())
+            weather_outlook_dates.append(table_header)
+
+        weather_outlook_of_ph_cities[city] = {'dates': weather_outlook_dates}
+
+        tbody = table.find('tbody')
+        table_rows = tbody.find_all('tr', attrs={'class': 'mobile-view-tr'})
