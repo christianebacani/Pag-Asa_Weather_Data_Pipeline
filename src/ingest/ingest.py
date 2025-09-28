@@ -147,13 +147,13 @@ def scrape_weather_outlook_for_selected_ph_cities_data(url: str) -> None | dict:
     result['time_of_validity'] = time_of_validity
  
     for ph_city in ph_cities:
-        # Get the city name
+        # Scrape city name
         city = str(ph_city.find('div', attrs={'class': 'panel-title'}).text)
         city = ' '.join(city.split())
 
         table = ph_city.find('table', attrs={'class': 'table'})
 
-        # Get the weather outlook dates
+        # Scrape weather outlook dates
         thead = table.find('thead', attrs={'class': 'desktop-view-thead'})
         table_headers = thead.find_all('th', attrs={'class': 'text-center'})
 
@@ -216,4 +216,28 @@ def scrape_asian_cities_weather_forecast_data(url: str) -> None | dict:
     
     else:
         issued_datetime = str(list_of_bold_tags[0].text)
-        print(issued_datetime)
+        time_of_validity = str(list_of_bold_tags[1].text)
+    
+    table = list_of_row_tags[0].find('table', attrs={'class': 'table', 'id': 'asian-table'})
+    tbody = table.find('tbody')
+    table_rows = tbody.find_all('tr')
+
+    result = {}
+    result['issued_datetime'] = issued_datetime
+    result['time_of_validity'] = time_of_validity
+
+    for table_row in table_rows:
+        table_datas = table_row.find_all('td')
+        
+        # Scrape city name
+        place = str(table_datas[0].text)
+
+        # Scrape weather description        
+        description = str(table_datas[2].text)
+        description = ' '.join(description.split())
+
+        # Scrape minimum temperature
+        minimum_temperature = str(table_datas[3].text)
+
+        # Scrape maximum temperature
+        maximum_temperature = str(table_datas[4].text)
