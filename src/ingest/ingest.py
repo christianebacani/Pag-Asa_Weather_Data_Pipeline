@@ -195,3 +195,25 @@ def scrape_asian_cities_weather_forecast_data(url: str) -> None | dict:
         to ingest asian cities weather forecast
         from the Website of Pag-Asa (https://www.pagasa.dost.gov.ph/)
     '''
+    response = requests.get(url)
+
+    if response.status_code != 200:
+        print(f'Status code: {response.status_code}')
+        print(f'The website didn\'t accept the request!')
+        return None
+
+    soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object
+    row_weather_page = soup.find('div', attrs={'class': 'row weather-page'})
+    list_of_row_tags = row_weather_page.find_all('div', attrs={'class': 'row'})
+
+    # Scrape asian citiesw weather forecast issued datetime and time of validity
+    validity = list_of_row_tags[0].find('div', attrs={'class': 'validity'})
+    list_of_bold_tags = validity.find_all('b')
+
+    if list_of_bold_tags == []:
+        issued_datetime = ''
+        time_of_validity = ''
+    
+    else:
+        issued_datetime = str(list_of_bold_tags[0].text)
+        print(issued_datetime)
