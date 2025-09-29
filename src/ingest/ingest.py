@@ -125,7 +125,7 @@ def scrape_weather_outlook_for_selected_ph_cities_data(url: str) -> None | dict:
     row_weather_page = soup.find('div', attrs={'class': 'row weather-page'})
     list_of_row_tags = row_weather_page.find_all('div', attrs={'class': 'row'})
     
-    # Scrape weather outlook for selected ph cities issued datetime
+    # Scrape weather outlook for selected ph cities issued datetime and time of validity
     validity = list_of_row_tags[0].find('div', attrs={'class': 'validity'})
     list_of_bold_tags = validity.find_all('b')
 
@@ -206,7 +206,7 @@ def scrape_asian_cities_weather_forecast_data(url: str) -> None | dict:
     row_weather_page = soup.find('div', attrs={'class': 'row weather-page'})
     list_of_row_tags = row_weather_page.find_all('div', attrs={'class': 'row'})
 
-    # Scrape asian citiesw weather forecast issued datetime and time of validity
+    # Scrape asian cities weather forecast issued datetime and time of validity
     validity = list_of_row_tags[0].find('div', attrs={'class': 'validity'})
     list_of_bold_tags = validity.find_all('b')
 
@@ -232,15 +232,24 @@ def scrape_asian_cities_weather_forecast_data(url: str) -> None | dict:
         # Scrape city name
         place = str(table_datas[0].text)
 
+        if place is None:
+            place = ''
+
         # Scrape weather description        
         description = str(table_datas[2].text)
         description = ' '.join(description.split())
 
         # Scrape minimum temperature
         minimum_temperature = str(table_datas[3].text)
+        
+        if minimum_temperature is None:
+            minimum_temperature = ''
 
         # Scrape maximum temperature
         maximum_temperature = str(table_datas[4].text)
+
+        if maximum_temperature is None:
+            maximum_temperature = ''
 
         result[place] = {}
         result[place]['description'] = description
@@ -266,5 +275,18 @@ def scrape_weather_outlook_for_selected_tourist_areas_data(url: str) -> None | d
     row_weather_page = soup.find('div', attrs={'class': 'row weather-page'})
     list_of_row_tags = row_weather_page.find_all('div', attrs={'class': 'row'})
 
+    # Scrape weather outlook for selected tourist areas issued datetime and time of validity
     validity = list_of_row_tags[0].find('div', attrs={'class': 'validity'})
     list_of_bold_tags = validity.find_all('b')
+
+    if list_of_bold_tags == []:
+        issued_datetime = ''
+        time_of_validity = ''
+    
+    else:
+        issued_datetime = str(list_of_bold_tags[0].text)
+        time_of_validity = str(list_of_bold_tags[1].text)
+    
+    table_desktop = list_of_row_tags[0].find('table', attrs={'class': 'table desktop'})
+
+    thead = table_desktop.find('thead')
