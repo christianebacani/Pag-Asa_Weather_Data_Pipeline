@@ -241,3 +241,30 @@ def scrape_asian_cities_weather_forecast_data(url: str) -> None | dict:
 
         # Scrape maximum temperature
         maximum_temperature = str(table_datas[4].text)
+
+        result[place] = {}
+        result[place]['description'] = description
+        result[place]['minimum_temperature'] = minimum_temperature
+        result[place]['maximum_temperature'] = maximum_temperature
+
+    return result
+
+def scrape_weather_outlook_for_selected_tourist_areas_data(url: str) -> None | dict:
+    '''
+        Scrape function to perform web-scraping
+        to ingest weather outlook for selected tourist
+        areas from the Website of Pag-Asa (https://www.pagasa.dost.gov.ph/)
+    '''
+    response = requests.get(url)
+
+    if response.status_code != 200:
+        print(f'Status code: {response.status_code}')
+        print(f'The website didn\'t accept the request!')
+        return None
+
+    soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object
+    row_weather_page = soup.find('div', attrs={'class': 'row weather-page'})
+    list_of_row_tags = row_weather_page.find_all('div', attrs={'class': 'row'})
+
+    validity = list_of_row_tags[0].find('div', attrs={'class': 'validity'})
+    list_of_bold_tags = validity.find_all('b')
