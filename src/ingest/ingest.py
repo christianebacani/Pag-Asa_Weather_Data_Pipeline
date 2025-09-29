@@ -289,4 +289,30 @@ def scrape_weather_outlook_for_selected_tourist_areas_data(url: str) -> None | d
     
     table_desktop = list_of_row_tags[0].find('table', attrs={'class': 'table desktop'})
 
+    # Scrape weather outlook dates
     thead = table_desktop.find('thead')
+    table_headers = thead.find_all('th')
+
+    weather_outlook_dates = []
+
+    for table_header in table_headers:
+        table_header = str(table_header.text)
+        table_header = ' '.join(table_header.split())
+        weather_outlook_dates.append(table_header)
+
+    tbody = table_desktop.find('tbody')
+    table_rows = tbody.find_all('tr')
+    
+    result = {}
+    result['issued_datetime'] = issued_datetime
+    result['time_of_validity'] = time_of_validity
+
+    for table_row in table_rows:
+        table_datas = table_row.find_all('td')
+        
+        # Scrape tourist destination name
+        tourist_destination = str(table_datas[0].text)
+        tourist_destination = ' '.join(tourist_destination.split())
+
+        # Scrape minimum and maximum temperatures in different dates
+        minimum_and_maximum_temperatures = table_datas[1:]
