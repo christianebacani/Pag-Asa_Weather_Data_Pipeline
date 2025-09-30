@@ -363,8 +363,7 @@ def scrape_weekly_weather_outlook_data(url: str) -> None | dict:
     result = {}
     result['issued_datetime'] = issued_datetime
     result['datetime_of_validity'] = datetime_of_validity
-    
-    # Scrape weekly weather outlooks
+
     table = list_of_row_tags[0].find('table', attrs={'class': 'table'})
     tbody = table.find('tbody')
     table_rows = tbody.find_all('tr')
@@ -372,11 +371,16 @@ def scrape_weekly_weather_outlook_data(url: str) -> None | dict:
     for table_row in table_rows:
         table_datas = table_row.find_all('td')
 
+        # Scrape weather outlook date
         weather_outlook_date = str(table_datas[0].text)
         weather_outlook_date = ' '.join(weather_outlook_date.split())
 
+        # Scrape weather outlook description
         weather_outlook_description = str(table_datas[1].text)
         weather_outlook_description = ' '.join(weather_outlook_description.split())
+
+        if weather_outlook_date == '':
+            continue
 
         result[weather_outlook_date] = weather_outlook_description
     
@@ -388,3 +392,37 @@ def scrape_daily_temperature_data(url: str) -> None | dict:
         to ingest daily temperature data
         from the Website of Pag-Asa (https://www.pagasa.dost.gov.ph/)
     '''
+    response = requests.get(url)
+    
+    if response.status_code != 200:
+        print(f'Status code: {response.status_code}')
+        print(f'The website didn\'t accept the request!')
+        return None
+
+    soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object
+    row_weather_page = soup.find('div', attrs={'class': 'row weather-page'})
+    article_content = row_weather_page.find('div', attrs={'class': 'col-md-12 article-content'})
+    column_tags = article_content.find_all('div', attrs={'class': 'col-md-6'})
+
+    panel = column_tags[0].find('div', attrs={'class': 'panel'})
+    
+    # Scrape top 10 lowest temperature heading
+    panel_heading = panel.find('div', attrs={'class': 'panel-heading'})
+    panel_heading = str(panel_heading.text)
+    top_10_lowest_temperature_heading = ' '.join(panel_heading.split())
+
+    panel_body = panel.find('div', attrs={'class': 'panel-body'})
+    table = panel_body.find('table', attrs={'class': 'table'})
+    tbody = table.find('tbody')
+    table_rows = tbody.find_all('tr')
+
+    for table_row in table_rows:
+        table_datas = table_row.find_all('td')
+        
+        # Scrape station name for top 10 lowest temperature
+        station_name = str(table_datas[0].text)
+        station_name = ' '.join(station_name.split())
+
+        # Scrape temperature for top 10 lowest temperature
+        temperature = str(table_datas[1].text)
+        temperature = ' '.join(temperature.split())
