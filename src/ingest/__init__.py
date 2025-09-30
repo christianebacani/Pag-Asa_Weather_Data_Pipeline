@@ -1,1 +1,1 @@
-from . import ingest
+from . import ingest_weather_data
