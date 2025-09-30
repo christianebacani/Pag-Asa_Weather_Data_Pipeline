@@ -112,7 +112,7 @@ def scrape_weather_outlook_for_selected_ph_cities_data(url: str) -> None | dict:
     '''
         Scrape function to perform web-scraping
         to ingest weather oulook for selected ph
-        cities from the Website of Pag-Asa (https://www.pagasa.dost.gov.ph/)
+        cities data from the Website of Pag-Asa (https://www.pagasa.dost.gov.ph/)
     '''
     response = requests.get(url)
 
@@ -192,7 +192,7 @@ def scrape_weather_outlook_for_selected_ph_cities_data(url: str) -> None | dict:
 def scrape_asian_cities_weather_forecast_data(url: str) -> None | dict:
     '''
         Scrape function to perform web-scraping
-        to ingest asian cities weather forecast
+        to ingest asian cities weather forecast data
         from the Website of Pag-Asa (https://www.pagasa.dost.gov.ph/)
     '''
     response = requests.get(url)
@@ -218,13 +218,13 @@ def scrape_asian_cities_weather_forecast_data(url: str) -> None | dict:
         issued_datetime = str(list_of_bold_tags[0].text)
         time_of_validity = str(list_of_bold_tags[1].text)
     
-    table = list_of_row_tags[0].find('table', attrs={'class': 'table', 'id': 'asian-table'})
-    tbody = table.find('tbody')
-    table_rows = tbody.find_all('tr')
-
     result = {}
     result['issued_datetime'] = issued_datetime
     result['time_of_validity'] = time_of_validity
+
+    table = list_of_row_tags[0].find('table', attrs={'class': 'table', 'id': 'asian-table'})
+    tbody = table.find('tbody')
+    table_rows = tbody.find_all('tr')
 
     for table_row in table_rows:
         table_datas = table_row.find_all('td')
@@ -262,7 +262,7 @@ def scrape_weather_outlook_for_selected_tourist_areas_data(url: str) -> None | d
     '''
         Scrape function to perform web-scraping
         to ingest weather outlook for selected tourist
-        areas from the Website of Pag-Asa (https://www.pagasa.dost.gov.ph/)
+        areas data from the Website of Pag-Asa (https://www.pagasa.dost.gov.ph/)
     '''
     response = requests.get(url)
 
@@ -287,11 +287,16 @@ def scrape_weather_outlook_for_selected_tourist_areas_data(url: str) -> None | d
         issued_datetime = str(list_of_bold_tags[0].text)
         time_of_validity = str(list_of_bold_tags[1].text)
     
+    result = {}
+    result['issued_datetime'] = issued_datetime
+    result['time_of_validity'] = time_of_validity
+
     table_desktop = list_of_row_tags[0].find('table', attrs={'class': 'table desktop'})
 
     # Scrape weather outlook dates
     thead = table_desktop.find('thead')
     table_headers = thead.find_all('th')
+    table_headers = table_headers[1:]
 
     weather_outlook_dates = []
 
@@ -302,10 +307,6 @@ def scrape_weather_outlook_for_selected_tourist_areas_data(url: str) -> None | d
 
     tbody = table_desktop.find('tbody')
     table_rows = tbody.find_all('tr')
-    
-    result = {}
-    result['issued_datetime'] = issued_datetime
-    result['time_of_validity'] = time_of_validity
 
     for table_row in table_rows:
         table_datas = table_row.find_all('td')
@@ -313,6 +314,77 @@ def scrape_weather_outlook_for_selected_tourist_areas_data(url: str) -> None | d
         # Scrape tourist destination name
         tourist_destination = str(table_datas[0].text)
         tourist_destination = ' '.join(tourist_destination.split())
+        result[tourist_destination] = {}
 
         # Scrape minimum and maximum temperatures in different dates
         minimum_and_maximum_temperatures = table_datas[1:]
+
+        for index, minimum_and_maximum_temperature in enumerate(minimum_and_maximum_temperatures):
+            minimum_and_maximum_temperature = str(minimum_and_maximum_temperature.text)
+            temperatures = minimum_and_maximum_temperature.split()
+
+            if weather_outlook_dates == []:
+                continue
+
+            date = weather_outlook_dates[index]
+            result[tourist_destination][date] = temperatures
+
+    return result
+
+def scrape_weekly_weather_outlook_data(url: str) -> None | dict:
+    '''
+        Scrape function to perform web-scraping
+        to ingest weekly weather outlook data
+        from the Website of Pag-Asa (https://www.pagasa.dost.gov.ph/)
+    '''
+    response = requests.get(url)
+    
+    if response.status_code != 200:
+        print(f'Status code: {response.status_code}')
+        print(f'The website didn\'t accept the request!')
+        return None
+
+    soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object
+    row_weather_page = soup.find('div', attrs={'class': 'row weather-page'})
+    list_of_row_tags = row_weather_page.find_all('div', attrs={'class': 'row'})
+    
+    # Scrape weekly weather outlook issued datetime and datetime of validity
+    validity = list_of_row_tags[0].find('div', attrs={'class': 'validity'})
+    list_of_bold_tags = validity.find_all('b')
+
+    if list_of_bold_tags == []:
+        issued_datetime = ''
+        datetime_of_validity = ''
+    
+    else:
+        issued_datetime = str(list_of_bold_tags[0].text)
+        datetime_of_validity = str(list_of_bold_tags[1].text)
+
+    result = {}
+    result['issued_datetime'] = issued_datetime
+    result['datetime_of_validity'] = datetime_of_validity
+    
+    # Scrape weekly weather outlooks
+    table = list_of_row_tags[0].find('table', attrs={'class': 'table'})
+    tbody = table.find('tbody')
+    table_rows = tbody.find_all('tr')
+
+    for table_row in table_rows:
+        table_datas = table_row.find_all('td')
+
+        weather_outlook_date = str(table_datas[0].text)
+        weather_outlook_date = ' '.join(weather_outlook_date.split())
+
+        weather_outlook_description = str(table_datas[1].text)
+        weather_outlook_description = ' '.join(weather_outlook_description.split())
+
+        result[weather_outlook_date] = weather_outlook_description
+    
+    return result
+
+def scrape_daily_temperature_data(url: str) -> None | dict:
+    '''
+        Scrape function to perform web-scraping
+        to ingest daily temperature data
+        from the Website of Pag-Asa (https://www.pagasa.dost.gov.ph/)
+    '''
