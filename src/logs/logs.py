@@ -37,4 +37,6 @@ if __name__ == '__main__':
     # weather_outlook_for_selected_tourist_areas = scrape_weather_outlook_for_selected_tourist_areas_data('https://www.pagasa.dost.gov.ph/weather/weather-outlook-selected-tourist-areas')
     # weekly_weather_outlook = scrape_weekly_weather_outlook_data('https://www.pagasa.dost.gov.ph/weather/weather-outlook-weekly')
     # daily_temperature_data = scrape_daily_temperature_data('https://www.pagasa.dost.gov.ph/weather/low-high-temperature')
+    
+    # Flood data
     scrape_flood_information_data('https://www.pagasa.dost.gov.ph/flood#flood-information')
