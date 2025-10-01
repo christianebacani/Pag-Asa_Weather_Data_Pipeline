@@ -45,6 +45,10 @@ def scrape_daily_weather_forecast_data(url: str) -> None | dict:
     
     for tr in table_row:
         table_data = tr.find_all('td')
+
+        if table_data == []:
+            continue
+
         data = []
 
         for td in table_data:
@@ -62,6 +66,10 @@ def scrape_daily_weather_forecast_data(url: str) -> None | dict:
 
     for tr in table_row:
         table_data = tr.find_all('td')
+
+        if table_data == []:
+            continue
+
         data = []
 
         for td in table_data:
@@ -78,7 +86,12 @@ def scrape_daily_weather_forecast_data(url: str) -> None | dict:
     temperature_and_relative_humidity_description = []
 
     for span_tag in span_tags:
-        temperature_and_relative_humidity_description.append(str(span_tag.text))
+        span_tag = str(span_tag.text)
+        
+        if span_tag == '':
+            continue
+
+        temperature_and_relative_humidity_description.append(span_tag)
 
     temperature_and_relative_humidity_description = ' '.join(temperature_and_relative_humidity_description)
 
@@ -90,6 +103,10 @@ def scrape_daily_weather_forecast_data(url: str) -> None | dict:
 
     for tr in table_row:
         table_data = tr.find_all('td')
+        
+        if table_data == []:
+            continue
+
         data = []
 
         for td in table_data:
@@ -151,6 +168,9 @@ def scrape_weather_outlook_for_selected_ph_cities_data(url: str) -> None | dict:
         city = str(ph_city.find('div', attrs={'class': 'panel-title'}).text)
         city = ' '.join(city.split())
 
+        if city == '':
+            continue
+
         table = ph_city.find('table', attrs={'class': 'table'})
 
         # Scrape weather outlook dates
@@ -162,6 +182,10 @@ def scrape_weather_outlook_for_selected_ph_cities_data(url: str) -> None | dict:
         for table_header in table_headers:
             table_header = str(table_header.text)
             table_header = ' '.join(table_header.split())
+
+            if table_header == '':
+                continue
+
             weather_outlook_dates.append(table_header)
 
         tbody = table.find('tbody')
@@ -175,10 +199,18 @@ def scrape_weather_outlook_for_selected_ph_cities_data(url: str) -> None | dict:
             # Scrape weather outlook temperatures
             temperatures = str(table_data.find('div', attrs={'class': 'weather-values'}).text)
             temperatures = temperatures.split()
+
+            if temperatures == []:
+                continue
+
             weather_outlook_temperatures.append(temperatures)
 
             # Scrape weather outlook chances of rain
             chances_of_rain = str(table_data.find('span', attrs={'style': 'font-weight:bold; color: rgb(9, 73, 156);'}).text)
+            
+            if chances_of_rain == '':
+                continue
+
             weather_outlook_chances_of_rain.append(chances_of_rain)
         
         # Store all the scraped weather outlook for selected ph cities data to a dictionary for better readability instead of using separate arrays
@@ -229,11 +261,11 @@ def scrape_asian_cities_weather_forecast_data(url: str) -> None | dict:
     for table_row in table_rows:
         table_datas = table_row.find_all('td')
         
+        if table_datas == []:
+            continue
+
         # Scrape city name
         place = str(table_datas[0].text)
-
-        if place is None:
-            place = ''
 
         # Scrape weather description        
         description = str(table_datas[2].text)
@@ -241,15 +273,9 @@ def scrape_asian_cities_weather_forecast_data(url: str) -> None | dict:
 
         # Scrape minimum temperature
         minimum_temperature = str(table_datas[3].text)
-        
-        if minimum_temperature is None:
-            minimum_temperature = ''
 
         # Scrape maximum temperature
         maximum_temperature = str(table_datas[4].text)
-
-        if maximum_temperature is None:
-            maximum_temperature = ''
 
         result[place] = {}
         result[place]['description'] = description
@@ -303,6 +329,10 @@ def scrape_weather_outlook_for_selected_tourist_areas_data(url: str) -> None | d
     for table_header in table_headers:
         table_header = str(table_header.text)
         table_header = ' '.join(table_header.split())
+
+        if table_header == '':
+            continue
+
         weather_outlook_dates.append(table_header)
 
     tbody = table_desktop.find('tbody')
@@ -311,9 +341,16 @@ def scrape_weather_outlook_for_selected_tourist_areas_data(url: str) -> None | d
     for table_row in table_rows:
         table_datas = table_row.find_all('td')
         
+        if table_datas == []:
+            continue
+
         # Scrape tourist destination name
         tourist_destination = str(table_datas[0].text)
         tourist_destination = ' '.join(tourist_destination.split())
+        
+        if tourist_destination == '':
+            continue
+
         result[tourist_destination] = {}
 
         # Scrape minimum and maximum temperatures in different dates
@@ -371,6 +408,9 @@ def scrape_weekly_weather_outlook_data(url: str) -> None | dict:
     for table_row in table_rows:
         table_datas = table_row.find_all('td')
 
+        if (table_datas == []) or (len(table_datas) != 2):
+            continue
+
         # Scrape weather outlook date
         weather_outlook_date = str(table_datas[0].text)
         weather_outlook_date = ' '.join(weather_outlook_date.split())
@@ -378,9 +418,6 @@ def scrape_weekly_weather_outlook_data(url: str) -> None | dict:
         # Scrape weather outlook description
         weather_outlook_description = str(table_datas[1].text)
         weather_outlook_description = ' '.join(weather_outlook_description.split())
-
-        if weather_outlook_date == '':
-            continue
 
         result[weather_outlook_date] = weather_outlook_description
     
@@ -420,6 +457,9 @@ def scrape_daily_temperature_data(url: str) -> None | dict:
 
     for table_row in table_rows:
         table_datas = table_row.find_all('td')
+
+        if (table_datas == []) or (len(table_datas) != 2):
+            continue
         
         # Scrape station name for top 10 lowest temperature
         station_name = str(table_datas[0].text)
@@ -428,9 +468,6 @@ def scrape_daily_temperature_data(url: str) -> None | dict:
         # Scrape temperature for top 10 lowest temperature
         temperature = str(table_datas[1].text)
         temperature = ' '.join(temperature.split())
-
-        if station_name == '':
-            continue
 
         result[top_10_lowest_temperature_heading][station_name] = temperature
     
@@ -450,6 +487,9 @@ def scrape_daily_temperature_data(url: str) -> None | dict:
     for table_row in table_rows:
         table_datas = table_row.find_all('td')
 
+        if (table_datas == []) or (len(table_datas) != 2):
+            continue
+
         # Scrape station name for top 10 highest temperature
         station_name = str(table_datas[0].text)
         station_name = ' '.join(station_name.split())
@@ -457,9 +497,6 @@ def scrape_daily_temperature_data(url: str) -> None | dict:
         # Scrape temperature for top 10 highest temperature
         temperature = str(table_datas[1].text)
         temperature = ' '.join(temperature.split())
-        
-        if station_name == '':
-            continue
 
         result[top_10_highest_temperature_heading][station_name] = temperature
     
