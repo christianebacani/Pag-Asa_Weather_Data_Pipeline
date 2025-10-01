@@ -19,9 +19,10 @@ def scrape_flood_information_data(url: str) -> None | dict:
     
     soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object
     row_flood_page = soup.find('div', attrs={'class': 'row flood-page'})
+    list_of_all_article_content_tags = row_flood_page.find_all('div', attrs={'class': 'col-md-12 article-content'})
 
-    article_content = row_flood_page.find('div', attrs={'class': 'col-md-12 article-content'})
-    table = article_content.find('table', attrs={'class': 'table'})
+    basin_hydrological_forecast = list_of_all_article_content_tags[0]
+    table = basin_hydrological_forecast.find('table', attrs={'class': 'table'})
     list_of_tbody_tags = table.find_all('tbody')
 
     result = {}
@@ -62,3 +63,34 @@ def scrape_flood_information_data(url: str) -> None | dict:
         status = ' '.join(status.split())
 
         result['basin_hydrological_forecast'][sub_basin] = status
+    
+    dam_water_level_update = list_of_all_article_content_tags[1]
+    panel = dam_water_level_update.find('div', attrs={'class': 'panel'})
+    
+    # Scrape dam water level update datetime
+    dam_weather_level_update_datetime = str(panel.find('h5', attrs={'class': 'pull-right'}).text)
+
+    dam_table = panel.find('table', attrs={'class': 'table dam-table'})
+    tbody = dam_table.find('tbody', attrs={'style': 'text-align: center;vertical-align: middle;'})
+    table_rows = tbody.find_all('tr')
+
+    # We iterate using 4 index because every row of dam water level update data contains 4 tr tags
+    for index in range(0, len(table_rows), 4):
+        dam_water_level_update_data = table_rows[index : index + 4]
+
+        if len(dam_water_level_update_data) != 4:
+            continue
+        
+        # TODO: Add more keys here for the column of dam water level update data containing 4 tr tags per iteration
+        data = {
+            'observation_time_date': [],
+            'reservoir_water_level_meter': [],
+            'water_level_deviation_hour': [],
+            'water_level_deviation_amount': [],
+            'normal_high_water_level_meter': []
+        }
+
+        table_datas = dam_water_level_update_data[0].find_all('td')
+
+        for table_data in table_datas:
+            table_data = str(table_data.text)
