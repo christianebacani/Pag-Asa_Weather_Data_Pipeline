@@ -19,14 +19,46 @@ def scrape_flood_information_data(url: str) -> None | dict:
     
     soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object
     row_flood_page = soup.find('div', attrs={'class': 'row flood-page'})
-    
-    # Scrape basic hydrological forecast
+
     article_content = row_flood_page.find('div', attrs={'class': 'col-md-12 article-content'})
     table = article_content.find('table', attrs={'class': 'table'})
     list_of_tbody_tags = table.find_all('tbody')
+
+    result = {}
+    result['basin_hydrological_forecast'] = {}
 
     major_river_basins_table = list_of_tbody_tags[0]
     table_rows = major_river_basins_table.find_all('tr')
 
     for table_row in table_rows:
-        print(table_row)
+        table_datas = table_row.find_all('td')
+
+        if (table_datas == []) or (len(table_datas) != 2):
+            continue
+
+        # Scrape major river basin name for basin hydrological forecast        
+        major_river_basin = str(table_datas[0].text)
+
+        # Scrape status for basin hydrological forecast
+        status = str(table_datas[1].text)
+        status = ' '.join(status.split())
+
+        result['basin_hydrological_forecast'][major_river_basin] = status
+
+    sub_basins_table = list_of_tbody_tags[1]
+    table_rows = sub_basins_table.find_all('tr')
+
+    for table_row in table_rows:
+        table_datas = table_row.find_all('td')
+
+        if (table_datas == []) or (len(table_datas) != 2):
+            continue
+
+        # Scrape sub basin name for basin hydrological forecast
+        sub_basin = str(table_datas[0].text)
+        
+        # Scrape status for basin hydrological forecast
+        status = str(table_datas[1].text)
+        status = ' '.join(status.split())
+
+        result['basin_hydrological_forecast'][sub_basin] = status
