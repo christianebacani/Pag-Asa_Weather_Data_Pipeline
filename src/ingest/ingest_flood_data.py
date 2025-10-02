@@ -34,15 +34,21 @@ def scrape_flood_information_data(url: str) -> None | dict:
     for table_row in table_rows:
         table_datas = table_row.find_all('td')
 
-        if (table_datas == []) or (len(table_datas) != 2):
+        if len(table_datas) != 2:
             continue
 
         # Scrape major river basin name for basin hydrological forecast        
         major_river_basin = str(table_datas[0].text)
 
+        if major_river_basin == '':
+            continue
+
         # Scrape status for basin hydrological forecast
         status = str(table_datas[1].text)
         status = ' '.join(status.split())
+
+        if status == '':
+            status = 'None'
 
         result['basin_hydrological_forecast'][major_river_basin] = status
 
@@ -52,18 +58,21 @@ def scrape_flood_information_data(url: str) -> None | dict:
     for table_row in table_rows:
         table_datas = table_row.find_all('td')
 
-        if (table_datas == []) or (len(table_datas) != 2):
+        if len(table_datas) != 2:
             continue
 
         # Scrape sub basin name for basin hydrological forecast
         sub_basin = str(table_datas[0].text)
 
+        if sub_basin == '':
+            continue
+
         # Scrape status for basin hydrological forecast
         status = str(table_datas[1].text)
         status = ' '.join(status.split())
-        
-        if sub_basin == '':
-            continue
+
+        if status == '':
+            status = 'None'
 
         result['basin_hydrological_forecast'][sub_basin] = status
     
@@ -72,6 +81,11 @@ def scrape_flood_information_data(url: str) -> None | dict:
     
     # Scrape dam water level update datetime
     dam_weather_level_update_datetime = str(panel.find('h5', attrs={'class': 'pull-right'}).text)
+    
+    if dam_weather_level_update_datetime == '':
+        dam_weather_level_update_datetime = 'None'
+    
+    result['dam_weather_level_update_datetime'] = dam_weather_level_update_datetime
 
     dam_table = panel.find('table', attrs={'class': 'table dam-table'})
     tbody = dam_table.find('tbody', attrs={'style': 'text-align: center;vertical-align: middle;'})
