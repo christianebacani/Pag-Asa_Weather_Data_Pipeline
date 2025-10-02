@@ -13,7 +13,7 @@ from ingest.ingest_weather_data import scrape_weather_outlook_for_selected_touri
 from ingest.ingest_weather_data import scrape_weekly_weather_outlook_data
 from ingest.ingest_weather_data import scrape_daily_temperature_data
 from ingest.ingest_flood_data import scrape_flood_information_data
-from ingest.ingest_tropical_cyclone_data import scrape_tropical_cyclone_bulletin
+from ingest.ingest_tropical_cyclone_data import scrape_tropical_cyclone_bulletin_data
 
 def generate_logs_from_pipeline_job(job: str) -> None:
     '''
@@ -45,4 +45,4 @@ if __name__ == '__main__':
     '''
 
     # Tropical cyclone data
-    scrape_tropical_cyclone_bulletin('https://www.pagasa.dost.gov.ph/tropical-cyclone/severe-weather-bulletin')
+    scrape_tropical_cyclone_bulletin_data('https://www.pagasa.dost.gov.ph/tropical-cyclone/severe-weather-bulletin')
