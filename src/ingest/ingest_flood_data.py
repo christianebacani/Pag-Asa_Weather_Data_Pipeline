@@ -57,10 +57,13 @@ def scrape_flood_information_data(url: str) -> None | dict:
 
         # Scrape sub basin name for basin hydrological forecast
         sub_basin = str(table_datas[0].text)
-        
+
         # Scrape status for basin hydrological forecast
         status = str(table_datas[1].text)
         status = ' '.join(status.split())
+        
+        if sub_basin == '':
+            continue
 
         result['basin_hydrological_forecast'][sub_basin] = status
     
@@ -89,7 +92,7 @@ def scrape_flood_information_data(url: str) -> None | dict:
             'normal_high_water_level_in_meter': [],
             'deviation_from_nhwl_in_meter': [],
             'rule_curve_elevation_in_meter': [],
-            'devication_from_rule_curve_in_meter': [],
+            'deviation_from_rule_curve_in_meter': [],
             'gate_opening_in_gate': [],
             'gate_opening_in_meter': [],
             'estimated_centimeters_in_inflow': [],
@@ -100,10 +103,16 @@ def scrape_flood_information_data(url: str) -> None | dict:
         # Scrape dam name for dam water level update
         dam_name = dam_water_level_update_data[0].find('td')
         dam_name = str(dam_name.text)
+        
+        if dam_name == '':
+            continue
 
-        # Scrape observation time, reservoir water level, water level deviation (both hour and amount), normal water level, 
-        # deviation from NHWL, rule curve elevation, deviation from rule, gate opening (both gate and meters), and lastly
-        # estimated in centimeters (both inflow and outflow)
+        '''
+        Scrape the first instance of observation time, first instance of reservoir water level, 
+        water level deviation (both hour and amount), normal water level, first instance of deviation from NHWL, 
+        first instance of rule curve elevation, first instance of deviation from rule, first instance of gate opening (both gate and meters), 
+        and lastly first instances of estimated in centimeters (both inflow and outflow)
+        '''
         table_datas = dam_water_level_update_data[0].find_all('td')[1:]
 
         for table_data_index, table_data in enumerate(table_datas):
@@ -114,16 +123,101 @@ def scrape_flood_information_data(url: str) -> None | dict:
                 table_data = 'None'
 
             column = dam_water_level_update_columns[table_data_index]
-            data[column] = table_data
+            data[column].append(table_data)
         
-        # Scrape observation date
+        # Scrape the first instance of observation date
         observation_date = str(dam_water_level_update_data[1].find('td').text)
+        
+        if observation_date == '':
+            pass
+
+        else:
+            data['observation_in_time_and_date'][0] = data['observation_in_time_and_date'][0] + ' ' + observation_date
 
         table_datas = dam_water_level_update_data[2].find_all('td')
-        
-        for table_data in table_datas:
-            table_data = str(table_data.text)
-            table_data = ' '.join(table_data.split())
 
-            if table_data == '':
-                table_data = 'None'
+        if table_datas == []:
+            continue
+
+        # Scrape the second instance of observation time
+        observation_time = str(table_datas[0].text)
+
+        if observation_time == '':
+            observation_time == 'None'
+
+        data['observation_in_time_and_date'].append(observation_time)
+
+        # Scrape the second instance of reservoir water level
+        reservoir_water_level = str(table_datas[1].text)
+
+        if reservoir_water_level == '':
+            reservoir_water_level = 'None'
+
+        data['reservoir_water_level_in_meter'].append(reservoir_water_level)
+
+        # Scrape the second instance of deviation from nhwl
+        deviation_from_nhwl = str(table_datas[2].text)
+
+        if deviation_from_nhwl == '':
+            deviation_from_nhwl = 'None'
+
+        data['deviation_from_nhwl_in_meter'].append(deviation_from_nhwl)
+
+        # Scrape the second instance of rule curve elevation
+        rule_curve_elevation = str(table_datas[3].text)
+        
+        if rule_curve_elevation == '':
+            rule_curve_elevation = 'None'
+
+        data['rule_curve_elevation_in_meter'].append(rule_curve_elevation)
+
+        # Scrape the second instance of deviation from rule curve
+        deviation_from_rule_curve = str(table_datas[4].text)
+
+        if deviation_from_rule_curve == '':
+            deviation_from_rule_curve = 'None'
+        
+        data['deviation_from_rule_curve_in_meter'].append(deviation_from_rule_curve)
+
+        # Scrape the second instance of gate opening (in gate)
+        gate_opening_in_gate = str(table_datas[5].text)
+
+        if gate_opening_in_gate == '':
+            gate_opening_in_gate = 'None'
+        
+        data['gate_opening_in_gate'].append(gate_opening_in_gate)
+
+        # Scrape the second instance of gate opening (in meters)
+        gate_opening_in_meter = str(table_datas[6].text)
+        
+        if gate_opening_in_meter == '':
+            gate_opening_in_meter = 'None'
+        
+        data['gate_opening_in_meter'].append(gate_opening_in_meter)
+
+        # Scrape the second instance of estimated centimeters (in inflow)
+        estimated_centimeters_in_inflow = str(table_datas[7].text)
+
+        if estimated_centimeters_in_inflow == '':
+            estimated_centimeters_in_inflow = 'None'
+
+        data['estimated_centimeters_in_inflow'].append(estimated_centimeters_in_inflow)
+
+        # Scrape the second instance of estimated centimeters (in outflow)
+        estimated_centimeters_in_outflow = str(table_datas[8].text)
+
+        if estimated_centimeters_in_outflow == '':
+            estimated_centimeters_in_outflow = 'None'
+        
+        data['estimated_centimeters_in_outflow'].append(estimated_centimeters_in_outflow)
+
+        # Scrape the second instance of observation date
+        observation_date = str(dam_water_level_update_data[3].find('td').text)
+        
+        if observation_date == '':
+            pass
+
+        else:
+            data['observation_in_time_and_date'][1] = data['observation_in_time_and_date'][1] + ' ' + observation_date
+        
+        result[dam_name] = data
