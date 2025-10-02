@@ -19,66 +19,76 @@ def scrape_daily_weather_forecast_data(url: str) -> None | dict:
 
     soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object
     row_weather_page = soup.find('div', attrs={'class': 'row weather-page'})
-    list_of_row_tags = row_weather_page.find_all('div', attrs={'class': 'row'})
+    list_of_all_row_tags = row_weather_page.find_all('div', attrs={'class': 'row'})
 
     # Scrape daily weather forececast issued datetime
-    issue_tag = list_of_row_tags[0].find('div', attrs={'class': 'col-md-12 col-lg-12 issue'})
+    issue_tag = list_of_all_row_tags[0].find('div', attrs={'class': 'col-md-12 col-lg-12 issue'})
     issued_datetime = str(issue_tag.find('b').text)
 
-    if issued_datetime is None:
-        issued_datetime = ''
+    if issued_datetime == '':
+        issued_datetime = 'None'
 
     # Scrape synopsis
-    synopsis = list_of_row_tags[0].find_all('div', attrs={'class': 'col-md-12 col-lg-12'})[0]
+    synopsis = list_of_all_row_tags[0].find_all('div', attrs={'class': 'col-md-12 col-lg-12'})[0]
     synopsis = str(synopsis.find('p').text)
 
-    if synopsis is None:
-        synopsis = ''
+    if synopsis == '':
+        synopsis = 'None'
 
     # Scrape forecast weather conditions    
-    forecast_weather_conditions = list_of_row_tags[0].find_all('div', attrs={'class': 'col-md-12 col-lg-12'})[1]
+    forecast_weather_conditions = list_of_all_row_tags[0].find_all('div', attrs={'class': 'col-md-12 col-lg-12'})[1]
     table = forecast_weather_conditions.find('table', attrs={'class': 'table table-striped'})
     tbody = table.find('tbody')
-    table_row = tbody.find_all('tr')
+    table_rows = tbody.find_all('tr')
 
     forecast_weather_conditions_data = []
     
-    for tr in table_row:
-        table_data = tr.find_all('td')
+    for table_row in table_rows:
+        table_datas = table_row.find_all('td')
 
-        if table_data == []:
+        if table_datas == []:
             continue
 
         data = []
 
-        for td in table_data:
-            data.append(str(td.text))
-        
+        for table_data in table_datas:
+            table_data = str(table_data.text)
+            
+            if table_data == '':
+                continue
+
+            data.append(table_data)
+
         forecast_weather_conditions_data.append(data)
 
     # Scrape forecast wind and coastal weather conditions    
-    forecast_wind_and_coastal_weather_conditions = list_of_row_tags[0].find_all('div', attrs={'class': 'col-md-12 col-lg-12'})[2]
+    forecast_wind_and_coastal_weather_conditions = list_of_all_row_tags[0].find_all('div', attrs={'class': 'col-md-12 col-lg-12'})[2]
     table = forecast_wind_and_coastal_weather_conditions.find('table', attrs={'class': 'table table-striped'})
     tbody = table.find('tbody')
-    table_row = tbody.find_all('tr')
+    table_rows = tbody.find_all('tr')
     
     forecast_wind_and_coastal_weather_conditions_data = []
 
-    for tr in table_row:
-        table_data = tr.find_all('td')
+    for table_row in table_rows:
+        table_datas = table_row.find_all('td')
 
-        if table_data == []:
+        if table_datas == []:
             continue
 
         data = []
 
-        for td in table_data:
-            data.append(str(td.text))
+        for table_data in table_datas:
+            table_data = str(table_data.text)
+            
+            if table_data == '':
+                continue
+
+            data.append(table_data)
         
         forecast_wind_and_coastal_weather_conditions_data.append(data)
     
     # Scrape temperature and relative humidity
-    inner_row_tag = list_of_row_tags[0].find('div', attrs={'class': 'row', 'style': 'margin-left: 0; margin-right: 0;'})
+    inner_row_tag = list_of_all_row_tags[0].find('div', attrs={'class': 'row', 'style': 'margin-left: 0; margin-right: 0;'})
     temperature_and_relative_humidity = inner_row_tag.find('div', attrs={'class': 'col-md-12 col-lg-12'})
 
     span_tags = temperature_and_relative_humidity.find_all('span')
@@ -97,20 +107,25 @@ def scrape_daily_weather_forecast_data(url: str) -> None | dict:
 
     table = temperature_and_relative_humidity.find('table', attrs={'class': 'table'})
     tbody = table.find('tbody')
-    table_row = tbody.find_all('tr')
+    table_rows = tbody.find_all('tr')
 
     temperature_and_relative_humidity_data = []
 
-    for tr in table_row:
-        table_data = tr.find_all('td')
+    for table_row in table_rows:
+        table_datas = table_row.find_all('td')
         
-        if table_data == []:
+        if table_datas == []:
             continue
 
         data = []
 
-        for td in table_data:
-            data.append(str(td.text))
+        for table_data in table_datas:
+            table_data = str(table_data.text)
+
+            if table_data == '':
+                continue
+
+            data.append(table_data)
         
         temperature_and_relative_humidity_data.append(data)
 
@@ -140,23 +155,23 @@ def scrape_weather_outlook_for_selected_ph_cities_data(url: str) -> None | dict:
 
     soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object
     row_weather_page = soup.find('div', attrs={'class': 'row weather-page'})
-    list_of_row_tags = row_weather_page.find_all('div', attrs={'class': 'row'})
-    
-    # Scrape weather outlook for selected ph cities issued datetime and time of validity
-    validity = list_of_row_tags[0].find('div', attrs={'class': 'validity'})
-    list_of_bold_tags = validity.find_all('b')
+    list_of_all_row_tags = row_weather_page.find_all('div', attrs={'class': 'row'})
 
-    if list_of_bold_tags == []:
-        issued_datetime = ''
-        time_of_validity = ''
+    # Scrape weather outlook for selected ph cities issued datetime and time of validity
+    validity = list_of_all_row_tags[0].find('div', attrs={'class': 'validity'})
+    list_of_all_bold_tags = validity.find_all('b')
+
+    if len(list_of_all_bold_tags) != 2:
+        issued_datetime = 'None'
+        time_of_validity = 'None'
 
     else:
-        issued_datetime = str(list_of_bold_tags[0].text)
+        issued_datetime = str(list_of_all_bold_tags[0].text)
         issued_datetime = ' '.join(issued_datetime.split())
-        time_of_validity = str(list_of_bold_tags[1].text)
+        time_of_validity = str(list_of_all_bold_tags[1].text)
     
     # Scrape weather outlook for selected ph cities
-    outlook_ph_cities = list_of_row_tags[0].find('div', attrs={'class': 'panel-group', 'id': 'outlook-phil-cities'})
+    outlook_ph_cities = list_of_all_row_tags[0].find('div', attrs={'class': 'panel-group', 'id': 'outlook-phil-cities'})
     ph_cities = outlook_ph_cities.find_all('div', attrs={'class': 'panel panel-default panel-pagasa'})
 
     result = {}
@@ -236,25 +251,25 @@ def scrape_asian_cities_weather_forecast_data(url: str) -> None | dict:
 
     soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object
     row_weather_page = soup.find('div', attrs={'class': 'row weather-page'})
-    list_of_row_tags = row_weather_page.find_all('div', attrs={'class': 'row'})
+    list_of_all_row_tags = row_weather_page.find_all('div', attrs={'class': 'row'})
 
     # Scrape asian cities weather forecast issued datetime and time of validity
-    validity = list_of_row_tags[0].find('div', attrs={'class': 'validity'})
-    list_of_bold_tags = validity.find_all('b')
+    validity = list_of_all_row_tags[0].find('div', attrs={'class': 'validity'})
+    list_of_all_bold_tags = validity.find_all('b')
 
-    if list_of_bold_tags == []:
-        issued_datetime = ''
-        time_of_validity = ''
+    if len(list_of_all_bold_tags) != 2:
+        issued_datetime = 'None'
+        time_of_validity = 'None'
     
     else:
-        issued_datetime = str(list_of_bold_tags[0].text)
-        time_of_validity = str(list_of_bold_tags[1].text)
+        issued_datetime = str(list_of_all_bold_tags[0].text)
+        time_of_validity = str(list_of_all_bold_tags[1].text)
     
     result = {}
     result['issued_datetime'] = issued_datetime
     result['time_of_validity'] = time_of_validity
 
-    table = list_of_row_tags[0].find('table', attrs={'class': 'table', 'id': 'asian-table'})
+    table = list_of_all_row_tags[0].find('table', attrs={'class': 'table', 'id': 'asian-table'})
     tbody = table.find('tbody')
     table_rows = tbody.find_all('tr')
 
@@ -267,15 +282,27 @@ def scrape_asian_cities_weather_forecast_data(url: str) -> None | dict:
         # Scrape city name
         place = str(table_datas[0].text)
 
+        if place == '':
+            continue
+
         # Scrape weather description        
         description = str(table_datas[2].text)
         description = ' '.join(description.split())
 
+        if description == '':
+            description = 'None'
+
         # Scrape minimum temperature
         minimum_temperature = str(table_datas[3].text)
+        
+        if minimum_temperature == '':
+            minimum_temperature = 'None'
 
         # Scrape maximum temperature
         maximum_temperature = str(table_datas[4].text)
+
+        if maximum_temperature == '':
+            maximum_temperature = 'None'
 
         result[place] = {}
         result[place]['description'] = description
@@ -299,25 +326,25 @@ def scrape_weather_outlook_for_selected_tourist_areas_data(url: str) -> None | d
 
     soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object
     row_weather_page = soup.find('div', attrs={'class': 'row weather-page'})
-    list_of_row_tags = row_weather_page.find_all('div', attrs={'class': 'row'})
+    list_of_all_row_tags = row_weather_page.find_all('div', attrs={'class': 'row'})
 
     # Scrape weather outlook for selected tourist areas issued datetime and time of validity
-    validity = list_of_row_tags[0].find('div', attrs={'class': 'validity'})
-    list_of_bold_tags = validity.find_all('b')
+    validity = list_of_all_row_tags[0].find('div', attrs={'class': 'validity'})
+    list_of_all_bold_tags = validity.find_all('b')
 
-    if list_of_bold_tags == []:
-        issued_datetime = ''
-        time_of_validity = ''
+    if len(list_of_all_bold_tags) != 2:
+        issued_datetime = 'None'
+        time_of_validity = 'None'
     
     else:
-        issued_datetime = str(list_of_bold_tags[0].text)
-        time_of_validity = str(list_of_bold_tags[1].text)
+        issued_datetime = str(list_of_all_bold_tags[0].text)
+        time_of_validity = str(list_of_all_bold_tags[1].text)
     
     result = {}
     result['issued_datetime'] = issued_datetime
     result['time_of_validity'] = time_of_validity
 
-    table_desktop = list_of_row_tags[0].find('table', attrs={'class': 'table desktop'})
+    table_desktop = list_of_all_row_tags[0].find('table', attrs={'class': 'table desktop'})
 
     # Scrape weather outlook dates
     thead = table_desktop.find('thead')
@@ -383,41 +410,47 @@ def scrape_weekly_weather_outlook_data(url: str) -> None | dict:
 
     soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object
     row_weather_page = soup.find('div', attrs={'class': 'row weather-page'})
-    list_of_row_tags = row_weather_page.find_all('div', attrs={'class': 'row'})
+    list_of_all_row_tags = row_weather_page.find_all('div', attrs={'class': 'row'})
     
     # Scrape weekly weather outlook issued datetime and datetime of validity
-    validity = list_of_row_tags[0].find('div', attrs={'class': 'validity'})
-    list_of_bold_tags = validity.find_all('b')
+    validity = list_of_all_row_tags[0].find('div', attrs={'class': 'validity'})
+    list_of_all_bold_tags = validity.find_all('b')
 
-    if list_of_bold_tags == []:
-        issued_datetime = ''
-        datetime_of_validity = ''
+    if len(list_of_all_bold_tags) != 2:
+        issued_datetime = 'None'
+        datetime_of_validity = 'None'
     
     else:
-        issued_datetime = str(list_of_bold_tags[0].text)
-        datetime_of_validity = str(list_of_bold_tags[1].text)
+        issued_datetime = str(list_of_all_bold_tags[0].text)
+        datetime_of_validity = str(list_of_all_bold_tags[1].text)
 
     result = {}
     result['issued_datetime'] = issued_datetime
     result['datetime_of_validity'] = datetime_of_validity
 
-    table = list_of_row_tags[0].find('table', attrs={'class': 'table'})
+    table = list_of_all_row_tags[0].find('table', attrs={'class': 'table'})
     tbody = table.find('tbody')
     table_rows = tbody.find_all('tr')
 
     for table_row in table_rows:
         table_datas = table_row.find_all('td')
 
-        if (table_datas == []) or (len(table_datas) != 2):
+        if len(table_datas) != 2:
             continue
 
         # Scrape weather outlook date
         weather_outlook_date = str(table_datas[0].text)
         weather_outlook_date = ' '.join(weather_outlook_date.split())
+        
+        if weather_outlook_date == '':
+            continue
 
         # Scrape weather outlook description
         weather_outlook_description = str(table_datas[1].text)
         weather_outlook_description = ' '.join(weather_outlook_description.split())
+
+        if weather_outlook_description == '':
+            weather_outlook_description = 'None'
 
         result[weather_outlook_date] = weather_outlook_description
     
@@ -439,15 +472,20 @@ def scrape_daily_temperature_data(url: str) -> None | dict:
     soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object
     row_weather_page = soup.find('div', attrs={'class': 'row weather-page'})
     article_content = row_weather_page.find('div', attrs={'class': 'col-md-12 article-content'})
-    column_tags = article_content.find_all('div', attrs={'class': 'col-md-6'})
+    list_of_all_column_tags = article_content.find_all('div', attrs={'class': 'col-md-6'})
 
-    panel = column_tags[0].find('div', attrs={'class': 'panel'})
+    panel = list_of_all_column_tags[0].find('div', attrs={'class': 'panel'})
     result = {}
     
     # Scrape top 10 lowest temperature heading
     panel_heading = panel.find('div', attrs={'class': 'panel-heading'})
     panel_heading = str(panel_heading.text)
     top_10_lowest_temperature_heading = ' '.join(panel_heading.split())
+
+    if top_10_lowest_temperature_heading == '':
+        print(f'Currently there\'s no data for top 10 lowest temperature')
+        return None
+
     result[top_10_lowest_temperature_heading] = {}
 
     panel_body = panel.find('div', attrs={'class': 'panel-body'})
@@ -458,25 +496,36 @@ def scrape_daily_temperature_data(url: str) -> None | dict:
     for table_row in table_rows:
         table_datas = table_row.find_all('td')
 
-        if (table_datas == []) or (len(table_datas) != 2):
+        if len(table_datas) != 2:
             continue
         
         # Scrape station name for top 10 lowest temperature
         station_name = str(table_datas[0].text)
         station_name = ' '.join(station_name.split())
 
+        if station_name == '':
+            continue
+
         # Scrape temperature for top 10 lowest temperature
         temperature = str(table_datas[1].text)
         temperature = ' '.join(temperature.split())
 
+        if temperature == '':
+            temperature = 'None'
+
         result[top_10_lowest_temperature_heading][station_name] = temperature
     
-    panel = column_tags[1].find('div', attrs={'class': 'panel'})
+    panel = list_of_all_column_tags[1].find('div', attrs={'class': 'panel'})
     
     # Scrape top 10 highest temperature heading
     panel_heading = panel.find('div', attrs={'class': 'panel-heading'})
     panel_heading = str(panel_heading.text)
     top_10_highest_temperature_heading = ' '.join(panel_heading.split())
+    
+    if top_10_highest_temperature_heading == '':
+        print(f'Currently there\'s no data for top 10 highest temperature')
+        return None
+
     result[top_10_highest_temperature_heading] = {}
 
     panel_body = panel.find('div', attrs={'class': 'panel-body'})
@@ -487,16 +536,22 @@ def scrape_daily_temperature_data(url: str) -> None | dict:
     for table_row in table_rows:
         table_datas = table_row.find_all('td')
 
-        if (table_datas == []) or (len(table_datas) != 2):
+        if len(table_datas) != 2:
             continue
 
         # Scrape station name for top 10 highest temperature
         station_name = str(table_datas[0].text)
         station_name = ' '.join(station_name.split())
         
+        if station_name == '':
+            continue
+
         # Scrape temperature for top 10 highest temperature
         temperature = str(table_datas[1].text)
         temperature = ' '.join(temperature.split())
+
+        if temperature == '':
+            temperature = 'None'
 
         result[top_10_highest_temperature_heading][station_name] = temperature
     
