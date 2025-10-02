@@ -80,17 +80,41 @@ def scrape_flood_information_data(url: str) -> None | dict:
 
         if len(dam_water_level_update_data) != 4:
             continue
-        
-        # TODO: Add more keys here for the column of dam water level update data containing 4 tr tags per iteration
+
         data = {
-            'observation_time_date': [],
-            'reservoir_water_level_meter': [],
-            'water_level_deviation_hour': [],
-            'water_level_deviation_amount': [],
-            'normal_high_water_level_meter': []
+            'observation_in_time_and_date': [],
+            'reservoir_water_level_in_meter': [],
+            'water_level_deviation_in_hour': [],
+            'water_level_deviation_in_amount': [],
+            'normal_high_water_level_in_meter': [],
+            'deviation_from_nhwl_in_meter': [],
+            'rule_curve_elevation_in_meter': [],
+            'devication_from_rule_curve_in_meter': [],
+            'gate_opening_in_gate': [],
+            'gate_opening_in_meter': [],
+            'estimated_centimeters_in_inflow': [],
+            'estimated_centimeters_in_outflow': []
         }
+        dam_water_level_update_columns = list(data.keys())
 
-        table_datas = dam_water_level_update_data[0].find_all('td')
+        # Scrape dam name for dam water level update
+        dam_name = dam_water_level_update_data[0].find('td')
+        dam_name = str(dam_name.text)
 
-        for table_data in table_datas:
+        # Scrape observation time, reservoir water level, water level deviation (both hour and amount), normal water level, 
+        # deviation from NHWL, rule curve elevation, deviation from rule, gate opening (both gate and meters), and lastly
+        # estimated in centimeters (both inflow and outflow)
+        table_datas = dam_water_level_update_data[0].find_all('td')[1:]
+
+        for table_data_index, table_data in enumerate(table_datas):
             table_data = str(table_data.text)
+            table_data = ' '.join(table_data.split())
+
+            if table_data == '':
+                table_data = 'None'
+
+            column = dam_water_level_update_columns[table_data_index]
+            data[column] = table_data
+        
+        # Scrape observation date
+        observation_date = str(dam_water_level_update_data[1].find('td').text)
