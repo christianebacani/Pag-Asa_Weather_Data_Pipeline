@@ -118,3 +118,12 @@ def scrape_flood_information_data(url: str) -> None | dict:
         
         # Scrape observation date
         observation_date = str(dam_water_level_update_data[1].find('td').text)
+
+        table_datas = dam_water_level_update_data[2].find_all('td')
+        
+        for table_data in table_datas:
+            table_data = str(table_data.text)
+            table_data = ' '.join(table_data.split())
+
+            if table_data == '':
+                table_data = 'None'
