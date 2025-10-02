@@ -221,3 +221,5 @@ def scrape_flood_information_data(url: str) -> None | dict:
             data['observation_in_time_and_date'][1] = data['observation_in_time_and_date'][1] + ' ' + observation_date
         
         result[dam_name] = data
+
+    return result
