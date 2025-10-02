@@ -19,4 +19,27 @@ def scrape_tropical_cyclone_bulletin(url: str) -> None | dict:
     
     soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object
     tropical_cyclone_weather_bulletin_page = soup.find('div', attrs={'class': 'row tropical-cyclone-weather-bulletin-page'})
-    print(tropical_cyclone_weather_bulletin_page)
+    article_content = tropical_cyclone_weather_bulletin_page.find('div', attrs={'col-md-12 article-content'})
+
+    list_of_all_row_tags = article_content.find_all('div', attrs={'class': 'row'})
+
+    # Scrape tropical cyclone name    
+    tropical_cyclone_name = str(list_of_all_row_tags[1].text)
+    tropical_cyclone_name = ' '.join(tropical_cyclone_name.split())
+
+    if tropical_cyclone_name == '':
+        print(f'Currently there\'s no tropical cyclone!')
+        return None
+
+    list_of_all_h5_tags = list_of_all_row_tags[2].find_all('h5')
+
+    if len(list_of_all_h5_tags) != 2:
+        issued_datetime = 'None'
+        validity_description = 'None'
+
+    else:
+        # Scrape issued datetime
+        issued_datetime = str(list_of_all_h5_tags[0].text)
+
+        # Scrape validity description
+        validity_description = str(list_of_all_h5_tags[1].text)
