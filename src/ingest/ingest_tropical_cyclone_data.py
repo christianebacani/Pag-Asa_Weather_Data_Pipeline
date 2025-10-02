@@ -4,7 +4,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-def scrape_tropical_cyclone_bulletin(url: str) -> None | dict:
+def scrape_tropical_cyclone_bulletin_data(url: str) -> None | dict:
     '''
         Scrape function to perform web-scraping
         to ingest tropical cyclone bulletin data from
