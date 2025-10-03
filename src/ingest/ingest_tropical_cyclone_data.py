@@ -104,7 +104,7 @@ def scrape_tropical_cyclone_bulletin_data(url: str) -> None | dict:
         print(f'Currently there\'s no data for the strength of the tropical cyclone!')
         return None
 
-    # Scrape the forecast posotions of the tropical cyclone
+    # Scrape the forecast positions of the tropical cyclone
     unordered_list_tag = list_of_all_div_tags[1].find('ul')
     list_of_all_list_item_tags = unordered_list_tag.find_all('li')
 
