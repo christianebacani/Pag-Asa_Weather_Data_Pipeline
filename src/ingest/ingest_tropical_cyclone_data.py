@@ -21,6 +21,8 @@ def scrape_tropical_cyclone_bulletin_data(url: str) -> None | dict:
     tropical_cyclone_weather_bulletin_page = soup.find('div', attrs={'class': 'row tropical-cyclone-weather-bulletin-page'})
     article_content = tropical_cyclone_weather_bulletin_page.find('div', attrs={'col-md-12 article-content'})
 
+    result = {}
+
     list_of_all_row_tags = article_content.find_all('div', attrs={'class': 'row'})
 
     # Scrape tropical cyclone name    
@@ -30,6 +32,8 @@ def scrape_tropical_cyclone_bulletin_data(url: str) -> None | dict:
     if tropical_cyclone_name == '':
         print(f'Currently there\'s no data for the tropical cyclone!')
         return None
+    
+    result['tropical_cyclone_name'] = tropical_cyclone_name
 
     list_of_all_h5_tags = list_of_all_row_tags[2].find_all('h5')
 
@@ -42,7 +46,10 @@ def scrape_tropical_cyclone_bulletin_data(url: str) -> None | dict:
 
     # Scrape validity description
     validity_description = str(list_of_all_h5_tags[1].text)
-    
+
+    result['issued_datetime'] = issued_datetime
+    result['validity_description'] = validity_description
+
     tropical_cyclone_bulletin_descriptions = list_of_all_row_tags[3]
     
     # Scrape tropical cyclone current update header
@@ -52,6 +59,8 @@ def scrape_tropical_cyclone_bulletin_data(url: str) -> None | dict:
         print(f'Currently there\'s no data for the current update header of the tropical cyclone!')
         return None
     
+    result['tropical_cyclone_current_update_header'] = tropical_cyclone_current_update_header
+
     # Scrape tropical cyclone descriptions
     unordered_list_tag = tropical_cyclone_bulletin_descriptions.find('ul')
     list_of_all_list_item_tags = unordered_list_tag.find_all('li')
@@ -70,6 +79,8 @@ def scrape_tropical_cyclone_bulletin_data(url: str) -> None | dict:
 
         tropical_cyclone_current_update_descriptions.append(list_item)
 
+    result['tropical_cyclone_current_update_descriptions'] = tropical_cyclone_current_update_descriptions
+
     fifth_instance_of_row_tag = list_of_all_row_tags[4]
     list_of_all_div_tags = fifth_instance_of_row_tag.find_all('div', attrs={'class': 'col-md-6'})
 
@@ -86,6 +97,8 @@ def scrape_tropical_cyclone_bulletin_data(url: str) -> None | dict:
         print(f'Currently there\'s no data for the location of eye or center of the tropical cyclone!')
         return None
 
+    result['location_of_eye_or_center'] = location_of_eye_or_center
+
     # Scrape the movement of the tropical cyclone
     movement = list_of_all_panel_tags[1].find('div', attrs={'class': 'panel-body'})
     movement = str(movement.text)
@@ -95,6 +108,8 @@ def scrape_tropical_cyclone_bulletin_data(url: str) -> None | dict:
         print(f'Currently there\'s no data for the movement of the tropical cyclone!')
         return None
 
+    result['movement'] = movement
+
     # Scrape the strength of the tropical cyclone
     strength = list_of_all_panel_tags[2].find('div', attrs={'class': 'panel-body'})
     strength = str(strength.text)
@@ -103,6 +118,8 @@ def scrape_tropical_cyclone_bulletin_data(url: str) -> None | dict:
     if strength == '':
         print(f'Currently there\'s no data for the strength of the tropical cyclone!')
         return None
+
+    result['strength'] = strength
 
     # Scrape the forecast positions of the tropical cyclone
     unordered_list_tag = list_of_all_div_tags[1].find('ul')
@@ -123,8 +140,15 @@ def scrape_tropical_cyclone_bulletin_data(url: str) -> None | dict:
 
         forecast_positions.append(list_item)
     
+    result['forecast_positions'] = forecast_positions
+
     sixth_instance_of_row_tag = list_of_all_row_tags[5]
     table = sixth_instance_of_row_tag.find('table', attrs={'class': 'table text-center table-header', 'style': 'margin-top:15px;'})
+    
+    if table is None:
+        result['tropical_cyclone_wind_signal_data'] = {}
+        print(f'Currently there\'s no data for the wind signal of the tropical cyclone!')
+        return result
 
     tropical_cyclone_wind_signal_data = {}
 
@@ -145,11 +169,12 @@ def scrape_tropical_cyclone_bulletin_data(url: str) -> None | dict:
         
         source_attribute_value = str(image_tag['src']).replace('https://pubfiles.pagasa.dost.gov.ph/pagasaweb/icons/hazard/tropical-cyclone/64/', '')
         source_attribute_value = source_attribute_value.replace('.png', '')
-        source_attribute_value = source_attribute_value.replace('tcws', '')
-
-        tropical_cyclone_wind_signal = tropical_cyclone_wind_signal_header + ' ' + source_attribute_value
+        tropical_wind_signal_number = source_attribute_value.replace('tcws', '')
+        
+        tropical_cyclone_wind_signal = tropical_cyclone_wind_signal_header + ' ' + tropical_wind_signal_number
         tropical_cyclone_wind_signal_data[tropical_cyclone_wind_signal] = {}
-    
+
+    # TODO: To be implemented (because currently there's no data of wind signal of the tropical cyclone from the website)    
     list_of_all_table_body_tags = table.find_all('tbody')
 
     for table_body in list_of_all_table_body_tags:
