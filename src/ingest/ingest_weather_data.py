@@ -4,7 +4,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-def scrape_daily_weather_forecast_data(url: str) -> None | dict:
+def scrape_daily_weather_forecast_data(url: str) -> dict:
     '''
         Scrape function to perform web-scraping
         to ingest daily weather forecast data from
@@ -17,142 +17,13 @@ def scrape_daily_weather_forecast_data(url: str) -> None | dict:
         print(f'The website didn\'t accept the request!')
         
         result = {}
-        result['issued_datetime'] = 'None'
-        result['synopsis'] = 'None'
-        result['forecast_weather_conditions'] = []
-        result['forecast_wind_and_coastal_weather_conditions'] = []
-        result['temperature_and_relative_humidity_description'] = []
-        result['temperature_and_relative_humidity'] = []
-
         return result
 
     soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object
-    row_weather_page = soup.find('div', attrs={'class': 'row weather-page'})
-    list_of_all_row_tags = row_weather_page.find_all('div', attrs={'class': 'row'})
+    return {}
+    # TODO: Rewrite this entire function
 
-    # Scrape daily weather forececast issued datetime
-    issue_tag = list_of_all_row_tags[0].find('div', attrs={'class': 'col-md-12 col-lg-12 issue'})
-    issued_datetime = str(issue_tag.find('b').text)
-
-    if issued_datetime == '':
-        issued_datetime = 'None'
-
-    # Scrape synopsis
-    synopsis = list_of_all_row_tags[0].find_all('div', attrs={'class': 'col-md-12 col-lg-12'})[0]
-    synopsis = str(synopsis.find('p').text)
-
-    if synopsis == '':
-        synopsis = 'None'
-
-    # Scrape forecast weather conditions    
-    forecast_weather_conditions = list_of_all_row_tags[0].find_all('div', attrs={'class': 'col-md-12 col-lg-12'})[1]
-    table = forecast_weather_conditions.find('table', attrs={'class': 'table table-striped'})
-    tbody = table.find('tbody')
-    table_rows = tbody.find_all('tr')
-
-    forecast_weather_conditions_data = []
-    
-    for table_row in table_rows:
-        table_datas = table_row.find_all('td')
-
-        if table_datas == []:
-            continue
-
-        data = []
-
-        for table_data in table_datas:
-            table_data = str(table_data.text)
-            
-            if table_data == '':
-                continue
-
-            data.append(table_data)
-
-        forecast_weather_conditions_data.append(data)
-
-    # Scrape forecast wind and coastal weather conditions    
-    forecast_wind_and_coastal_weather_conditions = list_of_all_row_tags[0].find_all('div', attrs={'class': 'col-md-12 col-lg-12'})[2]
-    table = forecast_wind_and_coastal_weather_conditions.find('table', attrs={'class': 'table table-striped'})
-    tbody = table.find('tbody')
-    table_rows = tbody.find_all('tr')
-    
-    forecast_wind_and_coastal_weather_conditions_data = []
-
-    for table_row in table_rows:
-        table_datas = table_row.find_all('td')
-
-        if table_datas == []:
-            continue
-
-        data = []
-
-        for table_data in table_datas:
-            table_data = str(table_data.text)
-            
-            if table_data == '':
-                continue
-
-            data.append(table_data)
-        
-        forecast_wind_and_coastal_weather_conditions_data.append(data)
-    
-    # Scrape temperature and relative humidity
-    inner_row_tag = list_of_all_row_tags[0].find('div', attrs={'class': 'row', 'style': 'margin-left: 0; margin-right: 0;'})
-    temperature_and_relative_humidity = inner_row_tag.find('div', attrs={'class': 'col-md-12 col-lg-12'})
-
-    span_tags = temperature_and_relative_humidity.find_all('span')
-    
-    temperature_and_relative_humidity_description = []
-
-    for span_tag in span_tags:
-        span_tag = str(span_tag.text)
-        
-        if span_tag == '':
-            continue
-
-        temperature_and_relative_humidity_description.append(span_tag)
-
-    temperature_and_relative_humidity_description = ' '.join(temperature_and_relative_humidity_description)
-
-    table = temperature_and_relative_humidity.find('table', attrs={'class': 'table'})
-    tbody = table.find('tbody')
-    table_rows = tbody.find_all('tr')
-
-    temperature_and_relative_humidity_data = []
-
-    for table_row in table_rows:
-        table_datas = table_row.find_all('td')
-        
-        if table_datas == []:
-            continue
-
-        data = []
-
-        for table_data in table_datas:
-            table_data = str(table_data.text)
-
-            if table_data == '':
-                continue
-
-            data.append(table_data)
-        
-        temperature_and_relative_humidity_data.append(data)
-
-    # Store all the scraped daily weather forecast data to a dictionary for better readability instead of using separate arrays    
-    result = {}
-    result['issued_datetime'] = issued_datetime
-    result['synopsis'] = synopsis
-    result['forecast_weather_conditions'] = forecast_weather_conditions_data
-    result['forecast_wind_and_coastal_water_conditions'] = forecast_wind_and_coastal_weather_conditions_data
-    result['temperature_and_relative_humidity_description'] = temperature_and_relative_humidity_description
-    result['temperature_and_relative_humidity'] = temperature_and_relative_humidity_data
-
-    return result
-
-# ----------------------------------------------------------------------------------------------------------------------------
-# TODO: Make sure to refactor the default value to return from this function if the variable that was being scrape is NoneType
-# ----------------------------------------------------------------------------------------------------------------------------
-def scrape_weather_outlook_for_selected_ph_cities_data(url: str) -> None | dict:
+def scrape_weather_outlook_for_selected_ph_cities_data(url: str) -> dict:
     '''
         Scrape function to perform web-scraping
         to ingest weather oulook for selected ph
@@ -163,7 +34,9 @@ def scrape_weather_outlook_for_selected_ph_cities_data(url: str) -> None | dict:
     if response.status_code != 200:
         print(f'Status code: {response.status_code}')
         print(f'The website didn\'t accept the request!')
-        return None
+
+        result = {}
+        return result
 
     soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object
     row_weather_page = soup.find('div', attrs={'class': 'row weather-page'})
@@ -248,7 +121,7 @@ def scrape_weather_outlook_for_selected_ph_cities_data(url: str) -> None | dict:
 
     return result
 
-def scrape_asian_cities_weather_forecast_data(url: str) -> None | dict:
+def scrape_asian_cities_weather_forecast_data(url: str) -> dict:
     '''
         Scrape function to perform web-scraping
         to ingest asian cities weather forecast data
@@ -259,7 +132,9 @@ def scrape_asian_cities_weather_forecast_data(url: str) -> None | dict:
     if response.status_code != 200:
         print(f'Status code: {response.status_code}')
         print(f'The website didn\'t accept the request!')
-        return None
+        
+        result = {}
+        return result
 
     soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object
     row_weather_page = soup.find('div', attrs={'class': 'row weather-page'})
@@ -323,7 +198,7 @@ def scrape_asian_cities_weather_forecast_data(url: str) -> None | dict:
 
     return result
 
-def scrape_weather_outlook_for_selected_tourist_areas_data(url: str) -> None | dict:
+def scrape_weather_outlook_for_selected_tourist_areas_data(url: str) -> dict:
     '''
         Scrape function to perform web-scraping
         to ingest weather outlook for selected tourist
@@ -334,7 +209,9 @@ def scrape_weather_outlook_for_selected_tourist_areas_data(url: str) -> None | d
     if response.status_code != 200:
         print(f'Status code: {response.status_code}')
         print(f'The website didn\'t accept the request!')
-        return None
+
+        result = {}
+        return result
 
     soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object
     row_weather_page = soup.find('div', attrs={'class': 'row weather-page'})
@@ -407,7 +284,7 @@ def scrape_weather_outlook_for_selected_tourist_areas_data(url: str) -> None | d
 
     return result
 
-def scrape_weekly_weather_outlook_data(url: str) -> None | dict:
+def scrape_weekly_weather_outlook_data(url: str) -> dict:
     '''
         Scrape function to perform web-scraping
         to ingest weekly weather outlook data
@@ -418,7 +295,9 @@ def scrape_weekly_weather_outlook_data(url: str) -> None | dict:
     if response.status_code != 200:
         print(f'Status code: {response.status_code}')
         print(f'The website didn\'t accept the request!')
-        return None
+
+        result = {}
+        return result
 
     soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object
     row_weather_page = soup.find('div', attrs={'class': 'row weather-page'})
@@ -468,7 +347,7 @@ def scrape_weekly_weather_outlook_data(url: str) -> None | dict:
     
     return result
 
-def scrape_weather_advisory_data(url: str) -> None | dict:
+def scrape_weather_advisory_data(url: str) -> dict:
     '''
         Scrape function to perform web-scraping
         to ingest weather advisory data in PDF format
@@ -479,16 +358,19 @@ def scrape_weather_advisory_data(url: str) -> None | dict:
     if response.status_code != 200:
         print(f'Status code: {response.status_code}')
         print(f'The website didn\'t accept the request!')
-        return None
+
+        result = {}
+        return result
 
     soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object
     row_marine_page = soup.find('div', attrs={'class': 'row marine'})
     article_content_weather_advisory = row_marine_page.find('div', attrs={'class': 'col-md-12 article-content weather-advisory'})
-
+    
     # TODO: Implement the functionality here to ingest the PDF data of the weather advisory in PDF Format
     # NOTE: Curently we can't implement it because there's no currently no weather advisory data from the website
+    return {}
 
-def scrape_daily_temperature_data(url: str) -> None | dict:
+def scrape_daily_temperature_data(url: str) -> dict:
     '''
         Scrape function to perform web-scraping
         to ingest daily temperature data
@@ -499,7 +381,9 @@ def scrape_daily_temperature_data(url: str) -> None | dict:
     if response.status_code != 200:
         print(f'Status code: {response.status_code}')
         print(f'The website didn\'t accept the request!')
-        return None
+
+        result = {}
+        return result
 
     soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object
     row_weather_page = soup.find('div', attrs={'class': 'row weather-page'})
@@ -516,7 +400,9 @@ def scrape_daily_temperature_data(url: str) -> None | dict:
 
     if top_10_lowest_temperature_heading == '':
         print(f'Currently there\'s no data for top 10 lowest temperature')
-        return None
+
+        result = {}
+        return result
 
     result[top_10_lowest_temperature_heading] = {}
 
@@ -556,7 +442,9 @@ def scrape_daily_temperature_data(url: str) -> None | dict:
     
     if top_10_highest_temperature_heading == '':
         print(f'Currently there\'s no data for top 10 highest temperature')
-        return None
+
+        result = {}
+        return result
 
     result[top_10_highest_temperature_heading] = {}
 
@@ -586,5 +474,5 @@ def scrape_daily_temperature_data(url: str) -> None | dict:
             temperature = 'None'
 
         result[top_10_highest_temperature_heading][station_name] = temperature
-    
+
     return result
