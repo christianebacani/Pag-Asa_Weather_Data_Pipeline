@@ -15,9 +15,7 @@ def scrape_flood_information_data(url: str) -> dict:
     if response.status_code != 200:
         print(f'Status code: {response.status_code}')
         print(f'The website didn\'t accept the request!')
-        
-        result = {}
-        return result
+        return {}
 
     soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object
     row_flood_page = soup.find('div', attrs={'class': 'row flood-page'})
