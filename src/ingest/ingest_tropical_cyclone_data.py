@@ -182,3 +182,39 @@ def scrape_tropical_cyclone_bulletin_data(url: str) -> None | dict:
         
         if list_of_all_table_row_tags == []:
             continue
+
+def scrape_tropical_cyclone_warning_for_shipping_data(url: str) -> None | dict:
+    '''
+        Scrape function to perform web-scraping
+        to ingest tropical cyclone warning from shipping 
+        data in PDF Format from the Website of Pag-Asa (https://www.pagasa.dost.gov.ph/) 
+    '''
+    response = requests.get(url)
+
+    if response.status_code != 200:
+        print(f'Status code: {response.status_code}')
+        print(f'The website didn\'t accept the request!')
+        return None
+    
+    soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object
+    row_tropical_cycline_warning_for_shipping_page = soup.find('div', attrs={'class': 'row tropical-cyclone-warning-for-shipping'})
+    article_content = row_tropical_cycline_warning_for_shipping_page.find('div', attrs={'class': 'col-md-12 article-content'})
+
+    if article_content is None:
+        print(f'Currently there\'s no data for the tropical cyclone warning for shipping data in PDF format!')
+        return None
+
+    # Scrape the tropical cyclone warning for shipping in PDF Format
+    iframe_tag = article_content.find('iframe')
+    document = str(iframe_tag['src']).strip()
+
+    result = {}
+    result['tropical_cyclone_warning_for_shipping_data_in_pdf_format'] = document
+    return result
+
+def scrape_forecast_storm_surge_data(url: str) -> None | dict:
+    '''
+        Scrape function to perform web-scraping
+        to ingest forecast storm surge data in PDF
+        format from the Website of Pag-Asa (https://www.pagasa.dost.gov.ph/)         
+    '''
