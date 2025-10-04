@@ -4,7 +4,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-def scrape_tropical_cyclone_bulletin_data(url: str) -> None | dict:
+def scrape_tropical_cyclone_bulletin_data(url: str) -> dict:
     '''
         Scrape function to perform web-scraping
         to ingest tropical cyclone bulletin data from
@@ -15,11 +15,15 @@ def scrape_tropical_cyclone_bulletin_data(url: str) -> None | dict:
     if response.status_code != 200:
         print(f'Status code: {response.status_code}')
         print(f'The website didn\'t accept the request!')
-        return None
-    
+        return {}
+
     soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object
     tropical_cyclone_weather_bulletin_page = soup.find('div', attrs={'class': 'row tropical-cyclone-weather-bulletin-page'})
     article_content = tropical_cyclone_weather_bulletin_page.find('div', attrs={'col-md-12 article-content'})
+
+    if article_content is None:
+        print(f'Currently there\'s no data for the tropical cyclone bulletin!')
+        return {}
 
     result = {}
 
@@ -31,7 +35,7 @@ def scrape_tropical_cyclone_bulletin_data(url: str) -> None | dict:
 
     if tropical_cyclone_name == '':
         print(f'Currently there\'s no data for the tropical cyclone!')
-        return None
+        return {}
     
     result['tropical_cyclone_name'] = tropical_cyclone_name
 
@@ -39,7 +43,7 @@ def scrape_tropical_cyclone_bulletin_data(url: str) -> None | dict:
 
     if len(list_of_all_h5_tags) != 2:
         print(f'Currently there\'s no data for the issued datetime and validity description of the tropical cyclone!')
-        return None
+        return {}
 
     # Scrape issued datetime
     issued_datetime = str(list_of_all_h5_tags[0].text)
@@ -57,7 +61,7 @@ def scrape_tropical_cyclone_bulletin_data(url: str) -> None | dict:
     
     if tropical_cyclone_current_update_header == '':
         print(f'Currently there\'s no data for the current update header of the tropical cyclone!')
-        return None
+        return {}
     
     result['tropical_cyclone_current_update_header'] = tropical_cyclone_current_update_header
 
@@ -67,7 +71,7 @@ def scrape_tropical_cyclone_bulletin_data(url: str) -> None | dict:
 
     if list_of_all_list_item_tags == []:
         print(f'Currently there\'s no data for the current update descriptions of the tropical cyclone!')
-        return None
+        return {}
     
     tropical_cyclone_current_update_descriptions = []
 
@@ -86,8 +90,8 @@ def scrape_tropical_cyclone_bulletin_data(url: str) -> None | dict:
 
     if len(list_of_all_div_tags) != 2:
         print(f'Currently there\'s no data for the location, movement, strength, and forecast position of the tropical cyclone!')
-        return None
-    
+        return {}
+
     list_of_all_panel_tags = list_of_all_div_tags[0].find_all('div', attrs={'class': 'panel'})
     
     # Scrape the location of eye or center of the tropical cyclone
@@ -95,7 +99,7 @@ def scrape_tropical_cyclone_bulletin_data(url: str) -> None | dict:
     
     if location_of_eye_or_center == '':
         print(f'Currently there\'s no data for the location of eye or center of the tropical cyclone!')
-        return None
+        return {}
 
     result['location_of_eye_or_center'] = location_of_eye_or_center
 
@@ -106,7 +110,7 @@ def scrape_tropical_cyclone_bulletin_data(url: str) -> None | dict:
 
     if movement == '':
         print(f'Currently there\'s no data for the movement of the tropical cyclone!')
-        return None
+        return {}
 
     result['movement'] = movement
 
@@ -117,7 +121,7 @@ def scrape_tropical_cyclone_bulletin_data(url: str) -> None | dict:
 
     if strength == '':
         print(f'Currently there\'s no data for the strength of the tropical cyclone!')
-        return None
+        return {}
 
     result['strength'] = strength
 
@@ -127,7 +131,7 @@ def scrape_tropical_cyclone_bulletin_data(url: str) -> None | dict:
 
     if list_of_all_list_item_tags == []:
         print(f'Currently there\'s no data for the forecast position of the tropical cyclone!')
-        return None
+        return {}
 
     forecast_positions = []
 
@@ -148,7 +152,7 @@ def scrape_tropical_cyclone_bulletin_data(url: str) -> None | dict:
     if table is None:
         result['tropical_cyclone_wind_signal_data'] = {}
         print(f'Currently there\'s no data for the wind signal of the tropical cyclone!')
-        return result
+        return {}
 
     tropical_cyclone_wind_signal_data = {}
 
@@ -194,22 +198,28 @@ def scrape_tropical_cyclone_warning_for_shipping_data(url: str) -> None | dict:
     if response.status_code != 200:
         print(f'Status code: {response.status_code}')
         print(f'The website didn\'t accept the request!')
-        return None
-    
+        return {}
+
     soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object
     row_tropical_cycline_warning_for_shipping_page = soup.find('div', attrs={'class': 'row tropical-cyclone-warning-for-shipping'})
     article_content = row_tropical_cycline_warning_for_shipping_page.find('div', attrs={'class': 'col-md-12 article-content'})
 
     if article_content is None:
         print(f'Currently there\'s no data for the tropical cyclone warning for shipping data in PDF format!')
-        return None
+        return {}
 
     # Scrape the tropical cyclone warning for shipping in PDF Format
     iframe_tag = article_content.find('iframe')
+    
+    if iframe_tag is None:
+        print(f'Currently there\'s no data for the tropical cyclone warning for shipping data in PDF format!')
+        return {}
+
     document = str(iframe_tag['src']).strip()
 
     result = {}
     result['tropical_cyclone_warning_for_shipping_data_in_pdf_format'] = document
+
     return result
 
 def scrape_forecast_storm_surge_data(url: str) -> None | dict:
