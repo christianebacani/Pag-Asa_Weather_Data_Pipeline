@@ -14,14 +14,12 @@ def scrape_daily_weather_forecast_data(url: str) -> dict:
 
     if response.status_code != 200:
         print(f'Status code: {response.status_code}')
-        print(f'The website didn\'t accept the request!')
-        
-        result = {}
-        return result
+        print(f'The website didn\'t accept the request!')        
+        return {}
 
     soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object
-    return {}
-    # TODO: Rewrite this entire function
+    row_weather_page = soup.find('div', attrs={'class': 'row weather-page'})
+    div_tag_with_row_class = row_weather_page.find('div', attrs={'class': 'row'})
 
 def scrape_weather_outlook_for_selected_ph_cities_data(url: str) -> dict:
     '''
@@ -34,9 +32,7 @@ def scrape_weather_outlook_for_selected_ph_cities_data(url: str) -> dict:
     if response.status_code != 200:
         print(f'Status code: {response.status_code}')
         print(f'The website didn\'t accept the request!')
-
-        result = {}
-        return result
+        return {}
 
     soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object
     row_weather_page = soup.find('div', attrs={'class': 'row weather-page'})
@@ -131,10 +127,8 @@ def scrape_asian_cities_weather_forecast_data(url: str) -> dict:
 
     if response.status_code != 200:
         print(f'Status code: {response.status_code}')
-        print(f'The website didn\'t accept the request!')
-        
-        result = {}
-        return result
+        print(f'The website didn\'t accept the request!')        
+        return {}
 
     soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object
     row_weather_page = soup.find('div', attrs={'class': 'row weather-page'})
@@ -209,9 +203,7 @@ def scrape_weather_outlook_for_selected_tourist_areas_data(url: str) -> dict:
     if response.status_code != 200:
         print(f'Status code: {response.status_code}')
         print(f'The website didn\'t accept the request!')
-
-        result = {}
-        return result
+        return {}
 
     soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object
     row_weather_page = soup.find('div', attrs={'class': 'row weather-page'})
@@ -295,9 +287,7 @@ def scrape_weekly_weather_outlook_data(url: str) -> dict:
     if response.status_code != 200:
         print(f'Status code: {response.status_code}')
         print(f'The website didn\'t accept the request!')
-
-        result = {}
-        return result
+        return {}
 
     soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object
     row_weather_page = soup.find('div', attrs={'class': 'row weather-page'})
@@ -358,9 +348,7 @@ def scrape_weather_advisory_data(url: str) -> dict:
     if response.status_code != 200:
         print(f'Status code: {response.status_code}')
         print(f'The website didn\'t accept the request!')
-
-        result = {}
-        return result
+        return {}
 
     soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object
     row_marine_page = soup.find('div', attrs={'class': 'row marine'})
@@ -381,9 +369,7 @@ def scrape_daily_temperature_data(url: str) -> dict:
     if response.status_code != 200:
         print(f'Status code: {response.status_code}')
         print(f'The website didn\'t accept the request!')
-
-        result = {}
-        return result
+        return {}
 
     soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object
     row_weather_page = soup.find('div', attrs={'class': 'row weather-page'})
@@ -400,9 +386,7 @@ def scrape_daily_temperature_data(url: str) -> dict:
 
     if top_10_lowest_temperature_heading == '':
         print(f'Currently there\'s no data for top 10 lowest temperature')
-
-        result = {}
-        return result
+        return {}
 
     result[top_10_lowest_temperature_heading] = {}
 
@@ -442,9 +426,7 @@ def scrape_daily_temperature_data(url: str) -> dict:
     
     if top_10_highest_temperature_heading == '':
         print(f'Currently there\'s no data for top 10 highest temperature')
-
-        result = {}
-        return result
+        return {}
 
     result[top_10_highest_temperature_heading] = {}
 
