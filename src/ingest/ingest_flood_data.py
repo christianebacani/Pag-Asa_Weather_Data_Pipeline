@@ -4,19 +4,21 @@
 import requests
 from bs4 import BeautifulSoup
 
-def scrape_flood_information_data(url: str) -> None | dict:
+def scrape_flood_information_data(url: str) -> dict:
     '''
         Scrape function to perform web-scraping
         to ingest flood information data from
         the Website of Pag-Asa (https://www.pagasa.dost.gov.ph/)
     '''
     response = requests.get(url)
-    
+
     if response.status_code != 200:
         print(f'Status code: {response.status_code}')
         print(f'The website didn\'t accept the request!')
-        return None
-    
+        
+        result = {}
+        return result
+
     soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object
     row_flood_page = soup.find('div', attrs={'class': 'row flood-page'})
     list_of_all_article_content_tags = row_flood_page.find_all('div', attrs={'class': 'col-md-12 article-content'})
