@@ -16,6 +16,7 @@ from ingest.ingest_weather_data import scrape_daily_temperature_data
 from ingest.ingest_flood_data import scrape_flood_information_data
 from ingest.ingest_tropical_cyclone_data import scrape_tropical_cyclone_bulletin_data
 from ingest.ingest_tropical_cyclone_data import scrape_tropical_cyclone_warning_for_shipping_data
+from ingest.ingest_tropical_cyclone_data import scrape_forecast_storm_surge_data
 
 def generate_logs_from_pipeline_job(job: str) -> None:
     '''
@@ -49,4 +50,5 @@ if __name__ == '__main__':
     
     # Tropical cyclone data
     # tropical_cyclone_bulletin_data = scrape_tropical_cyclone_bulletin_data('https://www.pagasa.dost.gov.ph/tropical-cyclone/severe-weather-bulletin')
-    scrape_tropical_cyclone_warning_for_shipping_data('https://www.pagasa.dost.gov.ph/tropical-cyclone/tropical-cyclone-warning-for-shipping')
+    # tropical_cyclone_warning_for_shipping_data = scrape_tropical_cyclone_warning_for_shipping_data('https://www.pagasa.dost.gov.ph/tropical-cyclone/tropical-cyclone-warning-for-shipping')
+    scrape_forecast_storm_surge_data('https://www.pagasa.dost.gov.ph/tropical-cyclone/forecast-storm-surge')    
