@@ -15,7 +15,16 @@ def scrape_daily_weather_forecast_data(url: str) -> None | dict:
     if response.status_code != 200:
         print(f'Status code: {response.status_code}')
         print(f'The website didn\'t accept the request!')
-        return None
+        
+        result = {}
+        result['issued_datetime'] = 'None'
+        result['synopsis'] = 'None'
+        result['forecast_weather_conditions'] = []
+        result['forecast_wind_and_coastal_weather_conditions'] = []
+        result['temperature_and_relative_humidity_description'] = []
+        result['temperature_and_relative_humidity'] = []
+
+        return result
 
     soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object
     row_weather_page = soup.find('div', attrs={'class': 'row weather-page'})
@@ -140,6 +149,9 @@ def scrape_daily_weather_forecast_data(url: str) -> None | dict:
 
     return result
 
+# ----------------------------------------------------------------------------------------------------------------------------
+# TODO: Make sure to refactor the default value to return from this function if the variable that was being scrape is NoneType
+# ----------------------------------------------------------------------------------------------------------------------------
 def scrape_weather_outlook_for_selected_ph_cities_data(url: str) -> None | dict:
     '''
         Scrape function to perform web-scraping
