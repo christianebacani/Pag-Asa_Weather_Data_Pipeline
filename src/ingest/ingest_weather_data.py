@@ -416,7 +416,7 @@ def scrape_daily_temperature_data(url: str) -> dict:
 
         if len(table_datas) != 2:
             continue
-        
+
         # Scrape station name for top 10 lowest temperature
         station_name = str(table_datas[0].text)
         station_name = ' '.join(station_name.split())
