@@ -472,8 +472,9 @@ def scrape_weather_advisory_data(url: str) -> None | dict:
     soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object
     row_marine_page = soup.find('div', attrs={'class': 'row marine'})
     article_content_weather_advisory = row_marine_page.find('div', attrs={'class': 'col-md-12 article-content weather-advisory'})
-    
-    # TODO: Add more content to this function
+
+    # TODO: Implement the functionality here to ingest the PDF data of the weather advisory in PDF Format
+    # NOTE: Curently we can't implement it because there's no currently no weather advisory data from the website
 
 def scrape_daily_temperature_data(url: str) -> None | dict:
     '''
