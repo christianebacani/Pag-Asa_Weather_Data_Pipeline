@@ -15,6 +15,7 @@ from ingest.ingest_weather_data import scrape_weather_advisory_data
 from ingest.ingest_weather_data import scrape_daily_temperature_data
 from ingest.ingest_flood_data import scrape_flood_information_data
 from ingest.ingest_tropical_cyclone_data import scrape_tropical_cyclone_bulletin_data
+from ingest.ingest_tropical_cyclone_data import scrape_tropical_cyclone_warning_for_shipping_data
 
 def generate_logs_from_pipeline_job(job: str) -> None:
     '''
@@ -40,13 +41,12 @@ if __name__ == '__main__':
     weather_outlook_for_selected_tourist_areas_data = scrape_weather_outlook_for_selected_tourist_areas_data('https://www.pagasa.dost.gov.ph/weather/weather-outlook-selected-tourist-areas')
     weekly_weather_outlook_data = scrape_weekly_weather_outlook_data('https://www.pagasa.dost.gov.ph/weather/weather-outlook-weekly')
     daily_temperature_data = scrape_daily_temperature_data('https://www.pagasa.dost.gov.ph/weather/low-high-temperature')
-    '''
     scrape_weather_advisory_data('https://www.pagasa.dost.gov.ph/weather/weather-advisory')
 
-    '''
     # Flood data
     flood_information_data = scrape_flood_information_data('https://www.pagasa.dost.gov.ph/flood#flood-information')
-
+    '''
+    
     # Tropical cyclone data
     # tropical_cyclone_bulletin_data = scrape_tropical_cyclone_bulletin_data('https://www.pagasa.dost.gov.ph/tropical-cyclone/severe-weather-bulletin')
-    '''
+    scrape_tropical_cyclone_warning_for_shipping_data('https://www.pagasa.dost.gov.ph/tropical-cyclone/tropical-cyclone-warning-for-shipping')
