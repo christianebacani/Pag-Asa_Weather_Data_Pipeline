@@ -472,6 +472,8 @@ def scrape_weather_advisory_data(url: str) -> None | dict:
     soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object
     row_marine_page = soup.find('div', attrs={'class': 'row marine'})
     article_content_weather_advisory = row_marine_page.find('div', attrs={'class': 'col-md-12 article-content weather-advisory'})
+    
+    # TODO: Add more content to this function
 
 def scrape_daily_temperature_data(url: str) -> None | dict:
     '''
