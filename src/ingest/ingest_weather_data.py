@@ -456,6 +456,23 @@ def scrape_weekly_weather_outlook_data(url: str) -> None | dict:
     
     return result
 
+def scrape_weather_advisory_data(url: str) -> None | dict:
+    '''
+        Scrape function to perform web-scraping
+        to ingest weather advisory data in PDF format
+        from the Website of Pag-Asa (https://www.pagasa.dost.gov.ph/)
+    '''
+    response = requests.get(url)
+
+    if response.status_code != 200:
+        print(f'Status code: {response.status_code}')
+        print(f'The website didn\'t accept the request!')
+        return None
+
+    soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object
+    row_marine_page = soup.find('div', attrs={'class': 'row marine'})
+    article_content_weather_advisory = row_marine_page.find('div', attrs={'class': 'col-md-12 article-content weather-advisory'})
+
 def scrape_daily_temperature_data(url: str) -> None | dict:
     '''
         Scrape function to perform web-scraping
