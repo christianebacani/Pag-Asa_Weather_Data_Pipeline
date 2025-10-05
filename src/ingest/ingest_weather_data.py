@@ -20,6 +20,7 @@ def scrape_daily_weather_forecast_data(url: str) -> dict:
     soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
     div_tag_with_row_class = div_tag_with_row_weather_page_class.find('div', attrs={'class': 'row'})
+    return {}
 
 def scrape_weather_outlook_for_selected_ph_cities_data(url: str) -> dict:
     '''
@@ -53,7 +54,7 @@ def scrape_weather_outlook_for_selected_ph_cities_data(url: str) -> dict:
     
     # Scrape weather outlook for selected ph cities
     div_tag_with_panel_group_class = list_of_all_row_tags[0].find('div', attrs={'class': 'panel-group', 'id': 'outlook-phil-cities'})
-    ph_cities = div_tag_with_panel_group_class.find('div', attrs={'class': 'panel panel-default panel-pagasa'})
+    ph_cities = div_tag_with_panel_group_class.find_all('div', attrs={'class': 'panel panel-default panel-pagasa'})
 
     result = {}
     result['issued_datetime'] = issued_datetime
@@ -68,7 +69,7 @@ def scrape_weather_outlook_for_selected_ph_cities_data(url: str) -> dict:
             continue
 
         table_tag = ph_city.find('table', attrs={'class': 'table'})
-        
+
         # Scrape weather outlook dates
         thead_tag = table_tag.find('thead', attrs={'class': 'desktop-view-thead'})
         list_of_all_table_header_tags = thead_tag.find_all('th', attrs={'class': 'text-center'})
@@ -382,21 +383,21 @@ def scrape_daily_temperature_data(url: str) -> dict:
     result = {}
     
     # Scrape top 10 lowest temperature heading
-    div_tag_with_panel_heading_class = panel.find('div', attrs={'class': 'panel-heading'})
-    div_tag_with_panel_heading_class = str(panel_heading.text)
+    div_tag_with_panel_heading_class = div_tag_with_panel_class.find('div', attrs={'class': 'panel-heading'})
+    div_tag_with_panel_heading_class = str(div_tag_with_panel_heading_class.text)
 
-    top_10_lowest_temperature_heading = ' '.join(panel_heading.split())
+    top_10_lowest_temperature_heading = ' '.join(div_tag_with_panel_heading_class.split())
 
-    if top_10_lowest_temperature_heading == '':
+    if top_10_lowest_temperature_heading == '':    
         print(f'Currently there\'s no data for top 10 lowest temperature')
         return {}
 
     result[top_10_lowest_temperature_heading] = {}
 
-    div_tag_with_panel_body_class = panel.find('div', attrs={'class': 'panel-body'})
+    div_tag_with_panel_body_class = div_tag_with_panel_class.find('div', attrs={'class': 'panel-body'})
     table_tag = div_tag_with_panel_body_class.find('table', attrs={'class': 'table'})
     tbody_tag = table_tag.find('tbody')
-    list_of_all_table_row_tags = tbody.find_all('tr')
+    list_of_all_table_row_tags = tbody_tag.find_all('tr')
 
     for table_row_tag in list_of_all_table_row_tags:
         list_of_all_table_data_tags = table_row_tag.find_all('td')
@@ -421,42 +422,38 @@ def scrape_daily_temperature_data(url: str) -> dict:
         result[top_10_lowest_temperature_heading][station_name] = temperature
     
     div_tag_with_panel_class = list_of_all_column_tags[1].find('div', attrs={'class': 'panel'})
-    
-    # -------------------------------------------------------------------------------------------------------------------------
-    # TODO: Refactor the content of the function to provide proper descriptive names for the list of html tags and html tags
-    # -------------------------------------------------------------------------------------------------------------------------
 
     # Scrape top 10 highest temperature heading
-    panel_heading = panel.find('div', attrs={'class': 'panel-heading'})
-    panel_heading = str(panel_heading.text)
-    top_10_highest_temperature_heading = ' '.join(panel_heading.split())
-    
+    div_tag_with_panel_heading_class = div_tag_with_panel_class.find('div', attrs={'class': 'panel-heading'})
+    div_tag_with_panel_heading_class = str(div_tag_with_panel_heading_class.text)
+    top_10_highest_temperature_heading = ' '.join(div_tag_with_panel_heading_class.split())
+
     if top_10_highest_temperature_heading == '':
         print(f'Currently there\'s no data for top 10 highest temperature')
         return {}
 
     result[top_10_highest_temperature_heading] = {}
 
-    panel_body = panel.find('div', attrs={'class': 'panel-body'})
-    table = panel_body.find('table', attrs={'class': 'table'})
-    tbody = table.find('tbody')
-    table_rows = tbody.find_all('tr')
+    div_tag_with_panel_body_class = div_tag_with_panel_class.find('div', attrs={'class': 'panel-body'})
+    table_tag = div_tag_with_panel_body_class.find('table', attrs={'class': 'table'})
+    tbody_tag = table_tag.find('tbody')
+    list_of_all_table_row_tags = tbody_tag.find_all('tr')
 
-    for table_row in table_rows:
-        table_datas = table_row.find_all('td')
+    for table_row_tag in list_of_all_table_row_tags:
+        list_of_all_table_data_tags = table_row_tag.find_all('td')
 
-        if len(table_datas) != 2:
+        if len(list_of_all_table_data_tags) != 2:
             continue
 
         # Scrape station name for top 10 highest temperature
-        station_name = str(table_datas[0].text)
+        station_name = str(list_of_all_table_data_tags[0].text)
         station_name = ' '.join(station_name.split())
         
         if station_name == '':
             continue
 
         # Scrape temperature for top 10 highest temperature
-        temperature = str(table_datas[1].text)
+        temperature = str(list_of_all_table_data_tags[1].text)
         temperature = ' '.join(temperature.split())
 
         if temperature == '':
