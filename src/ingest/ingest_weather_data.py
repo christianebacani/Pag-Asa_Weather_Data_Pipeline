@@ -47,6 +47,40 @@ def scrape_daily_weather_forecast_data(url: str) -> dict:
         synopsis = str(div_tag_with_panel_body_class.text)
         synopsis = ' '.join(synopsis.split())
 
+    # Scrape tropical cyclone information for daily weather forecast
+    if len(list_of_all_div_tag_with_col_md_twelve_col_lg_twelve_classes) == 5: # NOTE: The TC information div appears only during typhoons, so there are 5 divs instead of 4 when it’s present.
+        second_instance_of_div_tag_with_col_md_twelve_col_lg_twelve_class = list_of_all_div_tag_with_col_md_twelve_col_lg_twelve_classes[1]
+        table_tag = second_instance_of_div_tag_with_col_md_twelve_col_lg_twelve_class.find('table')
+        list_of_all_table_row_tags = table_tag.find_all('tr')
+        tc_information = {}
+        
+        tropical_cyclone_current_update_with_time = str(list_of_all_table_row_tags[0].text)
+        tropical_cyclone_current_update_with_time = ' '.join(tropical_cyclone_current_update_with_time.split())
+        tc_information['tropical_cyclone_current_update_with_time'] = tropical_cyclone_current_update_with_time
+        
+        tropical_cyclone_name = str(list_of_all_table_row_tags[1].text)
+        tropical_cyclone_name = ' '.join(tropical_cyclone_name.split())
+        tc_information['tropical_cyclone_name'] = tropical_cyclone_name
+
+        tropical_cyclone_location = str(list_of_all_table_row_tags[2].text)
+        tropical_cyclone_location = ' '.join(tropical_cyclone_location.split())
+        tc_information['tropical_cyclone_location'] = tropical_cyclone_location
+
+        tropical_cyclone_max_sustained_wind = str(list_of_all_table_row_tags[3].text)
+        tropical_cyclone_max_sustained_wind = ' '.join(tropical_cyclone_max_sustained_wind.split())
+        tc_information['tropical_cyclone_max_sustained_wind'] = tropical_cyclone_max_sustained_wind
+
+        tropical_cyclone_gustiness = str(list_of_all_table_row_tags[4].text)
+        tropical_cyclone_gustiness = ' '.join(tropical_cyclone_gustiness.split())
+        tc_information['tropical_cyclone_gustiness'] = tropical_cyclone_gustiness
+
+        tropical_cyclone_movement = str(list_of_all_table_row_tags[5].text)
+        tropical_cyclone_movement = ' '.join(tropical_cyclone_movement.split())
+        tc_information['tropical_cyclone_movement'] = tropical_cyclone_movement
+
+    else:
+        tc_information = {}
+
 def scrape_weather_outlook_for_selected_ph_cities_data(url: str) -> dict:
     '''
         Scrape function to perform web-scraping
