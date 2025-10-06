@@ -165,10 +165,6 @@ def scrape_daily_weather_forecast_data(url: str) -> dict:
     tbody_tag = fifth_instance_of_div_tag_with_col_md_twelve_col_lg_twelve_class.find('tbody')
 
     if tbody_tag is None:
-        temperature_and_relative_humidity = {}
-    
-    else:
-        list_of_table_row_tags = tbody_tag.find_all('tr')
         temperature_and_relative_humidity = {
             'maximum_temperature': 'None',
             'time_of_maximum_temperature': 'None',
@@ -180,8 +176,32 @@ def scrape_daily_weather_forecast_data(url: str) -> dict:
             'time_of_minimum_relative_humidity_percentage': 'None'
         }
 
-        for table_row_tag in list_of_table_row_tags:
-            list_of_all_table_data_tags = table_row_tag.find_all('td')
+    else:
+        temperature_and_relative_humidity = {
+            'maximum_temperature': 'None',
+            'time_of_maximum_temperature': 'None',
+            'maximum_relative_humidity_percentage': 'None',
+            'time_of_maximum_relative_humidity_percentage': 'None',
+            'minimum_temperature': 'None',
+            'time_of_minimum_temperature': 'None',
+            'minimum_relative_humidity_percentage': 'None',
+            'time_of_minimum_relative_humidity_percentage': 'None'
+        }
+        list_of_all_table_row_tags = tbody_tag.find_all('tr')
+
+        list_of_all_table_data_tags = list_of_all_table_row_tags[0].find_all('td')
+        list_of_all_table_data_tags = list_of_all_table_data_tags[1:]
+        
+        maximum_temperature = str(list_of_all_table_data_tags[0].text)
+        time_of_maximum_temperature = str(list_of_all_table_data_tags[1].text)
+        
+        minimum_temperature = str(list_of_all_table_data_tags[2].text)
+        time_of_minimum_temperature = str(list_of_all_table_data_tags[3].text)
+        
+        print(maximum_temperature)
+        print(time_of_maximum_temperature)
+        print(minimum_temperature)
+        print(time_of_minimum_temperature)
 
 def scrape_weather_outlook_for_selected_ph_cities_data(url: str) -> dict:
     '''
