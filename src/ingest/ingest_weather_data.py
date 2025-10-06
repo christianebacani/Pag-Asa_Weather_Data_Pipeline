@@ -20,7 +20,32 @@ def scrape_daily_weather_forecast_data(url: str) -> dict:
     soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
     div_tag_with_row_class = div_tag_with_row_weather_page_class.find('div', attrs={'class': 'row'})
-    return {}
+    
+    # Scrape issued datetime for daily weather forecast
+    div_tag_with_col_md_twelve_col_lg_twelve_issue_class = div_tag_with_row_class.find('div', attrs={'class': 'col-md-12 col-lg-12 issue'})
+
+    if div_tag_with_col_md_twelve_col_lg_twelve_issue_class is None:
+        issued_datetime = 'None'
+    
+    else:
+        issued_datetime = str(div_tag_with_col_md_twelve_col_lg_twelve_issue_class.text)
+        issued_datetime = ' '.join(issued_datetime.split())
+
+    list_of_all_div_tag_with_col_md_twelve_col_lg_twelve_classes = div_tag_with_row_class.find_all('div', attrs={'class': 'col-md-12 col-lg-12'})
+
+    if list_of_all_div_tag_with_col_md_twelve_col_lg_twelve_classes == []:
+        return {}
+
+    # Scrape synopsis for daily weather forecast
+    first_instance_of_div_tag_with_col_md_twelve_col_lg_twelve_class = list_of_all_div_tag_with_col_md_twelve_col_lg_twelve_classes[0]
+    div_tag_with_panel_body_class = first_instance_of_div_tag_with_col_md_twelve_col_lg_twelve_class.find('div', attrs={'class': 'panel-body'})
+    
+    if div_tag_with_panel_body_class is None:
+        synopsis = 'None'
+    
+    else:
+        synopsis = str(div_tag_with_panel_body_class.text)
+        synopsis = ' '.join(synopsis.split())
 
 def scrape_weather_outlook_for_selected_ph_cities_data(url: str) -> dict:
     '''
