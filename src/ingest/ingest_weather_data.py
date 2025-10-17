@@ -197,12 +197,10 @@ def scrape_daily_weather_forecast_data(url: str) -> dict:
         
         minimum_temperature = str(list_of_all_table_data_tags[2].text)
         time_of_minimum_temperature = str(list_of_all_table_data_tags[3].text)
-        
-        print(maximum_temperature)
-        print(time_of_maximum_temperature)
-        print(minimum_temperature)
-        print(time_of_minimum_temperature)
 
+        list_of_all_table_data_tags = list_of_all_table_row_tags[1].find_all('td')
+        
+        
 def scrape_weather_outlook_for_selected_ph_cities_data(url: str) -> dict:
     '''
         Scrape function to perform web-scraping
