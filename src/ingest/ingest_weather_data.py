@@ -18,6 +18,26 @@ def scrape_daily_weather_forecast_data(url: str) -> dict:
         return {}
 
     soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object
+    div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
+    div_tag_with_row_class = div_tag_with_row_weather_page_class.find('div', attrs={'class': 'row'})
+
+    # Scrape issued datetime for daily weather forecast   
+    div_tag_with_col_md_twelve_col_lg_twelve_issue_class = div_tag_with_row_class.find('div', attrs={'class': 'col-md-12 col-lg-12 issue'})
+    bold_tag =  div_tag_with_col_md_twelve_col_lg_twelve_issue_class.find('b')
+
+    if bold_tag is None:
+        issued_datetime = 'None'
+    
+    else:
+        issued_datetime = str(bold_tag.text)
+
+    list_of_div_tag_with_col_md_twelve_col_lg_twelve_classes = div_tag_with_row_class.find_all('div', attrs={'class': 'col-md-12 col-lg-12'})
+
+    if len(list_of_div_tag_with_col_md_twelve_col_lg_twelve_classes) == 4: # Without TC Information, only 4 matching <div> elements exist.
+        synopsis = list_of_div_tag_with_col_md_twelve_col_lg_twelve_classes[0]
+        forecast_weather_conditions = list_of_div_tag_with_col_md_twelve_col_lg_twelve_classes[1]
+        forecast_wind_and_coastal_weather_conditions = list_of_div_tag_with_col_md_twelve_col_lg_twelve_classes[2]
+        temperature_and_relative_humidity = list_of_div_tag_with_col_md_twelve_col_lg_twelve_classes[3]
 
 def scrape_weather_outlook_for_selected_ph_cities_data(url: str) -> dict:
     '''
