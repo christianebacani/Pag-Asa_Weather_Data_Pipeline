@@ -50,7 +50,29 @@ def scrape_daily_weather_forecast_data(url: str) -> dict:
     else:
         synopsis = str(paragraph_tag.text)
 
-    
+    # Scrape daily weather forecast weather conditions
+    tbody_tag = forecast_weather_conditions.find('tbody')
+
+    if tbody_tag is None:
+        forecast_weather_conditions = {
+            'place': [],
+            'weather_condition': [],
+            'caused_by': [],
+            'impacts': []
+        }
+
+    else:
+        list_of_all_table_row_tags = tbody_tag.find_all('tr')
+        forecast_weather_conditions = {
+            'place': [],
+            'weather_condition': [],
+            'caused_by': [],
+            'impacts': []
+        }
+
+        for table_row_tag in list_of_all_table_row_tags:
+            list_of_all_table_data_tags = table_row_tag.find_all('td')
+            
 def scrape_weather_outlook_for_selected_ph_cities_data(url: str) -> dict:
     '''
         Scrape function to perform web-scraping
