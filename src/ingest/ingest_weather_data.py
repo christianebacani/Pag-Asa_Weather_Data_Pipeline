@@ -63,6 +63,7 @@ def scrape_daily_weather_forecast_data(url: str) -> dict:
 
     else:
         list_of_all_table_row_tags = tbody_tag.find_all('tr')
+
         forecast_weather_conditions = {
             'place': [],
             'weather_condition': [],
@@ -73,6 +74,18 @@ def scrape_daily_weather_forecast_data(url: str) -> dict:
         for table_row_tag in list_of_all_table_row_tags:
             list_of_all_table_data_tags = table_row_tag.find_all('td')
             
+            place = str(list_of_all_table_data_tags[0].text)
+            forecast_weather_conditions['place'].append(place)
+
+            weather_condition = str(list_of_all_table_data_tags[1].text)
+            forecast_weather_conditions['weather_condition'].append(weather_condition)
+
+            caused_by = str(list_of_all_table_data_tags[2].text)
+            forecast_weather_conditions['caused_by'].append(caused_by)
+
+            impacts = str(list_of_all_table_data_tags[3].text)
+            forecast_weather_conditions['impacts'].append(impacts)
+
 def scrape_weather_outlook_for_selected_ph_cities_data(url: str) -> dict:
     '''
         Scrape function to perform web-scraping
