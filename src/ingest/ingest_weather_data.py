@@ -21,7 +21,7 @@ def scrape_daily_weather_forecast_data(url: str) -> dict:
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
     div_tag_with_row_class = div_tag_with_row_weather_page_class.find('div', attrs={'class': 'row'})
 
-    # Scrape issued datetime for daily weather forecast   
+    # Scrape daily weather forecast issued datetime 
     div_tag_with_col_md_twelve_col_lg_twelve_issue_class = div_tag_with_row_class.find('div', attrs={'class': 'col-md-12 col-lg-12 issue'})
     bold_tag =  div_tag_with_col_md_twelve_col_lg_twelve_issue_class.find('b')
 
@@ -38,7 +38,19 @@ def scrape_daily_weather_forecast_data(url: str) -> dict:
         forecast_weather_conditions = list_of_div_tag_with_col_md_twelve_col_lg_twelve_classes[1]
         forecast_wind_and_coastal_weather_conditions = list_of_div_tag_with_col_md_twelve_col_lg_twelve_classes[2]
         temperature_and_relative_humidity = list_of_div_tag_with_col_md_twelve_col_lg_twelve_classes[3]
+    
+    # TODO: Add else statement here if the TC Information exist in the website so the matching <div> elements is 5 instead of 4
 
+    # Scrape daily weather forecast synopsis
+    paragraph_tag = synopsis.find('p')
+
+    if paragraph_tag is None:
+        synopsis = 'None'
+    
+    else:
+        synopsis = str(paragraph_tag.text)
+
+    
 def scrape_weather_outlook_for_selected_ph_cities_data(url: str) -> dict:
     '''
         Scrape function to perform web-scraping
