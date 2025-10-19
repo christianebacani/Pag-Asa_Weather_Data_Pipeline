@@ -35,7 +35,7 @@ def generate_logs_from_pipeline_job(job: str) -> None:
 
 if __name__ == '__main__':
     # Weather Data
-    daily_weather_forecast_data = scrape_daily_weather_forecast_data('https://www.pagasa.dost.gov.ph/weather#daily-weather-forecast')
+    # daily_weather_forecast_data = scrape_daily_weather_forecast_data('https://www.pagasa.dost.gov.ph/weather#daily-weather-forecast')
     # weather_outlook_for_selected_ph_cities_data = scrape_weather_outlook_for_selected_ph_cities_data('https://www.pagasa.dost.gov.ph/weather/weather-outlook-selected-philippine-cities')
     # asian_cities_weather_forecast_data = scrape_asian_cities_weather_forecast_data('https://www.pagasa.dost.gov.ph/weather/weather-asian-cities-weather-forecast')
     # weather_outlook_for_selected_tourist_areas_data = scrape_weather_outlook_for_selected_tourist_areas_data('https://www.pagasa.dost.gov.ph/weather/weather-outlook-selected-tourist-areas')

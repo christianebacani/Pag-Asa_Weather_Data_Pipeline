@@ -182,6 +182,28 @@ def scrape_daily_weather_forecast_data(url: str) -> dict:
         list_of_all_table_data_tags = list_of_all_table_row_tags[1].find_all('td')
         list_of_all_table_data_tags = list_of_all_table_data_tags[1:]
 
+        maximum_relative_humidity_percentage = str(list_of_all_table_data_tags[0].text)
+        temperature_and_relative_humidity['maximum_relative_humidity_percentage'] = maximum_relative_humidity_percentage
+
+        time_of_maximum_relative_humidity_percentage = str(list_of_all_table_data_tags[1].text)
+        temperature_and_relative_humidity['time_of_maximum_relative_humidity_percentage'] = time_of_maximum_relative_humidity_percentage
+
+        minimum_relative_humidity_percentage = str(list_of_all_table_data_tags[2].text)
+        temperature_and_relative_humidity['minimum_relative_humidity_percentage'] = minimum_relative_humidity_percentage
+
+        time_of_minimum_relative_humidity_percentage = str(list_of_all_table_data_tags[3].text)
+        temperature_and_relative_humidity['time_of_minimum_relative_humidity_percentage'] = time_of_minimum_relative_humidity_percentage
+    
+    # TODO: Added new data to initialize inside the dictionary 'result' if the TC Information div is present
+    result = {}
+    result['issued_datetime'] = issued_datetime
+    result['synopsis'] = synopsis
+    result['forecast_weather_conditions'] = forecast_weather_conditions
+    result['forecast_wind_and_coastal_water_conditions'] = forecast_wind_and_coastal_weather_conditions
+    result['temperature_and_relative_humidity'] = temperature_and_relative_humidity
+    
+    return result
+
 def scrape_weather_outlook_for_selected_ph_cities_data(url: str) -> dict:
     '''
         Scrape function to perform web-scraping
