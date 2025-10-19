@@ -146,6 +146,7 @@ def scrape_tropical_cyclone_bulletin_data(url: str) -> dict:
     
     result['forecast_positions'] = forecast_positions
 
+    # Scrape the data for every tropical cyclone wind signal numbers
     sixth_instance_of_div_tag_with_row_classes = list_of_all_div_tag_with_row_classes[5]
     table_tag = sixth_instance_of_div_tag_with_row_classes.find('table', attrs={'class': 'table text-center table-header', 'style': 'margin-top:15px;'})
     
@@ -178,10 +179,59 @@ def scrape_tropical_cyclone_bulletin_data(url: str) -> dict:
         tropical_cyclone_wind_signal = tropical_cyclone_wind_signal_header + ' ' + tropical_wind_signal_number
         tropical_cyclone_wind_signal_data[tropical_cyclone_wind_signal] = {}
 
-    # TODO: To be implemented (because currently there's no data of wind signal of the tropical cyclone from the website)    
+    # Scrape the data of affected areas, meteorological condition, impact of the wind, precautionary measures, 
+    # and list of what to do for every tropical cyclone wind signal number
     list_of_all_table_body_tags = table_tag.find_all('tbody')
     
-    print(len(list_of_all_table_body_tags))
+    for table_body_tag in list_of_all_table_body_tags:
+        list_of_all_table_row_tags = table_body_tag.find_all('tr')
+        
+        if list_of_all_table_row_tags == []:
+            continue
+        
+        data = {
+            'affected_areas': [],
+            'meteorological_condition': [],
+            'impact_of_the_wind': [],
+            'precautionary_measures': [],
+            'what_to_do': []
+        }
+
+        # Scrape the affected areas for a specific tropical cyclone wind signal number
+        list_of_all_table_data_tags = list_of_all_table_row_tags[0].find_all('td')        
+        affected_areas = str(list_of_all_table_data_tags[1].text)
+        affected_areas = ' '.join(affected_areas.split())
+        affected_areas = affected_areas.replace('Luzon ', 'Luzon: ')
+        affected_areas = affected_areas.replace('Visayas ', '\nVisayas: ')
+        affected_areas = affected_areas.replace('Mindanao ', '\nMindanao: ')
+        data['affected_areas'].append(affected_areas)
+
+        # Scrape the meteorological condition for a specific tropical cyclone wind signal number
+        list_of_all_table_data_tags = list_of_all_table_row_tags[1].find_all('td')
+        meteorological_condition = str(list_of_all_table_data_tags[1].text)
+        meteorological_condition = ' '.join(meteorological_condition.split())
+        data['meteorological_condition'].append(meteorological_condition)
+
+        # Scrape the impact of the wind for a specific tropical cyclone wind signal number
+        list_of_all_table_data_tags = list_of_all_table_row_tags[2].find_all('td')
+        impact_of_the_wind = str(list_of_all_table_data_tags[1].text)
+        impact_of_the_wind = ' '.join(impact_of_the_wind.split())
+        data['impact_of_the_wind'].append(impact_of_the_wind)
+
+        # Scrape the precautionary measures for a specific tropical cyclone wind signal number
+        list_of_all_table_data_tags = list_of_all_table_row_tags[3].find_all('td')
+        precautionary_measures = str(list_of_all_table_data_tags[1].text)
+        precautionary_measures = ' '.join(precautionary_measures.split())
+        data['precautionary_measures'].append(precautionary_measures)
+
+        # Scrape the list of what to do for a specific tropical cyclone wind signal number
+        list_of_all_table_data_tags = list_of_all_table_row_tags[4].find_all('td')
+        what_to_do = str(list_of_all_table_data_tags[1].text)
+        what_to_do = ' '.join(what_to_do.split())
+        data['what_to_do'].append(what_to_do)
+
+        print(data)
+        print()
 
 def scrape_tropical_cyclone_warning_for_shipping_data(url: str) -> dict:
     '''
@@ -211,9 +261,8 @@ def scrape_tropical_cyclone_warning_for_shipping_data(url: str) -> dict:
         print(f'Currently there\'s no data for the tropical cyclone warning for shipping data in PDF format!')
         return {}
 
-    document = str(iframe_tag['src']).strip()
-
     result = {}
+    document = str(iframe_tag['src']).strip()
     result['tropical_cyclone_warning_for_shipping_data_in_pdf_format'] = document
 
     return result
