@@ -180,12 +180,8 @@ def scrape_tropical_cyclone_bulletin_data(url: str) -> dict:
 
     # TODO: To be implemented (because currently there's no data of wind signal of the tropical cyclone from the website)    
     list_of_all_table_body_tags = table_tag.find_all('tbody')
-
-    for table_body_tag in list_of_all_table_body_tags:
-        list_of_all_table_row_tags = table_body_tag.find_all('tr')
-
-        if list_of_all_table_row_tags == []:
-            continue
+    
+    print(len(list_of_all_table_body_tags))
 
 def scrape_tropical_cyclone_warning_for_shipping_data(url: str) -> dict:
     '''
