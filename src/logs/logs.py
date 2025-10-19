@@ -40,7 +40,7 @@ if __name__ == '__main__':
     # asian_cities_weather_forecast_data = scrape_asian_cities_weather_forecast_data('https://www.pagasa.dost.gov.ph/weather/weather-asian-cities-weather-forecast')
     # weather_outlook_for_selected_tourist_areas_data = scrape_weather_outlook_for_selected_tourist_areas_data('https://www.pagasa.dost.gov.ph/weather/weather-outlook-selected-tourist-areas')
     # weekly_weather_outlook_data = scrape_weekly_weather_outlook_data('https://www.pagasa.dost.gov.ph/weather/weather-outlook-weekly')
-    # weather_advisory_data = scrape_weather_advisory_data('https://www.pagasa.dost.gov.ph/weather/weather-advisory')
+    weather_advisory_data = scrape_weather_advisory_data('https://www.pagasa.dost.gov.ph/weather/weather-advisory')
     # daily_temperature_data = scrape_daily_temperature_data('https://www.pagasa.dost.gov.ph/weather/low-high-temperature')
 
     # Flood data
