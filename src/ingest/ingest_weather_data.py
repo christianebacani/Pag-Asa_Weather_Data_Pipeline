@@ -535,11 +535,22 @@ def scrape_weather_advisory_data(url: str) -> dict:
 
     soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object
     div_tag_with_row_marine_class = soup.find('div', attrs={'class': 'row marine'})
-    div_tag_with_article_content_weather_advisory_class = div_tag_with_row_marine_class.find('div', attrs={'class': 'col-md-12 article-content weather-advisory'})
+    div_tag_with_col_md_twelve_article_content_weather_advisory_class = div_tag_with_row_marine_class.find('div', attrs={'class': 'col-md-12 article-content weather-advisory'})
+    
+    result = {}
 
-    # TODO: Implement the functionality here to ingest the PDF data of the weather advisory in PDF Format
-    # NOTE: Curently we can't implement it because there's no currently no weather advisory data from the website
-    return {}
+    # Scrape weather advisory data filepath in PDF Format
+    div_tag_with_weekly_content_adv_class = div_tag_with_col_md_twelve_article_content_weather_advisory_class.find('div', attrs={'class': 'weekly-content-adv'})
+
+    if div_tag_with_weekly_content_adv_class is None:
+        result['weather_advisory_data_in_pdf_format'] = 'None'
+
+    else:
+        iframe_tag = div_tag_with_weekly_content_adv_class.find('iframe')
+        document = str(iframe_tag['src']).strip()
+        result['weather_advisory_data_in_pdf_format'] = document
+
+    return result
 
 def scrape_daily_temperature_data(url: str) -> dict:
     '''
