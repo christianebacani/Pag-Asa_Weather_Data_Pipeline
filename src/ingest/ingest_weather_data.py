@@ -50,7 +50,7 @@ def scrape_daily_weather_forecast_data(url: str) -> dict:
     else:
         synopsis = str(paragraph_tag.text)
 
-    # Scrape daily weather forecast weather conditions
+    # Scrape daily weather forecast conditions
     tbody_tag = forecast_weather_conditions.find('tbody')
 
     if tbody_tag is None:
@@ -74,17 +74,113 @@ def scrape_daily_weather_forecast_data(url: str) -> dict:
         for table_row_tag in list_of_all_table_row_tags:
             list_of_all_table_data_tags = table_row_tag.find_all('td')
             
+            # Scrape the place of forecasted weather conditions
             place = str(list_of_all_table_data_tags[0].text)
             forecast_weather_conditions['place'].append(place)
 
+            # Scrape the forecasted weather condition
             weather_condition = str(list_of_all_table_data_tags[1].text)
             forecast_weather_conditions['weather_condition'].append(weather_condition)
 
+            # Scraped the caused of forecasted weather condition
             caused_by = str(list_of_all_table_data_tags[2].text)
             forecast_weather_conditions['caused_by'].append(caused_by)
 
+            # Scrape the impact of forecasted weather condition
             impacts = str(list_of_all_table_data_tags[3].text)
             forecast_weather_conditions['impacts'].append(impacts)
+
+    # Scrape daily weather forecast for wind and coastal water conditions    
+    tbody_tag = forecast_wind_and_coastal_weather_conditions.find('tbody')
+    
+    if tbody_tag is None:
+        forecast_wind_and_coastal_weather_conditions = {
+            'place': [],
+            'speed': [],
+            'direction': [],
+            'coastal_water': []
+        }
+
+    else:
+        list_of_all_table_row_tags = tbody_tag.find_all('tr')
+
+        forecast_wind_and_coastal_weather_conditions = {
+            'place': [],
+            'speed': [],
+            'direction': [],
+            'coastal_water': []
+        }
+        
+        for table_row_tag in list_of_all_table_row_tags:
+            list_of_all_table_data_tags = table_row_tag.find_all('td')
+
+            # Scrape the place of forecasted wind and coastal weather condition
+            place = str(list_of_all_table_data_tags[0].text)
+            forecast_wind_and_coastal_weather_conditions['place'].append(place)
+
+            # Scrape speed of forecasted wind and coastal weather condition
+            speed = str(list_of_all_table_data_tags[1].text)
+            forecast_wind_and_coastal_weather_conditions['speed'].append(speed)
+
+            # Scrape the direction of forecasted wind and coastal weather condition
+            direction = str(list_of_all_table_data_tags[2].text)
+            forecast_wind_and_coastal_weather_conditions['direction'].append(direction)
+
+            # Scrape the coastal water of forecasted wind and coastal weather condition
+            coastal_water = str(list_of_all_table_data_tags[3].text)
+            forecast_wind_and_coastal_weather_conditions['coastal_water'].append(coastal_water)
+    
+    # Scrape daily weather forecast for temperature and relative humidity
+    table_tag = temperature_and_relative_humidity.find('table', attrs={'class': 'table'})
+    tbody_tag = table_tag.find('tbody')
+
+    if tbody_tag is None:
+        temperature_and_relative_humidity = {
+            'maximum_temperature': 'None',
+            'time_of_maximum_temperature': 'None',
+            'minimum_temperature': 'None',
+            'time_of_minimum_temperature': 'None',
+            'maximum_relative_humidity_percentage': 'None',
+            'time_of_maximum_relative_humidity_percentage': 'None',
+            'minimum_relative_humidity_percentage': 'None',
+            'time_of_minimum_relative_humidity_percentage': 'None'
+        }
+    
+    else:
+        list_of_all_table_row_tags = tbody_tag.find_all('tr')
+
+        temperature_and_relative_humidity = {
+            'maximum_temperature': 'None',
+            'time_of_maximum_temperature': 'None',
+            'minimum_temperature': 'None',
+            'time_of_minimum_temperature': 'None',
+            'maximum_relative_humidity_percentage': 'None',
+            'time_of_maximum_relative_humidity_percentage': 'None',
+            'minimum_relative_humidity_percentage': 'None',
+            'time_of_minimum_relative_humidity_percentage': 'None'
+        }
+        
+        list_of_all_table_data_tags = list_of_all_table_row_tags[0].find_all('td')
+        list_of_all_table_data_tags = list_of_all_table_data_tags[1:]
+
+        # Scrape the maximum temperature
+        maximum_temperature = str(list_of_all_table_data_tags[0].text)
+        temperature_and_relative_humidity['maximum_temperature'] = maximum_temperature
+
+        # Scrape time of maximum temperature
+        time_of_maximum_temperature = str(list_of_all_table_data_tags[1].text)
+        temperature_and_relative_humidity['time_of_maximum_temperature'] = time_of_maximum_temperature
+
+        # Scrape minimum temperature
+        minimum_temperature = str(list_of_all_table_data_tags[2].text)
+        temperature_and_relative_humidity['minimum_temperature'] = minimum_temperature
+
+        # Scrape time of minimum temperature
+        time_of_minimum_temperature = str(list_of_all_table_data_tags[3].text)
+        temperature_and_relative_humidity['time_of_minimum_temperature'] = time_of_minimum_temperature
+
+        list_of_all_table_data_tags = list_of_all_table_row_tags[1].find_all('td')
+        list_of_all_table_data_tags = list_of_all_table_data_tags[1:]
 
 def scrape_weather_outlook_for_selected_ph_cities_data(url: str) -> dict:
     '''
