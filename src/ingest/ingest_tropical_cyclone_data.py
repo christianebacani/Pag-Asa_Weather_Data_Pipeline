@@ -29,7 +29,7 @@ def scrape_tropical_cyclone_bulletin_data(url: str) -> dict:
 
     list_of_all_div_tag_with_row_classes = div_tag_with_article_content_class.find_all('div', attrs={'class': 'row'})
 
-    # Scrape tropical cyclone name    
+    # Scrape the name of the tropical cyclone
     tropical_cyclone_name = str(list_of_all_div_tag_with_row_classes[1].text)
     tropical_cyclone_name = ' '.join(tropical_cyclone_name.split())
 
@@ -45,10 +45,10 @@ def scrape_tropical_cyclone_bulletin_data(url: str) -> dict:
         print(f'Currently there\'s no data for the issued datetime and validity description of the tropical cyclone!')
         return {}
 
-    # Scrape issued datetime
+    # Scrape the issued datetime for the tropical cyclone bulletin
     issued_datetime = str(list_of_all_h5_tags[0].text)
 
-    # Scrape validity description
+    # Scrape the description of validity for the tropical cyclone bulletin
     validity_description = str(list_of_all_h5_tags[1].text)
 
     result['issued_datetime'] = issued_datetime
@@ -56,7 +56,7 @@ def scrape_tropical_cyclone_bulletin_data(url: str) -> dict:
 
     tropical_cyclone_bulletin_descriptions = list_of_all_div_tag_with_row_classes[3]
 
-    # Scrape tropical cyclone current update header
+    # Scrape the header of the current update from tropical cyclone
     tropical_cyclone_current_update_header = (tropical_cyclone_bulletin_descriptions.find('h5').text)
     
     if tropical_cyclone_current_update_header == '':
@@ -65,7 +65,7 @@ def scrape_tropical_cyclone_bulletin_data(url: str) -> dict:
     
     result['tropical_cyclone_current_update_header'] = tropical_cyclone_current_update_header
 
-    # Scrape tropical cyclone descriptions
+    # Scrape the descriptions of the tropical cyclone
     unordered_list_tag = tropical_cyclone_bulletin_descriptions.find('ul')
     list_of_all_list_item_tags = unordered_list_tag.find_all('li')
 
@@ -125,7 +125,7 @@ def scrape_tropical_cyclone_bulletin_data(url: str) -> dict:
 
     result['strength'] = strength
 
-    # Scrape the forecast positions of the tropical cyclone
+    # Scrape the forecasted positions of the tropical cyclone
     unordered_list_tag = list_of_all_div_tag_with_col_md_six_classes[1].find('ul')
     list_of_all_list_item_tags = unordered_list_tag.find_all('li')
 
@@ -152,8 +152,7 @@ def scrape_tropical_cyclone_bulletin_data(url: str) -> dict:
     
     if table_tag is None:
         result['tropical_cyclone_wind_signal_data'] = {}
-        print(f'Currently there\'s no data for the wind signal of the tropical cyclone!')
-        return {}
+        return result
 
     tropical_cyclone_wind_signal_data = {}
 
@@ -262,19 +261,20 @@ def scrape_tropical_cyclone_warning_for_shipping_data(url: str) -> dict:
     div_tag_with_article_content_class = div_tag_with_tropical_cyclone_warning_for_shipping_class.find('div', attrs={'class': 'col-md-12 article-content'})
 
     if div_tag_with_article_content_class is None:
-        print(f'Currently there\'s no data for the tropical cyclone warning for shipping data in PDF format!')
+        print(f'Currently there\'s no data for the tropical cyclone warning for shipping data!')
         return {}
 
-    # Scrape the tropical cyclone warning for shipping in PDF Format
+    # Scrape the URL of the tropical cyclone warning for shipping
     iframe_tag = div_tag_with_article_content_class.find('iframe')
 
     if iframe_tag is None:
-        print(f'Currently there\'s no data for the tropical cyclone warning for shipping data in PDF format!')
+        print(f'Currently there\'s no data for the tropical cyclone warning for shipping data!')
         return {}
 
     result = {}
-    document = str(iframe_tag['src']).strip()
-    result['tropical_cyclone_warning_for_shipping_data_in_pdf_format'] = document
+
+    url = str(iframe_tag['src']).strip()
+    result['url_of_the_tropical_cyclone_warning_for_shipping'] = url
 
     return result
 
