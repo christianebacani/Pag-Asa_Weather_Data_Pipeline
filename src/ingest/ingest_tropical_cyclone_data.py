@@ -229,9 +229,20 @@ def scrape_tropical_cyclone_bulletin_data(url: str) -> dict:
         what_to_do = str(list_of_all_table_data_tags[1].text)
         what_to_do = ' '.join(what_to_do.split())
         data['what_to_do'].append(what_to_do)
+        
+        tropical_cyclone_wind_signal_numbers = list(tropical_cyclone_wind_signal_data.keys())
+        
+        # Store the data to the corresponding tropical cyclone wind signal number
+        for tropical_cyclone_wind_signal_number in tropical_cyclone_wind_signal_numbers:
+            if tropical_cyclone_wind_signal_data[tropical_cyclone_wind_signal_number] != {}:
+                continue
 
-        print(data)
-        print()
+            tropical_cyclone_wind_signal_data[tropical_cyclone_wind_signal_number] = data
+            break
+    
+    result['tropical_cyclone_wind_signal_data'] = tropical_cyclone_wind_signal_data
+
+    return result
 
 def scrape_tropical_cyclone_warning_for_shipping_data(url: str) -> dict:
     '''
