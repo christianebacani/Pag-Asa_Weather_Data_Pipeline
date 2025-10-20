@@ -541,12 +541,12 @@ def scrape_weather_advisory_data(url: str) -> dict:
 
     # Scrape weather advisory data filepath in PDF Format
     div_tag_with_weekly_content_adv_class = div_tag_with_col_md_twelve_article_content_weather_advisory_class.find('div', attrs={'class': 'weekly-content-adv'})
-
-    if div_tag_with_weekly_content_adv_class is None:
+    iframe_tag = div_tag_with_weekly_content_adv_class.find('iframe')
+    
+    if iframe_tag is None:
         result['weather_advisory_data_in_pdf_format'] = 'None'
-
+    
     else:
-        iframe_tag = div_tag_with_weekly_content_adv_class.find('iframe')
         document = str(iframe_tag['src']).strip()
         result['weather_advisory_data_in_pdf_format'] = document
 
