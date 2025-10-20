@@ -278,11 +278,21 @@ def scrape_tropical_cyclone_warning_for_shipping_data(url: str) -> dict:
 
     return result
 
-def scrape_forecast_storm_surge_data(url: str) -> None | dict:
+def scrape_forecast_storm_surge_data(url: str) -> dict:
     '''
         Scrape function to perform web-scraping
-        to ingest forecast storm surge data in PDF
-        format from the Website of Pag-Asa (https://www.pagasa.dost.gov.ph/)         
+        to ingest the URL of forecast storm surge data
+        from the Website of Pag-Asa (https://www.pagasa.dost.gov.ph/)         
+    '''
+    # TODO: To be implemented
+    return {}
+
+def scrape_tropical_cyclone_warning_for_agriculture_data(url: str) -> dict:
+    '''
+        Scrape function to perform web-scraping
+        to ingest tropical cyclone warning for
+        agriculture data from the Website of Pag-Asa 
+        (https://www.pagasa.dost.gov.ph/)         
     '''
     # TODO: To be implemented
     return {}
