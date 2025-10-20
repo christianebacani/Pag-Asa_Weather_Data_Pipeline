@@ -478,10 +478,10 @@ def scrape_weekly_weather_outlook_data(url: str) -> dict:
 
     soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
-    list_of_all_row_tags = div_tag_with_row_weather_page_class.find_all('div', attrs={'class': 'row'})
+    list_of_all_div_tag_with_row_classes = div_tag_with_row_weather_page_class.find_all('div', attrs={'class': 'row'})
 
     # Scrape the issued datetime and datetime of validity for weekly weather outlook
-    div_tag_with_validity_class = list_of_all_row_tags[0].find('div', attrs={'class': 'validity'})
+    div_tag_with_validity_class = list_of_all_div_tag_with_row_classes[0].find('div', attrs={'class': 'validity'})
     list_of_all_bold_tags = div_tag_with_validity_class.find_all('b')
 
     if len(list_of_all_bold_tags) != 2:
@@ -496,7 +496,12 @@ def scrape_weekly_weather_outlook_data(url: str) -> dict:
     result['issued_datetime'] = issued_datetime
     result['datetime_of_validity'] = datetime_of_validity
 
-    table_tag = list_of_all_row_tags[0].find('table', attrs={'class': 'table'})
+    table_tag = list_of_all_div_tag_with_row_classes[0].find('table', attrs={'class': 'table'})
+    
+    if table_tag is None:
+        print(f'Currently there\'s no data for the weekly weather outlook!')
+        return {}
+
     tbody_tag = table_tag.find('tbody')
     list_of_all_table_row_tags = tbody_tag.find_all('tr')
 
