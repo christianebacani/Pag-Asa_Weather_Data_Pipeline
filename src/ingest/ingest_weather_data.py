@@ -21,7 +21,7 @@ def scrape_daily_weather_forecast_data(url: str) -> dict:
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
     div_tag_with_row_class = div_tag_with_row_weather_page_class.find('div', attrs={'class': 'row'})
 
-    # Scrape daily weather forecast issued datetime 
+    # Scrape the issued datetime for the daily weather forecast
     div_tag_with_col_md_twelve_col_lg_twelve_issue_class = div_tag_with_row_class.find('div', attrs={'class': 'col-md-12 col-lg-12 issue'})
     bold_tag =  div_tag_with_col_md_twelve_col_lg_twelve_issue_class.find('b')
 
@@ -41,7 +41,7 @@ def scrape_daily_weather_forecast_data(url: str) -> dict:
     
     # TODO: Add else statement here if the TC Information exist in the website so the matching <div> elements is 5 instead of 4
 
-    # Scrape daily weather forecast synopsis
+    # Scrape the synopsis of the daily weather forecast
     paragraph_tag = synopsis.find('p')
 
     if paragraph_tag is None:
@@ -50,7 +50,7 @@ def scrape_daily_weather_forecast_data(url: str) -> dict:
     else:
         synopsis = str(paragraph_tag.text)
 
-    # Scrape daily weather forecast conditions
+    # Scrape the forecasted weather conditions
     tbody_tag = forecast_weather_conditions.find('tbody')
 
     if tbody_tag is None:
@@ -90,7 +90,7 @@ def scrape_daily_weather_forecast_data(url: str) -> dict:
             impacts = str(list_of_all_table_data_tags[3].text)
             forecast_weather_conditions['impacts'].append(impacts)
 
-    # Scrape daily weather forecast for wind and coastal water conditions    
+    # Scrape the forecasted wind and coastal water conditions
     tbody_tag = forecast_wind_and_coastal_weather_conditions.find('tbody')
     
     if tbody_tag is None:
@@ -118,7 +118,7 @@ def scrape_daily_weather_forecast_data(url: str) -> dict:
             place = str(list_of_all_table_data_tags[0].text)
             forecast_wind_and_coastal_weather_conditions['place'].append(place)
 
-            # Scrape speed of forecasted wind and coastal weather condition
+            # Scrape the speed of forecasted wind and coastal weather condition
             speed = str(list_of_all_table_data_tags[1].text)
             forecast_wind_and_coastal_weather_conditions['speed'].append(speed)
 
@@ -130,7 +130,7 @@ def scrape_daily_weather_forecast_data(url: str) -> dict:
             coastal_water = str(list_of_all_table_data_tags[3].text)
             forecast_wind_and_coastal_weather_conditions['coastal_water'].append(coastal_water)
     
-    # Scrape daily weather forecast for temperature and relative humidity
+    # Scrape the forecasted temperature and relative humidity
     table_tag = temperature_and_relative_humidity.find('table', attrs={'class': 'table'})
     tbody_tag = table_tag.find('tbody')
 
@@ -163,34 +163,38 @@ def scrape_daily_weather_forecast_data(url: str) -> dict:
         list_of_all_table_data_tags = list_of_all_table_row_tags[0].find_all('td')
         list_of_all_table_data_tags = list_of_all_table_data_tags[1:]
 
-        # Scrape the maximum temperature
+        # Scrape the forecasted maximum temperature
         maximum_temperature = str(list_of_all_table_data_tags[0].text)
         temperature_and_relative_humidity['maximum_temperature'] = maximum_temperature
 
-        # Scrape time of maximum temperature
+        # Scrape the forecasted time of maximum temperature
         time_of_maximum_temperature = str(list_of_all_table_data_tags[1].text)
         temperature_and_relative_humidity['time_of_maximum_temperature'] = time_of_maximum_temperature
 
-        # Scrape minimum temperature
+        # Scrape the forecasted minimum temperature
         minimum_temperature = str(list_of_all_table_data_tags[2].text)
         temperature_and_relative_humidity['minimum_temperature'] = minimum_temperature
 
-        # Scrape time of minimum temperature
+        # Scrape the forecasted time of minimum temperature
         time_of_minimum_temperature = str(list_of_all_table_data_tags[3].text)
         temperature_and_relative_humidity['time_of_minimum_temperature'] = time_of_minimum_temperature
 
         list_of_all_table_data_tags = list_of_all_table_row_tags[1].find_all('td')
         list_of_all_table_data_tags = list_of_all_table_data_tags[1:]
 
+        # Scrape the forecasted maximum relative humidity percentage
         maximum_relative_humidity_percentage = str(list_of_all_table_data_tags[0].text)
         temperature_and_relative_humidity['maximum_relative_humidity_percentage'] = maximum_relative_humidity_percentage
 
+        # Scrape the forecasted time of maximum relative humidity percentage
         time_of_maximum_relative_humidity_percentage = str(list_of_all_table_data_tags[1].text)
         temperature_and_relative_humidity['time_of_maximum_relative_humidity_percentage'] = time_of_maximum_relative_humidity_percentage
 
+        # Scrape the forecasted minimum relative humidity percentage
         minimum_relative_humidity_percentage = str(list_of_all_table_data_tags[2].text)
         temperature_and_relative_humidity['minimum_relative_humidity_percentage'] = minimum_relative_humidity_percentage
 
+        # Scrape the forecasted time of minimum relative humidity percentage
         time_of_minimum_relative_humidity_percentage = str(list_of_all_table_data_tags[3].text)
         temperature_and_relative_humidity['time_of_minimum_relative_humidity_percentage'] = time_of_minimum_relative_humidity_percentage
     
@@ -221,7 +225,7 @@ def scrape_weather_outlook_for_selected_ph_cities_data(url: str) -> dict:
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
     list_of_all_row_tags = div_tag_with_row_weather_page_class.find_all('div', attrs={'class': 'row'})
 
-    # Scrape weather outlook for selected ph cities issued datetime and time of validity
+    # Scrape the issued datetime and time of validity for the weather outlook for selected ph cities    
     div_tag_with_validity_class = list_of_all_row_tags[0].find('div', attrs={'class': 'validity'})
     list_of_all_bold_tags = div_tag_with_validity_class.find_all('b')
 
@@ -233,8 +237,8 @@ def scrape_weather_outlook_for_selected_ph_cities_data(url: str) -> dict:
         issued_datetime = str(list_of_all_bold_tags[0].text)
         issued_datetime = ' '.join(issued_datetime.split())
         time_of_validity = str(list_of_all_bold_tags[1].text)
-    
-    # Scrape weather outlook for selected ph cities
+
+    # Scrape all the div elements of the selected ph cities
     div_tag_with_panel_group_class = list_of_all_row_tags[0].find('div', attrs={'class': 'panel-group', 'id': 'outlook-phil-cities'})
     ph_cities = div_tag_with_panel_group_class.find_all('div', attrs={'class': 'panel panel-default panel-pagasa'})
 
@@ -243,7 +247,7 @@ def scrape_weather_outlook_for_selected_ph_cities_data(url: str) -> dict:
     result['time_of_validity'] = time_of_validity
  
     for ph_city in ph_cities:
-        # Scrape city name
+        # Scrape the name of the city
         city = str(ph_city.find('div', attrs={'class': 'panel-title'}).text)
         city = ' '.join(city.split())
 
@@ -252,7 +256,7 @@ def scrape_weather_outlook_for_selected_ph_cities_data(url: str) -> dict:
 
         table_tag = ph_city.find('table', attrs={'class': 'table'})
 
-        # Scrape weather outlook dates
+        # Scrape all of the weather outlook dates
         thead_tag = table_tag.find('thead', attrs={'class': 'desktop-view-thead'})
         list_of_all_table_header_tags = thead_tag.find_all('th', attrs={'class': 'text-center'})
 
@@ -275,7 +279,7 @@ def scrape_weather_outlook_for_selected_ph_cities_data(url: str) -> dict:
         weather_outlook_chances_of_rain = []
 
         for table_data_tag in list_of_all_table_data_tags:
-            # Scrape weather outlook temperatures
+            # Scrape the weather outlook temperatures
             temperatures = str(table_data_tag.find('div', attrs={'class': 'weather-values'}).text)
             temperatures = temperatures.split()
 
@@ -284,7 +288,7 @@ def scrape_weather_outlook_for_selected_ph_cities_data(url: str) -> dict:
 
             weather_outlook_temperatures.append(temperatures)
 
-            # Scrape weather outlook chances of rain
+            # Scrape the chances of rain percentage
             chances_of_rain = str(table_data_tag.find('span', attrs={'style': 'font-weight:bold; color: rgb(9, 73, 156);'}).text)
             
             if chances_of_rain == '':
@@ -292,7 +296,7 @@ def scrape_weather_outlook_for_selected_ph_cities_data(url: str) -> dict:
 
             weather_outlook_chances_of_rain.append(chances_of_rain)
         
-        # Store all the scraped weather outlook for selected ph cities data to a dictionary for better readability instead of using separate arrays
+        # Store all of the data of the weather outlook for selected ph cities to a dictionary for better readability instead of using separate arrays
         result[city] = {}
         result[city]['weather_outlook_dates'] = weather_outlook_dates
         result[city]['weather_outlook_temperatures'] = weather_outlook_temperatures
@@ -317,7 +321,7 @@ def scrape_asian_cities_weather_forecast_data(url: str) -> dict:
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
     list_of_all_row_tags = div_tag_with_row_weather_page_class.find_all('div', attrs={'class': 'row'})
 
-    # Scrape asian cities weather forecast issued datetime and time of validity
+    # Scrape the issued datetime and time of validity for the forecasted weather of asian cities 
     div_tag_with_validity_class = list_of_all_row_tags[0].find('div', attrs={'class': 'validity'})
     list_of_all_bold_tags = div_tag_with_validity_class.find_all('b')
 
@@ -343,26 +347,26 @@ def scrape_asian_cities_weather_forecast_data(url: str) -> dict:
         if list_of_all_table_data_tags == []:
             continue
       
-        # Scrape city name
+        # Scrape the name of the city
         place = str(list_of_all_table_data_tags[0].text)
 
         if place == '':
             continue
 
-        # Scrape weather description        
+        # Scrape the weather description        
         description = str(list_of_all_table_data_tags[2].text)
         description = ' '.join(description.split())
 
         if description == '':
             description = 'None'
 
-        # Scrape minimum temperature
+        # Scrape the forecasted minimum temperature
         minimum_temperature = str(list_of_all_table_data_tags[3].text)
         
         if minimum_temperature == '':
             minimum_temperature = 'None'
 
-        # Scrape maximum temperature
+        # Scrape the forecasted maximum temperature
         maximum_temperature = str(list_of_all_table_data_tags[4].text)
 
         if maximum_temperature == '':
@@ -392,7 +396,7 @@ def scrape_weather_outlook_for_selected_tourist_areas_data(url: str) -> dict:
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
     list_of_all_row_tags = div_tag_with_row_weather_page_class.find_all('div', attrs={'class': 'row'})
 
-    # Scrape weather outlook for selected tourist areas issued datetime and time of validity
+    # Scrape the issued datetime and time of validity for the forecasted weather outlook for the selected tourist areas
     div_tag_with_validity_class = list_of_all_row_tags[0].find('div', attrs={'class': 'validity'})
     list_of_all_bold_tags = div_tag_with_validity_class.find_all('b')
 
@@ -410,7 +414,7 @@ def scrape_weather_outlook_for_selected_tourist_areas_data(url: str) -> dict:
 
     table_tag_with_table_desktop_class = list_of_all_row_tags[0].find('table', attrs={'class': 'table desktop'})
 
-    # Scrape weather outlook dates
+    # Scrape all of the weather outlook dates
     thead_tag = table_tag_with_table_desktop_class.find('thead')
     list_of_all_table_header_tags = thead_tag.find_all('th')
     list_of_all_table_header_tags = list_of_all_table_header_tags[1:]
@@ -435,7 +439,7 @@ def scrape_weather_outlook_for_selected_tourist_areas_data(url: str) -> dict:
         if list_of_all_table_data_tags == []:
             continue
 
-        # Scrape tourist destination name
+        # Scrape the name of the tourist destination
         tourist_destination = str(list_of_all_table_data_tags[0].text)
         tourist_destination = ' '.join(tourist_destination.split())
         
@@ -444,7 +448,7 @@ def scrape_weather_outlook_for_selected_tourist_areas_data(url: str) -> dict:
 
         result[tourist_destination] = {}
 
-        # Scrape minimum and maximum temperatures in different dates
+        # Scrape all of the different dates of minimum and maximum temperatures
         minimum_and_maximum_temperatures = list_of_all_table_data_tags[1:]
 
         for index, minimum_and_maximum_temperature in enumerate(minimum_and_maximum_temperatures):
@@ -476,7 +480,7 @@ def scrape_weekly_weather_outlook_data(url: str) -> dict:
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
     list_of_all_row_tags = div_tag_with_row_weather_page_class.find_all('div', attrs={'class': 'row'})
 
-    # Scrape weekly weather outlook issued datetime and datetime of validity
+    # Scrape the issued datetime and datetime of validity for weekly weather outlook
     div_tag_with_validity_class = list_of_all_row_tags[0].find('div', attrs={'class': 'validity'})
     list_of_all_bold_tags = div_tag_with_validity_class.find_all('b')
 
@@ -502,14 +506,14 @@ def scrape_weekly_weather_outlook_data(url: str) -> dict:
         if len(list_of_all_table_data_tags) != 2:
             continue
 
-        # Scrape weather outlook date
+        # Scrape the weather outlook date
         weather_outlook_date = str(list_of_all_table_data_tags[0].text)
         weather_outlook_date = ' '.join(weather_outlook_date.split())
         
         if weather_outlook_date == '':
             continue
-
-        # Scrape weather outlook description
+        
+        # Scrape the description of weather outlook
         weather_outlook_description = str(list_of_all_table_data_tags[1].text)
         weather_outlook_description = ' '.join(weather_outlook_description.split())
 
@@ -539,16 +543,16 @@ def scrape_weather_advisory_data(url: str) -> dict:
     
     result = {}
 
-    # Scrape weather advisory data filepath in PDF Format
+    # Scrape the URL of the weather advisory data
     div_tag_with_weekly_content_adv_class = div_tag_with_col_md_twelve_article_content_weather_advisory_class.find('div', attrs={'class': 'weekly-content-adv'})
     iframe_tag = div_tag_with_weekly_content_adv_class.find('iframe')
     
     if iframe_tag is None:
-        result['weather_advisory_data_in_pdf_format'] = 'None'
-    
+        result['url_of_weather_advisory_data'] = 'None'
+
     else:
-        document = str(iframe_tag['src']).strip()
-        result['weather_advisory_data_in_pdf_format'] = document
+        url = str(iframe_tag['src']).strip()
+        result['url_of_weather_advisory_data'] = url
 
     return result
 
@@ -575,7 +579,7 @@ def scrape_daily_temperature_data(url: str) -> dict:
 
     result = {}
     
-    # Scrape top 10 lowest temperature heading
+    # Scrape the heading of the table that consist of top 10 lowest temperature
     div_tag_with_panel_heading_class = div_tag_with_panel_class.find('div', attrs={'class': 'panel-heading'})
     div_tag_with_panel_heading_class = str(div_tag_with_panel_heading_class.text)
 
@@ -598,14 +602,14 @@ def scrape_daily_temperature_data(url: str) -> dict:
         if len(list_of_all_table_data_tags) != 2:
             continue
 
-        # Scrape station name for top 10 lowest temperature
+        # Scrape the station name in the table of top 10 lowest temperature
         station_name = str(list_of_all_table_data_tags[0].text)
         station_name = ' '.join(station_name.split())
 
         if station_name == '':
             continue
-
-        # Scrape temperature for top 10 lowest temperature
+        
+        # Scrape the temperature in the table of the top 10 lowest temperature
         temperature = str(list_of_all_table_data_tags[1].text)
         temperature = ' '.join(temperature.split())
 
@@ -616,7 +620,7 @@ def scrape_daily_temperature_data(url: str) -> dict:
     
     div_tag_with_panel_class = list_of_all_column_tags[1].find('div', attrs={'class': 'panel'})
 
-    # Scrape top 10 highest temperature heading
+    # Scrape the heading of the table that consist of the top 10 highest temperature
     div_tag_with_panel_heading_class = div_tag_with_panel_class.find('div', attrs={'class': 'panel-heading'})
     div_tag_with_panel_heading_class = str(div_tag_with_panel_heading_class.text)
     top_10_highest_temperature_heading = ' '.join(div_tag_with_panel_heading_class.split())
@@ -637,15 +641,15 @@ def scrape_daily_temperature_data(url: str) -> dict:
 
         if len(list_of_all_table_data_tags) != 2:
             continue
-
-        # Scrape station name for top 10 highest temperature
+        
+        # Scrape the station name in the table of top 10 highest temperature
         station_name = str(list_of_all_table_data_tags[0].text)
         station_name = ' '.join(station_name.split())
         
         if station_name == '':
             continue
-
-        # Scrape temperature for top 10 highest temperature
+            
+        # Scrape the temperature in the table of top 10 highest temperature
         temperature = str(list_of_all_table_data_tags[1].text)
         temperature = ' '.join(temperature.split())
 
