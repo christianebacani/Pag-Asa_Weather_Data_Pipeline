@@ -37,13 +37,13 @@ def scrape_flood_information_data(url: str) -> dict:
         if len(list_of_all_table_data_tags) != 2:
             continue
 
-        # Scrape major river basin name for basin hydrological forecast        
+        # Scrape the major river basin name for basin hydrological forecast        
         major_river_basin = str(list_of_all_table_data_tags[0].text)
 
         if major_river_basin == '':
             continue
 
-        # Scrape status for basin hydrological forecast
+        # Scrape the status of the major river basin for basin hyrdological forecast
         status = str(list_of_all_table_data_tags[1].text)
         status = ' '.join(status.split())
 
@@ -61,13 +61,13 @@ def scrape_flood_information_data(url: str) -> dict:
         if len(list_of_all_table_data_tags) != 2:
             continue
 
-        # Scrape sub basin name for basin hydrological forecast
+        # Scrape the sub basin name for basin hydrological forecast
         sub_basin = str(list_of_all_table_data_tags[0].text)
 
         if sub_basin == '':
             continue
 
-        # Scrape status for basin hydrological forecast
+        # Scrape status of the sub basin for basin hydrological forecast
         status = str(list_of_all_table_data_tags[1].text)
         status = ' '.join(status.split())
 
@@ -79,7 +79,7 @@ def scrape_flood_information_data(url: str) -> dict:
     dam_water_level_update = list_of_all_div_tag_with_article_content_classes[1]
     div_tag_with_panel_class = dam_water_level_update.find('div', attrs={'class': 'panel'})
     
-    # Scrape dam water level update datetime
+    # Scrape the datetime of the water level update of dam
     dam_weather_level_update_datetime = str(div_tag_with_panel_class.find('h5', attrs={'class': 'pull-right'}).text)
     
     if dam_weather_level_update_datetime == '':
@@ -91,7 +91,7 @@ def scrape_flood_information_data(url: str) -> dict:
     tbody_tag = table_tag_with_dam_table_class.find('tbody', attrs={'style': 'text-align: center;vertical-align: middle;'})
     list_of_all_table_row_tags = tbody_tag.find_all('tr')
 
-    # We iterate using 4 index because every row of dam water level update data contains 4 tr tags
+    # We iterate using 4 index because every row of the table from dam water level update consist of 4 tr tags
     for index in range(0, len(list_of_all_table_row_tags), 4):
         dam_water_level_update_data = list_of_all_table_row_tags[index : index + 4]
 
@@ -161,7 +161,7 @@ def scrape_flood_information_data(url: str) -> dict:
 
         data['observation_in_time_and_date'].append(observation_time)
 
-        # Scrape the second instance of reservoir water level
+        # Scrape the second instance of reservoir water level in meters
         reservoir_water_level = str(list_of_all_table_data_tags[1].text)
 
         if reservoir_water_level == '':
@@ -169,7 +169,7 @@ def scrape_flood_information_data(url: str) -> dict:
 
         data['reservoir_water_level_in_meter'].append(reservoir_water_level)
 
-        # Scrape the second instance of deviation from nhwl
+        # Scrape the second instance of deviation from nhwl in meters
         deviation_from_nhwl = str(list_of_all_table_data_tags[2].text)
 
         if deviation_from_nhwl == '':
@@ -177,7 +177,7 @@ def scrape_flood_information_data(url: str) -> dict:
 
         data['deviation_from_nhwl_in_meter'].append(deviation_from_nhwl)
 
-        # Scrape the second instance of rule curve elevation
+        # Scrape the second instance of rule curve elevation in meters
         rule_curve_elevation = str(list_of_all_table_data_tags[3].text)
         
         if rule_curve_elevation == '':
@@ -185,7 +185,7 @@ def scrape_flood_information_data(url: str) -> dict:
 
         data['rule_curve_elevation_in_meter'].append(rule_curve_elevation)
 
-        # Scrape the second instance of deviation from rule curve
+        # Scrape the second instance of deviation from rule curve in meters
         deviation_from_rule_curve = str(list_of_all_table_data_tags[4].text)
 
         if deviation_from_rule_curve == '':
@@ -193,7 +193,7 @@ def scrape_flood_information_data(url: str) -> dict:
         
         data['deviation_from_rule_curve_in_meter'].append(deviation_from_rule_curve)
 
-        # Scrape the second instance of gate opening (in gate)
+        # Scrape the second instance of gate opening (gates)
         gate_opening_in_gate = str(list_of_all_table_data_tags[5].text)
 
         if gate_opening_in_gate == '':
@@ -201,7 +201,7 @@ def scrape_flood_information_data(url: str) -> dict:
         
         data['gate_opening_in_gate'].append(gate_opening_in_gate)
 
-        # Scrape the second instance of gate opening (in meters)
+        # Scrape the second instance of gate opening (meters)
         gate_opening_in_meter = str(list_of_all_table_data_tags[6].text)
         
         if gate_opening_in_meter == '':
@@ -209,7 +209,7 @@ def scrape_flood_information_data(url: str) -> dict:
         
         data['gate_opening_in_meter'].append(gate_opening_in_meter)
 
-        # Scrape the second instance of estimated centimeters (in inflow)
+        # Scrape the second instance of estimated centimeters (inflow)
         estimated_centimeters_in_inflow = str(list_of_all_table_data_tags[7].text)
 
         if estimated_centimeters_in_inflow == '':
@@ -217,7 +217,7 @@ def scrape_flood_information_data(url: str) -> dict:
 
         data['estimated_centimeters_in_inflow'].append(estimated_centimeters_in_inflow)
 
-        # Scrape the second instance of estimated centimeters (in outflow)
+        # Scrape the second instance of estimated centimeters (outflow)
         estimated_centimeters_in_outflow = str(list_of_all_table_data_tags[8].text)
 
         if estimated_centimeters_in_outflow == '':
