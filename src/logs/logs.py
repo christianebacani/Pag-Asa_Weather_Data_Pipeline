@@ -36,7 +36,7 @@ def generate_logs_from_pipeline_job(job: str) -> None:
 
 if __name__ == '__main__':
     # Weather Data
-    daily_weather_forecast_data = scrape_daily_weather_forecast_data('https://www.pagasa.dost.gov.ph/weather#daily-weather-forecast')
+    # daily_weather_forecast_data = scrape_daily_weather_forecast_data('https://www.pagasa.dost.gov.ph/weather#daily-weather-forecast')
     # weather_outlook_for_selected_ph_cities_data = scrape_weather_outlook_for_selected_ph_cities_data('https://www.pagasa.dost.gov.ph/weather/weather-outlook-selected-philippine-cities')
     # asian_cities_weather_forecast_data = scrape_asian_cities_weather_forecast_data('https://www.pagasa.dost.gov.ph/weather/weather-asian-cities-weather-forecast')
     # weather_outlook_for_selected_tourist_areas_data = scrape_weather_outlook_for_selected_tourist_areas_data('https://www.pagasa.dost.gov.ph/weather/weather-outlook-selected-tourist-areas')
@@ -51,4 +51,4 @@ if __name__ == '__main__':
     # tropical_cyclone_bulletin_data = scrape_tropical_cyclone_bulletin_data('https://www.pagasa.dost.gov.ph/tropical-cyclone/severe-weather-bulletin')
     # tropical_cyclone_warning_for_shipping_data = scrape_tropical_cyclone_warning_for_shipping_data('https://www.pagasa.dost.gov.ph/tropical-cyclone/tropical-cyclone-warning-for-shipping')
     # forecast_storm_surge_data = scrape_forecast_storm_surge_data('https://www.pagasa.dost.gov.ph/tropical-cyclone/forecast-storm-surge')
-    # tropical_cyclone_warning_for_agriculture_data = scrape_tropical_cyclone_warning_for_agriculture_data('https://www.pagasa.dost.gov.ph/tropical-cyclone/tropical-cyclone-warning-for-agriculture')
+    tropical_cyclone_warning_for_agriculture_data = scrape_tropical_cyclone_warning_for_agriculture_data('https://www.pagasa.dost.gov.ph/tropical-cyclone/tropical-cyclone-warning-for-agriculture')
