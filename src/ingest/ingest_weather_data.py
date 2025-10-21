@@ -39,6 +39,13 @@ def scrape_daily_weather_forecast_data(url: str) -> dict:
         forecast_wind_and_coastal_weather_conditions = list_of_div_tag_with_col_md_twelve_col_lg_twelve_classes[2]
         temperature_and_relative_humidity = list_of_div_tag_with_col_md_twelve_col_lg_twelve_classes[3]
     
+    else:
+        synopsis = list_of_div_tag_with_col_md_twelve_col_lg_twelve_classes[0]
+        tc_information = list_of_div_tag_with_col_md_twelve_col_lg_twelve_classes[1]
+        forecast_weather_conditions = list_of_div_tag_with_col_md_twelve_col_lg_twelve_classes[2]
+        forecast_wind_and_coastal_weather_conditions = list_of_div_tag_with_col_md_twelve_col_lg_twelve_classes[3]
+        temperature_and_relative_humidity = list_of_div_tag_with_col_md_twelve_col_lg_twelve_classes[4]
+
     # TODO: Add else statement here if the TC Information exist in the website so the matching <div> elements is 5 instead of 4
 
     # Scrape the synopsis of the daily weather forecast
@@ -211,8 +218,8 @@ def scrape_daily_weather_forecast_data(url: str) -> dict:
 def scrape_weather_outlook_for_selected_ph_cities_data(url: str) -> dict:
     '''
         Scrape function to perform web-scraping
-        to ingest weather oulook for selected ph
-        cities data from the Website of Pag-Asa (https://www.pagasa.dost.gov.ph/)
+        to ingest data of weather oulook for selected ph
+        cities from the website of Pag-Asa (https://www.pagasa.dost.gov.ph/)
     '''
     response = requests.get(url)
 
@@ -307,8 +314,8 @@ def scrape_weather_outlook_for_selected_ph_cities_data(url: str) -> dict:
 def scrape_asian_cities_weather_forecast_data(url: str) -> dict:
     '''
         Scrape function to perform web-scraping
-        to ingest asian cities weather forecast data
-        from the Website of Pag-Asa (https://www.pagasa.dost.gov.ph/)
+        to ingest the data of asian cities weather forecast
+        from the website of Pag-Asa (https://www.pagasa.dost.gov.ph/)
     '''
     response = requests.get(url)
 
@@ -382,8 +389,8 @@ def scrape_asian_cities_weather_forecast_data(url: str) -> dict:
 def scrape_weather_outlook_for_selected_tourist_areas_data(url: str) -> dict:
     '''
         Scrape function to perform web-scraping
-        to ingest weather outlook for selected tourist
-        areas data from the Website of Pag-Asa (https://www.pagasa.dost.gov.ph/)
+        to ingest the data of weather outlook for selected tourist
+        areas from the website of Pag-Asa (https://www.pagasa.dost.gov.ph/)
     '''
     response = requests.get(url)
 
@@ -466,8 +473,8 @@ def scrape_weather_outlook_for_selected_tourist_areas_data(url: str) -> dict:
 def scrape_weekly_weather_outlook_data(url: str) -> dict:
     '''
         Scrape function to perform web-scraping
-        to ingest weekly weather outlook data
-        from the Website of Pag-Asa (https://www.pagasa.dost.gov.ph/)
+        to ingest the data of weekly weather outlook
+        from the website of Pag-Asa (https://www.pagasa.dost.gov.ph/)
     '''
     response = requests.get(url)
     
@@ -532,8 +539,8 @@ def scrape_weekly_weather_outlook_data(url: str) -> dict:
 def scrape_weather_advisory_data(url: str) -> dict:
     '''
         Scrape function to perform web-scraping
-        to ingest weather advisory data in PDF format
-        from the Website of Pag-Asa (https://www.pagasa.dost.gov.ph/)
+        to ingest the URL of weather advisory data
+        in PDF format from the website of Pag-Asa (https://www.pagasa.dost.gov.ph/)
     '''
     response = requests.get(url)
 
@@ -564,8 +571,8 @@ def scrape_weather_advisory_data(url: str) -> dict:
 def scrape_daily_temperature_data(url: str) -> dict:
     '''
         Scrape function to perform web-scraping
-        to ingest daily temperature data from the 
-        Website of Pag-Asa (https://www.pagasa.dost.gov.ph/)
+        to ingest the data of daily temperature from the 
+        website of Pag-Asa (https://www.pagasa.dost.gov.ph/)
     '''
     response = requests.get(url)
     
