@@ -46,8 +46,6 @@ def scrape_daily_weather_forecast_data(url: str) -> dict:
         forecast_wind_and_coastal_weather_conditions = list_of_div_tag_with_col_md_twelve_col_lg_twelve_classes[3]
         temperature_and_relative_humidity = list_of_div_tag_with_col_md_twelve_col_lg_twelve_classes[4]
 
-    # TODO: Add else statement here if the TC Information exist in the website so the matching <div> elements is 5 instead of 4
-
     # Scrape the synopsis of the daily weather forecast
     paragraph_tag = synopsis.find('p')
 
@@ -56,6 +54,60 @@ def scrape_daily_weather_forecast_data(url: str) -> dict:
     
     else:
         synopsis = str(paragraph_tag.text)
+
+    # Scrape the information of the tropical cyclone   
+    try:
+        tbody_tag = tc_information.find('tbody')
+        list_of_all_table_row_tags = tbody_tag.find_all('tr')
+
+        tc_information = {
+            'tc_information_current_update': 'None',
+            'tropical_cyclone_name': 'None',
+            'location': 'None',
+            'maximum_sustained_winds': 'None',
+            'gustiness': 'None',
+            'movement': 'None'
+        }
+
+        # Scrape the current update of the tropical cyclone
+        tc_information_current_update = str(list_of_all_table_row_tags[0].text)
+        tc_information_current_update = ' '.join(tc_information_current_update.split())
+        tc_information['tc_information_current_update'] = tc_information_current_update
+
+        # Scrape the name of the tropical cyclone
+        tropical_cyclone_name = str(list_of_all_table_row_tags[1].text)
+        tropical_cyclone_name = ' '.join(tropical_cyclone_name.split())
+        tc_information['tropical_cyclone_name'] = tropical_cyclone_name
+        
+        # Scrape the location of the tropical cyclone
+        location = str(list_of_all_table_row_tags[2].text)
+        location = ' '.join(location.split())
+        tc_information['location'] = location
+
+        # Scrape the maximum sutained winds of the tropical cyclone
+        maximum_sustained_winds = str(list_of_all_table_row_tags[3].text)
+        maximum_sustained_winds = ' '.join(maximum_sustained_winds.split())
+        tc_information['maximum_sustained_winds'] = maximum_sustained_winds
+
+        # Scrape the gustiness of the tropical cyclone
+        gustiness = str(list_of_all_table_row_tags[4].text)
+        gustiness = ' '.join(gustiness.split())
+        tc_information['gustiness'] = gustiness
+
+        # Scrape the movement of the tropical cyclone
+        movement = str(list_of_all_table_row_tags[5].text)
+        movement = ' '.join(movement.split())
+        tc_information['movement'] = movement
+
+    except UnboundLocalError:
+        tc_information = {
+            'tc_information_current_update': 'None',
+            'tropical_cyclone_name': 'None',
+            'location': 'None',
+            'maximum_sustained_winds': 'None',
+            'gustiness': 'None',
+            'movement': 'None'
+        }
 
     # Scrape the forecasted weather conditions
     tbody_tag = forecast_weather_conditions.find('tbody')
@@ -204,11 +256,11 @@ def scrape_daily_weather_forecast_data(url: str) -> dict:
         # Scrape the forecasted time of minimum relative humidity percentage
         time_of_minimum_relative_humidity_percentage = str(list_of_all_table_data_tags[3].text)
         temperature_and_relative_humidity['time_of_minimum_relative_humidity_percentage'] = time_of_minimum_relative_humidity_percentage
-    
-    # TODO: Added new data to initialize inside the dictionary 'result' if the TC Information div is present
+
     result = {}
     result['issued_datetime'] = issued_datetime
     result['synopsis'] = synopsis
+    result['tc_information'] = tc_information
     result['forecast_weather_conditions'] = forecast_weather_conditions
     result['forecast_wind_and_coastal_water_conditions'] = forecast_wind_and_coastal_weather_conditions
     result['temperature_and_relative_humidity'] = temperature_and_relative_humidity
