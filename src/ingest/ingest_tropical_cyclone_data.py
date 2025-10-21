@@ -6,9 +6,9 @@ from bs4 import BeautifulSoup
 
 def scrape_tropical_cyclone_bulletin_data(url: str) -> dict:
     '''
-        Scrape function to perform web-scraping
-        to ingest tropical cyclone bulletin data from
-        the Website of Pag-Asa (https://www.pagasa.dost.gov.ph/) 
+        Performs web scraping on the Pag-asa website to
+        ingest tropical cyclone bulletin data. The function
+        retrieves the data containing tropical cyclone bulletin.
     '''
     response = requests.get(url)
     
@@ -245,9 +245,9 @@ def scrape_tropical_cyclone_bulletin_data(url: str) -> dict:
 
 def scrape_tropical_cyclone_warning_for_shipping_data(url: str) -> dict:
     '''
-        Scrape function to perform web-scraping
-        to ingest tropical cyclone warning from shipping 
-        data in PDF Format from the Website of Pag-Asa (https://www.pagasa.dost.gov.ph/) 
+        Performs web scraping on the Pag-asa website to
+        ingest tropical cyclone warning for shipping data. The function
+        retrieves the data containing tropical cyclone warning for shipping.
     '''
     response = requests.get(url)
 
@@ -280,19 +280,20 @@ def scrape_tropical_cyclone_warning_for_shipping_data(url: str) -> dict:
 
 def scrape_forecast_storm_surge_data(url: str) -> dict:
     '''
-        Scrape function to perform web-scraping
-        to ingest the URL of forecast storm surge data
-        from the Website of Pag-Asa (https://www.pagasa.dost.gov.ph/)         
+        Performs web scraping on the Pag-asa website to
+        ingest forecast storm surge data. The function 
+        retrieves the URL containing the forecasted storm 
+        surge data in PDF Format.
     '''
     # TODO: To be implemented
     return {}
 
 def scrape_tropical_cyclone_warning_for_agriculture_data(url: str) -> dict:
     '''
-        Scrape function to perform web-scraping
-        to ingest tropical cyclone warning for
-        agriculture data from the Website of Pag-Asa 
-        (https://www.pagasa.dost.gov.ph/)         
+        Performs web scraping on the Pag-asa website to
+        ingest tropical cyclone warning for agriculture
+        data. The function retrieves the data containing
+        tropical cyclone warning for agriculture.
     '''
     # TODO: To be implemented
     return {}
