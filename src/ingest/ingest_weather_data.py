@@ -6,9 +6,9 @@ from bs4 import BeautifulSoup
 
 def scrape_daily_weather_forecast_data(url: str) -> dict:
     '''
-        Scrape function to perform web-scraping
-        to ingest the data of daily weather forecast from
-        the website of Pag-asa (https://www.pagasa.dost.gov.ph/)
+        Performs web scraping on the Pag-asa website to
+        ingest daily weather forecast data. The function 
+        retrieves the data containing the forecasted daily weather.
     '''
     response = requests.get(url)
 
@@ -217,9 +217,10 @@ def scrape_daily_weather_forecast_data(url: str) -> dict:
 
 def scrape_weather_outlook_for_selected_ph_cities_data(url: str) -> dict:
     '''
-        Scrape function to perform web-scraping
-        to ingest data of weather oulook for selected ph
-        cities from the website of Pag-Asa (https://www.pagasa.dost.gov.ph/)
+        Performs web scraping on the Pag-asa website to
+        ingest weather outlook for selected philippine cities data. 
+        The function retrieves the data containing the weather outlook
+        for selected philippine cities.
     '''
     response = requests.get(url)
 
@@ -313,9 +314,9 @@ def scrape_weather_outlook_for_selected_ph_cities_data(url: str) -> dict:
 
 def scrape_asian_cities_weather_forecast_data(url: str) -> dict:
     '''
-        Scrape function to perform web-scraping
-        to ingest the data of asian cities weather forecast
-        from the website of Pag-Asa (https://www.pagasa.dost.gov.ph/)
+        Performs web scraping on the Pag-asa website to
+        ingest asian cities weather forecast data. The function 
+        retrieves the data containing the forecasted asian cities weather.
     '''
     response = requests.get(url)
 
@@ -388,9 +389,10 @@ def scrape_asian_cities_weather_forecast_data(url: str) -> dict:
 
 def scrape_weather_outlook_for_selected_tourist_areas_data(url: str) -> dict:
     '''
-        Scrape function to perform web-scraping
-        to ingest the data of weather outlook for selected tourist
-        areas from the website of Pag-Asa (https://www.pagasa.dost.gov.ph/)
+        Performs web scraping on the Pag-asa website to
+        ingest weather outlook for selected tourist areas data. 
+        The function retrieves the data containing the weather 
+        outlook for selected tourist areas.
     '''
     response = requests.get(url)
 
@@ -472,9 +474,9 @@ def scrape_weather_outlook_for_selected_tourist_areas_data(url: str) -> dict:
 
 def scrape_weekly_weather_outlook_data(url: str) -> dict:
     '''
-        Scrape function to perform web-scraping
-        to ingest the data of weekly weather outlook
-        from the website of Pag-Asa (https://www.pagasa.dost.gov.ph/)
+        Performs web scraping on the Pag-asa website to
+        ingest weekly weather outlook data. The function 
+        retrieves the data containing the weekly weather outlook.
     '''
     response = requests.get(url)
     
@@ -538,9 +540,9 @@ def scrape_weekly_weather_outlook_data(url: str) -> dict:
 
 def scrape_weather_advisory_data(url: str) -> dict:
     '''
-        Scrape function to perform web-scraping
-        to ingest the URL of weather advisory data
-        in PDF format from the website of Pag-Asa (https://www.pagasa.dost.gov.ph/)
+        Performs web scraping on the Pag-asa website to
+        ingest weather advisory data. The function 
+        retrieves the data containing the weather advisory.
     '''
     response = requests.get(url)
 
@@ -570,9 +572,9 @@ def scrape_weather_advisory_data(url: str) -> dict:
 
 def scrape_daily_temperature_data(url: str) -> dict:
     '''
-        Scrape function to perform web-scraping
-        to ingest the data of daily temperature from the 
-        website of Pag-Asa (https://www.pagasa.dost.gov.ph/)
+        Performs web scraping on the Pag-asa website to
+        ingest daily temperature data. The function 
+        retrieves the data containing the daily temperature.
     '''
     response = requests.get(url)
     
