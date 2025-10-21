@@ -7,8 +7,8 @@ from bs4 import BeautifulSoup
 def scrape_daily_weather_forecast_data(url: str) -> dict:
     '''
         Scrape function to perform web-scraping
-        to ingest daily weather forecast data from
-        the Website of Pag-Asa (https://www.pagasa.dost.gov.ph/)
+        to ingest the data of daily weather forecast from
+        the website of Pag-asa (https://www.pagasa.dost.gov.ph/)
     '''
     response = requests.get(url)
 
