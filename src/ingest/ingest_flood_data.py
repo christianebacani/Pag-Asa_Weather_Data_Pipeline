@@ -7,8 +7,8 @@ from bs4 import BeautifulSoup
 def scrape_flood_information_data(url: str) -> dict:
     '''
         Scrape function to perform web-scraping
-        to ingest flood information data from
-        the Website of Pag-Asa (https://www.pagasa.dost.gov.ph/)
+        to ingest the data of flood information from
+        the website of Pag-Asa (https://www.pagasa.dost.gov.ph/)
     '''
     response = requests.get(url)
 
