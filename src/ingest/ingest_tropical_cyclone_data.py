@@ -309,3 +309,13 @@ def scrape_tropical_cyclone_warning_for_agriculture_data(url: str) -> dict:
     div_tag_with_col_md_twelve_class = div_tag_with_row_class.find('div', attrs={'class': 'col-md-12'})
 
     list_of_all_div_tag_with_row_classes = div_tag_with_col_md_twelve_class.find_all('div', attrs={'class': 'row'})
+
+    first_instance_of_div_tag_with_row_class = list_of_all_div_tag_with_row_classes[0]
+
+    # Scrape the header of the tropical cyclone warning for agriculture
+    div_tag_with_col_md_eight_col_sm_five_col_xs_four_text_center_class = first_instance_of_div_tag_with_row_class.find('div', attrs={'class': 'col-md-8 col-sm-5 col-xs-4 text-center'})
+    
+    if div_tag_with_col_md_eight_col_sm_five_col_xs_four_text_center_class is None:
+        return {}
+    
+    # TODO: Add more content here...
