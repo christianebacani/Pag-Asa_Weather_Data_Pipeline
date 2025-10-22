@@ -295,5 +295,24 @@ def scrape_tropical_cyclone_warning_for_agriculture_data(url: str) -> dict:
         data. The function retrieves the data containing
         tropical cyclone warning for agriculture.
     '''
-    # TODO: To be implemented
-    return {}
+    response = requests.get(url)
+
+    if response.status_code != 200:
+        print(f'Status code: {response.status_code}')
+        print(f'The website didn\'t accept the request!')
+        return {}
+
+    soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object
+    div_tag_with_row_agriculture_page_class = soup.find('div', attrs={'class': 'row agriculture-page'})
+    div_tag_with_col_md_twelve_article_content_class = div_tag_with_row_agriculture_page_class.find('div', attrs={'class': 'col-md-12 article-content'})
+
+    # Scrape the header of tropical cyclone warning
+    div_tag_with_col_md_eight_col_sm_five_col_xs_four_text_center_class = div_tag_with_col_md_twelve_article_content_class.find('div', attrs={'class': 'col-md-8 col-sm-5 col-xs-4 text-center'})
+
+    if div_tag_with_col_md_eight_col_sm_five_col_xs_four_text_center_class is None:
+        return {}
+    
+    else:
+        tropical_cyclone_warning_header = str(div_tag_with_col_md_eight_col_sm_five_col_xs_four_text_center_class.text)
+        tropical_cyclone_warning_header = ' '.join(tropical_cyclone_warning_header.split())
+        tropical_cyclone_warning_header = tropical_cyclone_warning_header.replace('TCWA', ': TCWA')
