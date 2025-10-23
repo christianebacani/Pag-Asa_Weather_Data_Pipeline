@@ -329,3 +329,6 @@ def scrape_tropical_cyclone_warning_for_agriculture_data(url: str) -> dict:
         result['released_datetime'] = released_datetime
     
     second_instance_of_div_tag_with_row_classes = list_of_all_div_tag_with_row_classes[1]
+    list_of_all_div_tag_with_col_md_six_classes = second_instance_of_div_tag_with_row_classes.find_all('div', attrs={'class': 'col-md-6'})
+
+    first_instance_of_div_tag_with_col_md_six_classes = list_of_all_div_tag_with_col_md_six_classes[0]
