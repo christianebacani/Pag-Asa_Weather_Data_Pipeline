@@ -16,16 +16,16 @@ def scrape_tropical_cyclone_bulletin_data(url: str) -> dict:
         return {}
 
     soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object
-    div_tag_with_tropical_cyclone_weather_bulletin_page_class = soup.find('div', attrs={'class': 'row tropical-cyclone-weather-bulletin-page'})
-    div_tag_with_article_content_class = div_tag_with_tropical_cyclone_weather_bulletin_page_class.find('div', attrs={'col-md-12 article-content'})
-    
-    if div_tag_with_article_content_class is None:
+    div_tag_with_row_tropical_cyclone_weather_bulletin_page_class = soup.find('div', attrs={'class': 'row tropical-cyclone-weather-bulletin-page'})
+    div_tag_with_col_md_twelve_article_content_class = div_tag_with_row_tropical_cyclone_weather_bulletin_page_class.find('div', attrs={'col-md-12 article-content'})
+
+    if div_tag_with_col_md_twelve_article_content_class is None:
         print(f'Currently there\'s no data for the tropical cyclone bulletin!')
         return {}
 
     result = {}
 
-    list_of_all_div_tag_with_row_classes = div_tag_with_article_content_class.find_all('div', attrs={'class': 'row'})
+    list_of_all_div_tag_with_row_classes = div_tag_with_col_md_twelve_article_content_class.find_all('div', attrs={'class': 'row'})
 
     # Scrape the name of the tropical cyclone
     tropical_cyclone_name = str(list_of_all_div_tag_with_row_classes[1].text)
@@ -90,10 +90,10 @@ def scrape_tropical_cyclone_bulletin_data(url: str) -> dict:
         print(f'Currently there\'s no data for the location, movement, strength, and forecast position of the tropical cyclone!')
         return {}
 
-    list_of_all_div_tag_with_panel_class = list_of_all_div_tag_with_col_md_six_classes[0].find_all('div', attrs={'class': 'panel'})
-    
+    list_of_all_div_tag_with_panel_classes = list_of_all_div_tag_with_col_md_six_classes[0].find_all('div', attrs={'class': 'panel'})
+
     # Scrape the location of eye or center of the tropical cyclone
-    location_of_eye_or_center = str(list_of_all_div_tag_with_panel_class[0].find('p').text)
+    location_of_eye_or_center = str(list_of_all_div_tag_with_panel_classes[0].find('p').text)
     
     if location_of_eye_or_center == '':
         print(f'Currently there\'s no data for the location of eye or center of the tropical cyclone!')
@@ -102,7 +102,7 @@ def scrape_tropical_cyclone_bulletin_data(url: str) -> dict:
     result['location_of_eye_or_center'] = location_of_eye_or_center
 
     # Scrape the movement of the tropical cyclone
-    movement = list_of_all_div_tag_with_panel_class[1].find('div', attrs={'class': 'panel-body'})
+    movement = list_of_all_div_tag_with_panel_classes[1].find('div', attrs={'class': 'panel-body'})
     movement = str(movement.text)
     movement = ' '.join(movement.split())
 
@@ -113,7 +113,7 @@ def scrape_tropical_cyclone_bulletin_data(url: str) -> dict:
     result['movement'] = movement
 
     # Scrape the strength of the tropical cyclone
-    strength = list_of_all_div_tag_with_panel_class[2].find('div', attrs={'class': 'panel-body'})
+    strength = list_of_all_div_tag_with_panel_classes[2].find('div', attrs={'class': 'panel-body'})
     strength = str(strength.text)
     strength = ' '.join(strength.split())
 
@@ -253,15 +253,15 @@ def scrape_tropical_cyclone_warning_for_shipping_data(url: str) -> dict:
         return {}
 
     soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object
-    div_tag_with_tropical_cyclone_warning_for_shipping_class = soup.find('div', attrs={'class': 'row tropical-cyclone-warning-for-shipping'})
-    div_tag_with_article_content_class = div_tag_with_tropical_cyclone_warning_for_shipping_class.find('div', attrs={'class': 'col-md-12 article-content'})
+    div_tag_with_row_tropical_cyclone_warning_for_shipping_class = soup.find('div', attrs={'class': 'row tropical-cyclone-warning-for-shipping'})
+    div_tag_with_col_md_twelve_article_content_class = div_tag_with_row_tropical_cyclone_warning_for_shipping_class.find('div', attrs={'class': 'col-md-12 article-content'})
 
-    if div_tag_with_article_content_class is None:
+    if div_tag_with_col_md_twelve_article_content_class is None:
         print(f'Currently there\'s no data for the tropical cyclone warning for shipping data!')
         return {}
 
     # Scrape the URL of the tropical cyclone warning for shipping
-    iframe_tag = div_tag_with_article_content_class.find('iframe')
+    iframe_tag = div_tag_with_col_md_twelve_article_content_class.find('iframe')
 
     if iframe_tag is None:
         print(f'Currently there\'s no data for the tropical cyclone warning for shipping data!')
