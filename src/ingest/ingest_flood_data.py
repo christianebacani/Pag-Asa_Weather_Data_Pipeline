@@ -17,9 +17,9 @@ def scrape_flood_information_data(url: str) -> dict:
 
     soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object
     div_tag_with_row_flood_page_class = soup.find('div', attrs={'class': 'row flood-page'})
-    list_of_all_div_tag_with_article_content_classes = div_tag_with_row_flood_page_class.find_all('div', attrs={'class': 'col-md-12 article-content'})
+    list_of_all_div_tag_with_col_md_twelve_article_content_classes = div_tag_with_row_flood_page_class.find_all('div', attrs={'class': 'col-md-12 article-content'})
 
-    basin_hydrological_forecast = list_of_all_div_tag_with_article_content_classes[0]
+    basin_hydrological_forecast = list_of_all_div_tag_with_col_md_twelve_article_content_classes[0]
     table_tag = basin_hydrological_forecast.find('table', attrs={'class': 'table'})
     list_of_all_tbody_tags = table_tag.find_all('tbody')
 
@@ -74,7 +74,7 @@ def scrape_flood_information_data(url: str) -> dict:
 
         result['basin_hydrological_forecast'][sub_basin] = status
     
-    dam_water_level_update = list_of_all_div_tag_with_article_content_classes[1]
+    dam_water_level_update = list_of_all_div_tag_with_col_md_twelve_article_content_classes[1]
     div_tag_with_panel_class = dam_water_level_update.find('div', attrs={'class': 'panel'})
     
     # Scrape the datetime of the water level update of dam
@@ -85,8 +85,8 @@ def scrape_flood_information_data(url: str) -> dict:
     
     result['dam_weather_level_update_datetime'] = dam_weather_level_update_datetime
 
-    table_tag_with_dam_table_class = div_tag_with_panel_class.find('table', attrs={'class': 'table dam-table'})
-    tbody_tag = table_tag_with_dam_table_class.find('tbody', attrs={'style': 'text-align: center;vertical-align: middle;'})
+    table_tag_with_table_dam_table_classs = div_tag_with_panel_class.find('table', attrs={'class': 'table dam-table'})
+    tbody_tag = table_tag_with_table_dam_table_classs.find('tbody', attrs={'style': 'text-align: center;vertical-align: middle;'})
     list_of_all_table_row_tags = tbody_tag.find_all('tr')
 
     # We iterate using 4 index because every row of the table from dam water level update consist of 4 tr tags
