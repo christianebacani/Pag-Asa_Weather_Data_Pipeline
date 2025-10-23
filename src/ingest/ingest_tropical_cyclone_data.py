@@ -310,6 +310,8 @@ def scrape_tropical_cyclone_warning_for_agriculture_data(url: str) -> dict:
 
     list_of_all_div_tag_with_row_classes = div_tag_with_col_md_twelve_class.find_all('div', attrs={'class': 'row'})
 
+    result = {}
+
     first_instance_of_div_tag_with_row_class = list_of_all_div_tag_with_row_classes[0]
 
     # Scrape the header of the tropical cyclone warning for agriculture
@@ -318,4 +320,16 @@ def scrape_tropical_cyclone_warning_for_agriculture_data(url: str) -> dict:
     if div_tag_with_col_md_eight_col_sm_five_col_xs_four_text_center_class is None:
         return {}
     
-    # TODO: Add more content here...
+    else:
+        tropical_cyclone_warning_header = str(div_tag_with_col_md_eight_col_sm_five_col_xs_four_text_center_class.text)
+        tropical_cyclone_warning_header = ' '.join(tropical_cyclone_warning_header.split())
+        tropical_cyclone_warning_header = tropical_cyclone_warning_header.replace('TCWA', ': TCWA')
+        result['tropical_cyclone_warning_header'] = tropical_cyclone_warning_header
+    
+    bold_tag = first_instance_of_div_tag_with_row_class.find('b')
+
+    if bold_tag is None:
+        return {}
+
+    else:
+        released_datetime = str(bold_tag.text)
