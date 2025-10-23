@@ -312,10 +312,10 @@ def scrape_tropical_cyclone_warning_for_agriculture_data(url: str) -> dict:
 
     result = {}
 
-    first_instance_of_div_tag_with_row_class = list_of_all_div_tag_with_row_classes[0]
+    first_instance_of_div_tag_with_row_classes = list_of_all_div_tag_with_row_classes[0]
 
     # Scrape the header of the tropical cyclone warning for agriculture
-    div_tag_with_col_md_eight_col_sm_five_col_xs_four_text_center_class = first_instance_of_div_tag_with_row_class.find('div', attrs={'class': 'col-md-8 col-sm-5 col-xs-4 text-center'})
+    div_tag_with_col_md_eight_col_sm_five_col_xs_four_text_center_class = first_instance_of_div_tag_with_row_classes.find('div', attrs={'class': 'col-md-8 col-sm-5 col-xs-4 text-center'})
     
     if div_tag_with_col_md_eight_col_sm_five_col_xs_four_text_center_class is None:
         return {}
@@ -325,11 +325,15 @@ def scrape_tropical_cyclone_warning_for_agriculture_data(url: str) -> dict:
         tropical_cyclone_warning_header = ' '.join(tropical_cyclone_warning_header.split())
         tropical_cyclone_warning_header = tropical_cyclone_warning_header.replace('TCWA', ': TCWA')
         result['tropical_cyclone_warning_header'] = tropical_cyclone_warning_header
-    
-    bold_tag = first_instance_of_div_tag_with_row_class.find('b')
+
+    # Scrape the released datetime of tropical cyclone warning for agriculture    
+    bold_tag = first_instance_of_div_tag_with_row_classes.find('b')
 
     if bold_tag is None:
         return {}
 
     else:
         released_datetime = str(bold_tag.text)
+        result['released_datetime'] = released_datetime
+    
+    second_instance_of_div_tag_with_row_classes = list_of_all_div_tag_with_row_classes[1]
