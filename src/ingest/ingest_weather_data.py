@@ -625,9 +625,9 @@ def scrape_daily_temperature_data(url: str) -> dict:
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
     div_tag_with_article_content_class = div_tag_with_row_weather_page_class.find('div', attrs={'class': 'col-md-12 article-content'})
 
-    list_of_all_column_tags = div_tag_with_article_content_class.find_all('div', attrs={'class': 'col-md-6'})
-
-    div_tag_with_panel_class = list_of_all_column_tags[0].find('div', attrs={'class': 'panel'})
+    list_of_all_div_tag_with_col_md_six_classes = div_tag_with_article_content_class.find_all('div', attrs={'class': 'col-md-6'})
+    
+    div_tag_with_panel_class = list_of_all_div_tag_with_col_md_six_classes[0].find('div', attrs={'class': 'panel'})
 
     result = {}
     
@@ -670,7 +670,7 @@ def scrape_daily_temperature_data(url: str) -> dict:
 
         result[top_10_lowest_temperature_heading][station_name] = temperature
     
-    div_tag_with_panel_class = list_of_all_column_tags[1].find('div', attrs={'class': 'panel'})
+    div_tag_with_panel_class = list_of_all_div_tag_with_col_md_six_classes[1].find('div', attrs={'class': 'panel'})
 
     # Scrape the heading of the table that consist of the top 10 highest temperature
     div_tag_with_panel_heading_class = div_tag_with_panel_class.find('div', attrs={'class': 'panel-heading'})
