@@ -6,9 +6,7 @@ from bs4 import BeautifulSoup
 
 def scrape_flood_information_data(url: str) -> dict:
     '''
-        Performs web scraping on the Pag-asa website to
-        ingest flood information data. The function 
-        retrieves the data containing the flood information.
+        The function retrieves the data containing the flood information.
     '''
     response = requests.get(url)
 
