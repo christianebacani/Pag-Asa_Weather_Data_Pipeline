@@ -18,6 +18,7 @@ from ingest.ingest_tropical_cyclone_data import scrape_tropical_cyclone_bulletin
 from ingest.ingest_tropical_cyclone_data import scrape_tropical_cyclone_warning_for_shipping_data
 from ingest.ingest_tropical_cyclone_data import scrape_forecast_storm_surge_data
 from ingest.ingest_tropical_cyclone_data import scrape_tropical_cyclone_warning_for_agriculture_data
+from ingest.ingest_tropical_cyclone_data import scrape_tc_threat_potential_forecast_data
 
 def generate_logs_from_pipeline_job(job: str) -> None:
     '''
@@ -51,4 +52,5 @@ if __name__ == '__main__':
     # tropical_cyclone_bulletin_data = scrape_tropical_cyclone_bulletin_data('https://www.pagasa.dost.gov.ph/tropical-cyclone/severe-weather-bulletin')
     # tropical_cyclone_warning_for_shipping_data = scrape_tropical_cyclone_warning_for_shipping_data('https://www.pagasa.dost.gov.ph/tropical-cyclone/tropical-cyclone-warning-for-shipping')
     # forecast_storm_surge_data = scrape_forecast_storm_surge_data('https://www.pagasa.dost.gov.ph/tropical-cyclone/forecast-storm-surge')
-    tropical_cyclone_warning_for_agriculture_data = scrape_tropical_cyclone_warning_for_agriculture_data('https://www.pagasa.dost.gov.ph/tropical-cyclone/tropical-cyclone-warning-for-agriculture')
+    # tropical_cyclone_warning_for_agriculture_data = scrape_tropical_cyclone_warning_for_agriculture_data('https://www.pagasa.dost.gov.ph/tropical-cyclone/tropical-cyclone-warning-for-agriculture')
+    scrape_tc_threat_potential_forecast_data('https://www.pagasa.dost.gov.ph/tropical-cyclone/tc-threat-potential-forecast')
