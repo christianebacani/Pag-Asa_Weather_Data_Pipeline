@@ -19,6 +19,7 @@ from ingest.ingest_tropical_cyclone_data import scrape_tropical_cyclone_warning_
 from ingest.ingest_tropical_cyclone_data import scrape_forecast_storm_surge_data
 from ingest.ingest_tropical_cyclone_data import scrape_tropical_cyclone_warning_for_agriculture_data
 from ingest.ingest_tropical_cyclone_data import scrape_tc_threat_potential_forecast_data
+from ingest.ingest_tropical_cyclone_data import scrape_tropical_cyclone_associated_rainfall_data
 
 def generate_logs_from_pipeline_job(job: str) -> None:
     '''
@@ -53,4 +54,5 @@ if __name__ == '__main__':
     # tropical_cyclone_warning_for_shipping_data = scrape_tropical_cyclone_warning_for_shipping_data('https://www.pagasa.dost.gov.ph/tropical-cyclone/tropical-cyclone-warning-for-shipping')
     # forecast_storm_surge_data = scrape_forecast_storm_surge_data('https://www.pagasa.dost.gov.ph/tropical-cyclone/forecast-storm-surge')
     # tropical_cyclone_warning_for_agriculture_data = scrape_tropical_cyclone_warning_for_agriculture_data('https://www.pagasa.dost.gov.ph/tropical-cyclone/tropical-cyclone-warning-for-agriculture')
-    scrape_tc_threat_potential_forecast_data('https://www.pagasa.dost.gov.ph/tropical-cyclone/tc-threat-potential-forecast')
+    # tc_threat_potentiel_forecast_data = scrape_tc_threat_potential_forecast_data('https://www.pagasa.dost.gov.ph/tropical-cyclone/tc-threat-potential-forecast')
+    tropical_cyclone_associated_rainfall_data = scrape_tropical_cyclone_associated_rainfall_data('https://www.pagasa.dost.gov.ph/climate/tropical-cyclone-associated-rainfall')
