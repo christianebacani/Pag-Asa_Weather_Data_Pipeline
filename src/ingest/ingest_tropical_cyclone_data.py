@@ -371,3 +371,18 @@ def scrape_tc_threat_potential_forecast_data(url: str) -> dict:
         result['url_of_tc_threat_potential_forecast_data'] = url
     
     return result
+
+def scrape_tropical_cyclone_associated_rainfall_data(url: str) -> dict:
+    '''
+        The function retrieves the data containing tropical 
+        cylone associated rainfall data.
+    '''
+    response = requests.get(url)
+    
+    if response.status_code != 200:
+        print(f'Status code: {response.status_code}')
+        print(f'The website didn\'t accept the request!')
+        return {}
+
+    soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object    
+    print(soup)
