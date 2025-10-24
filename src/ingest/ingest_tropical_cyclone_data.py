@@ -385,4 +385,5 @@ def scrape_tropical_cyclone_associated_rainfall_data(url: str) -> dict:
         return {}
 
     soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object    
-    print(soup)
+    div_tag_with_row_climate_page_class = soup.find('div', attrs={'class': 'row climate-page'})
+    print(div_tag_with_row_climate_page_class)
