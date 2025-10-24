@@ -298,6 +298,10 @@ def scrape_tropical_cyclone_warning_for_agriculture_data(url: str) -> dict:
     div_tag_with_row_agriculture_page_class = soup.find('div', attrs={'class': 'row agriculture-page'})
     div_tag_with_col_md_twelve_article_content_class = div_tag_with_row_agriculture_page_class.find('div', attrs={'class': 'col-md-12 article-content'})
     div_tag_with_row_class = div_tag_with_col_md_twelve_article_content_class.find('div', attrs={'class': 'row'})
+
+    if div_tag_with_row_class is None:
+        return {}
+
     div_tag_with_col_md_twelve_class = div_tag_with_row_class.find('div', attrs={'class': 'col-md-12'})
 
     list_of_all_div_tag_with_row_classes = div_tag_with_col_md_twelve_class.find_all('div', attrs={'class': 'row'})
@@ -332,3 +336,38 @@ def scrape_tropical_cyclone_warning_for_agriculture_data(url: str) -> dict:
     list_of_all_div_tag_with_col_md_six_classes = second_instance_of_div_tag_with_row_classes.find_all('div', attrs={'class': 'col-md-6'})
 
     first_instance_of_div_tag_with_col_md_six_classes = list_of_all_div_tag_with_col_md_six_classes[0]
+
+def scrape_tc_threat_potential_forecast_data(url: str) -> dict:
+    '''
+        The function retrieves the data containing
+        the tc-threat potential forecast.
+    '''
+    response = requests.get(url)
+    
+    if response.status_code != 200:
+        print(f'Status code: {response.status_code}')
+        print(f'The website didn\'t accept the request!')
+        return {}
+
+    soup = BeautifulSoup(response.text, 'html.parser') # Parse response to a Beautiful Soup object    
+    div_tag_with_row_tc_threat_page_class = soup.find('div', attrs={'class': 'row tc-threat-page'})
+    div_tag_with_panel_class = div_tag_with_row_tc_threat_page_class.find('div', attrs={'class': 'panel'})
+    
+    list_of_all_div_tag_with_col_md_twelve_classes = div_tag_with_panel_class.find_all('div', attrs={'class': 'col-md-12'})
+    
+    if len(list_of_all_div_tag_with_col_md_twelve_classes) != 3: # If there aren’t exactly 3 matching divs, the TC threat forecast data is missing
+        return {}
+
+    result = {}
+
+    second_instance_of_div_tag_with_col_md_twelve_classes = list_of_all_div_tag_with_col_md_twelve_classes[1]
+    image_tag = second_instance_of_div_tag_with_col_md_twelve_classes.find('img')
+    
+    if image_tag is None:    
+        result['url_of_tc_threat_potential_forecast_data'] = 'None'
+
+    else:
+        url = str(image_tag['src']).strip()
+        result['url_of_tc_threat_potential_forecast_data'] = url
+    
+    return result
