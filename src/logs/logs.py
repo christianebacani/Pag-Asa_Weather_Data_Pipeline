@@ -12,7 +12,7 @@ def generate_logs(log_message: str) -> None:
     now = datetime.now()
     timestamp = now.strftime(format)
     
-    # Generate logs usins pandas for logs dataset (csv format)
+    # Generate logs using pandas for logs dataset (csv format)
     logs = pd.read_csv('src/logs/logs.csv')
     logs = pd.concat([logs, pd.DataFrame({'messages': [log_message], 'timestamps': [timestamp]})], ignore_index=True)
     logs.to_csv('src/logs/logs.csv', index=False)
