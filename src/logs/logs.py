@@ -24,4 +24,4 @@ def generate_logs(log_message: str) -> None:
 
 if __name__ == '__main__':
     ingest_daily_weather_forecast_data('https://www.pagasa.dost.gov.ph/weather#daily-weather-forecast')
-    generate_logs('INGEST')
+    generate_logs('(DEV): Ingest daily weather forecast data')
