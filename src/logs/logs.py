@@ -1,8 +1,13 @@
 '''
     Data Pipeline Logs
 '''
+import sys
+import os
+sys.path.insert(0, os.path.abspath('src'))
+
 import pandas as pd
 from datetime import datetime
+from ingest.ingest_weather_data import ingest_daily_weather_forecast_data
 
 def generate_logs(log_message: str) -> None:
     '''
@@ -18,4 +23,5 @@ def generate_logs(log_message: str) -> None:
     logs.to_csv('src/logs/logs.csv', index=False)
 
 if __name__ == '__main__':
-    generate_logs('START')
+    ingest_daily_weather_forecast_data('https://www.pagasa.dost.gov.ph/weather#daily-weather-forecast')
+    generate_logs('INGEST')
