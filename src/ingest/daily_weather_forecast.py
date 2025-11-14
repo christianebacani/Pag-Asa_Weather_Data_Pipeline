@@ -32,4 +32,4 @@ def get_issued_datetime(soup: BeautifulSoup) -> str:
     if bold_tag is not None:
         issued_datetime = str(bold_tag.text).strip()
     
-    return issued_datetime    
+    return issued_datetime
