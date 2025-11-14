@@ -12,6 +12,7 @@ from ingest.daily_weather_forecast import init_soup_object
 from ingest.daily_weather_forecast import get_issued_datetime
 from ingest.daily_weather_forecast import get_synopsis
 from ingest.daily_weather_forecast import get_forecast_weather_conditions
+from ingest.daily_weather_forecast import get_forecast_wind_and_coastal_water_conditions
 
 def generate_logs(log_message: str) -> None:
     '''
@@ -34,6 +35,7 @@ if __name__ == '__main__':
         issued_datetime = get_issued_datetime(soup)
         synopsis = get_synopsis(soup)
         forecast_weather_conditions = get_forecast_weather_conditions(soup)
+        forecast_wind_and_coastal_water_conditions = get_forecast_wind_and_coastal_water_conditions(soup)
 
     else:
         issued_datetime = ''
@@ -43,6 +45,12 @@ if __name__ == '__main__':
             'weather_condition': [],
             'caused_by': [],
             'impacts': []
+        }
+        forecast_wind_and_coastal_water_conditions = {
+            'place': [],
+            'speed': [],
+            'direction': [],
+            'coastal_water': []
         }
 
     generate_logs('(DEV): Ingest daily weather forecast data')
