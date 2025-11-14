@@ -16,7 +16,7 @@ def init_soup_object(url: str) -> BeautifulSoup | None:
     if response.status_code != 200:
         return None
 
-    soup = BeautifulSoup(response.text, 'html.parser')
+    soup = BeautifulSoup(response.text, 'html.parser') # Parse to a Beautiful Soup Object
     return soup
 
 def get_issued_datetime(soup: BeautifulSoup) -> str:
