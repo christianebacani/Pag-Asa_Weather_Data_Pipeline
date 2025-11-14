@@ -50,3 +50,9 @@ def get_synopsis(soup: BeautifulSoup) -> str:
         synopsis = str(paragraph_tag.text).strip()
     
     return synopsis
+
+def get_forecasted_weather_conditions(soup: BeautifulSoup) -> dict:
+    '''
+        Function to get the forecasted weather conditions
+        from the daily weather forecast
+    '''
