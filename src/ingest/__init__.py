@@ -1,1 +1,1 @@
-from . import ingest_weather_data
+from . import daily_weather_forecast
