@@ -8,7 +8,7 @@ sys.path.insert(0, os.path.abspath('src'))
 import pandas as pd
 from datetime import datetime
 from ingest.daily_weather_forecast import init_soup_object
-from ingest.daily_weather_forecast import ingest_issued_datetime_of_daily_weather_forecast
+from ingest.daily_weather_forecast import get_issued_datetime
 
 def generate_logs(log_message: str) -> None:
     '''
@@ -28,6 +28,6 @@ if __name__ == '__main__':
     soup = init_soup_object('https://www.pagasa.dost.gov.ph/weather#daily-weather-forecast')
 
     if soup is not None:
-        ingest_issued_datetime_of_daily_weather_forecast(soup)
+        get_issued_datetime(soup)
         
     generate_logs('(DEV): Ingest daily weather forecast data')
