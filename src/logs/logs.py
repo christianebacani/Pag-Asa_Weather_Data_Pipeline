@@ -37,7 +37,7 @@ if __name__ == '__main__':
         synopsis = get_synopsis(soup)
         forecast_weather_conditions = get_forecast_weather_conditions(soup)
         forecast_wind_and_coastal_water_conditions = get_forecast_wind_and_coastal_water_conditions(soup)
-        get_temperature_and_relative_humidity(soup)
+        temperature_and_relative_humidity = get_temperature_and_relative_humidity(soup)
 
     else:
         issued_datetime = ''
@@ -64,5 +64,5 @@ if __name__ == '__main__':
             'minimum_relative_humidity_percentage': [],
             'time_of_minimum_relative_humidity_percentage': []
         }
-    
+
     generate_logs('(DEV): Ingest daily weather forecast data')
