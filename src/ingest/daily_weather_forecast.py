@@ -128,3 +128,23 @@ def get_temperature_and_relative_humidity(soup: BeautifulSoup) -> dict:
         Function to get the temperature and relative humidity from
         the daily weather forecast.
     '''
+    temperature_and_relative_humidity = {
+        'maximum_temperature': [],
+        'time_of_maximum_temperature': [],
+        'minimum_temperature': [],
+        'time_of_minimum_temperature': [],
+        'maximum_relative_humidity_percentage': [],
+        'time_of_maximum_relative_humidity_percentage': [],
+        'minimum_relative_humidity_percentage': [],
+        'time_of_minimum_relative_humidity_percentage': []
+    }
+
+    temperature_and_relative_humidity_tag = soup.find_all('div', attrs={'class': 'col-md-12 col-lg-12'})[3]
+    table_tag = temperature_and_relative_humidity_tag.find('table', attrs={'class': 'table'})
+
+    if table_tag is not None:
+        tbody_tag = table_tag.find('tbody')
+        list_of_all_table_row_tags = tbody_tag.find_all('tr')
+
+        temperature_tag = list_of_all_table_row_tags[0]
+        relative_humidity_percentage_tag = list_of_all_table_row_tags[1]
