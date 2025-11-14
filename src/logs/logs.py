@@ -7,8 +7,10 @@ sys.path.insert(0, os.path.abspath('src'))
 
 import pandas as pd
 from datetime import datetime
+
 from ingest.daily_weather_forecast import init_soup_object
 from ingest.daily_weather_forecast import get_issued_datetime
+from ingest.daily_weather_forecast import get_synopsis
 
 def generate_logs(log_message: str) -> None:
     '''
@@ -29,5 +31,6 @@ if __name__ == '__main__':
 
     if soup is not None:
         issued_datetime = get_issued_datetime(soup)
+        synopsis = get_synopsis(soup)
 
     generate_logs('(DEV): Ingest daily weather forecast data')
