@@ -33,3 +33,20 @@ def get_issued_datetime(soup: BeautifulSoup) -> str:
         issued_datetime = str(bold_tag.text).strip()
     
     return issued_datetime
+
+def get_synopsis(soup: BeautifulSoup) -> str:
+    '''
+        Function to get the synopsis from
+        the daily weather forecast
+    '''
+    synopsis = ''
+
+    synopsis_tag = soup.find('div', attrs={'class': 'col-md-12 col-lg-12'})
+    div_tag_with_panel_class = synopsis_tag.find('div', attrs={'class': 'panel'})
+    div_tag_with_panel_body_class = div_tag_with_panel_class.find('div', attrs={'class': 'panel-body'})
+
+    if div_tag_with_panel_body_class is not None:
+        paragraph_tag = div_tag_with_panel_body_class.find('p')
+        synopsis = str(paragraph_tag.text).strip()
+    
+    return synopsis
