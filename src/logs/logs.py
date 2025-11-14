@@ -28,6 +28,6 @@ if __name__ == '__main__':
     soup = init_soup_object('https://www.pagasa.dost.gov.ph/weather#daily-weather-forecast')
 
     if soup is not None:
-        get_issued_datetime(soup)
-        
+        issued_datetime = get_issued_datetime(soup)
+
     generate_logs('(DEV): Ingest daily weather forecast data')
