@@ -35,4 +35,14 @@ if __name__ == '__main__':
         synopsis = get_synopsis(soup)
         forecast_weather_conditions = get_forecasted_weather_conditions(soup)
 
+    else:
+        issued_datetime = ''
+        synopsis = ''
+        forecast_weather_conditions = {
+            'place': [],
+            'weather_condition': [],
+            'caused_by': [],
+            'impacts': []
+        }
+
     generate_logs('(DEV): Ingest daily weather forecast data')
