@@ -11,7 +11,7 @@ from datetime import datetime
 from ingest.daily_weather_forecast import init_soup_object
 from ingest.daily_weather_forecast import get_issued_datetime
 from ingest.daily_weather_forecast import get_synopsis
-from ingest.daily_weather_forecast import get_forecasted_weather_conditions
+from ingest.daily_weather_forecast import get_forecast_weather_conditions
 
 def generate_logs(log_message: str) -> None:
     '''
@@ -33,7 +33,7 @@ if __name__ == '__main__':
     if soup is not None:
         issued_datetime = get_issued_datetime(soup)
         synopsis = get_synopsis(soup)
-        forecast_weather_conditions = get_forecasted_weather_conditions(soup)
+        forecast_weather_conditions = get_forecast_weather_conditions(soup)
 
     else:
         issued_datetime = ''
