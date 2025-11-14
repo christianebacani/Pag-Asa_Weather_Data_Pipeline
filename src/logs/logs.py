@@ -13,6 +13,7 @@ from ingest.daily_weather_forecast import get_issued_datetime
 from ingest.daily_weather_forecast import get_synopsis
 from ingest.daily_weather_forecast import get_forecast_weather_conditions
 from ingest.daily_weather_forecast import get_forecast_wind_and_coastal_water_conditions
+from ingest.daily_weather_forecast import get_temperature_and_relative_humidity
 
 def generate_logs(log_message: str) -> None:
     '''
@@ -36,6 +37,7 @@ if __name__ == '__main__':
         synopsis = get_synopsis(soup)
         forecast_weather_conditions = get_forecast_weather_conditions(soup)
         forecast_wind_and_coastal_water_conditions = get_forecast_wind_and_coastal_water_conditions(soup)
+        get_temperature_and_relative_humidity(soup)
 
     else:
         issued_datetime = ''
@@ -52,5 +54,15 @@ if __name__ == '__main__':
             'direction': [],
             'coastal_water': []
         }
-
+        temperature_and_relative_humidity = {
+            'maximum_temperature': [],
+            'time_of_maximum_temperature': [],
+            'minimum_temperature': [],
+            'time_of_minimum_temperature': [],
+            'maximum_relative_humidity_percentage': [],
+            'time_of_maximum_relative_humidity_percentage': [],
+            'minimum_relative_humidity_percentage': [],
+            'time_of_minimum_relative_humidity_percentage': []
+        }
+    
     generate_logs('(DEV): Ingest daily weather forecast data')
