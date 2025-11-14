@@ -24,5 +24,5 @@ def generate_logs(log_message: str) -> None:
     logs.to_csv('src/logs/logs.csv', index=False)
 
 if __name__ == '__main__':
-    init_soup_object('https://www.pagasa.dost.gov.ph/weather#daily-weather-forecast')
+    soup = init_soup_object('https://www.pagasa.dost.gov.ph/weather#daily-weather-forecast')
     generate_logs('(DEV): Ingest daily weather forecast data')
