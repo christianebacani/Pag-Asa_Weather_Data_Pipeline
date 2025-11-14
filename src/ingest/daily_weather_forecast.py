@@ -51,9 +51,9 @@ def get_synopsis(soup: BeautifulSoup) -> str:
     
     return synopsis
 
-def get_forecasted_weather_conditions(soup: BeautifulSoup) -> dict:
+def get_forecast_weather_conditions(soup: BeautifulSoup) -> dict:
     '''
-        Function to get the forecasted weather conditions
+        Function to get the forecast weather conditions
         from the daily weather forecast
     '''
     forecast_weather_conditions = {
@@ -86,3 +86,9 @@ def get_forecasted_weather_conditions(soup: BeautifulSoup) -> dict:
             forecast_weather_conditions['impacts'].append(impacts)
     
     return forecast_weather_conditions
+
+def get_forecast_wind_and_coastal_water_conditions(soup: BeautifulSoup) -> dict:
+    '''
+        Function to get the forecast wind and coastal water conditions
+        from the daily weather forecast
+    '''
