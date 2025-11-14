@@ -32,6 +32,8 @@ def generate_logs(log_message: str) -> None:
 if __name__ == '__main__':
     soup = init_soup_object('https://www.pagasa.dost.gov.ph/weather#daily-weather-forecast')
 
+    # We need to check if the parsed soup object from data of daily weather forecast is not NoneType because it
+    # woul result an error if use a NoneType object as a parameter from other functions
     if soup is not None:
         issued_datetime = get_issued_datetime(soup)
         synopsis = get_synopsis(soup)
