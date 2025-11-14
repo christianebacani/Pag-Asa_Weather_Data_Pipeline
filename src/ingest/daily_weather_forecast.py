@@ -9,7 +9,7 @@ def init_soup_object(url: str) -> BeautifulSoup | None:
         Function to initialize Beautiful 
         Soup Object from the requested data
         from the website 
-        (https://www.pagasa.dost.gov.ph/weather#daily-weather-forecast)
+        (https://www.pagasa.dost.gov.ph/weather#daily-weather-forecast).
     '''
     response = requests.get(url)
 
@@ -22,7 +22,7 @@ def init_soup_object(url: str) -> BeautifulSoup | None:
 def get_issued_datetime(soup: BeautifulSoup) -> str:
     '''
         Function to get issued datetime
-        from the daily weather forecast
+        from the daily weather forecast.
     '''
     issued_datetime = ''
 
@@ -37,7 +37,7 @@ def get_issued_datetime(soup: BeautifulSoup) -> str:
 def get_synopsis(soup: BeautifulSoup) -> str:
     '''
         Function to get the synopsis from
-        the daily weather forecast
+        the daily weather forecast.
     '''
     synopsis = ''
 
@@ -54,7 +54,7 @@ def get_synopsis(soup: BeautifulSoup) -> str:
 def get_forecast_weather_conditions(soup: BeautifulSoup) -> dict:
     '''
         Function to get the forecast weather conditions
-        from the daily weather forecast
+        from the daily weather forecast.
     '''
     forecast_weather_conditions = {
         'place': [],
@@ -90,7 +90,7 @@ def get_forecast_weather_conditions(soup: BeautifulSoup) -> dict:
 def get_forecast_wind_and_coastal_water_conditions(soup: BeautifulSoup) -> dict:
     '''
         Function to get the forecast wind and coastal water conditions
-        from the daily weather forecast
+        from the daily weather forecast.
     '''
     forecast_wind_and_coastal_water_conditions = {
         'place': [],
@@ -122,3 +122,9 @@ def get_forecast_wind_and_coastal_water_conditions(soup: BeautifulSoup) -> dict:
             forecast_wind_and_coastal_water_conditions['coastal_water'].append(coastal_water)
     
     return forecast_wind_and_coastal_water_conditions
+
+def get_temperature_and_relative_humidity(soup: BeautifulSoup) -> dict:
+    '''
+        Function to get the temperature and relative humidity from
+        the daily weather forecast.
+    '''
