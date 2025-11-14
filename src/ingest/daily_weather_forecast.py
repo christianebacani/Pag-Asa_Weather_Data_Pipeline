@@ -148,3 +148,28 @@ def get_temperature_and_relative_humidity(soup: BeautifulSoup) -> dict:
 
         temperature_tag = list_of_all_table_row_tags[0]
         relative_humidity_percentage_tag = list_of_all_table_row_tags[1]
+
+        list_of_all_table_tags_for_temperature = temperature_tag.find_all('td', attrs={'class', 'text-center'})[1:]
+        list_of_all_table_tags_for_relative_humidity_percentage = relative_humidity_percentage_tag.find_all('td', attrs={'class': 'text-center'})[1:]
+
+        maximum_temperature = str(list_of_all_table_tags_for_temperature[0].text).strip()
+        maximum_relative_humidity_percentage = str(list_of_all_table_tags_for_relative_humidity_percentage[0].text).strip()
+        temperature_and_relative_humidity['maximum_temperature'].append(maximum_temperature)
+        temperature_and_relative_humidity['maximum_relative_humidity_percentage'].append(maximum_relative_humidity_percentage)
+
+        time_of_maximum_temperature = str(list_of_all_table_tags_for_temperature[1].text).strip()
+        time_of_maximum_relative_humidity_percentage = str(list_of_all_table_tags_for_relative_humidity_percentage[1].text).strip()
+        temperature_and_relative_humidity['time_of_maximum_temperature'].append(time_of_maximum_temperature)
+        temperature_and_relative_humidity['time_of_maximum_relative_humidity_percentage'].append(time_of_maximum_relative_humidity_percentage)
+
+        minimum_temperature = str(list_of_all_table_tags_for_temperature[2].text).strip()
+        minimum_relative_humidity_percentage = str(list_of_all_table_tags_for_relative_humidity_percentage[2].text).strip()
+        temperature_and_relative_humidity['minimum_temperature'].append(minimum_temperature)
+        temperature_and_relative_humidity['minimum_relative_humidity_percentage'].append(minimum_relative_humidity_percentage)
+
+        time_of_minimum_temperature = str(list_of_all_table_tags_for_temperature[3].text).strip()
+        time_of_minimum_relative_humidity_percentage = str(list_of_all_table_tags_for_relative_humidity_percentage[3].text).strip()
+        temperature_and_relative_humidity['time_of_minimum_temperature'].append(time_of_minimum_temperature)
+        temperature_and_relative_humidity['time_of_minimum_relative_humidity_percentage'].append(time_of_minimum_relative_humidity_percentage)
+    
+    return temperature_and_relative_humidity
