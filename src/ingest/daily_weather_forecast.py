@@ -4,11 +4,10 @@
 import requests
 from bs4 import BeautifulSoup
 
-def init_soup_object(url: str) -> BeautifulSoup | None:
+def get_daily_weather_forecast_soup(url: str) -> BeautifulSoup | None:
     '''
-        Function to initialize Beautiful 
-        Soup Object from the requested data
-        from the website 
+        Function to get the beautiful soup object
+        from the web-page that contains daily weather forecast 
         (https://www.pagasa.dost.gov.ph/weather#daily-weather-forecast).
     '''
     response = requests.get(url)
