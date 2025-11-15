@@ -8,7 +8,7 @@ sys.path.insert(0, os.path.abspath('src'))
 import pandas as pd
 from datetime import datetime
 
-from ingest.daily_weather_forecast import init_soup_object
+from ingest.daily_weather_forecast import get_daily_weather_forecast_soup
 from ingest.daily_weather_forecast import get_issued_datetime
 from ingest.daily_weather_forecast import get_synopsis
 from ingest.daily_weather_forecast import get_forecast_weather_conditions
@@ -30,16 +30,16 @@ def generate_logs(log_message: str) -> None:
     logs.to_csv('src/logs/logs.csv', index=False)
 
 if __name__ == '__main__':
-    soup = init_soup_object('https://www.pagasa.dost.gov.ph/weather#daily-weather-forecast')
+    daily_weather_forecast_soup = get_daily_weather_forecast_soup('https://www.pagasa.dost.gov.ph/weather#daily-weather-forecast')
 
     # We need to check if the parsed soup object from 'init_soup_object' function is not NoneType because it
     # will have error if we use a NoneType object as a parameter from other functions
-    if soup is not None:
-        issued_datetime = get_issued_datetime(soup)
-        synopsis = get_synopsis(soup)
-        forecast_weather_conditions = get_forecast_weather_conditions(soup)
-        forecast_wind_and_coastal_water_conditions = get_forecast_wind_and_coastal_water_conditions(soup)
-        temperature_and_relative_humidity = get_temperature_and_relative_humidity(soup)
+    if daily_weather_forecast_soup is not None:
+        issued_datetime = get_issued_datetime(daily_weather_forecast_soup)
+        synopsis = get_synopsis(daily_weather_forecast_soup)
+        forecast_weather_conditions = get_forecast_weather_conditions(daily_weather_forecast_soup)
+        forecast_wind_and_coastal_water_conditions = get_forecast_wind_and_coastal_water_conditions(daily_weather_forecast_soup)
+        temperature_and_relative_humidity = get_temperature_and_relative_humidity(daily_weather_forecast_soup)
 
     else:
         issued_datetime = ''
