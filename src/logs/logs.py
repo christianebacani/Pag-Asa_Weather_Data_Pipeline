@@ -15,6 +15,8 @@ from ingest.daily_weather_forecast import get_forecast_weather_conditions
 from ingest.daily_weather_forecast import get_forecast_wind_and_coastal_water_conditions
 from ingest.daily_weather_forecast import get_temperature_and_relative_humidity
 
+from ingest.weather_outlook_for_selected_ph_cities import get_ph_city_weather_outlook_soup
+
 def generate_logs(log_message: str) -> None:
     '''
         Function to generate logs based on 
@@ -31,6 +33,7 @@ def generate_logs(log_message: str) -> None:
 
 if __name__ == '__main__':
     daily_weather_forecast_soup = get_daily_weather_forecast_soup('https://www.pagasa.dost.gov.ph/weather#daily-weather-forecast')
+    ph_city_weather_outlook_soup = get_ph_city_weather_outlook_soup('https://www.pagasa.dost.gov.ph/weather/weather-outlook-selected-philippine-cities')
 
     # We need to check if the parsed soup object from 'init_soup_object' function is not NoneType because it
     # will have error if we use a NoneType object as a parameter from other functions
