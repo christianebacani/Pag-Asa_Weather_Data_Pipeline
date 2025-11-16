@@ -6,9 +6,9 @@ from bs4 import BeautifulSoup
 
 def get_daily_weather_forecast_soup(url: str) -> BeautifulSoup | None:
     '''
-        Function to get the beautiful soup object
-        from the web-page that contains daily weather forecast 
-        (https://www.pagasa.dost.gov.ph/weather#daily-weather-forecast).
+        Function to get the parsed beautiful soup object
+        from the web-page that contains daily weather forecast
+        of pag-asa dost website.
     '''
     response = requests.get(url)
 
@@ -20,8 +20,8 @@ def get_daily_weather_forecast_soup(url: str) -> BeautifulSoup | None:
 
 def get_daily_forecast_issued_datetime(soup: BeautifulSoup) -> str:
     '''
-        Function to get issued datetime from the daily 
-        weather forecast.
+        Function to get issued datetime from web-page that contains
+        daily weather forecast of pag-asa dost website.
     '''
     issued_datetime = ''
 
@@ -36,8 +36,9 @@ def get_daily_forecast_issued_datetime(soup: BeautifulSoup) -> str:
 
 def get_synopsis(soup: BeautifulSoup) -> str:
     '''
-        Function to get the synopsis from
-        the daily weather forecast.
+        Function to get synopsis from web-page
+        that contains daily weather forecast of
+        pag-asa dost website.
     '''
     synopsis = ''
 
@@ -54,8 +55,8 @@ def get_synopsis(soup: BeautifulSoup) -> str:
 
 def get_forecast_weather_conditions(soup: BeautifulSoup) -> dict:
     '''
-        Function to get the forecast weather conditions
-        from the daily weather forecast.
+        Function to get forecast weather conditions from web-page
+        that contains daily weather forecast of pag-asa dost website.
     '''
     forecast_weather_conditions = {
         'place': [],
@@ -92,8 +93,8 @@ def get_forecast_weather_conditions(soup: BeautifulSoup) -> dict:
 
 def get_forecast_wind_and_coastal_water_conditions(soup: BeautifulSoup) -> dict:
     '''
-        Function to get the forecast wind and coastal water conditions
-        from the daily weather forecast.
+        Function to get forecast wind and coastal water conditions from web-page
+        that contains daily weather forecast of pag-asa dost website.
     '''
     forecast_wind_and_coastal_water_conditions = {
         'place': [],
@@ -130,8 +131,9 @@ def get_forecast_wind_and_coastal_water_conditions(soup: BeautifulSoup) -> dict:
 
 def get_temperature_and_relative_humidity(soup: BeautifulSoup) -> dict:
     '''
-        Function to get the temperature and relative humidity from
-        the daily weather forecast.
+        Function to get temperature and relative humidity from the
+        web-page that contains daily weather forecast of pag-asa
+        dost website.
     '''
     temperature_and_relative_humidity = {
         'maximum_temperature': [],
