@@ -9,13 +9,14 @@ import pandas as pd
 from datetime import datetime
 
 from ingest.daily_weather_forecast import get_daily_weather_forecast_soup
-from ingest.daily_weather_forecast import get_issued_datetime
+from ingest.daily_weather_forecast import get_daily_forecast_issued_datetime
 from ingest.daily_weather_forecast import get_synopsis
 from ingest.daily_weather_forecast import get_forecast_weather_conditions
 from ingest.daily_weather_forecast import get_forecast_wind_and_coastal_water_conditions
 from ingest.daily_weather_forecast import get_temperature_and_relative_humidity
 
 from ingest.weather_outlook_for_selected_ph_cities import get_ph_city_weather_outlook_soup
+from ingest.weather_outlook_for_selected_ph_cities import get_ph_city_outlook_issued_datetime
 
 def generate_logs(log_message: str) -> None:
     '''
@@ -32,42 +33,16 @@ def generate_logs(log_message: str) -> None:
     logs.to_csv('src/logs/logs.csv', index=False)
 
 if __name__ == '__main__':
+    # Fetch the necessary data from the web-page contains of daily weather forecast
     daily_weather_forecast_soup = get_daily_weather_forecast_soup('https://www.pagasa.dost.gov.ph/weather#daily-weather-forecast')
+    daily_forecast_issued_datetime = get_daily_forecast_issued_datetime(daily_weather_forecast_soup)
+    synopsis = get_synopsis(daily_weather_forecast_soup)
+    forecast_weather_conditions = get_forecast_weather_conditions(daily_weather_forecast_soup)
+    forecast_wind_and_coastal_water_conditions = get_forecast_wind_and_coastal_water_conditions(daily_weather_forecast_soup)
+    temperature_and_relative_humidity = get_temperature_and_relative_humidity(daily_weather_forecast_soup)
+
+    # Fetch the necessary data from the web-page contains of daily weather forecast
     ph_city_weather_outlook_soup = get_ph_city_weather_outlook_soup('https://www.pagasa.dost.gov.ph/weather/weather-outlook-selected-philippine-cities')
-
-    # We need to check if the parsed soup object from 'init_soup_object' function is not NoneType because it
-    # will have error if we use a NoneType object as a parameter from other functions
-    if daily_weather_forecast_soup is not None:
-        issued_datetime = get_issued_datetime(daily_weather_forecast_soup)
-        synopsis = get_synopsis(daily_weather_forecast_soup)
-        forecast_weather_conditions = get_forecast_weather_conditions(daily_weather_forecast_soup)
-        forecast_wind_and_coastal_water_conditions = get_forecast_wind_and_coastal_water_conditions(daily_weather_forecast_soup)
-        temperature_and_relative_humidity = get_temperature_and_relative_humidity(daily_weather_forecast_soup)
-
-    else:
-        issued_datetime = ''
-        synopsis = ''
-        forecast_weather_conditions = {
-            'place': [],
-            'weather_condition': [],
-            'caused_by': [],
-            'impacts': []
-        }
-        forecast_wind_and_coastal_water_conditions = {
-            'place': [],
-            'speed': [],
-            'direction': [],
-            'coastal_water': []
-        }
-        temperature_and_relative_humidity = {
-            'maximum_temperature': [],
-            'time_of_maximum_temperature': [],
-            'minimum_temperature': [],
-            'time_of_minimum_temperature': [],
-            'maximum_relative_humidity_percentage': [],
-            'time_of_maximum_relative_humidity_percentage': [],
-            'minimum_relative_humidity_percentage': [],
-            'time_of_minimum_relative_humidity_percentage': []
-        }
+    ph_city_outlook_issued_datetime = get_ph_city_outlook_issued_datetime(ph_city_weather_outlook_soup)
 
     generate_logs('(DEV): Ingest daily weather forecast data')
