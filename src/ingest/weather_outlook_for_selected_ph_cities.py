@@ -6,10 +6,8 @@ from bs4 import BeautifulSoup
 
 def get_ph_city_weather_outlook_soup(url: str) -> BeautifulSoup | None:
     '''
-        Function to get the beautiful soup object
-        from the web-page that contains weather outlook
-        for the selected ph cities 
-        (https://www.pagasa.dost.gov.ph/weather/weather-outlook-selected-philippine-cities).
+        Function to get the parsed beautiful soup object to extract
+        weather outlook for selected ph cities from pag-asa dost website.
     '''
     response = requests.get(url)
 
@@ -21,8 +19,8 @@ def get_ph_city_weather_outlook_soup(url: str) -> BeautifulSoup | None:
 
 def get_ph_city_outlook_issued_datetime(soup: BeautifulSoup) -> str:
     '''
-        Function to get issued datetime from the weather outlook 
-        for selected ph cities.
+        Function to get the issued datetime of weather outlook for
+        selected ph cities from pag-asa dost website.
     '''
     issued_datetime = ''
 
@@ -38,6 +36,6 @@ def get_ph_city_outlook_issued_datetime(soup: BeautifulSoup) -> str:
 
 def get_ph_city_outlook_valid_period(soup: BeautifulSoup) -> str:
     '''
-        Function to get the valid time period from the weather
-        outlook for selected ph cities.
+        Function to get the valid period of weather outlook
+        for selected ph cities from pag-asa dost website.
     '''
