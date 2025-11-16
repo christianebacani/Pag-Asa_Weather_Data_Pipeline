@@ -18,10 +18,10 @@ def get_daily_weather_forecast_soup(url: str) -> BeautifulSoup | None:
     soup = BeautifulSoup(response.text, 'html.parser') # Parse to a Beautiful Soup Object
     return soup
 
-def get_issued_datetime(soup: BeautifulSoup) -> str:
+def get_daily_forecast_issued_datetime(soup: BeautifulSoup) -> str:
     '''
-        Function to get issued datetime
-        from the daily weather forecast.
+        Function to get issued datetime from the daily 
+        weather forecast.
     '''
     issued_datetime = ''
 
