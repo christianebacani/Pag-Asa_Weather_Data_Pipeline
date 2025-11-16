@@ -39,5 +39,5 @@ def get_ph_city_outlook_issued_datetime(soup: BeautifulSoup) -> str:
 def get_ph_city_outlook_valid_period(soup: BeautifulSoup) -> str:
     '''
         Function to get the valid time period from the weather
-        outlook for selected ph cities.     
+        outlook for selected ph cities.
     '''
