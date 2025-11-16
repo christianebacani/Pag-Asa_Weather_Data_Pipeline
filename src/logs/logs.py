@@ -41,7 +41,7 @@ if __name__ == '__main__':
     forecast_wind_and_coastal_water_conditions = get_forecast_wind_and_coastal_water_conditions(daily_weather_forecast_soup)
     temperature_and_relative_humidity = get_temperature_and_relative_humidity(daily_weather_forecast_soup)
 
-    # Fetch the necessary data from the web-page contains of daily weather forecast
+    # Fetch the necessary data from the web-page contains of weather outlook for selected ph cities
     ph_city_weather_outlook_soup = get_ph_city_weather_outlook_soup('https://www.pagasa.dost.gov.ph/weather/weather-outlook-selected-philippine-cities')
     ph_city_outlook_issued_datetime = get_ph_city_outlook_issued_datetime(ph_city_weather_outlook_soup)
 
