@@ -34,7 +34,7 @@ def generate_logs(log_message: str) -> None:
     logs.to_csv('src/logs/logs.csv', index=False)
 
 if __name__ == '__main__':
-    # Fetch the necessary data from the web-page contains of daily weather forecast
+    # Fetch the necessary data from the web-page that contains daily weather forecast
     daily_weather_forecast_soup = get_daily_weather_forecast_soup('https://www.pagasa.dost.gov.ph/weather#daily-weather-forecast')
     daily_forecast_issued_datetime = get_daily_forecast_issued_datetime(daily_weather_forecast_soup)
     synopsis = get_synopsis(daily_weather_forecast_soup)
@@ -43,7 +43,7 @@ if __name__ == '__main__':
     temperature_and_relative_humidity = get_temperature_and_relative_humidity(daily_weather_forecast_soup)
     generate_logs('(DEV): Ingest daily weather forecast data.')
 
-    # Fetch the necessary data from the web-page contains of weather outlook for selected ph cities
+    # Fetch the necessary data from the web-page that contains weather outlook for selected ph cities
     ph_city_weather_outlook_soup = get_ph_city_weather_outlook_soup('https://www.pagasa.dost.gov.ph/weather/weather-outlook-selected-philippine-cities')
     ph_city_outlook_issued_datetime = get_ph_city_outlook_issued_datetime(ph_city_weather_outlook_soup)
     ph_city_outlook_valid_period = get_ph_city_outlook_valid_period(ph_city_weather_outlook_soup)
