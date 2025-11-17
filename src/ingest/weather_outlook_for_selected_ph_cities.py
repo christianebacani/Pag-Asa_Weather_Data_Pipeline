@@ -24,8 +24,8 @@ def get_ph_city_outlook_issued_datetime(soup: BeautifulSoup) -> str:
     '''
     issued_datetime = ''
 
-    issued_datetime_tag = soup.find('div', attrs={'class': 'col-md-12 col-lg-12 issue'})
-    div_tag_with_validity_class = issued_datetime_tag.find('div', attrs={'class': 'validity'})
+    issued_datetime_and_valid_period_tag = soup.find('div', attrs={'class': 'col-md-12 col-lg-12 issue'})
+    div_tag_with_validity_class = issued_datetime_and_valid_period_tag.find('div', attrs={'class': 'validity'})
 
     if div_tag_with_validity_class is not None:
         issued_datetime = div_tag_with_validity_class.find_all('b')[0]
@@ -39,3 +39,13 @@ def get_ph_city_outlook_valid_period(soup: BeautifulSoup) -> str:
         Function to get the valid period of weather outlook
         for selected ph cities from pag-asa dost website.
     '''
+    valid_period = ''
+
+    issued_datetime_and_valid_period_tag = soup.find('div', attrs={'class': 'col-md-12 col-lg-12 issue'})
+    div_tag_with_validity_class = issued_datetime_and_valid_period_tag.find('div', attrs={'class': 'validity'})
+
+    if div_tag_with_validity_class is not None:
+        valid_period = div_tag_with_validity_class.find_all('b')[1]
+        valid_period = str(valid_period.text).strip()
+    
+    return valid_period
