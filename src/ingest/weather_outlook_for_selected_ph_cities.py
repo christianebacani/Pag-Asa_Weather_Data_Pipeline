@@ -49,3 +49,8 @@ def get_ph_city_outlook_valid_period(soup: BeautifulSoup) -> str:
         valid_period = str(valid_period.text).strip()
     
     return valid_period
+
+def get_all_selected_ph_cities(soup: BeautifulSoup) -> list[str]:
+    '''
+        
+    '''
