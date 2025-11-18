@@ -70,6 +70,4 @@ def get_all_selected_ph_cities(soup: BeautifulSoup) -> dict[str, dict]:
     list_of_all_selected_ph_cities_tags = div_tag_with_panel_group_class.find_all('div', attrs={'class': 'panel panel-default panel-pagasa'})
 
     for selected_ph_city_tag in list_of_all_selected_ph_cities_tags:
-        div_tag_with_panel_heading_class = selected_ph_city_tag.find('div', attrs={'class': 'panel-heading panel-pagasa-heading panel-pagasa-list panel-pagasa'})
-        print(div_tag_with_panel_heading_class)
-        print()
+        anchor_tag = selected_ph_city_tag.find('a', attrs={'data-toggle': 'collapse', 'data-parent': '#outlook-phil-cities'})
