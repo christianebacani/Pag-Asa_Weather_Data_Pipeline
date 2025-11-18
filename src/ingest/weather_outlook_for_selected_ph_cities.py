@@ -60,3 +60,8 @@ def get_all_selected_ph_cities(soup: BeautifulSoup) -> dict[str, dict]:
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
     div_tag_with_row_class = div_tag_with_row_weather_page_class.find('div', attrs={'class': 'row'})
     weather_outlook_for_selected_ph_cities_tag = div_tag_with_row_class.find('div', attrs={'class': 'col-md-12 col-lg-12'})
+    div_tag_with_panel_class = weather_outlook_for_selected_ph_cities_tag.find('div', attrs={'class': 'panel'})
+    div_tag_with_panel_body_class = div_tag_with_panel_class.find('div', attrs={'class': 'panel-body'})
+
+    if div_tag_with_panel_body_class is None:
+        return {}
