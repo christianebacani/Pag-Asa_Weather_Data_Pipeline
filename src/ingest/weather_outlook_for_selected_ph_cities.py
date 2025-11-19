@@ -76,9 +76,9 @@ def get_all_selected_ph_cities(soup: BeautifulSoup) -> dict[str, dict]:
 
     return result
 
-def map_the_weather_dates_for_ph_cities(soup: BeautifulSoup, selected_ph_cities: dict[str, dict]) -> dict[str, dict[str, list]] | dict[str, dict]:
+def map_weather_dates_for_selected_ph_cities(soup: BeautifulSoup, selected_ph_cities: dict[str, dict]) -> dict[str, dict]:
     '''
-        Function to map weather dates for selected ph cities
+        Function to map weather dates to be extracted for selected ph cities
         to get the weather outlooks from pag-asa dost website.        
     '''
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
@@ -111,3 +111,9 @@ def map_the_weather_dates_for_ph_cities(soup: BeautifulSoup, selected_ph_cities:
         selected_ph_cities[selected_ph_city_name] = {'weather_dates': weather_dates}
     
     return selected_ph_cities
+
+def get_temperature_ranges_for_selected_ph_cities(soup: BeautifulSoup, selected_ph_cities: dict[str, dict]) -> dict[str, dict]:
+    '''
+        Function to get temperature ranges of every extracted weather dates
+        of selected ph cities for their weather outlook from pag-asa dost website.
+    '''
