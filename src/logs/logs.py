@@ -43,7 +43,7 @@ if __name__ == '__main__':
     forecast_weather_conditions = get_forecast_weather_conditions(daily_weather_forecast_soup)
     forecast_wind_and_coastal_water_conditions = get_forecast_wind_and_coastal_water_conditions(daily_weather_forecast_soup)
     temperature_and_relative_humidity = get_temperature_and_relative_humidity(daily_weather_forecast_soup)
-    generate_logs('(DEV): Ingest daily weather forecast data.')
+    generate_logs('(DEV): Ingest the daily weather forecast data.')
 
     # Fetch the necessary data from the web-page that contains weather outlook for selected ph cities
     ph_city_weather_outlook_soup = get_ph_city_weather_outlook_soup('https://www.pagasa.dost.gov.ph/weather/weather-outlook-selected-philippine-cities')
@@ -51,4 +51,4 @@ if __name__ == '__main__':
     ph_city_outlook_valid_period = get_ph_city_outlook_valid_period(ph_city_weather_outlook_soup)
     selected_ph_cities = get_all_selected_ph_cities(ph_city_weather_outlook_soup)
     selected_ph_cities = map_the_weather_dates_for_ph_cities(ph_city_weather_outlook_soup, selected_ph_cities)
-    generate_logs('(DEV): Ingest weather outlook for selected ph cities data.')
+    generate_logs('(DEV): Ingest the weather outlook for selected ph cities data.')
