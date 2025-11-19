@@ -74,4 +74,4 @@ def get_all_selected_ph_cities(soup: BeautifulSoup) -> dict[str, dict]:
         selected_ph_city_name = str(anchor_tag.text).strip()
         result[selected_ph_city_name] = {}
 
-    return result        
+    return result
