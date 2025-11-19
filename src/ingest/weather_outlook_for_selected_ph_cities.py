@@ -97,7 +97,7 @@ def map_weather_dates_for_selected_ph_cities(soup: BeautifulSoup, selected_ph_ci
 
     for selected_ph_city_tag in list_of_all_selected_ph_cities_tags:
         anchor_tag = selected_ph_city_tag.find('a', attrs={'data-toggle': 'collapse', 'data-parent': '#outlook-phil-cities'})
-        selected_ph_city_name = str(anchor_tag.text).strip()
+        ph_city = str(anchor_tag.text).strip()
 
         thead_tag = selected_ph_city_tag.find('thead', attrs={'class': 'desktop-view-thead'})
         table_row_tag = thead_tag.find('tr')
@@ -110,7 +110,7 @@ def map_weather_dates_for_selected_ph_cities(soup: BeautifulSoup, selected_ph_ci
             weather_date = ' '.join(weather_date.split())
             weather_dates.append(weather_date)            
 
-        weather_outlook_ph_cities[selected_ph_city_name]['weather_dates'] = weather_dates
+        weather_outlook_ph_cities[ph_city]['weather_dates'] = weather_dates
 
     return weather_outlook_ph_cities
 
@@ -133,8 +133,8 @@ def map_temperature_ranges_for_selected_ph_cities(soup: BeautifulSoup, weather_o
     
     for selected_ph_city_tag in list_of_all_selected_ph_cities_tags:
         anchor_tag = selected_ph_city_tag.find('a', attrs={'data-toggle': 'collapse', 'data-parent': '#outlook-phil-cities'})
-        selected_ph_city_name = str(anchor_tag.text).strip()
-    
+        ph_city = str(anchor_tag.text).strip()
+
         tbody_tag = selected_ph_city_tag.find('tbody')
         table_row_tag_with_desktop_view_class = tbody_tag.find('tr', attrs={'class': 'desktop-view-tr'})
         list_of_all_table_data_tags = table_row_tag_with_desktop_view_class.find_all('td')
@@ -150,12 +150,42 @@ def map_temperature_ranges_for_selected_ph_cities(soup: BeautifulSoup, weather_o
 
             temperature_ranges.append([minimum_temperature, maximum_temperature])
 
-        weather_outlook_for_ph_cities[selected_ph_city_name]['temperature_ranges'] = temperature_ranges
+        weather_outlook_for_ph_cities[ph_city]['temperature_ranges'] = temperature_ranges
         
     return weather_outlook_for_ph_cities
 
-def map_daily_rain_chances_to_selected_ph_cities(soup: BeautifulSoup, weather_outlook_for_ph_cities: dict[str, dict]) -> dict[str, dict]:
+def map_daily_rain_chances_for_selected_ph_cities(soup: BeautifulSoup, weather_outlook_for_ph_cities: dict[str, dict]) -> dict[str, dict]:
     '''
-        Function to map percentage of rain chances per day that needs to be extracted for selected ph cities
+        Function to map daily rain chances percentage that needs to be extracted for selected ph cities
         to get the weather outlook from the pag-asa dost website.
     '''
+    div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
+    div_tag_with_row_class = div_tag_with_row_weather_page_class.find('div', attrs={'class': 'row'})
+    weather_outlook_for_selected_ph_cities_tag = div_tag_with_row_class.find('div', attrs={'class': 'col-md-12 col-lg-12'})
+    div_tag_with_panel_class = weather_outlook_for_selected_ph_cities_tag.find('div', attrs={'class': 'panel'})
+    div_tag_with_panel_body_class = div_tag_with_panel_class.find('div', attrs={'class': 'panel-body'})
+
+    if div_tag_with_panel_body_class is None:
+        return weather_outlook_for_ph_cities
+
+    div_tag_with_panel_group_class = div_tag_with_panel_body_class.find('div', attrs={'class': 'panel-group'})
+    list_of_all_selected_ph_cities_tags = div_tag_with_panel_group_class.find_all('div', attrs={'class': 'panel panel-default panel-pagasa'})
+    
+    for selected_ph_city_tag in list_of_all_selected_ph_cities_tags:
+        anchor_tag = selected_ph_city_tag.find('a', attrs={'data-toggle': 'collapse', 'data-parent': '#outlook-phil-cities'})
+        ph_city = str(anchor_tag.text).strip()
+
+        tbody_tag = selected_ph_city_tag.find('tbody')
+        table_row_tag_with_desktop_view_class = tbody_tag.find('tr', attrs={'class': 'desktop-view-tr'})
+        list_of_all_table_data_tags = table_row_tag_with_desktop_view_class.find_all('td')
+
+        chances_of_rain_percentages = []
+
+        for table_data_tag in list_of_all_table_data_tags:
+            chances_of_rain_percentage_tag = table_data_tag.find('span', attrs={'style': 'font-weight:bold; color: rgb(9, 73, 156);'})
+            chances_of_rain_percentage = str(chances_of_rain_percentage_tag.text).strip()
+            chances_of_rain_percentages.append(chances_of_rain_percentage)
+        
+        weather_outlook_for_ph_cities[ph_city]['chances_of_rain_percentages'] = chances_of_rain_percentages
+    
+    return weather_outlook_for_ph_cities
