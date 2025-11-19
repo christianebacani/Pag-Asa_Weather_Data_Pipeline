@@ -71,3 +71,7 @@ def get_all_selected_ph_cities(soup: BeautifulSoup) -> dict[str, dict]:
 
     for selected_ph_city_tag in list_of_all_selected_ph_cities_tags:
         anchor_tag = selected_ph_city_tag.find('a', attrs={'data-toggle': 'collapse', 'data-parent': '#outlook-phil-cities'})
+        selected_ph_city_name = str(anchor_tag.text).strip()
+        result[selected_ph_city_name] = {}
+
+    return result        
