@@ -96,7 +96,7 @@ def map_weather_dates_for_selected_ph_cities(soup: BeautifulSoup, selected_ph_ci
     for selected_ph_city_tag in list_of_all_selected_ph_cities_tags:
         anchor_tag = selected_ph_city_tag.find('a', attrs={'data-toggle': 'collapse', 'data-parent': '#outlook-phil-cities'})
         selected_ph_city_name = str(anchor_tag.text).strip()
-        
+
         thead_tag = selected_ph_city_tag.find('thead', attrs={'class': 'desktop-view-thead'})
         table_row_tag = thead_tag.find('tr')
         list_of_all_table_head_tags = table_row_tag.find_all('th', attrs={'class': 'text-center'})
@@ -108,8 +108,8 @@ def map_weather_dates_for_selected_ph_cities(soup: BeautifulSoup, selected_ph_ci
             weather_date = ' '.join(weather_date.split())
             weather_dates.append(weather_date)            
 
-        selected_ph_cities[selected_ph_city_name] = {'weather_dates': weather_dates}
-    
+        selected_ph_cities[selected_ph_city_name]['weather_dates'] = weather_dates
+
     return selected_ph_cities
 
 def get_temperature_ranges_for_selected_ph_cities(soup: BeautifulSoup, selected_ph_cities: dict[str, dict]) -> dict[str, dict]:
@@ -117,3 +117,37 @@ def get_temperature_ranges_for_selected_ph_cities(soup: BeautifulSoup, selected_
         Function to get temperature ranges of every extracted weather dates
         of selected ph cities for their weather outlook from pag-asa dost website.
     '''
+    div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
+    div_tag_with_row_class = div_tag_with_row_weather_page_class.find('div', attrs={'class': 'row'})
+    weather_outlook_for_selected_ph_cities_tag = div_tag_with_row_class.find('div', attrs={'class': 'col-md-12 col-lg-12'})
+    div_tag_with_panel_class = weather_outlook_for_selected_ph_cities_tag.find('div', attrs={'class': 'panel'})
+    div_tag_with_panel_body_class = div_tag_with_panel_class.find('div', attrs={'class': 'panel-body'})
+
+    if div_tag_with_panel_body_class is None:
+        return selected_ph_cities
+
+    div_tag_with_panel_group_class = div_tag_with_panel_body_class.find('div', attrs={'class': 'panel-group'})
+    list_of_all_selected_ph_cities_tags = div_tag_with_panel_group_class.find_all('div', attrs={'class': 'panel panel-default panel-pagasa'})
+    
+    for selected_ph_city_tag in list_of_all_selected_ph_cities_tags:
+        anchor_tag = selected_ph_city_tag.find('a', attrs={'data-toggle': 'collapse', 'data-parent': '#outlook-phil-cities'})
+        selected_ph_city_name = str(anchor_tag.text).strip()
+    
+        tbody_tag = selected_ph_city_tag.find('tbody')
+        table_row_tag_with_desktop_view_class = tbody_tag.find('tr', attrs={'class': 'desktop-view-tr'})
+        list_of_all_table_data_tags = table_row_tag_with_desktop_view_class.find_all('td')
+
+        temperature_ranges = []
+
+        for table_data_tag in list_of_all_table_data_tags:
+            minimum_temperature_tag = table_data_tag.find('span', attrs={'class': 'min'})
+            minimum_temperature = str(minimum_temperature_tag.text).strip()
+            
+            maximum_temperature_tag = table_data_tag.find('span', attrs={'class': 'max'})
+            maximum_temperature = str(maximum_temperature_tag.text).strip()
+
+            temperature_ranges.append([minimum_temperature, maximum_temperature])
+
+        selected_ph_cities[selected_ph_city_name]['temperature_ranges'] = temperature_ranges
+        
+    return selected_ph_cities
