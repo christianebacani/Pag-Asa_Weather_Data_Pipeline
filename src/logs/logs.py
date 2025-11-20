@@ -46,5 +46,5 @@ if __name__ == '__main__':
     # Fetch the necessary data from the web-page that contains weather outlook for selected ph cities
     ph_city_weather_outlook_soup = get_ph_city_weather_outlook_soup('https://www.pagasa.dost.gov.ph/weather/weather-outlook-selected-philippine-cities')
     ph_city_weather_outlook_issued_datetime = get_ph_city_weather_outlook_issued_datetime(ph_city_weather_outlook_soup)
-    get_ph_city_weather_outlook_valid_period(ph_city_weather_outlook_soup)
+    ph_city_weather_outlook_valid_period = get_ph_city_weather_outlook_valid_period(ph_city_weather_outlook_soup)
     generate_logs('(DEV): Ingest the weather outlook for selected ph cities data.')
