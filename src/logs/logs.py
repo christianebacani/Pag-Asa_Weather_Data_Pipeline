@@ -18,6 +18,7 @@ from ingest.daily_weather_forecast import get_temperature_and_relative_humidity
 from ingest.weather_outlook_for_selected_ph_cities import get_ph_city_weather_outlook_soup
 from ingest.weather_outlook_for_selected_ph_cities import get_ph_city_weather_outlook_issued_datetime
 from ingest.weather_outlook_for_selected_ph_cities import get_ph_city_weather_outlook_valid_period
+from ingest.weather_outlook_for_selected_ph_cities import get_selected_ph_cities
 
 def generate_logs(log_message: str) -> None:
     '''
@@ -47,4 +48,5 @@ if __name__ == '__main__':
     ph_city_weather_outlook_soup = get_ph_city_weather_outlook_soup('https://www.pagasa.dost.gov.ph/weather/weather-outlook-selected-philippine-cities')
     ph_city_weather_outlook_issued_datetime = get_ph_city_weather_outlook_issued_datetime(ph_city_weather_outlook_soup)
     ph_city_weather_outlook_valid_period = get_ph_city_weather_outlook_valid_period(ph_city_weather_outlook_soup)
+    get_selected_ph_cities(get_ph_city_weather_outlook_soup)
     generate_logs('(DEV): Ingest the weather outlook for selected ph cities data.')
