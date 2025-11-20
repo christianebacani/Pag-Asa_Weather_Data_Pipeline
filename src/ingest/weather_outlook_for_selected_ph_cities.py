@@ -85,7 +85,7 @@ def get_selected_ph_cities(soup: BeautifulSoup) -> dict[str, dict]:
 
     return result
 
-def map_weather_dates_to_selected_ph_cities(soup: BeautifulSoup, selected_ph_cities: dict[str, dict]) -> dict[str, dict]:
+def map_weather_dates_to_ph_cities(soup: BeautifulSoup, selected_ph_cities: dict[str, dict]) -> dict[str, dict]:
     '''
         Function to map weather dates to the selected ph cities for their weather outlook
         from pag-asa dost website.
