@@ -79,8 +79,8 @@ def get_selected_ph_cities(soup: BeautifulSoup) -> dict[str, dict]:
 
     # Using for-loop to iterate for every div_tag_with_panel_default_classes to fetch the name of the selected ph cities
     for div_tag_with_panel_default_class in list_of_div_tag_with_panel_default_classes:
-        anchor_tag = div_tag_with_panel_default_class.find('a', attrs={'data-toggle': 'collapse'})
-        ph_city = str(anchor_tag.text).strip()
+        ph_city_tag = div_tag_with_panel_default_class.find('a', attrs={'data-toggle': 'collapse'})
+        ph_city = str(ph_city_tag.text).strip()
         result[ph_city] = {}
 
     return result
@@ -153,7 +153,7 @@ def map_temperature_ranges_to_ph_cities(soup: BeautifulSoup, ph_cities_with_weat
         tbody_tag = table_tag.find('tbody')
         table_row_tag_with_desktop_view_class = tbody_tag.find('tr', attrs={'class': 'desktop-view-tr'})
         list_of_all_table_data_tags = table_row_tag_with_desktop_view_class.find_all('td')
-        
+
         temperature_ranges = []
 
         # Using for-loop to iterate for every div_tag_with_panel_default_classes to fetch the temperature ranges for every weather date
@@ -169,3 +169,40 @@ def map_temperature_ranges_to_ph_cities(soup: BeautifulSoup, ph_cities_with_weat
         result[ph_city]['temperature_ranges'] = temperature_ranges
     
     return result
+
+def map_chances_of_rain_pct_to_ph_cities(soup: BeautifulSoup, ph_cities_weather_outlook: dict[str, dict]) -> dict[str, dict]:
+    '''
+        Function to map chances of rain percentage to the selected ph cities for their weather outlook
+        from pag-asa dost website.
+    '''
+    result = ph_cities_weather_outlook
+
+    # Fetch the necessary HTML tags using find() method
+    div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
+    div_tag_with_row_class = div_tag_with_row_weather_page_class.find('div', attrs={'class': 'row'})
+
+    selected_ph_cities_weather_outlook_tag = div_tag_with_row_class.find('div', attrs={'class': 'col-md-12 col-lg-12'})
+    div_tag_with_panel_group_class = selected_ph_cities_weather_outlook_tag.find('div', attrs={'class': 'panel-group'})
+    
+    if div_tag_with_panel_group_class is None: # Validate the div_tag_with_panel_group_class if it's missing
+        return result
+
+    list_of_div_tag_with_panel_default_classes = div_tag_with_panel_group_class.find_all('div', attrs={'class': 'panel panel-default panel-pagasa'})
+
+    # Using for-loop to iterate for every div_tag_with_panel_default_classes to fetch the necessary data
+    for div_tag_with_panel_default_class in list_of_div_tag_with_panel_default_classes:
+        anchor_tag = div_tag_with_panel_default_class.find('a', attrs={'data-toggle': 'collapse'})
+        ph_city = str(anchor_tag.text).strip()
+        
+        table_tag = div_tag_with_panel_default_class.find('table', attrs={'class': 'table'})
+        tbody_tag = table_tag.find('tbody')
+        table_row_tag_with_desktop_view_class = tbody_tag.find('tr', attrs={'class': 'desktop-view-tr'})
+        list_of_all_table_data_tags = table_row_tag_with_desktop_view_class.find_all('td')
+        
+        chances_of_rain_percentages = []
+
+        # Using for-loop to iterate for every div_tag_with_panel_default_classes to fetch the percentage of chances of rain per weather date
+        for table_data_tag in list_of_all_table_data_tags:
+            chances_of_rain_pct_tag = table_data_tag.find('span', attrs={'style': 'font-weight:bold; color: rgb(9, 73, 156);'})
+            chances_of_rain_percentage = str(chances_of_rain_pct_tag.text).strip()
+            chances_of_rain_percentages.append(chances_of_rain_percentage)
