@@ -108,7 +108,7 @@ def map_weather_dates_to_ph_cities(soup: BeautifulSoup, selected_ph_cities: dict
     for div_tag_with_panel_default_class in list_of_div_tag_with_panel_default_classes:
         anchor_tag = div_tag_with_panel_default_class.find('a', attrs={'data-toggle': 'collapse'})
         ph_city = str(anchor_tag.text).strip()
-        
+
         table_tag = div_tag_with_panel_default_class.find('table', attrs={'class': 'table'})
         thead_tag = table_tag.find('thead', attrs={'class': 'desktop-view-thead'})
         list_of_all_table_head_tags = thead_tag.find_all('th', attrs={'class': 'text-center'})
@@ -122,5 +122,50 @@ def map_weather_dates_to_ph_cities(soup: BeautifulSoup, selected_ph_cities: dict
             weather_dates.append(weather_date)
         
         result[ph_city]['weather_dates'] = weather_dates
+    
+    return result
+
+def map_temperature_ranges_to_ph_cities(soup: BeautifulSoup, ph_cities_with_weather_dates: dict[str, dict]) -> dict[str, dict]:
+    '''
+        Function to map temperature ranges to the selected ph cities for their weather outlook
+        from pag-asa dost website.
+    '''
+    result = ph_cities_with_weather_dates
+
+    # Fetch the necessary HTML tags using find() method
+    div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
+    div_tag_with_row_class = div_tag_with_row_weather_page_class.find('div', attrs={'class': 'row'})
+
+    selected_ph_cities_weather_outlook_tag = div_tag_with_row_class.find('div', attrs={'class': 'col-md-12 col-lg-12'})
+    div_tag_with_panel_group_class = selected_ph_cities_weather_outlook_tag.find('div', attrs={'class': 'panel-group'})
+    
+    if div_tag_with_panel_group_class is None: # Validate the div_tag_with_panel_group_class if it's missing
+        return result
+
+    list_of_div_tag_with_panel_default_classes = div_tag_with_panel_group_class.find_all('div', attrs={'class': 'panel panel-default panel-pagasa'})
+
+    # Using for-loop to iterate for every div_tag_with_panel_default_classes to fetch the necessary data
+    for div_tag_with_panel_default_class in list_of_div_tag_with_panel_default_classes:
+        anchor_tag = div_tag_with_panel_default_class.find('a', attrs={'data-toggle': 'collapse'})
+        ph_city = str(anchor_tag.text).strip()
+        
+        table_tag = div_tag_with_panel_default_class.find('table', attrs={'class': 'table'})
+        tbody_tag = table_tag.find('tbody')
+        table_row_tag_with_desktop_view_class = tbody_tag.find('tr', attrs={'class': 'desktop-view-tr'})
+        list_of_all_table_data_tags = table_row_tag_with_desktop_view_class.find_all('td')
+        
+        temperature_ranges = []
+
+        # Using for-loop to iterate for every div_tag_with_panel_default_classes to fetch the temperature ranges for every weather date
+        for table_data_tag in list_of_all_table_data_tags:
+            minimum_temperature_tag = table_data_tag.find('span', attrs={'class': 'min'})
+            minimum_temperature = str(minimum_temperature_tag.text).strip()
+
+            maximum_temperature_tag = table_data_tag.find('span', attrs={'class': 'max'})
+            maximum_temperature = str(maximum_temperature_tag.text).strip()
+
+            temperature_ranges.append([minimum_temperature, maximum_temperature])
+        
+        result[ph_city]['temperature_ranges'][temperature_ranges]
     
     return result
