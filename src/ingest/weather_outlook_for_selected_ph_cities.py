@@ -166,6 +166,6 @@ def map_temperature_ranges_to_ph_cities(soup: BeautifulSoup, ph_cities_with_weat
 
             temperature_ranges.append([minimum_temperature, maximum_temperature])
         
-        result[ph_city]['temperature_ranges'][temperature_ranges]
+        result[ph_city]['temperature_ranges'] = temperature_ranges
     
     return result
