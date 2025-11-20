@@ -19,6 +19,7 @@ from ingest.weather_outlook_for_selected_ph_cities import get_ph_city_weather_ou
 from ingest.weather_outlook_for_selected_ph_cities import get_ph_city_weather_outlook_issued_datetime
 from ingest.weather_outlook_for_selected_ph_cities import get_ph_city_weather_outlook_valid_period
 from ingest.weather_outlook_for_selected_ph_cities import get_selected_ph_cities
+from ingest.weather_outlook_for_selected_ph_cities import map_weather_dates_to_selected_ph_cities
 
 def generate_logs(log_message: str) -> None:
     '''
@@ -49,4 +50,5 @@ if __name__ == '__main__':
     ph_city_weather_outlook_issued_datetime = get_ph_city_weather_outlook_issued_datetime(ph_city_weather_outlook_soup)
     ph_city_weather_outlook_valid_period = get_ph_city_weather_outlook_valid_period(ph_city_weather_outlook_soup)
     selected_ph_cities = get_selected_ph_cities(ph_city_weather_outlook_soup)
+    ph_cities_with_weather_dates = map_weather_dates_to_selected_ph_cities(ph_city_weather_outlook_soup, selected_ph_cities)    
     generate_logs('(DEV): Ingest the weather outlook for selected ph cities data.')
