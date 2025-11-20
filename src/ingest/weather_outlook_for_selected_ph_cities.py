@@ -60,8 +60,8 @@ def get_ph_city_weather_outlook_valid_period(soup: BeautifulSoup) -> str:
 
 def get_selected_ph_cities(soup: BeautifulSoup) -> dict[str, dict]:
     '''
-        Function to get the name of the selected ph cities for weather
-        outlook from pag-asa dost website.
+        Function to get the name of the selected ph cities for their 
+        weather outlook from pag-asa dost website.
     '''
     result = {}
     
@@ -77,10 +77,50 @@ def get_selected_ph_cities(soup: BeautifulSoup) -> dict[str, dict]:
 
     list_of_div_tag_with_panel_default_classes = div_tag_with_panel_group_class.find_all('div', attrs={'class': 'panel panel-default panel-pagasa'})
 
-    # Using for-loop to iterate for every div_tag_with_panel_default_classes to fetch the necessary data
+    # Using for-loop to iterate for every div_tag_with_panel_default_classes to fetch the name of the selected ph cities
     for div_tag_with_panel_default_class in list_of_div_tag_with_panel_default_classes:
         anchor_tag = div_tag_with_panel_default_class.find('a', attrs={'data-toggle': 'collapse'})
         ph_city = str(anchor_tag.text).strip()
         result[ph_city] = {}
 
+    return result
+
+def map_weather_dates_to_selected_ph_cities(soup: BeautifulSoup, selected_ph_cities: dict[str, dict]) -> dict[str, dict]:
+    '''
+        Function to map weather dates to the selected ph cities for their weather outlook
+        from pag-asa dost website.
+    '''
+    result = selected_ph_cities
+
+    # Fetch the necessary HTML tags using find() method
+    div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
+    div_tag_with_row_class = div_tag_with_row_weather_page_class.find('div', attrs={'class': 'row'})
+
+    selected_ph_cities_weather_outlook_tag = div_tag_with_row_class.find('div', attrs={'class': 'col-md-12 col-lg-12'})
+    div_tag_with_panel_group_class = selected_ph_cities_weather_outlook_tag.find('div', attrs={'class': 'panel-group'})
+    
+    if div_tag_with_panel_group_class is None: # Validate the div_tag_with_panel_group_class if it's missing
+        return result
+
+    list_of_div_tag_with_panel_default_classes = div_tag_with_panel_group_class.find_all('div', attrs={'class': 'panel panel-default panel-pagasa'})
+
+    # Using for-loop to iterate for every div_tag_with_panel_default_classes to fetch the necessary data
+    for div_tag_with_panel_default_class in list_of_div_tag_with_panel_default_classes:
+        anchor_tag = div_tag_with_panel_default_class.find('a', attrs={'data-toggle': 'collapse'})
+        ph_city = str(anchor_tag.text).strip()
+        
+        table_tag = div_tag_with_panel_default_class.find('table', attrs={'class': 'table'})
+        thead_tag = table_tag.find('thead', attrs={'class': 'desktop-view-thead'})
+        list_of_all_table_head_tags = thead_tag.find_all('th', attrs={'class': 'text-center'})
+        
+        weather_dates = []
+
+        # Using for-loop to iterate for every table_head_tags to fetch the weather dates
+        for table_head_tag in list_of_all_table_head_tags:
+            weather_date = str(table_head_tag.text).strip()
+            weather_date = ' '.join(weather_date.split())
+            weather_dates.append(weather_date)
+        
+        result[ph_city]['weather_dates'] = weather_dates
+    
     return result
