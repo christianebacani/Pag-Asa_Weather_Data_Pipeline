@@ -206,7 +206,7 @@ def map_chances_of_rain_pct_to_ph_cities(soup: BeautifulSoup, ph_cities_weather_
             chances_of_rain_pct_tag = table_data_tag.find('span', attrs={'style': 'font-weight:bold; color: rgb(9, 73, 156);'})
             chances_of_rain_percentage = str(chances_of_rain_pct_tag.text).strip()
             chances_of_rain_percentages.append(chances_of_rain_percentage)
-        
+
         result[ph_city]['chances_of_rain_percentages'] = chances_of_rain_percentages
 
     return result
