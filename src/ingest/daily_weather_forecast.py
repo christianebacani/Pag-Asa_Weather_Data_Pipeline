@@ -32,4 +32,4 @@ def extract_daily_weather_forecast_issued_datetime(soup: BeautifulSoup) -> str:
     if bold_tag is not None: # We need to check if the bold_tag is not missing
         issued_datetime = str(bold_tag.text).strip()
 
-    print(issued_datetime)
+    return issued_datetime
