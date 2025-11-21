@@ -9,7 +9,7 @@ from bs4 import BeautifulSoup
 def extract_daily_weather_forecast_soup(url: str) -> BeautifulSoup | None:
     '''
         Function to extract beautiful soup object of daily weather
-        forecast from pag-asa dost website.
+        forecast from the website of pag-asa dost.
     '''
     response = requests.get(url)
 
@@ -38,8 +38,8 @@ def extract_daily_weather_forecast_issued_datetime(soup: BeautifulSoup) -> str:
 
 def save_daily_forecast_issued_datetime_to_json(daily_weather_forecast_issued_datetime: str) -> None:
     '''
-        Function to save daily weather forecast issued datetime from pag-asa dost website to a 
-        dedicated json file from the raw/ directory of your local machine.
+        Function to save daily weather forecast issued datetime to a dedicated json file 
+        of the raw/ directory from your local machine.
     '''
     # Create a dictionary that stores daily weather forecast issued datetime
     data = {
@@ -51,3 +51,10 @@ def save_daily_forecast_issued_datetime_to_json(daily_weather_forecast_issued_da
         json.dump(data, json_file, indent=4)
     
     json_file.close()
+
+def extract_synopsis(soup: BeautifulSoup) -> str:
+    '''
+        Function to extract the synopsis of the
+        daily weather forecast from the website
+        of pag-asa dost.
+    '''
