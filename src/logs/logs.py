@@ -29,8 +29,8 @@ def generate_logs(log_message: str) -> None:
 
 if __name__ == '__main__':
     # Daily weather forecast
-    daily_weather_forecast_soup = extract_daily_weather_forecast_soup('https://www.pagasa.dost.gov.ph/weather#daily-weather-forecast')    
+    daily_weather_forecast_soup = extract_daily_weather_forecast_soup('https://www.pagasa.dost.gov.ph/weather#daily-weather-forecast')
     daily_weather_forecast_issued_datetime = extract_daily_weather_forecast_issued_datetime(daily_weather_forecast_soup)
     save_daily_forecast_issued_datetime_to_json(daily_weather_forecast_issued_datetime)
-    extract_synopsis(daily_weather_forecast_soup)
+    synopsis = extract_synopsis(daily_weather_forecast_soup)
     generate_logs('(DEV): Ingest the data for the daily weather forecast.')
