@@ -8,21 +8,6 @@ sys.path.insert(0, os.path.abspath('src'))
 import pandas as pd
 from datetime import datetime
 
-from ingest.daily_weather_forecast import get_daily_weather_forecast_soup
-from ingest.daily_weather_forecast import get_daily_forecast_issued_datetime
-from ingest.daily_weather_forecast import get_synopsis
-from ingest.daily_weather_forecast import get_forecast_weather_conditions
-from ingest.daily_weather_forecast import get_forecast_wind_and_coastal_water_conditions
-from ingest.daily_weather_forecast import get_temperature_and_relative_humidity
-
-from ingest.weather_outlook_for_selected_ph_cities import get_ph_city_weather_outlook_soup
-from ingest.weather_outlook_for_selected_ph_cities import get_ph_city_weather_outlook_issued_datetime
-from ingest.weather_outlook_for_selected_ph_cities import get_ph_city_weather_outlook_valid_period
-from ingest.weather_outlook_for_selected_ph_cities import get_selected_ph_cities
-from ingest.weather_outlook_for_selected_ph_cities import map_weather_dates_to_ph_cities
-from ingest.weather_outlook_for_selected_ph_cities import map_temperature_ranges_to_ph_cities
-from ingest.weather_outlook_for_selected_ph_cities import map_chances_of_rain_pct_to_ph_cities
-
 def generate_logs(log_message: str) -> None:
     '''
         Function to generate logs based on 
@@ -38,21 +23,5 @@ def generate_logs(log_message: str) -> None:
     logs.to_csv('src/logs/logs.csv', index=False)
 
 if __name__ == '__main__':
-    # Fetch the necessary data from the web-page that contains daily weather forecast
-    daily_weather_forecast_soup = get_daily_weather_forecast_soup('https://www.pagasa.dost.gov.ph/weather#daily-weather-forecast')
-    daily_forecast_issued_datetime = get_daily_forecast_issued_datetime(daily_weather_forecast_soup)
-    synopsis = get_synopsis(daily_weather_forecast_soup)
-    forecast_weather_conditions = get_forecast_weather_conditions(daily_weather_forecast_soup)
-    forecast_wind_and_coastal_water_conditions = get_forecast_wind_and_coastal_water_conditions(daily_weather_forecast_soup)
-    temperature_and_relative_humidity = get_temperature_and_relative_humidity(daily_weather_forecast_soup)
-    generate_logs('(DEV): Ingest the daily weather forecast data.')
 
-    # Fetch the necessary data from the web-page that contains weather outlook for selected ph cities
-    ph_city_weather_outlook_soup = get_ph_city_weather_outlook_soup('https://www.pagasa.dost.gov.ph/weather/weather-outlook-selected-philippine-cities')
-    ph_city_weather_outlook_issued_datetime = get_ph_city_weather_outlook_issued_datetime(ph_city_weather_outlook_soup)
-    ph_city_weather_outlook_valid_period = get_ph_city_weather_outlook_valid_period(ph_city_weather_outlook_soup)
-    selected_ph_cities = get_selected_ph_cities(ph_city_weather_outlook_soup)
-    ph_cities_with_weather_dates = map_weather_dates_to_ph_cities(ph_city_weather_outlook_soup, selected_ph_cities)    
-    ph_cities_weather_outlook = map_temperature_ranges_to_ph_cities(ph_city_weather_outlook_soup, ph_cities_with_weather_dates)
-    ph_cities_weather_outlook = map_chances_of_rain_pct_to_ph_cities(ph_city_weather_outlook_soup, ph_cities_weather_outlook)
     generate_logs('(DEV): Ingest the weather outlook for selected ph cities data.')
