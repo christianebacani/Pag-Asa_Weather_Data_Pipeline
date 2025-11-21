@@ -1,5 +1,5 @@
 '''
-    Weather Outlook for Selected PH Cities Module
+    Weather Outlook for Selected Philippine Cities Module
 '''
 import requests
 from bs4 import BeautifulSoup
