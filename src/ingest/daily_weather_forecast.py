@@ -58,3 +58,14 @@ def extract_synopsis(soup: BeautifulSoup) -> str:
         daily weather forecast from the website
         of pag-asa dost.
     '''
+    synopsis = ''
+
+    # Extract the necessary html tags to get the synopsis of daily weather forecast
+    div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
+    synopsis_tag = div_tag_with_row_weather_page_class.find('div', attrs={'class': 'col-md-12 col-lg-12'})
+    div_tag_with_panel_body_class = synopsis_tag.find('div', attrs={'class': 'panel-body'})
+
+    if div_tag_with_panel_body_class is not None: # We need to check if the div_tag_with_panel_body_class is not missing
+        synopsis = str(div_tag_with_panel_body_class.text).strip()
+
+    return synopsis
