@@ -8,6 +8,8 @@ sys.path.insert(0, os.path.abspath('src'))
 import pandas as pd
 from datetime import datetime
 
+from ingest.daily_weather_forecast import extract_daily_weather_forecast_soup
+
 def generate_logs(log_message: str) -> None:
     '''
         Function to generate logs based on 
@@ -23,5 +25,5 @@ def generate_logs(log_message: str) -> None:
     logs.to_csv('src/logs/logs.csv', index=False)
 
 if __name__ == '__main__':
-
+    extract_daily_weather_forecast_soup('https://www.pagasa.dost.gov.ph/weather#daily-weather-forecast')
     generate_logs('(DEV): Ingest the weather outlook for selected ph cities data.')
