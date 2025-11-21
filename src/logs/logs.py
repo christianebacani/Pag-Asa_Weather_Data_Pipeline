@@ -12,6 +12,7 @@ from ingest.daily_weather_forecast import extract_daily_weather_forecast_soup
 from ingest.daily_weather_forecast import extract_daily_weather_forecast_issued_datetime
 from ingest.daily_weather_forecast import save_daily_forecast_issued_datetime_to_json
 from ingest.daily_weather_forecast import extract_synopsis
+from ingest.daily_weather_forecast import save_synopsis_to_json
 
 def generate_logs(log_message: str) -> None:
     '''
@@ -30,7 +31,10 @@ def generate_logs(log_message: str) -> None:
 if __name__ == '__main__':
     # Daily weather forecast
     daily_weather_forecast_soup = extract_daily_weather_forecast_soup('https://www.pagasa.dost.gov.ph/weather#daily-weather-forecast')
+    
     daily_weather_forecast_issued_datetime = extract_daily_weather_forecast_issued_datetime(daily_weather_forecast_soup)
     save_daily_forecast_issued_datetime_to_json(daily_weather_forecast_issued_datetime)
+    
     synopsis = extract_synopsis(daily_weather_forecast_soup)
+    save_synopsis_to_json(synopsis)    
     generate_logs('(DEV): Ingest the data for the daily weather forecast.')
