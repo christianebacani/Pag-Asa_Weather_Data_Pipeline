@@ -11,5 +11,8 @@ def extract_daily_weather_forecast_soup(url: str) -> BeautifulSoup | None:
     '''
     response = requests.get(url)
 
-    if response.status_code != 200:
+    if response.status_code != 200: # Validate first if the status code of the response is not successful
         return None
+
+    soup = BeautifulSoup(response.text, 'html.parser') # Parse as a Beautiful Soup Object
+    return soup
