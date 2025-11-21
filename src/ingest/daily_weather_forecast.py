@@ -2,6 +2,8 @@
     Daily Weather Forecast Module
 '''
 import requests
+import os
+import json
 from bs4 import BeautifulSoup
 
 def extract_daily_weather_forecast_soup(url: str) -> BeautifulSoup | None:
@@ -33,3 +35,19 @@ def extract_daily_weather_forecast_issued_datetime(soup: BeautifulSoup) -> str:
         issued_datetime = str(bold_tag.text).strip()
 
     return issued_datetime
+
+def save_daily_forecast_issued_datetime_to_json(daily_weather_forecast_issued_datetime: str) -> None:
+    '''
+        Function to save daily weather forecast issued datetime from pag-asa dost website to a 
+        dedicated json file from the raw/ directory of your local machine.
+    '''
+    # Create a dictionary that stores daily weather forecast issued datetime
+    data = {
+        "issued_datetime": daily_weather_forecast_issued_datetime
+    }
+
+    # Save the dictionary to the json file using open() method and json module
+    with open('data/raw/daily_weather_forecast_issued_datetime.json', 'w') as json_file:
+        json.dump(data, json_file, indent=4)
+    
+    json_file.close()
