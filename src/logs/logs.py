@@ -11,6 +11,8 @@ from datetime import datetime
 from ingest.daily_weather_forecast import extract_daily_weather_forecast_soup
 from ingest.daily_weather_forecast import extract_daily_weather_forecast_issued_datetime
 from ingest.daily_weather_forecast import save_daily_forecast_issued_datetime_to_json
+from ingest.daily_weather_forecast import extract_synopsis
+
 def generate_logs(log_message: str) -> None:
     '''
         Function to generate logs based on 
@@ -26,7 +28,9 @@ def generate_logs(log_message: str) -> None:
     logs.to_csv('src/logs/logs.csv', index=False)
 
 if __name__ == '__main__':
+    # Daily weather forecast
     daily_weather_forecast_soup = extract_daily_weather_forecast_soup('https://www.pagasa.dost.gov.ph/weather#daily-weather-forecast')    
     daily_weather_forecast_issued_datetime = extract_daily_weather_forecast_issued_datetime(daily_weather_forecast_soup)
     save_daily_forecast_issued_datetime_to_json(daily_weather_forecast_issued_datetime)
-    generate_logs('(DEV): Ingest the weather outlook for selected ph cities data.')
+    extract_synopsis(daily_weather_forecast_soup)
+    generate_logs('(DEV): Ingest the data for the daily weather forecast.')
