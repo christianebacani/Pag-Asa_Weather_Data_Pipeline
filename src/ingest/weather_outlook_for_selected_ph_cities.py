@@ -156,7 +156,7 @@ def map_temperature_ranges_to_ph_cities(soup: BeautifulSoup, ph_cities_with_weat
 
         temperature_ranges = []
 
-        # Using for-loop to iterate for every div_tag_with_panel_default_classes to fetch the temperature ranges for every weather date
+        # Using for-loop to iterate for every table_data_tags to fetch the temperature ranges for every weather date
         for table_data_tag in list_of_all_table_data_tags:
             minimum_temperature_tag = table_data_tag.find('span', attrs={'class': 'min'})
             minimum_temperature = str(minimum_temperature_tag.text).strip()
@@ -201,8 +201,12 @@ def map_chances_of_rain_pct_to_ph_cities(soup: BeautifulSoup, ph_cities_weather_
         
         chances_of_rain_percentages = []
 
-        # Using for-loop to iterate for every div_tag_with_panel_default_classes to fetch the percentage of chances of rain per weather date
+        # Using for-loop to iterate for every table_data_tags to fetch the percentage of chances of rain per weather date
         for table_data_tag in list_of_all_table_data_tags:
             chances_of_rain_pct_tag = table_data_tag.find('span', attrs={'style': 'font-weight:bold; color: rgb(9, 73, 156);'})
             chances_of_rain_percentage = str(chances_of_rain_pct_tag.text).strip()
             chances_of_rain_percentages.append(chances_of_rain_percentage)
+        
+        result[ph_city]['chances_of_rain_percentages'] = chances_of_rain_percentages
+
+    return result
