@@ -9,6 +9,7 @@ import pandas as pd
 from datetime import datetime
 
 from ingest.daily_weather_forecast import extract_daily_weather_forecast_soup
+from ingest.daily_weather_forecast import extract_daily_weather_forecast_issued_datetime
 
 def generate_logs(log_message: str) -> None:
     '''
@@ -26,4 +27,5 @@ def generate_logs(log_message: str) -> None:
 
 if __name__ == '__main__':
     daily_weather_forecast_soup = extract_daily_weather_forecast_soup('https://www.pagasa.dost.gov.ph/weather#daily-weather-forecast')    
+    daily_weather_forecast_issued_datetime = extract_daily_weather_forecast_issued_datetime(daily_weather_forecast_soup)
     generate_logs('(DEV): Ingest the weather outlook for selected ph cities data.')
