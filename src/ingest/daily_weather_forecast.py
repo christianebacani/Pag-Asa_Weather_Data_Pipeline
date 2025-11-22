@@ -206,3 +206,22 @@ def extract_forecast_wind_and_coastal_water_conditions(soup: BeautifulSoup) -> d
         forecast_wind_and_coastal_water_conditions['coastal_water'].append(coastal_water)
 
     return forecast_wind_and_coastal_water_conditions
+
+def save_forecast_wind_and_coastal_water_conditions_to_json(forecast_wind_and_coastal_water_conditions: dict[str, list]) -> dict[str, list]:
+    '''
+        Function to save the forecast wind and coasatal water conditions of daily weather forecast to a dedicated
+        json file of the data/raw/daily_weather_forecast subdirectory from your local machine.        
+    '''
+    # Create a dictionary that stores the forecast wind and coastal water conditions of the daily weather forecast
+    data = {
+        "place": forecast_wind_and_coastal_water_conditions['place'],
+        "speed": forecast_wind_and_coastal_water_conditions['speed'],
+        "direction": forecast_wind_and_coastal_water_conditions['direction'],
+        "coastal_water": forecast_wind_and_coastal_water_conditions['coastal_water']
+    }
+
+    # Save the dictionary to a json file using open() method and json module    
+    with open('data/raw/daily_weather_forecast/forecast_wind_and_coastal_water_conditions.json', 'w') as json_file:
+        json.dump(data, json_file, indent=4)
+
+    json_file.close()
