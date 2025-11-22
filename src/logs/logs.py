@@ -17,6 +17,7 @@ from ingest.daily_weather_forecast import save_synopsis_to_json
 from ingest.daily_weather_forecast import extract_forecast_weather_conditions
 from ingest.daily_weather_forecast import save_forecast_weather_conditions_to_json
 from ingest.daily_weather_forecast import extract_forecast_wind_and_coastal_water_conditions
+from ingest.daily_weather_forecast import save_forecast_wind_and_coastal_water_conditions_to_json
 
 def generate_logs(log_message: str) -> None:
     '''
@@ -47,4 +48,5 @@ if __name__ == '__main__':
     save_forecast_weather_conditions_to_json(forecast_weather_conditions)
 
     forecast_wind_and_coastal_water_conditions = extract_forecast_wind_and_coastal_water_conditions(daily_weather_forecast_soup)
+    save_forecast_wind_and_coastal_water_conditions_to_json(forecast_wind_and_coastal_water_conditions)
     generate_logs('(DEV): Ingest the data for the daily weather forecast.')
