@@ -1,0 +1,38 @@
+{
+    "place": [
+        "Apayao, Kalinga, Cagayan, Isabela, Quirino, and Nueva Vizcaya",
+        "Caraga, Northern Mindanao, Davao Region and Palawan",
+        "Quezon and Aurora",
+        "Batanes and the rest of Cordillera Administrative Region",
+        "Ilocos Region",
+        "The rest of Mindanao",
+        "Metro Manila and the rest of the country"
+    ],
+    "weather_condition": [
+        "Cloudy skies with scattered rains and isolated thunderstorms",
+        "Cloudy skies with scattered rains and thunderstorms",
+        "Cloudy skies with scattered rains and thunderstorms",
+        "Cloudy skies with rains",
+        "Partly cloudy to cloudy skies with isolated light rains",
+        "Partly cloudy to cloudy skies with isolated rainshowers or thunderstorms",
+        "Partly cloudy to cloudy skies with isolated rainshowers or thunderstorms"
+    ],
+    "caused_by": [
+        "Shear Line",
+        "ITCZ",
+        "Easterlies",
+        "Northeast Monsoon",
+        "Northeast Monsoon",
+        "ITCZ",
+        "Easterlies"
+    ],
+    "impacts": [
+        "Possible flash floods or landslides due to moderate to heavy rains",
+        "Possible flash floods or landslides due to moderate to at times heavy rains",
+        "Possible flash floods or landslides due to moderate to at times heavy rains",
+        "Possible flash floods or landslides due to moderate to at times heavy rains",
+        "No significant impact",
+        "Possible flash floods or landslides during severe thunderstorms",
+        "Possible flash floods or landslides during severe thunderstorms"
+    ]
+}
