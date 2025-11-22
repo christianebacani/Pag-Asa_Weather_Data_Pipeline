@@ -41,5 +41,5 @@ if __name__ == '__main__':
     synopsis = extract_synopsis(daily_weather_forecast_soup)
     save_synopsis_to_json(synopsis)
 
-    extract_forecast_weather_conditions(daily_weather_forecast_soup)
+    forecast_weather_conditions = extract_forecast_weather_conditions(daily_weather_forecast_soup)
     generate_logs('(DEV): Ingest the data for the daily weather forecast.')
