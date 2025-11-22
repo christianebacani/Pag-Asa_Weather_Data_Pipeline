@@ -103,7 +103,7 @@ def save_synopsis_to_json(synopsis: str) -> None:
 
     json_file.close()
 
-def extract_forecast_weather_conditions(soup: BeautifulSoup) -> str:
+def extract_forecast_weather_conditions(soup: BeautifulSoup) -> dict[str, list]:
     '''
         Function to extract the weather forecast conditions
         of the daily weather forecast from the website of pag-asa
@@ -127,7 +127,7 @@ def extract_forecast_weather_conditions(soup: BeautifulSoup) -> str:
 
     list_of_all_table_row_tags = tbody_tag.find_all('tr')
     
-    # Using for-loop to access rows that contain the necessary html tags for forecast weather conditions
+    # Using for-loop to access rows that contains the necessary html tags to get forecast weather conditions
     for table_row_tag in list_of_all_table_row_tags:
         # Using find_all() method to retrieve all the necessary data of forecast weather conditions
         list_of_all_table_data_tags = table_row_tag.find_all('td')
@@ -164,3 +164,45 @@ def save_forecast_weather_conditions_to_json(forecast_weather_conditions: dict[s
         json.dump(data, json_file, indent=4)
 
     json_file.close()
+
+def extract_forecast_wind_and_coastal_water_conditions(soup: BeautifulSoup) -> dict[str, list]:
+    '''
+        Function to extract the forecast wind and coastal water conditions of daily weather
+        forecast from the website of the pag-asa dost website.
+    '''
+    forecast_wind_and_coastal_water_conditions = {
+        'place': [],
+        'speed': [],
+        'direction': [],
+        'coastal_water': []
+    }
+
+    # Extract the necessary html tags to get the forecast wind and coastal water conditions of daily weather forecast
+    div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
+    forecast_wind_and_coastal_water_conditions_tag = div_tag_with_row_weather_page_class.find_all('div', attrs={'class': 'col-md-12 col-lg-12'})[2]
+    tbody_tag = forecast_wind_and_coastal_water_conditions_tag.find('tbody')
+
+    # We need to check if the tbody_tag is missing
+    if tbody_tag is None:
+        return forecast_wind_and_coastal_water_conditions
+
+    list_of_all_table_row_tags = tbody_tag.find_all('tr')
+
+    # Using for-loop to access rows that contains the necessary html tags to get forecast wind and coastal water conditions
+    for table_row_tag in list_of_all_table_row_tags:
+        # Using find_all() method to retrieve all the necessary data of forecast wind and coastal water conditions
+        list_of_all_table_data_tags = table_row_tag.find_all('td')
+
+        place = str(list_of_all_table_data_tags[0].text).strip()
+        forecast_wind_and_coastal_water_conditions['place'].append(place)
+
+        speed = str(list_of_all_table_data_tags[1].text).strip()
+        forecast_wind_and_coastal_water_conditions['speed'].append(speed)
+
+        direction = str(list_of_all_table_data_tags[2].text).strip()
+        forecast_wind_and_coastal_water_conditions['direction'].append(direction)
+
+        coastal_water = str(list_of_all_table_data_tags[3].text).strip()
+        forecast_wind_and_coastal_water_conditions['coastal_water'].append(coastal_water)
+
+    return forecast_wind_and_coastal_water_conditions
