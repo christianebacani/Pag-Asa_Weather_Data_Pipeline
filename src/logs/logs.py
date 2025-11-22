@@ -14,6 +14,7 @@ from ingest.daily_weather_forecast import extract_daily_weather_forecast_issued_
 from ingest.daily_weather_forecast import save_daily_forecast_issued_datetime_to_json
 from ingest.daily_weather_forecast import extract_synopsis
 from ingest.daily_weather_forecast import save_synopsis_to_json
+from ingest.daily_weather_forecast import extract_forecast_weather_conditions
 
 def generate_logs(log_message: str) -> None:
     '''
@@ -39,4 +40,6 @@ if __name__ == '__main__':
     
     synopsis = extract_synopsis(daily_weather_forecast_soup)
     save_synopsis_to_json(synopsis)
+
+    extract_forecast_weather_conditions(daily_weather_forecast_soup)
     generate_logs('(DEV): Ingest the data for the daily weather forecast.')
