@@ -102,9 +102,15 @@ def save_synopsis_to_json(synopsis: str) -> None:
 
     json_file.close()
 
-def extract_weather_forecast_conditions(soup: BeautifulSoup) -> str:
+def extract_forecast_weather_conditions(soup: BeautifulSoup) -> str:
     '''
         Function to extract the weather forecast conditions
         of the daily weather forecast from the website of pag-asa
         dost website.
     '''
+    forecast_weather_conditions = {
+        'place': [],
+        'weather_conditions': [],
+        'caused_by': [],
+        'impacts': []
+    }
