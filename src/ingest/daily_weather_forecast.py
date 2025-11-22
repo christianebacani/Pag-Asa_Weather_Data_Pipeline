@@ -60,7 +60,7 @@ def save_daily_forecast_issued_datetime_to_json(daily_weather_forecast_issued_da
         "issued_datetime": daily_weather_forecast_issued_datetime
     }
 
-    # Save the dictionary to the json file using open() method and json module
+    # Save the dictionary to a json file using open() method and json module
     with open('data/raw/daily_weather_forecast/issued_datetime.json', 'w') as json_file:
         json.dump(data, json_file, indent=4)
     
@@ -97,7 +97,7 @@ def save_synopsis_to_json(synopsis: str) -> None:
         "synopsis": synopsis
     }
 
-    # Save the dictionary to the json file using open() method and json module
+    # Save the dictionary to a json file using open() method and json module
     with open('data/raw/daily_weather_forecast/synopsis.json', 'w') as json_file:
         json.dump(data, json_file, indent=4)
 
@@ -151,3 +151,16 @@ def save_forecast_weather_conditions_to_json(forecast_weather_conditions: dict[s
         Function to save the forecast weather conditions of daily weather forecast to a dedicated
         json file of the data/raw/daily_weather_forecast subdirectory from your local machine.
     '''
+    # Create a dictionary that stores the forecast weather conditions of the daily weather forecast
+    data = {
+        "place": forecast_weather_conditions['place'],
+        "weather_condition": forecast_weather_conditions['weather_condition'],
+        "caused_by": forecast_weather_conditions['caused_by'],
+        "impacts": forecast_weather_conditions['impacts']
+    }
+
+    # Save the dictionary to a json file using open() method and json module
+    with open('data/raw/daily_weather_forecast/forecast_weather_conditions.json', 'w') as json_file:
+        json.dump(data, json_file, indent=4)
+
+    json_file.close()
