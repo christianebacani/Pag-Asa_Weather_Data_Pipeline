@@ -53,7 +53,7 @@ def extract_daily_weather_forecast_issued_datetime(soup: BeautifulSoup) -> str:
 def save_daily_forecast_issued_datetime_to_json(daily_weather_forecast_issued_datetime: str) -> None:
     '''
         Function to save issued datetime of daily weather forecast to a dedicated json file
-        of the data/raw/ subdirectory from your local machine.
+        of the data/raw/daily_weather_forecast subdirectory from your local machine.
     '''
     # Create a dictionary that stores daily weather forecast issued datetime
     data = {
@@ -89,7 +89,8 @@ def save_synopsis_to_json(synopsis: str) -> None:
     '''
         Function to save the synopsis of the daily
         weather forecast to a dedicated json file
-        of the data/raw/ subdirectory from your local machine.
+        of the data/raw/daily_weather_forecast 
+        subdirectory from your local machine.
     '''
     # Create a dictionary that stores the synopsis of the daily weather forecast
     data = {
@@ -144,3 +145,9 @@ def extract_forecast_weather_conditions(soup: BeautifulSoup) -> str:
         forecast_weather_conditions['impacts'].append(impacts)
     
     return forecast_weather_conditions
+
+def save_forecast_weather_conditions_to_json(forecast_weather_conditions: dict[str, list]) -> None:
+    '''
+        Function to save the forecast weather conditions of daily weather forecast to a dedicated
+        json file of the data/raw/daily_weather_forecast subdirectory from your local machine.
+    '''
