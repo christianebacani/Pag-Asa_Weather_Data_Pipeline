@@ -225,3 +225,29 @@ def save_forecast_wind_and_coastal_water_conditions_to_json(forecast_wind_and_co
         json.dump(data, json_file, indent=4)
 
     json_file.close()
+
+def extract_temperature_and_relative_humidity(soup: BeautifulSoup) -> dict[str, str]:
+    '''
+        Function to extract temperature and relative humidity of daily weather forecast
+        from the website of pag-asa dost.
+    '''
+    temperature_and_relative_humidity = {
+        'temperature': {'max': [], 'min': []},
+        'relative_humidity_percentage': {'max': [], 'min': []}
+    }
+    
+    # Extract the necessary html tags to get the temperature and relative humidity of daily weather forecast
+    div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
+    temperature_and_relative_humidity_tag = div_tag_with_row_weather_page_class.find_all('div', attrs={'class': 'col-md-12 col-lg-12'})[3]
+    tbody_tag = temperature_and_relative_humidity_tag.find('tbody')
+
+    # We need to check if the tbody_tag is missing
+    if tbody_tag is None:
+        return temperature_and_relative_humidity
+
+    list_of_all_table_row_tags = tbody_tag.find_all('tr')
+
+    # Using for-loop to access rows that contains the necessary html tags to get temperature and relative humidity
+    for row, table_row_tag in enumerate(list_of_all_table_row_tags):
+        row += 1
+        list_of_all_table_data_tags = table_row_tag.find_all('td')[1:]
