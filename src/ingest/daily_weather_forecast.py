@@ -110,7 +110,37 @@ def extract_forecast_weather_conditions(soup: BeautifulSoup) -> str:
     '''
     forecast_weather_conditions = {
         'place': [],
-        'weather_conditions': [],
+        'weather_condition': [],
         'caused_by': [],
         'impacts': []
     }
+
+    # Extract the necessary html tags to get the forecast weather conditions of daily weather forecast
+    div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
+    forecast_weather_conditions_tag = div_tag_with_row_weather_page_class.find_all('div', attrs={'class': 'col-md-12 col-lg-12'})[1]
+    tbody_tag = forecast_weather_conditions_tag.find('tbody')
+
+    # We need to check if the tbody_tag is missing
+    if tbody_tag is None:
+        return forecast_weather_conditions
+
+    list_of_all_table_row_tags = tbody_tag.find_all('tr')
+    
+    # Using for-loop to access rows that contain the necessary html tags for forecast weather conditions
+    for table_row_tag in list_of_all_table_row_tags:
+        # Using find_all() method to retrieve all the necessary data of forecast weather conditions
+        list_of_all_table_data_tags = table_row_tag.find_all('td')
+
+        place = str(list_of_all_table_data_tags[0].text).strip()
+        forecast_weather_conditions['place'].append(place)
+
+        weather_condition = str(list_of_all_table_data_tags[1].text).strip()
+        forecast_weather_conditions['weather_condition'].append(weather_condition)
+
+        caused_by = str(list_of_all_table_data_tags[2].text).strip()
+        forecast_weather_conditions['caused_by'].append(caused_by)
+
+        impacts = str(list_of_all_table_data_tags[3].text).strip()
+        forecast_weather_conditions['impacts'].append(impacts)
+    
+    return forecast_weather_conditions
