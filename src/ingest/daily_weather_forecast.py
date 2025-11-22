@@ -52,7 +52,7 @@ def extract_daily_weather_forecast_issued_datetime(soup: BeautifulSoup) -> str:
 
 def save_daily_forecast_issued_datetime_to_json(daily_weather_forecast_issued_datetime: str) -> None:
     '''
-        Function to save daily weather forecast issued datetime to a dedicated json file 
+        Function to save issued datetime of daily weather forecast to a dedicated json file
         of the data/raw/ subdirectory from your local machine.
     '''
     # Create a dictionary that stores daily weather forecast issued datetime
@@ -101,3 +101,10 @@ def save_synopsis_to_json(synopsis: str) -> None:
         json.dump(data, json_file, indent=4)
 
     json_file.close()
+
+def extract_weather_forecast_conditions(soup: BeautifulSoup) -> str:
+    '''
+        Function to extract the weather forecast conditions
+        of the daily weather forecast from the website of pag-asa
+        dost website.
+    '''
