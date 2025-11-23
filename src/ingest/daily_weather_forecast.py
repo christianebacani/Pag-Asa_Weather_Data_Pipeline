@@ -10,7 +10,7 @@ def create_daily_weather_forecast_subdir() -> None:
     '''
         Function to create data/raw/daily_weather_forecast/
         subdirectory to store dedicated json files
-        for the ingested datas of daily weather forecast
+        for the ingested data of daily weather forecast
         from the website of pag-asa dost website.
     '''
     # Create the data/raw/daily_weather_forecast/ subdirectory if it doesn't exist
