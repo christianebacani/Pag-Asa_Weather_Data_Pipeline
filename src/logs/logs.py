@@ -1,5 +1,7 @@
 '''
-    Data Pipeline Logs
+    Module to generate logs when executing different jobs
+    of the etl pipeline for processing the data from the
+    website of pag-asa dost.
 '''
 import sys
 import os
@@ -23,8 +25,10 @@ from ingest.daily_weather_forecast import save_temperature_and_relative_humidity
 
 def generate_logs(log_message: str) -> None:
     '''
-        Function to generate logs based on 
-        the ETL Pipeline job/s.
+        Function to generate logs when executing
+        different jobs of the etl pipeline for
+        processing the data from the website of
+        pag-asa dost.
     '''
     format = '%Y-%m-%d %H:%M:%S'
     now = datetime.now()
