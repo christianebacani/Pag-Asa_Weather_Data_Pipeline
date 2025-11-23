@@ -10,18 +10,7 @@ sys.path.insert(0, os.path.abspath('src'))
 import pandas as pd
 from datetime import datetime
 
-from ingest.daily_weather_forecast import create_daily_weather_forecast_subdir
-from ingest.daily_weather_forecast import extract_daily_weather_forecast_soup
-from ingest.daily_weather_forecast import extract_daily_weather_forecast_issued_datetime
-from ingest.daily_weather_forecast import save_daily_forecast_issued_datetime_to_json
-from ingest.daily_weather_forecast import extract_synopsis
-from ingest.daily_weather_forecast import save_synopsis_to_json
-from ingest.daily_weather_forecast import extract_forecast_weather_conditions
-from ingest.daily_weather_forecast import save_forecast_weather_conditions_to_json
-from ingest.daily_weather_forecast import extract_forecast_wind_and_coastal_water_conditions
-from ingest.daily_weather_forecast import save_forecast_wind_and_coastal_water_conditions_to_json
-from ingest.daily_weather_forecast import extract_temperature_and_relative_humidity
-from ingest.daily_weather_forecast import save_temperature_and_relative_humidity_to_json
+from executor.daily_weather_forecast_executor import ingest_data_of_daily_weather_forecast
 
 def generate_logs(log_message: str) -> None:
     '''
@@ -30,7 +19,7 @@ def generate_logs(log_message: str) -> None:
         processing the data from the website of
         pag-asa dost.
     '''
-    format = '%Y-%m-%d %H:%M:%S'
+    format = '%Y-%m-%d %H:%M:%S' # Format: YYYY-MM-DD HH:MM:SS
     now = datetime.now()
     timestamp = now.strftime(format)
 
@@ -40,22 +29,5 @@ def generate_logs(log_message: str) -> None:
     logs.to_csv('src/logs/logs.csv', index=False)
 
 if __name__ == '__main__':
-    # Daily weather forecast
-    create_daily_weather_forecast_subdir()
-    daily_weather_forecast_soup = extract_daily_weather_forecast_soup('https://www.pagasa.dost.gov.ph/weather#daily-weather-forecast')
-    
-    daily_weather_forecast_issued_datetime = extract_daily_weather_forecast_issued_datetime(daily_weather_forecast_soup)
-    save_daily_forecast_issued_datetime_to_json(daily_weather_forecast_issued_datetime)
-    
-    synopsis = extract_synopsis(daily_weather_forecast_soup)
-    save_synopsis_to_json(synopsis)
-
-    forecast_weather_conditions = extract_forecast_weather_conditions(daily_weather_forecast_soup)
-    save_forecast_weather_conditions_to_json(forecast_weather_conditions)
-
-    forecast_wind_and_coastal_water_conditions = extract_forecast_wind_and_coastal_water_conditions(daily_weather_forecast_soup)
-    save_forecast_wind_and_coastal_water_conditions_to_json(forecast_wind_and_coastal_water_conditions)
-
-    temperature_and_relative_humidity = extract_temperature_and_relative_humidity(daily_weather_forecast_soup)
-    save_temperature_and_relative_humidity_to_json(temperature_and_relative_humidity)
+    ingest_data_of_daily_weather_forecast()
     generate_logs('(DEV): Ingest the data for the daily weather forecast.')
