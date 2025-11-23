@@ -248,6 +248,25 @@ def extract_temperature_and_relative_humidity(soup: BeautifulSoup) -> dict[str, 
     list_of_all_table_row_tags = tbody_tag.find_all('tr')
 
     # Using for-loop to access rows that contains the necessary html tags to get temperature and relative humidity
-    for row, table_row_tag in enumerate(list_of_all_table_row_tags):
-        row += 1
+    for row_number, table_row_tag in enumerate(list_of_all_table_row_tags):
+        row_number += 1
         list_of_all_table_data_tags = table_row_tag.find_all('td')[1:]
+        
+        first_instance_of_table_data_tag = str(list_of_all_table_data_tags[0].text).strip()
+        second_instance_of_table_data_tag = str(list_of_all_table_data_tags[1].text).strip()
+        third_instance_of_table_data_tag = str(list_of_all_table_data_tags[2].text).strip()
+        fourth_instance_of_table_data_tag = str(list_of_all_table_data_tags[3].text).strip()
+            
+        if row_number == 1:
+            temperature_and_relative_humidity['temperature']['max'].append(first_instance_of_table_data_tag)
+            temperature_and_relative_humidity['temperature']['max'].append(second_instance_of_table_data_tag)
+            temperature_and_relative_humidity['temperature']['min'].append(third_instance_of_table_data_tag)
+            temperature_and_relative_humidity['temperature']['min'].append(fourth_instance_of_table_data_tag)
+
+        else:
+            temperature_and_relative_humidity['relative_humidity_percentage']['max'].append(first_instance_of_table_data_tag)
+            temperature_and_relative_humidity['relative_humidity_percentage']['max'].append(second_instance_of_table_data_tag)
+            temperature_and_relative_humidity['relative_humidity_percentage']['min'].append(third_instance_of_table_data_tag)
+            temperature_and_relative_humidity['relative_humidity_percentage']['min'].append(fourth_instance_of_table_data_tag)
+
+    return temperature_and_relative_humidity
