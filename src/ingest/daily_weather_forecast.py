@@ -289,7 +289,7 @@ def save_temperature_and_relative_humidity_to_json(temperature_and_relative_humi
     }
 
     # Save the dictionary to a json file using open() method and json module
-    with open('data/raw/temperature_and_relative_humidity.json', 'w') as json_file:
+    with open('data/raw/daily_weather_forecast/temperature_and_relative_humidity.json', 'w') as json_file:
         json.dump(data, json_file, indent=4)
 
     json_file.close()
