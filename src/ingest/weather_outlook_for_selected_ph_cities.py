@@ -1,5 +1,6 @@
 '''
-    Weather Outlook for Selected Philippine Cities Module
+    Module to ingest the data of the weather outlook for the
+    selected philippine cities from the website of pag-asa dost.
 '''
 import os
 
