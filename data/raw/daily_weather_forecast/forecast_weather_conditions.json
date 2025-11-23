@@ -1,9 +1,9 @@
 {
     "place": [
         "Apayao, Cagayan, Isabela, and Quirino",
-        "Northern Mindanao, Caraga, Davao Region, Eastern Samar, Southern Leyte, and Bohol",
+        "Northern Mindanao, Caraga, Davao Region, Eastern Visayas, and Bohol",
         "Aurora, Quezon, and Camarines Norte",
-        "The rest of Cordillera Administrative Region and Cagayan Valley",
+        "The rest of Cordillera Administrative Region and the rest of Cagayan Valley",
         "Ilocos Region",
         "The rest of Mindanao",
         "Metro Manila and the rest of the country"
@@ -19,7 +19,7 @@
     ],
     "caused_by": [
         "Shear Line",
-        "ITCZ",
+        "Trough of a Low Pressure Area (LPA)",
         "Easterlies",
         "Northeast Monsoon",
         "Northeast Monsoon",
