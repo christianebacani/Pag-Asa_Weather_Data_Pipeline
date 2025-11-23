@@ -1,0 +1,22 @@
+{
+    "temperature": {
+        "max": [
+            "29.9 \u00b0C",
+            "11:00 AM"
+        ],
+        "min": [
+            "25.1 \u00b0C",
+            "6:00 AM"
+        ]
+    },
+    "relative_humidity_percentage": {
+        "max": [
+            "88 %",
+            "5:00 AM"
+        ],
+        "min": [
+            "66 %",
+            "11:00 AM"
+        ]
+    }
+}
