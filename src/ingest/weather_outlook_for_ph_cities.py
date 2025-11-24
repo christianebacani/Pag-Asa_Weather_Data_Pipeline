@@ -145,7 +145,7 @@ def extract_ph_city_names(list_of_all_ph_city_tags: list[BeautifulSoup]) -> dict
 
     return result
 
-def map_weather_dates_to_ph_cities(ph_city_names: dict[str, dict], list_of_all_ph_city_tags: list[BeautifulSoup]) -> dict[str, dict]:
+def map_weather_dates_to_ph_cities(list_of_all_ph_city_tags: list[BeautifulSoup], ph_city_names: dict[str, dict]) -> dict[str, dict]:
     '''
         Function to map extracted weather dates for selected Philippine cities to get their weather outlook
         from the PAGASA-DOST website.
