@@ -1,5 +1,5 @@
 '''
-    Module to ingest the data of the weather outlook for the
+    Module to ingest the data of the weather outlook for
     selected Philippine cities from the PAGASA-DOST website.
 '''
 import requests
@@ -42,7 +42,7 @@ def extract_issued_datetime(soup: BeautifulSoup) -> str:
     '''
     issued_datetime = ''
 
-    # Extract the necessary html tags to get the issued datetime of weather outlook for the selected philippine cities
+    # Extract the necessary html tags to get the issued datetime of weather outlook for selected Philippine cities
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
     issued_datetime_and_valid_period_tag = div_tag_with_row_weather_page_class.find('div', attrs={'class': 'col-md-12 col-lg-12 issue'})
     div_tag_with_validity_class = issued_datetime_and_valid_period_tag.find('div', attrs={'class': 'validity'})
@@ -61,7 +61,7 @@ def save_issued_datetime_to_json(issued_datetime: str) -> None:
         selected Philippine cities to a dedicated json file of the 
         data/raw/weather_outlook_for_ph_cities/ subdirectory from your local machine.
     '''
-    # Create a dictionary that stores issued datetime of the weather outlook for the selected philippine cities
+    # Create a dictionary that stores issued datetime of the weather outlook for selected Philippine cities
     data = {
         "issued_datetime": issued_datetime
     }
