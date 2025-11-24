@@ -56,7 +56,7 @@ def save_issued_datetime_to_json(issued_datetime: str) -> None:
         Function to save issued datetime of daily weather forecast to a dedicated json file
         of the data/raw/daily_weather_forecast/ subdirectory from your local machine.
     '''
-    # Create a dictionary that stores daily weather forecast issued datetime
+    # Create a dictionary that stores the issued datetime of the daily weather forecast
     data = {
         "issued_datetime": issued_datetime
     }
