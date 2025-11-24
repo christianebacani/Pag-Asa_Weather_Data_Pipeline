@@ -7,7 +7,7 @@ import os
 import json
 from bs4 import BeautifulSoup
 
-def create_daily_weather_forecast_subdir() -> None:
+def create_subdir() -> None:
     '''
         Function to create data/raw/daily_weather_forecast/
         subdirectory to store dedicated json files
@@ -18,7 +18,7 @@ def create_daily_weather_forecast_subdir() -> None:
     if not os.path.exists('data/raw/daily_weather_forecast'):
         os.makedirs('data/raw/daily_weather_forecast')
 
-def extract_daily_weather_forecast_soup(url: str) -> BeautifulSoup | None:
+def extract_beautiful_soup_object(url: str) -> BeautifulSoup | None:
     '''
         Function to extract beautiful soup object of daily weather
         forecast from the website of pag-asa dost.
@@ -33,7 +33,7 @@ def extract_daily_weather_forecast_soup(url: str) -> BeautifulSoup | None:
     soup = BeautifulSoup(response.text, 'html.parser')
     return soup
 
-def extract_daily_weather_forecast_issued_datetime(soup: BeautifulSoup) -> str:
+def extract_issued_datetime(soup: BeautifulSoup) -> str:
     '''
         Function to extract the issued datetime of daily weather forecast
         from the website of pag-asa dost.
@@ -51,14 +51,14 @@ def extract_daily_weather_forecast_issued_datetime(soup: BeautifulSoup) -> str:
 
     return issued_datetime
 
-def save_daily_forecast_issued_datetime_to_json(daily_weather_forecast_issued_datetime: str) -> None:
+def save_issued_datetime_to_json(issued_datetime: str) -> None:
     '''
         Function to save issued datetime of daily weather forecast to a dedicated json file
         of the data/raw/daily_weather_forecast/ subdirectory from your local machine.
     '''
     # Create a dictionary that stores daily weather forecast issued datetime
     data = {
-        "issued_datetime": daily_weather_forecast_issued_datetime
+        "issued_datetime": issued_datetime
     }
 
     # Save the dictionary to a json file using open() method and json module
