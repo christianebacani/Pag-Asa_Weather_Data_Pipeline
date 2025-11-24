@@ -31,3 +31,23 @@ def extract_weather_outlook_for_ph_cities_soup(url: str) -> BeautifulSoup | None
     # Parse as a Beautiful Soup Object
     soup = BeautifulSoup(response.text, 'html.parser')
     return soup
+
+def extract_weather_outlook_for_ph_cities_issued_datetime(soup: BeautifulSoup) -> str:
+    '''
+        Function to extract the issued datetime of weather outlook for selected philippine
+        cities from the website of pag-asa dost.
+    '''
+    issued_datetime = ''
+
+    # Extract the necessary html tags to get the issued datetime of weather outlook for selected philippine cities
+    div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
+    issued_datetime_and_valid_period_tag = div_tag_with_row_weather_page_class.find('div', attrs={'class': 'col-md-12 col-lg-12 issue'})
+    div_tag_with_validity_class = issued_datetime_and_valid_period_tag.find('div', attrs={'class': 'validity'})
+
+    # We need to check if the div_tag_with_validity_class is not missing
+    if div_tag_with_validity_class is not None:
+        issued_datetime_tag = div_tag_with_validity_class.find('b')
+        issued_datetime = str(issued_datetime_tag.text).strip()
+        issued_datetime = ' '.join(issued_datetime.split()) # Using split() method to remove extra whitespace in between words
+
+    return issued_datetime
