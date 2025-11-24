@@ -15,4 +15,3 @@ def execute_functions_to_ingest_weather_outlook_for_ph_cities() -> None:
     '''
     create_weather_outlook_for_ph_cities_subdir()
     weather_outlook_for_ph_cities_soup = extract_weather_outlook_for_ph_cities_soup('https://www.pagasa.dost.gov.ph/weather/weather-outlook-selected-philippine-cities')
-    print(weather_outlook_for_ph_cities_soup)
