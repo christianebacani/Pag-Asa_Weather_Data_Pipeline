@@ -1,7 +1,6 @@
 '''
-    Module to generate logs when executing different jobs
-    of the etl pipeline for processing the data from the
-    website of pag-asa dost.
+    Module for generating logs when executing different 
+    ETL pipeline jobs that process data from the PAGASA-DOST website.
 '''
 import sys
 import os
@@ -15,10 +14,10 @@ from executor.weather_outlook_for_ph_cities_executor import execute_functions_to
 
 def generate_logs(log_message: str) -> None:
     '''
-        Function to generate logs when executing
-        different jobs of the etl pipeline for
-        processing the data from the website of
-        pag-asa dost.
+        Function for generating logs when
+        executing different ETL Pipeline jobs
+        that process data from the PAGASA-DOST
+        website.
     '''
     format = '%Y-%m-%d %H:%M:%S' # Format: YYYY-MM-DD HH:MM:SS
     now = datetime.now()
@@ -30,8 +29,10 @@ def generate_logs(log_message: str) -> None:
     logs.to_csv('src/logs/logs.csv', index=False)
 
 if __name__ == '__main__':
+    # Ingest data for daily weather forecast
     execute_functions_to_ingest_daily_weather_forecast()
     generate_logs('(DEV): Ingest the data for the daily weather forecast.')
 
+    # Ingest data for weather outlook for selected Philippine cities
     execute_functions_to_ingest_weather_outlook_for_ph_cities()
     generate_logs('(DEV): Ingest the data for the weather outlook for selected philippine cities.')
