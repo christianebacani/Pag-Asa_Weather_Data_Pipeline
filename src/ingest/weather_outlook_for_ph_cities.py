@@ -109,9 +109,9 @@ def save_valid_period_to_json(valid_period: str) -> None:
     
     json_file.close()
 
-def extract_all_ph_city_tags(soup: BeautifulSoup) -> list[BeautifulSoup | None]:
+def extract_ph_city_tags(soup: BeautifulSoup) -> list[BeautifulSoup | None]:
     '''
-        Function to extract all selected Philippine city
+        Function to extract selected Philippine city
         tags to get the data for their weather outlook
         from the PAGASA-DOST website.
     '''
