@@ -79,3 +79,15 @@ def extract_valid_period(soup: BeautifulSoup) -> str:
         from the PAGASA-DOST website.
     '''
     valid_period = ''
+
+    # Extract the necessary html tags to get the valid period of weather outlook for selected Philippine cities
+    div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
+    issued_datetime_and_valid_period_tag = div_tag_with_row_weather_page_class.find('div', attrs={'class': 'col-md-12 col-lg-12 issue'})
+    div_tag_with_validity_class = issued_datetime_and_valid_period_tag.find('div', attrs={'class': 'validity'})
+
+    # We need to check if the div_tag_with_validity_class is not missing
+    if div_tag_with_validity_class is not None:
+        valid_period_tag = div_tag_with_validity_class.find_all('b')[1]
+        valid_period = str(valid_period_tag.text).strip()
+
+    return valid_period
