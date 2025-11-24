@@ -4,6 +4,7 @@
 '''
 import requests
 import os
+import json
 from bs4 import BeautifulSoup
 
 def create_subdir() -> None:
@@ -52,3 +53,18 @@ def extract_issued_datetime(soup: BeautifulSoup) -> str:
         issued_datetime = ' '.join(issued_datetime.split()) # Using split() method to remove extra whitespace in between words
 
     return issued_datetime
+
+def save_issued_datetime_to_json(issued_datetime: str) -> None:
+    '''
+        Function to save issued datetime of weather outlook for
+        selected philippine cities to a dedicated json file of the 
+        data/raw/weather_outlook_for_ph_cities/ subdirectory from your local machine.
+    '''
+    data = {
+        "issued_datetime": issued_datetime
+    }
+
+    with open('data/raw/weather_outlook_for_ph_cities/issued_datetime.json', 'w') as json_file:
+        json.dump(data, json_file, indent=4)
+
+    json_file.close()
