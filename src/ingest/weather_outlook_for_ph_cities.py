@@ -137,6 +137,7 @@ def extract_ph_city_names(list_of_all_ph_city_tags: list[BeautifulSoup]) -> dict
     '''
     result = {}
 
+    # Using for-loop to access rows that contains the necessary html tags to get the name of all selected Philippine city
     for ph_city_tag in list_of_all_ph_city_tags:
         ph_city_name_tag = ph_city_tag.find('a')
         ph_city_name = str(ph_city_name_tag.text).strip()
