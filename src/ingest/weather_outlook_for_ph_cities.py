@@ -70,3 +70,11 @@ def save_issued_datetime_to_json(issued_datetime: str) -> None:
         json.dump(data, json_file, indent=4)
 
     json_file.close()
+
+def extract_valid_period(soup: BeautifulSoup) -> str:
+    '''
+        Function to extract the valid period of the
+        weather outlook for the selected philippine cities
+        from the website of the pag-asa dost.
+    '''
+    valid_period = ''
