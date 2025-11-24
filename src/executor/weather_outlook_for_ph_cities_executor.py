@@ -7,6 +7,7 @@ from ingest.weather_outlook_for_ph_cities import create_subdir
 from ingest.weather_outlook_for_ph_cities import extract_beautiful_soup_object
 from ingest.weather_outlook_for_ph_cities import extract_issued_datetime
 from ingest.weather_outlook_for_ph_cities import save_issued_datetime_to_json
+from ingest.weather_outlook_for_ph_cities import extract_valid_period
 
 def execute_functions_to_ingest_weather_outlook_for_ph_cities() -> None:
     '''
@@ -21,3 +22,5 @@ def execute_functions_to_ingest_weather_outlook_for_ph_cities() -> None:
 
     issued_datetime = extract_issued_datetime(soup)
     save_issued_datetime_to_json(issued_datetime)
+
+    valid_period = extract_valid_period(soup)
