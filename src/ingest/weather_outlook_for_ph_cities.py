@@ -60,10 +60,12 @@ def save_issued_datetime_to_json(issued_datetime: str) -> None:
         selected philippine cities to a dedicated json file of the 
         data/raw/weather_outlook_for_ph_cities/ subdirectory from your local machine.
     '''
+    # Create a dictionary that stores issued datetime of the weather outlook for the selected philippine cities
     data = {
         "issued_datetime": issued_datetime
     }
 
+    # Save the dictionary to a json file using open() method and json module
     with open('data/raw/weather_outlook_for_ph_cities/issued_datetime.json', 'w') as json_file:
         json.dump(data, json_file, indent=4)
 
