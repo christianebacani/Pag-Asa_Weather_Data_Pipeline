@@ -1,7 +1,6 @@
 '''
     Module to execute functions for ingesting, transformation, 
-    loading, and etc. of daily weather forecast from the website of
-    pag-asa dost.
+    loading, and etc. of daily weather forecast from PAGASA-DOST website.
 '''
 from ingest.daily_weather_forecast import create_subdir
 from ingest.daily_weather_forecast import extract_beautiful_soup_object
@@ -20,10 +19,10 @@ def execute_functions_to_ingest_daily_weather_forecast() -> None:
     '''
         Function to execute all functions from the
         daily_weather_forecast module of src/ingest/ package
-        to ingest the data of daily weather forecast from the
-        website of pag-asa dost.
+        to ingest the data of daily weather forecast from the PAGASA-DOST
+        website.
     '''
-    # Execute all the functions to ingest the data of daily weather forecast from the website of pag-asa dost
+    # Execute all the functions to ingest the data of daily weather forecast from the PAGASA-DOST website.
     create_subdir()
     soup = extract_beautiful_soup_object('https://www.pagasa.dost.gov.ph/weather#daily-weather-forecast')
 
