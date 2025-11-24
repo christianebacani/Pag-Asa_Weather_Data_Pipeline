@@ -3,9 +3,9 @@
     loading, and etc. of weather outlook for selected philippine
     cities from the website of pag-asa dost.
 '''
-from ingest.weather_outlook_for_ph_cities import create_weather_outlook_for_ph_cities_subdir
-from ingest.weather_outlook_for_ph_cities import extract_weather_outlook_for_ph_cities_soup
-from ingest.weather_outlook_for_ph_cities import extract_weather_outlook_for_ph_cities_issued_datetime
+from ingest.weather_outlook_for_ph_cities import create_subdir
+from ingest.weather_outlook_for_ph_cities import extract_beautiful_soup_object
+from ingest.weather_outlook_for_ph_cities import extract_issued_datetime
 
 def execute_functions_to_ingest_weather_outlook_for_ph_cities() -> None:
     '''
@@ -14,7 +14,8 @@ def execute_functions_to_ingest_weather_outlook_for_ph_cities() -> None:
         to ingest the data of weather outlook for selected philippine
         cities from the website of pag-asa dost.
     '''
-    create_weather_outlook_for_ph_cities_subdir()
-    weather_outlook_for_ph_cities_soup = extract_weather_outlook_for_ph_cities_soup('https://www.pagasa.dost.gov.ph/weather/weather-outlook-selected-philippine-cities')
+    # Execute all the functions to ingest the data of weather outlook for selected philippine cities from the website of pag-asa dost
+    create_subdir()
+    soup = extract_beautiful_soup_object('https://www.pagasa.dost.gov.ph/weather/weather-outlook-selected-philippine-cities')
 
-    weather_outlook_for_ph_cities_issued_datetime = extract_weather_outlook_for_ph_cities_issued_datetime(weather_outlook_for_ph_cities_soup)
+    issued_datetime = extract_issued_datetime(soup)
