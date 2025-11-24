@@ -119,8 +119,8 @@ def extract_ph_city_tags(soup: BeautifulSoup) -> list[BeautifulSoup | None]:
 
     # Extract the necessary html tags to get all selected Philippine city tags for their weather outlook
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
-    ph_city_tag = div_tag_with_row_weather_page_class.find('div', attrs={'class': 'col-md-12 col-lg-12'})
-    div_tag_with_panel_group_class = ph_city_tag.find('div', attrs={'class': 'panel-group'})
+    weather_outlook_for_ph_city_tag = div_tag_with_row_weather_page_class.find('div', attrs={'class': 'col-md-12 col-lg-12'})
+    div_tag_with_panel_group_class = weather_outlook_for_ph_city_tag.find('div', attrs={'class': 'panel-group'})
 
     # We need to check if the div_tag_with_panel_group_class is missing
     if div_tag_with_panel_group_class is None:
@@ -129,3 +129,17 @@ def extract_ph_city_tags(soup: BeautifulSoup) -> list[BeautifulSoup | None]:
     # Using for-loop to access all selected Philippine city tags
     list_of_all_ph_city_tags = div_tag_with_panel_group_class.find_all('div', attrs={'class': 'panel panel-default panel-pagasa'})
     return list_of_all_ph_city_tags
+
+def extract_ph_city_names(list_of_all_ph_city_tags: list[BeautifulSoup]) -> dict[str, dict]:
+    '''
+        Function to extract all the name of selected Philippine cities to get the data for their
+        weather outlook from the PAGASA-DOST website.
+    '''
+    result = {}
+
+    for ph_city_tag in list_of_all_ph_city_tags:
+        ph_city_name_tag = ph_city_tag.find('a')
+        ph_city_name = str(ph_city_name_tag.text).strip()
+        result[ph_city_name] = {}
+
+    return result
