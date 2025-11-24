@@ -1,6 +1,6 @@
 '''
     Module to ingest the data of the daily weather forecast
-    from the website of pag-asa dost.
+    from the PAGASA-DOST website.
 '''
 import requests
 import os
@@ -12,7 +12,7 @@ def create_subdir() -> None:
         Function to create data/raw/daily_weather_forecast/
         subdirectory to store dedicated json files
         for the ingested data of daily weather forecast
-        from the website of pag-asa dost.
+        from the PAGASA-DOST website.
     '''
     # Create the data/raw/daily_weather_forecast/ subdirectory if it doesn't exist
     if not os.path.exists('data/raw/daily_weather_forecast'):
@@ -20,8 +20,8 @@ def create_subdir() -> None:
 
 def extract_beautiful_soup_object(url: str) -> BeautifulSoup | None:
     '''
-        Function to extract beautiful soup object of daily weather
-        forecast from the website of pag-asa dost.
+        Function to extract the BeautifulSoup object of the daily weather
+        forecast from the PAGASA-DOST website.
     '''
     response = requests.get(url)
 
@@ -35,8 +35,8 @@ def extract_beautiful_soup_object(url: str) -> BeautifulSoup | None:
 
 def extract_issued_datetime(soup: BeautifulSoup) -> str:
     '''
-        Function to extract the issued datetime of daily weather forecast
-        from the website of pag-asa dost.
+        Function to extract the issued datetime of the 
+        daily weather forecast from the PAGASA-DOST website.
     '''
     issued_datetime = ''
 
@@ -53,7 +53,7 @@ def extract_issued_datetime(soup: BeautifulSoup) -> str:
 
 def save_issued_datetime_to_json(issued_datetime: str) -> None:
     '''
-        Function to save issued datetime of daily weather forecast to a dedicated json file
+        Function to save the issued datetime of daily weather forecast to a dedicated json file
         of the data/raw/daily_weather_forecast/ subdirectory from your local machine.
     '''
     # Create a dictionary that stores the issued datetime of the daily weather forecast
@@ -70,8 +70,8 @@ def save_issued_datetime_to_json(issued_datetime: str) -> None:
 def extract_synopsis(soup: BeautifulSoup) -> str:
     '''
         Function to extract the synopsis of the
-        daily weather forecast from the website
-        of pag-asa dost.
+        daily weather forecast from the PAGASA-DOST
+        website.
     '''
     synopsis = ''
 
@@ -107,7 +107,7 @@ def save_synopsis_to_json(synopsis: str) -> None:
 def extract_forecast_weather_conditions(soup: BeautifulSoup) -> dict[str, list]:
     '''
         Function to extract the forecast weather conditions
-        of the daily weather forecast from the website of pag-asa dost.
+        of the daily weather forecast from the PAGASA-DOST website.
     '''
     forecast_weather_conditions = {
         'place': [],
@@ -168,7 +168,7 @@ def save_forecast_weather_conditions_to_json(forecast_weather_conditions: dict[s
 def extract_forecast_wind_and_coastal_water_conditions(soup: BeautifulSoup) -> dict[str, list]:
     '''
         Function to extract the forecast wind and coastal water conditions of daily weather
-        forecast from the website of the pag-asa dost.
+        forecast from the PAGASA-DOST website.
     '''
     forecast_wind_and_coastal_water_conditions = {
         'place': [],
@@ -229,7 +229,7 @@ def save_forecast_wind_and_coastal_water_conditions_to_json(forecast_wind_and_co
 def extract_temperature_and_relative_humidity(soup: BeautifulSoup) -> dict[str, str]:
     '''
         Function to extract temperature and relative humidity of daily weather forecast
-        from the website of pag-asa dost.
+        from the PAGASA-DOST website.
     '''
     temperature_and_relative_humidity = {
         'temperature': {'max': [], 'min': []},
