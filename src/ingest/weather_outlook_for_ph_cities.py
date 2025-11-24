@@ -108,3 +108,24 @@ def save_valid_period_to_json(valid_period: str) -> None:
         json.dump(data, json_file, indent=4)
     
     json_file.close()
+
+def extract_all_ph_city_tags(soup: BeautifulSoup) -> list[BeautifulSoup | None]:
+    '''
+        Function to extract all selected Philippine city
+        tags to get the data for their weather outlook
+        from the PAGASA-DOST website.
+    '''
+    list_of_all_ph_city_tags = []
+
+    # Extract the necessary html tags to get all selected Philippine city tags for their weather outlook
+    div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
+    ph_city_tag = div_tag_with_row_weather_page_class.find('div', attrs={'class': 'col-md-12 col-lg-12'})
+    div_tag_with_panel_group_class = ph_city_tag.find('div', attrs={'class': 'panel-group'})
+
+    # We need to check if the div_tag_with_panel_group_class is missing
+    if div_tag_with_panel_group_class is None:
+        return list_of_all_ph_city_tags
+
+    # Using for-loop to access all selected Philippine city tags
+    list_of_all_ph_city_tags = div_tag_with_panel_group_class.find_all('div', attrs={'class': 'panel panel-default panel-pagasa'})
+    return list_of_all_ph_city_tags
