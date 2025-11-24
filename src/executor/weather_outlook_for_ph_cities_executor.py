@@ -5,6 +5,7 @@
 '''
 from ingest.weather_outlook_for_ph_cities import create_weather_outlook_for_ph_cities_subdir
 from ingest.weather_outlook_for_ph_cities import extract_weather_outlook_for_ph_cities_soup
+from ingest.weather_outlook_for_ph_cities import extract_weather_outlook_for_ph_cities_issued_datetime
 
 def execute_functions_to_ingest_weather_outlook_for_ph_cities() -> None:
     '''
@@ -15,3 +16,5 @@ def execute_functions_to_ingest_weather_outlook_for_ph_cities() -> None:
     '''
     create_weather_outlook_for_ph_cities_subdir()
     weather_outlook_for_ph_cities_soup = extract_weather_outlook_for_ph_cities_soup('https://www.pagasa.dost.gov.ph/weather/weather-outlook-selected-philippine-cities')
+
+    weather_outlook_for_ph_cities_issued_datetime = extract_weather_outlook_for_ph_cities_issued_datetime(weather_outlook_for_ph_cities_soup)
