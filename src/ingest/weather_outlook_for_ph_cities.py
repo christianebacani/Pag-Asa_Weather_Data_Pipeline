@@ -1,6 +1,6 @@
 '''
     Module to ingest the data of the weather outlook for the
-    selected philippine cities from the website of pag-asa dost.
+    selected Philippine cities from the PAGASA-DOST website.
 '''
 import requests
 import os
@@ -12,7 +12,7 @@ def create_subdir() -> None:
         Function to create data/raw/weather_outlook_for_ph_cities/
         subdirectory to store dedicated json files
         for the ingested data of weather outlook for selected
-        philippine cities from the website of pag-asa dost.
+        Philippine cities from the PAGASA-DOST website.
     '''
     # Create the data/raw/weather_outlook_for_ph_cities/ subdirectory if it doesn't exist
     if not os.path.exists('data/raw/weather_outlook_for_ph_cities'):
@@ -20,8 +20,9 @@ def create_subdir() -> None:
 
 def extract_beautiful_soup_object(url: str) -> BeautifulSoup | None:
     '''
-        Function to extract beautiful soup object of weather outlook for
-        the selected philippine cities from the website of pag-asa dost.
+        Function to extract the BeautifulSoup object of the weather 
+        outlook for selected Philippine cities from the PAGASA-DOST 
+        website.
     '''
     response = requests.get(url)
 
@@ -35,9 +36,9 @@ def extract_beautiful_soup_object(url: str) -> BeautifulSoup | None:
 
 def extract_issued_datetime(soup: BeautifulSoup) -> str:
     '''
-        Function to extract the issued datetime of weather 
-        outlook for selected philippine cities from the 
-        website of pag-asa dost.
+        Function to extract the issued datetime of the 
+        weather outlook for selected Philippine cities 
+        from the PAGASA-DOST website.
     '''
     issued_datetime = ''
 
@@ -57,7 +58,7 @@ def extract_issued_datetime(soup: BeautifulSoup) -> str:
 def save_issued_datetime_to_json(issued_datetime: str) -> None:
     '''
         Function to save issued datetime of weather outlook for
-        selected philippine cities to a dedicated json file of the 
+        selected Philippine cities to a dedicated json file of the 
         data/raw/weather_outlook_for_ph_cities/ subdirectory from your local machine.
     '''
     # Create a dictionary that stores issued datetime of the weather outlook for the selected philippine cities
@@ -73,8 +74,8 @@ def save_issued_datetime_to_json(issued_datetime: str) -> None:
 
 def extract_valid_period(soup: BeautifulSoup) -> str:
     '''
-        Function to extract the valid period of the
-        weather outlook for the selected philippine cities
-        from the website of the pag-asa dost.
+        Function to extract the valid period of the 
+        weather outlook for selected Philippine cities 
+        from the PAGASA-DOST website.
     '''
     valid_period = ''
