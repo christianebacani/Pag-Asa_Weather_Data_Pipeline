@@ -9,6 +9,7 @@ from ingest.weather_outlook_for_ph_cities import extract_issued_datetime
 from ingest.weather_outlook_for_ph_cities import save_issued_datetime_to_json
 from ingest.weather_outlook_for_ph_cities import extract_valid_period
 from ingest.weather_outlook_for_ph_cities import save_valid_period_to_json
+from ingest.weather_outlook_for_ph_cities import extract_all_ph_city_tags
 
 def execute_functions_to_ingest_weather_outlook_for_ph_cities() -> None:
     '''
@@ -26,3 +27,5 @@ def execute_functions_to_ingest_weather_outlook_for_ph_cities() -> None:
 
     valid_period = extract_valid_period(soup)
     save_valid_period_to_json(valid_period)
+    
+    list_of_all_ph_city_tags = extract_all_ph_city_tags(soup)
