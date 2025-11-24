@@ -30,7 +30,7 @@ def extract_beautiful_soup_object(url: str) -> BeautifulSoup | None:
     if response.status_code != 200:
         return None
     
-    # Parse as a Beautiful Soup Object
+    # Parse as a BeautifulSoup object
     soup = BeautifulSoup(response.text, 'html.parser')
     return soup
 
