@@ -1,5 +1,5 @@
 '''
-    Module to ingest the data of the daily weather forecast
+    Module to ingest the data of daily weather forecast
     from the PAGASA-DOST website.
 '''
 import requests
@@ -20,7 +20,7 @@ def create_subdir() -> None:
 
 def extract_beautiful_soup_object(url: str) -> BeautifulSoup | None:
     '''
-        Function to extract the BeautifulSoup object of the daily weather
+        Function to extract the BeautifulSoup object of daily weather
         forecast from the PAGASA-DOST website.
     '''
     response = requests.get(url)
@@ -35,8 +35,8 @@ def extract_beautiful_soup_object(url: str) -> BeautifulSoup | None:
 
 def extract_issued_datetime(soup: BeautifulSoup) -> str:
     '''
-        Function to extract the issued datetime of the 
-        daily weather forecast from the PAGASA-DOST website.
+        Function to extract the issued datetime of daily
+        weather forecast from the PAGASA-DOST website.
     '''
     issued_datetime = ''
 
@@ -53,10 +53,12 @@ def extract_issued_datetime(soup: BeautifulSoup) -> str:
 
 def save_issued_datetime_to_json(issued_datetime: str) -> None:
     '''
-        Function to save the issued datetime of daily weather forecast to a dedicated json file
-        of the data/raw/daily_weather_forecast/ subdirectory from your local machine.
+        Function to save the issued datetime of daily weather 
+        forecast to a dedicated json file of the 
+        data/raw/daily_weather_forecast/ subdirectory from your 
+        local machine.
     '''
-    # Create a dictionary that stores the issued datetime of the daily weather forecast
+    # Create a dictionary that stores the issued datetime of daily weather forecast
     data = {
         "issued_datetime": issued_datetime
     }
@@ -69,9 +71,8 @@ def save_issued_datetime_to_json(issued_datetime: str) -> None:
 
 def extract_synopsis(soup: BeautifulSoup) -> str:
     '''
-        Function to extract the synopsis of the
-        daily weather forecast from the PAGASA-DOST
-        website.
+        Function to extract the synopsis of daily
+        weather forecast from the PAGASA-DOST website.
     '''
     synopsis = ''
 
@@ -88,12 +89,12 @@ def extract_synopsis(soup: BeautifulSoup) -> str:
 
 def save_synopsis_to_json(synopsis: str) -> None:
     '''
-        Function to save the synopsis of the daily
+        Function to save the synopsis of daily
         weather forecast to a dedicated json file
         of the data/raw/daily_weather_forecast/ 
         subdirectory from your local machine.
     '''
-    # Create a dictionary that stores the synopsis of the daily weather forecast
+    # Create a dictionary that stores the synopsis of daily weather forecast
     data = {
         "synopsis": synopsis
     }
@@ -107,7 +108,7 @@ def save_synopsis_to_json(synopsis: str) -> None:
 def extract_forecast_weather_conditions(soup: BeautifulSoup) -> dict[str, list]:
     '''
         Function to extract the forecast weather conditions
-        of the daily weather forecast from the PAGASA-DOST website.
+        of daily weather forecast from the PAGASA-DOST website.
     '''
     forecast_weather_conditions = {
         'place': [],
@@ -143,7 +144,7 @@ def extract_forecast_weather_conditions(soup: BeautifulSoup) -> dict[str, list]:
 
         impacts = str(list_of_all_table_data_tags[3].text).strip()
         forecast_weather_conditions['impacts'].append(impacts)
-    
+
     return forecast_weather_conditions
 
 def save_forecast_weather_conditions_to_json(forecast_weather_conditions: dict[str, list]) -> None:
@@ -151,7 +152,7 @@ def save_forecast_weather_conditions_to_json(forecast_weather_conditions: dict[s
         Function to save the forecast weather conditions of daily weather forecast to a dedicated
         json file of the data/raw/daily_weather_forecast/ subdirectory from your local machine.
     '''
-    # Create a dictionary that stores the forecast weather conditions of the daily weather forecast
+    # Create a dictionary that stores the forecast weather conditions of daily weather forecast
     data = {
         "place": forecast_weather_conditions['place'],
         "weather_condition": forecast_weather_conditions['weather_condition'],
@@ -212,7 +213,7 @@ def save_forecast_wind_and_coastal_water_conditions_to_json(forecast_wind_and_co
         Function to save the forecast wind and coastal water conditions of daily weather forecast to a dedicated
         json file of the data/raw/daily_weather_forecast/ subdirectory from your local machine.        
     '''
-    # Create a dictionary that stores the forecast wind and coastal water conditions of the daily weather forecast
+    # Create a dictionary that stores the forecast wind and coastal water conditions of daily weather forecast
     data = {
         "place": forecast_wind_and_coastal_water_conditions['place'],
         "speed": forecast_wind_and_coastal_water_conditions['speed'],
@@ -247,7 +248,7 @@ def extract_temperature_and_relative_humidity(soup: BeautifulSoup) -> dict[str, 
 
     list_of_all_table_row_tags = tbody_tag.find_all('tr')
 
-    # Using for-loop to access rows that contains the necessary html tags to get temperature and relative humidity
+    # Using for-loop to access rows that contains the necessary html tags to get temperature and relative humidity of daily weather forecast
     for row_number, table_row_tag in enumerate(list_of_all_table_row_tags):
         row_number += 1
         list_of_all_table_data_tags = table_row_tag.find_all('td')[1:]
@@ -256,7 +257,8 @@ def extract_temperature_and_relative_humidity(soup: BeautifulSoup) -> dict[str, 
         second_instance_of_table_data_tag = str(list_of_all_table_data_tags[1].text).strip()
         third_instance_of_table_data_tag = str(list_of_all_table_data_tags[2].text).strip()
         fourth_instance_of_table_data_tag = str(list_of_all_table_data_tags[3].text).strip()
-            
+        
+        # Check if the row_number is equal to 1 (temperature data) or 2 (relative humidity percentage data) instead of manually fetching it
         if row_number == 1:
             temperature_and_relative_humidity['temperature']['max'].append(first_instance_of_table_data_tag)
             temperature_and_relative_humidity['temperature']['max'].append(second_instance_of_table_data_tag)
@@ -276,7 +278,7 @@ def save_temperature_and_relative_humidity_to_json(temperature_and_relative_humi
         Function to save the temperature and relative humidity of daily weather forecast to a dedicated
         json file of the data/raw/daily_weather_forecast/ subdirectory from your local machine.   
     '''
-    # Create a dictionary that stores the temperature and relative humidity of the daily weather forecast
+    # Create a dictionary that stores the temperature and relative humidity of daily weather forecast
     data = {
         "temperature": {
             "max": temperature_and_relative_humidity['temperature']['max'],
