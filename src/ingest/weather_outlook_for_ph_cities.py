@@ -112,8 +112,8 @@ def save_valid_period_to_json(valid_period: str) -> None:
 def extract_ph_city_tags(soup: BeautifulSoup) -> list[BeautifulSoup | None]:
     '''
         Function to extract selected Philippine city
-        tags to get the data for their weather outlook
-        from the PAGASA-DOST website.
+        tags to get their weather outlook from the
+        PAGASA-DOST website.
     '''
     list_of_all_ph_city_tags = []
 
@@ -132,8 +132,8 @@ def extract_ph_city_tags(soup: BeautifulSoup) -> list[BeautifulSoup | None]:
 
 def extract_ph_city_names(list_of_all_ph_city_tags: list[BeautifulSoup]) -> dict[str, dict]:
     '''
-        Function to extract all the name of selected Philippine cities to get the data for their
-        weather outlook from the PAGASA-DOST website.
+        Function to extract all the name of selected Philippine cities to get their weather
+        outlook from the PAGASA-DOST website.
     '''
     result = {}
 
@@ -144,3 +144,14 @@ def extract_ph_city_names(list_of_all_ph_city_tags: list[BeautifulSoup]) -> dict
         result[ph_city_name] = {}
 
     return result
+
+def map_weather_dates_to_ph_cities(ph_city_names: dict[str, dict], list_of_all_ph_city_tags: list[BeautifulSoup]) -> dict[str, dict]:
+    '''
+        Function to map extracted weather dates for selected Philippine cities to get their weather outlook
+        from the PAGASA-DOST website.
+    '''
+    result = ph_city_names
+
+    # Using for-loop to access rows that contains the necessary html tags to get weather dates for selected Philippine cities
+    for ph_city_tag in list_of_all_ph_city_tags:
+        table_tag = ph_city_tag.find('table', attrs={'class': 'table'})
