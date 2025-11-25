@@ -14,10 +14,13 @@ from executor.weather_outlook_for_ph_cities_executor import execute_functions_to
 
 def generate_logs(log_message: str) -> None:
     '''
-        Function for generating logs when
-        executing different ETL Pipeline jobs
-        that process data from the PAGASA-DOST
-        website.
+    Function for generating logs when
+    executing different ETL Pipeline jobs
+    that process data from the PAGASA-DOST
+    website.
+
+    :param log_message: Log message when executing ETL Pipeline jobs
+    :type log_message: str
     '''
     format = '%Y-%m-%d %H:%M:%S' # Format: YYYY-MM-DD HH:MM:SS
     now = datetime.now()
