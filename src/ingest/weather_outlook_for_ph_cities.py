@@ -154,4 +154,15 @@ def map_weather_dates_to_ph_cities(list_of_all_ph_city_tags: list[BeautifulSoup]
 
     # Using for-loop to access rows that contains the necessary html tags to get weather dates for selected Philippine cities
     for ph_city_tag in list_of_all_ph_city_tags:
+        ph_city_name_tag = ph_city_tag.find('a')
+        ph_city_name = str(ph_city_name_tag.text).strip()
+
         table_tag = ph_city_tag.find('table', attrs={'class': 'table'})
+        thead_tag = table_tag.find('thead', attrs={'class': 'deskptop-view-thead'})
+        list_of_all_table_header_tags = thead_tag.find_all('th')
+
+        weather_dates = []
+
+        for table_header_tag in list_of_all_table_header_tags:
+            weather_date = str(table_header_tag.text).strip()
+            weather_dates.append(weather_date)
