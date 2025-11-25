@@ -231,10 +231,10 @@ def map_temperature_ranges_to_ph_cities(list_of_all_ph_city_tags: list[Beautiful
         ph_city_name = str(ph_city_name_tag.text).strip()
 
         table_tag = ph_city_tag.find('table', attrs={'class': 'table'})
-        temperature_ranges_tag = table_tag.find('tr', attrs={'class': 'desktop-view-tr'})
+        temperature_ranges_and_chances_of_rain_pct_tag = table_tag.find('tr', attrs={'class': 'desktop-view-tr'})
         # Using find_all() method to retrieve all temperature ranges for selected Philippine cities
-        list_of_all_table_data_tags = temperature_ranges_tag.find_all('td')
-        
+        list_of_all_table_data_tags = temperature_ranges_and_chances_of_rain_pct_tag.find_all('td')
+
         temperature_ranges = []
 
         for table_data_tag in list_of_all_table_data_tags:
@@ -268,3 +268,7 @@ def map_chances_of_rain_pct_to_ph_cities(list_of_all_ph_city_tags: list[Beautifu
     for ph_city_tag in list_of_all_ph_city_tags:
         ph_city_name_tag = ph_city_tag.find('a')
         ph_city_name = str(ph_city_name_tag.text).strip()
+
+        table_tag = ph_city_tag.find('table', attrs={'class': 'table'})
+        temperature_ranges_and_chances_of_rain_pct_tag = table_tag.find('tr', attrs={'class': 'desktop-view-tr'})
+        list_of_all_table_data_tags = temperature_ranges_and_chances_of_rain_pct_tag.find_all('td')
