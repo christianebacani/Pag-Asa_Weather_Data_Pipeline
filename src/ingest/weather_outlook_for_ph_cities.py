@@ -272,3 +272,14 @@ def map_chances_of_rain_pct_to_ph_cities(list_of_all_ph_city_tags: list[Beautifu
         table_tag = ph_city_tag.find('table', attrs={'class': 'table'})
         temperature_ranges_and_chances_of_rain_pct_tag = table_tag.find('tr', attrs={'class': 'desktop-view-tr'})
         list_of_all_table_data_tags = temperature_ranges_and_chances_of_rain_pct_tag.find_all('td')
+
+        chances_of_rain_percentages = []
+
+        for table_data_tag in list_of_all_table_data_tags:
+            chances_of_rain_pct_tag = table_data_tag.find('span', attrs={'style': 'font-weight:bold; color: rgb(9, 73, 156);'})
+            chances_of_rain_pct = str(chances_of_rain_pct_tag.text).strip()
+            chances_of_rain_percentages.append(chances_of_rain_pct)
+        
+        result[ph_city_name]['chances_of_rain_percentages'] = chances_of_rain_percentages
+    
+    return result
