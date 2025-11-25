@@ -264,3 +264,8 @@ def map_chances_of_rain_pct_to_ph_cities(list_of_all_ph_city_tags: list[Beautifu
     :return: Selected Philippine city names with temperature ranges and percentage of chances of rain per weather dates dictionary
     :rtype: dict[str, dict]
     '''
+    result = ph_cities_weather_outlook
+
+    for ph_city_tag in list_of_all_ph_city_tags:
+        ph_city_name_tag = ph_city_tag.find('a')
+        ph_city_name = str(ph_city_name_tag.text).strip()
