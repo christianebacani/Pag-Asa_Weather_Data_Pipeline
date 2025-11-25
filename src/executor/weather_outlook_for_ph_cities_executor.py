@@ -13,6 +13,7 @@ from ingest.weather_outlook_for_ph_cities import extract_ph_city_tags
 from ingest.weather_outlook_for_ph_cities import extract_ph_city_names
 from ingest.weather_outlook_for_ph_cities import map_weather_dates_to_ph_cities
 from ingest.weather_outlook_for_ph_cities import map_temperature_ranges_to_ph_cities
+from ingest.weather_outlook_for_ph_cities import map_chances_of_rain_pct_to_ph_cities
 
 def execute_functions_to_ingest_weather_outlook_for_ph_cities() -> None:
     '''
@@ -36,3 +37,4 @@ def execute_functions_to_ingest_weather_outlook_for_ph_cities() -> None:
     ph_city_names = extract_ph_city_names(list_of_all_ph_city_tags)
     ph_cities_with_weather_dates = map_weather_dates_to_ph_cities(list_of_all_ph_city_tags, ph_city_names)
     ph_cities_weather_outlook = map_temperature_ranges_to_ph_cities(list_of_all_ph_city_tags, ph_cities_with_weather_dates)
+    ph_cities_weather_outlook = map_chances_of_rain_pct_to_ph_cities(list_of_all_ph_city_tags, ph_cities_weather_outlook)
