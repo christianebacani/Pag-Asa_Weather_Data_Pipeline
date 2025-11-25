@@ -1,0 +1,686 @@
+{
+    "Bacolod City": {
+        "weather_dates": [
+            "Tuesday  November 25, 2025",
+            "Wednesday  November 26, 2025",
+            "Thursday  November 27, 2025",
+            "Friday  November 28, 2025",
+            "Saturday  November 29, 2025"
+        ],
+        "temperature_ranges": [
+            [
+                "26\u00b0C",
+                "29\u00b0C"
+            ],
+            [
+                "26\u00b0C",
+                "30\u00b0C"
+            ],
+            [
+                "25\u00b0C",
+                "31\u00b0C"
+            ],
+            [
+                "25\u00b0C",
+                "31\u00b0C"
+            ],
+            [
+                "24\u00b0C",
+                "31\u00b0C"
+            ]
+        ],
+        "chances_of_rain_percentages": [
+            "Chance of rain: 90%",
+            "Chance of rain: 60%",
+            "Chance of rain: 40%",
+            "Chance of rain: 40%",
+            "Chance of rain: 40%"
+        ]
+    },
+    "Baguio City": {
+        "weather_dates": [
+            "Tuesday  November 25, 2025",
+            "Wednesday  November 26, 2025",
+            "Thursday  November 27, 2025",
+            "Friday  November 28, 2025",
+            "Saturday  November 29, 2025"
+        ],
+        "temperature_ranges": [
+            [
+                "17\u00b0C",
+                "23\u00b0C"
+            ],
+            [
+                "17\u00b0C",
+                "23\u00b0C"
+            ],
+            [
+                "18\u00b0C",
+                "24\u00b0C"
+            ],
+            [
+                "18\u00b0C",
+                "24\u00b0C"
+            ],
+            [
+                "17\u00b0C",
+                "24\u00b0C"
+            ]
+        ],
+        "chances_of_rain_percentages": [
+            "Chance of rain: 70%",
+            "Chance of rain: 70%",
+            "Chance of rain: 40%",
+            "Chance of rain: 40%",
+            "Chance of rain: 40%"
+        ]
+    },
+    "Cagayan De Oro City": {
+        "weather_dates": [
+            "Tuesday  November 25, 2025",
+            "Wednesday  November 26, 2025",
+            "Thursday  November 27, 2025",
+            "Friday  November 28, 2025",
+            "Saturday  November 29, 2025"
+        ],
+        "temperature_ranges": [
+            [
+                "25\u00b0C",
+                "28\u00b0C"
+            ],
+            [
+                "25\u00b0C",
+                "30\u00b0C"
+            ],
+            [
+                "25\u00b0C",
+                "31\u00b0C"
+            ],
+            [
+                "24\u00b0C",
+                "32\u00b0C"
+            ],
+            [
+                "24\u00b0C",
+                "32\u00b0C"
+            ]
+        ],
+        "chances_of_rain_percentages": [
+            "Chance of rain: 60%",
+            "Chance of rain: 60%",
+            "Chance of rain: 40%",
+            "Chance of rain: 30%",
+            "Chance of rain: 20%"
+        ]
+    },
+    "Iloilo City": {
+        "weather_dates": [
+            "Tuesday  November 25, 2025",
+            "Wednesday  November 26, 2025",
+            "Thursday  November 27, 2025",
+            "Friday  November 28, 2025",
+            "Saturday  November 29, 2025"
+        ],
+        "temperature_ranges": [
+            [
+                "25\u00b0C",
+                "29\u00b0C"
+            ],
+            [
+                "25\u00b0C",
+                "30\u00b0C"
+            ],
+            [
+                "25\u00b0C",
+                "31\u00b0C"
+            ],
+            [
+                "24\u00b0C",
+                "31\u00b0C"
+            ],
+            [
+                "24\u00b0C",
+                "31\u00b0C"
+            ]
+        ],
+        "chances_of_rain_percentages": [
+            "Chance of rain: %",
+            "Chance of rain: %",
+            "Chance of rain: %",
+            "Chance of rain: %",
+            "Chance of rain: %"
+        ]
+    },
+    "Kalayaan Group Of Islands": {
+        "weather_dates": [
+            "Tuesday  November 25, 2025",
+            "Wednesday  November 26, 2025",
+            "Thursday  November 27, 2025",
+            "Friday  November 28, 2025",
+            "Saturday  November 29, 2025"
+        ],
+        "temperature_ranges": [
+            [
+                "24\u00b0C",
+                "31\u00b0C"
+            ],
+            [
+                "25\u00b0C",
+                "29\u00b0C"
+            ],
+            [
+                "26\u00b0C",
+                "28\u00b0C"
+            ],
+            [
+                "25\u00b0C",
+                "29\u00b0C"
+            ],
+            [
+                "24\u00b0C",
+                "30\u00b0C"
+            ]
+        ],
+        "chances_of_rain_percentages": [
+            "Chance of rain: %",
+            "Chance of rain: %",
+            "Chance of rain: %",
+            "Chance of rain: %",
+            "Chance of rain: %"
+        ]
+    },
+    "Laoag City": {
+        "weather_dates": [
+            "Tuesday  November 25, 2025",
+            "Wednesday  November 26, 2025",
+            "Thursday  November 27, 2025",
+            "Friday  November 28, 2025",
+            "Saturday  November 29, 2025"
+        ],
+        "temperature_ranges": [
+            [
+                "23\u00b0C",
+                "32\u00b0C"
+            ],
+            [
+                "23\u00b0C",
+                "30\u00b0C"
+            ],
+            [
+                "23\u00b0C",
+                "30\u00b0C"
+            ],
+            [
+                "23\u00b0C",
+                "31\u00b0C"
+            ],
+            [
+                "22\u00b0C",
+                "31\u00b0C"
+            ]
+        ],
+        "chances_of_rain_percentages": [
+            "Chance of rain: 30%",
+            "Chance of rain: 60%",
+            "Chance of rain: 60%",
+            "Chance of rain: 40%",
+            "Chance of rain: 40%"
+        ]
+    },
+    "Legazpi City": {
+        "weather_dates": [
+            "Tuesday  November 25, 2025",
+            "Wednesday  November 26, 2025",
+            "Thursday  November 27, 2025",
+            "Friday  November 28, 2025",
+            "Saturday  November 29, 2025"
+        ],
+        "temperature_ranges": [
+            [
+                "26\u00b0C",
+                "29\u00b0C"
+            ],
+            [
+                "25\u00b0C",
+                "30\u00b0C"
+            ],
+            [
+                "25\u00b0C",
+                "31\u00b0C"
+            ],
+            [
+                "24\u00b0C",
+                "31\u00b0C"
+            ],
+            [
+                "24\u00b0C",
+                "31\u00b0C"
+            ]
+        ],
+        "chances_of_rain_percentages": [
+            "Chance of rain: 100%",
+            "Chance of rain: 90%",
+            "Chance of rain: 40%",
+            "Chance of rain: 40%",
+            "Chance of rain: 40%"
+        ]
+    },
+    "Lipa City": {
+        "weather_dates": [
+            "Tuesday  November 25, 2025",
+            "Wednesday  November 26, 2025",
+            "Thursday  November 27, 2025",
+            "Friday  November 28, 2025",
+            "Saturday  November 29, 2025"
+        ],
+        "temperature_ranges": [
+            [
+                "24\u00b0C",
+                "29\u00b0C"
+            ],
+            [
+                "24\u00b0C",
+                "30\u00b0C"
+            ],
+            [
+                "24\u00b0C",
+                "30\u00b0C"
+            ],
+            [
+                "24\u00b0C",
+                "31\u00b0C"
+            ],
+            [
+                "23\u00b0C",
+                "31\u00b0C"
+            ]
+        ],
+        "chances_of_rain_percentages": [
+            "Chance of rain: 100%",
+            "Chance of rain: 80%",
+            "Chance of rain: 60%",
+            "Chance of rain: 40%",
+            "Chance of rain: 40%"
+        ]
+    },
+    "Metro Cebu": {
+        "weather_dates": [
+            "Tuesday  November 25, 2025",
+            "Wednesday  November 26, 2025",
+            "Thursday  November 27, 2025",
+            "Friday  November 28, 2025",
+            "Saturday  November 29, 2025"
+        ],
+        "temperature_ranges": [
+            [
+                "25\u00b0C",
+                "29\u00b0C"
+            ],
+            [
+                "24\u00b0C",
+                "30\u00b0C"
+            ],
+            [
+                "24\u00b0C",
+                "31\u00b0C"
+            ],
+            [
+                "24\u00b0C",
+                "31\u00b0C"
+            ],
+            [
+                "24\u00b0C",
+                "31\u00b0C"
+            ]
+        ],
+        "chances_of_rain_percentages": [
+            "Chance of rain: 60%",
+            "Chance of rain: 60%",
+            "Chance of rain: 40%",
+            "Chance of rain: 30%",
+            "Chance of rain: 20%"
+        ]
+    },
+    "Metro Davao": {
+        "weather_dates": [
+            "Tuesday  November 25, 2025",
+            "Wednesday  November 26, 2025",
+            "Thursday  November 27, 2025",
+            "Friday  November 28, 2025",
+            "Saturday  November 29, 2025"
+        ],
+        "temperature_ranges": [
+            [
+                "25\u00b0C",
+                "31\u00b0C"
+            ],
+            [
+                "24\u00b0C",
+                "31\u00b0C"
+            ],
+            [
+                "24\u00b0C",
+                "32\u00b0C"
+            ],
+            [
+                "24\u00b0C",
+                "32\u00b0C"
+            ],
+            [
+                "24\u00b0C",
+                "32\u00b0C"
+            ]
+        ],
+        "chances_of_rain_percentages": [
+            "Chance of rain: 60%",
+            "Chance of rain: 60%",
+            "Chance of rain: 30%",
+            "Chance of rain: 40%",
+            "Chance of rain: 30%"
+        ]
+    },
+    "Metro Manila": {
+        "weather_dates": [
+            "Tuesday  November 25, 2025",
+            "Wednesday  November 26, 2025",
+            "Thursday  November 27, 2025",
+            "Friday  November 28, 2025",
+            "Saturday  November 29, 2025"
+        ],
+        "temperature_ranges": [
+            [
+                "25\u00b0C",
+                "29\u00b0C"
+            ],
+            [
+                "25\u00b0C",
+                "30\u00b0C"
+            ],
+            [
+                "24\u00b0C",
+                "31\u00b0C"
+            ],
+            [
+                "24\u00b0C",
+                "32\u00b0C"
+            ],
+            [
+                "24\u00b0C",
+                "32\u00b0C"
+            ]
+        ],
+        "chances_of_rain_percentages": [
+            "Chance of rain: 60%",
+            "Chance of rain: 60%",
+            "Chance of rain: 60%",
+            "Chance of rain: 30%",
+            "Chance of rain: 40%"
+        ]
+    },
+    "Puerto Princesa City": {
+        "weather_dates": [
+            "Tuesday  November 25, 2025",
+            "Wednesday  November 26, 2025",
+            "Thursday  November 27, 2025",
+            "Friday  November 28, 2025",
+            "Saturday  November 29, 2025"
+        ],
+        "temperature_ranges": [
+            [
+                "25\u00b0C",
+                "30\u00b0C"
+            ],
+            [
+                "24\u00b0C",
+                "29\u00b0C"
+            ],
+            [
+                "24\u00b0C",
+                "30\u00b0C"
+            ],
+            [
+                "24\u00b0C",
+                "30\u00b0C"
+            ],
+            [
+                "24\u00b0C",
+                "31\u00b0C"
+            ]
+        ],
+        "chances_of_rain_percentages": [
+            "Chance of rain: 60%",
+            "Chance of rain: 80%",
+            "Chance of rain: 60%",
+            "Chance of rain: 60%",
+            "Chance of rain: 40%"
+        ]
+    },
+    "Sbma (Olongapo)": {
+        "weather_dates": [
+            "Tuesday  November 25, 2025",
+            "Wednesday  November 26, 2025",
+            "Thursday  November 27, 2025",
+            "Friday  November 28, 2025",
+            "Saturday  November 29, 2025"
+        ],
+        "temperature_ranges": [
+            [
+                "26\u00b0C",
+                "31\u00b0C"
+            ],
+            [
+                "25\u00b0C",
+                "30\u00b0C"
+            ],
+            [
+                "24\u00b0C",
+                "30\u00b0C"
+            ],
+            [
+                "23\u00b0C",
+                "31\u00b0C"
+            ],
+            [
+                "24\u00b0C",
+                "32\u00b0C"
+            ]
+        ],
+        "chances_of_rain_percentages": [
+            "Chance of rain: 60%",
+            "Chance of rain: 60%",
+            "Chance of rain: 60%",
+            "Chance of rain: 30%",
+            "Chance of rain: 20%"
+        ]
+    },
+    "Tacloban City": {
+        "weather_dates": [
+            "Tuesday  November 25, 2025",
+            "Wednesday  November 26, 2025",
+            "Thursday  November 27, 2025",
+            "Friday  November 28, 2025",
+            "Saturday  November 29, 2025"
+        ],
+        "temperature_ranges": [
+            [
+                "25\u00b0C",
+                "29\u00b0C"
+            ],
+            [
+                "26\u00b0C",
+                "30\u00b0C"
+            ],
+            [
+                "25\u00b0C",
+                "31\u00b0C"
+            ],
+            [
+                "23\u00b0C",
+                "32\u00b0C"
+            ],
+            [
+                "24\u00b0C",
+                "32\u00b0C"
+            ]
+        ],
+        "chances_of_rain_percentages": [
+            "Chance of rain: 70%",
+            "Chance of rain: 70%",
+            "Chance of rain: 40%",
+            "Chance of rain: 40%",
+            "Chance of rain: 40%"
+        ]
+    },
+    "Tagaytay City": {
+        "weather_dates": [
+            "Tuesday  November 25, 2025",
+            "Wednesday  November 26, 2025",
+            "Thursday  November 27, 2025",
+            "Friday  November 28, 2025",
+            "Saturday  November 29, 2025"
+        ],
+        "temperature_ranges": [
+            [
+                "22\u00b0C",
+                "28\u00b0C"
+            ],
+            [
+                "23\u00b0C",
+                "29\u00b0C"
+            ],
+            [
+                "22\u00b0C",
+                "29\u00b0C"
+            ],
+            [
+                "22\u00b0C",
+                "30\u00b0C"
+            ],
+            [
+                "22\u00b0C",
+                "29\u00b0C"
+            ]
+        ],
+        "chances_of_rain_percentages": [
+            "Chance of rain: %",
+            "Chance of rain: %",
+            "Chance of rain: %",
+            "Chance of rain: %",
+            "Chance of rain: %"
+        ]
+    },
+    "Tuguegarao City": {
+        "weather_dates": [
+            "Tuesday  November 25, 2025",
+            "Wednesday  November 26, 2025",
+            "Thursday  November 27, 2025",
+            "Friday  November 28, 2025",
+            "Saturday  November 29, 2025"
+        ],
+        "temperature_ranges": [
+            [
+                "23\u00b0C",
+                "30\u00b0C"
+            ],
+            [
+                "23\u00b0C",
+                "29\u00b0C"
+            ],
+            [
+                "24\u00b0C",
+                "30\u00b0C"
+            ],
+            [
+                "24\u00b0C",
+                "30\u00b0C"
+            ],
+            [
+                "24\u00b0C",
+                "30\u00b0C"
+            ]
+        ],
+        "chances_of_rain_percentages": [
+            "Chance of rain: 80%",
+            "Chance of rain: 90%",
+            "Chance of rain: 90%",
+            "Chance of rain: 70%",
+            "Chance of rain: 60%"
+        ]
+    },
+    "Valencia City": {
+        "weather_dates": [
+            "Tuesday  November 25, 2025",
+            "Wednesday  November 26, 2025",
+            "Thursday  November 27, 2025",
+            "Friday  November 28, 2025",
+            "Saturday  November 29, 2025"
+        ],
+        "temperature_ranges": [
+            [
+                "25\u00b0C",
+                "29\u00b0C"
+            ],
+            [
+                "23\u00b0C",
+                "30\u00b0C"
+            ],
+            [
+                "23\u00b0C",
+                "31\u00b0C"
+            ],
+            [
+                "23\u00b0C",
+                "31\u00b0C"
+            ],
+            [
+                "22\u00b0C",
+                "31\u00b0C"
+            ]
+        ],
+        "chances_of_rain_percentages": [
+            "Chance of rain: 60%",
+            "Chance of rain: 60%",
+            "Chance of rain: 40%",
+            "Chance of rain: 40%",
+            "Chance of rain: 30%"
+        ]
+    },
+    "Zamboanga City": {
+        "weather_dates": [
+            "Tuesday  November 25, 2025",
+            "Wednesday  November 26, 2025",
+            "Thursday  November 27, 2025",
+            "Friday  November 28, 2025",
+            "Saturday  November 29, 2025"
+        ],
+        "temperature_ranges": [
+            [
+                "24\u00b0C",
+                "32\u00b0C"
+            ],
+            [
+                "25\u00b0C",
+                "31\u00b0C"
+            ],
+            [
+                "24\u00b0C",
+                "32\u00b0C"
+            ],
+            [
+                "24\u00b0C",
+                "32\u00b0C"
+            ],
+            [
+                "24\u00b0C",
+                "32\u00b0C"
+            ]
+        ],
+        "chances_of_rain_percentages": [
+            "Chance of rain: 60%",
+            "Chance of rain: 60%",
+            "Chance of rain: 20%",
+            "Chance of rain: 40%",
+            "Chance of rain: 40%"
+        ]
+    }
+}
