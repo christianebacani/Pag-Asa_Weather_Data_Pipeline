@@ -249,3 +249,17 @@ def map_temperature_ranges_to_ph_cities(list_of_all_ph_city_tags: list[Beautiful
 
         # Map temperature ranges per weather dates to selected Philippine cities
         result[ph_city_name]['temperature_ranges'] = temperature_ranges
+    
+    return result
+
+def map_chances_of_rain_pct_to_ph_cities(list_of_all_ph_city_tags: list[BeautifulSoup], ph_cities_weather_outlook: dict[str, dict]) -> dict[str, dict]:
+    '''
+    Docstring for map_chances_of_rain_pct_to_ph_cities
+
+    :param list_of_all_ph_city_tags: Description
+    :type list_of_all_ph_city_tags: list[BeautifulSoup]
+    :param ph_cities_weather_outlook: Description
+    :type ph_cities_weather_outlook: dict[str, dict]
+    :return: Description
+    :rtype: dict[str, dict]
+    '''
