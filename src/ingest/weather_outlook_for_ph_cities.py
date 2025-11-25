@@ -197,9 +197,8 @@ def map_weather_dates_to_ph_cities(list_of_all_ph_city_tags: list[BeautifulSoup]
         ph_city_name = str(ph_city_name_tag.text).strip()
 
         table_tag = ph_city_tag.find('table', attrs={'class': 'table'})
-        weather_dates_tag = table_tag.find('thead', attrs={'class': 'desktop-view-thead'})
         # Using find_all() method to retrieve all weather dates for selected Philippine cities
-        list_of_all_table_header_tags = weather_dates_tag.find_all('th')
+        list_of_all_table_header_tags = table_tag.find_all('th')
 
         weather_dates = []
 
