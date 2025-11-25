@@ -254,12 +254,13 @@ def map_temperature_ranges_to_ph_cities(list_of_all_ph_city_tags: list[Beautiful
 
 def map_chances_of_rain_pct_to_ph_cities(list_of_all_ph_city_tags: list[BeautifulSoup], ph_cities_weather_outlook: dict[str, dict]) -> dict[str, dict]:
     '''
-    Docstring for map_chances_of_rain_pct_to_ph_cities
+    Function to map extracted percentage of chances of rain per weather dates for selected Philippine cities to get their weather outlook
+    from the PAGASA-DOST website.
 
-    :param list_of_all_ph_city_tags: Description
+    :param list_of_all_ph_city_tags: List of all selected Philippine city HTML tags
     :type list_of_all_ph_city_tags: list[BeautifulSoup]
     :param ph_cities_weather_outlook: Description
-    :type ph_cities_weather_outlook: dict[str, dict]
-    :return: Description
+    :type ph_cities_weather_outlook: Selected Philippine city names with temperature ranges per weather dates dictionary
+    :return: Selected Philippine city names with temperature ranges and percentage of chances of rain per weather dates dictionary
     :rtype: dict[str, dict]
     '''
