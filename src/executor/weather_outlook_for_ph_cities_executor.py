@@ -33,4 +33,4 @@ def execute_functions_to_ingest_weather_outlook_for_ph_cities() -> None:
     list_of_all_ph_city_tags = extract_ph_city_tags(soup)
 
     ph_city_names = extract_ph_city_names(list_of_all_ph_city_tags)
-    map_weather_dates_to_ph_cities(list_of_all_ph_city_tags, ph_city_names)
+    ph_cities_with_weather_dates = map_weather_dates_to_ph_cities(list_of_all_ph_city_tags, ph_city_names)
