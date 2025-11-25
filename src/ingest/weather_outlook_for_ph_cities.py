@@ -206,7 +206,7 @@ def map_weather_dates_to_ph_cities(list_of_all_ph_city_tags: list[BeautifulSoup]
             weather_date = str(table_header_tag.text).strip()
             weather_dates.append(weather_date)
 
-        # Map weather dates to selected Philippine cities
+        # Map weather dates to each selected Philippine city
         result[ph_city_name]['weather_dates'] = weather_dates
 
     return result
@@ -246,7 +246,7 @@ def map_temperature_ranges_to_ph_cities(list_of_all_ph_city_tags: list[Beautiful
 
             temperature_ranges.append([minimum_temperature, maximum_temperature])
 
-        # Map temperature ranges per weather dates to selected Philippine cities
+        # Map temperature ranges to each selected Philippine city by weather date
         result[ph_city_name]['temperature_ranges'] = temperature_ranges
     
     return result
@@ -265,12 +265,14 @@ def map_chances_of_rain_pct_to_ph_cities(list_of_all_ph_city_tags: list[Beautifu
     '''
     result = ph_cities_weather_outlook
 
+    # Using for-loop to access rows that contains the necessary html tags to get chances of rain percentages for selected Philippine cities
     for ph_city_tag in list_of_all_ph_city_tags:
         ph_city_name_tag = ph_city_tag.find('a')
         ph_city_name = str(ph_city_name_tag.text).strip()
 
         table_tag = ph_city_tag.find('table', attrs={'class': 'table'})
         temperature_ranges_and_chances_of_rain_pct_tag = table_tag.find('tr', attrs={'class': 'desktop-view-tr'})
+        # Using find_all() method to retrieve all chances of rain percentages for selected Philippine cities
         list_of_all_table_data_tags = temperature_ranges_and_chances_of_rain_pct_tag.find_all('td')
 
         chances_of_rain_percentages = []
@@ -279,7 +281,8 @@ def map_chances_of_rain_pct_to_ph_cities(list_of_all_ph_city_tags: list[Beautifu
             chances_of_rain_pct_tag = table_data_tag.find('span', attrs={'style': 'font-weight:bold; color: rgb(9, 73, 156);'})
             chances_of_rain_pct = str(chances_of_rain_pct_tag.text).strip()
             chances_of_rain_percentages.append(chances_of_rain_pct)
-        
+
+        # Map chances of rain percentage to each selected Philippine city by weather date
         result[ph_city_name]['chances_of_rain_percentages'] = chances_of_rain_percentages
-    
+
     return result
