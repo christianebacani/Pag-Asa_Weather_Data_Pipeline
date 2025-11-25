@@ -197,9 +197,9 @@ def map_weather_dates_to_ph_cities(list_of_all_ph_city_tags: list[BeautifulSoup]
         ph_city_name = str(ph_city_name_tag.text).strip()
 
         table_tag = ph_city_tag.find('table', attrs={'class': 'table'})
-        thead_tag = table_tag.find('thead', attrs={'class': 'desktop-view-thead'})
+        weather_dates_tag = table_tag.find('thead', attrs={'class': 'desktop-view-thead'})
         # Using find_all() method to retrieve all weather dates for selected Philippine cities
-        list_of_all_table_header_tags = thead_tag.find_all('th')
+        list_of_all_table_header_tags = weather_dates_tag.find_all('th')
 
         weather_dates = []
 
@@ -207,7 +207,7 @@ def map_weather_dates_to_ph_cities(list_of_all_ph_city_tags: list[BeautifulSoup]
             weather_date = str(table_header_tag.text).strip()
             weather_dates.append(weather_date)
 
-        # Map the weather dates to the selected Philippine cities
+        # Map weather dates to selected Philippine cities
         result[ph_city_name]['weather_dates'] = weather_dates
 
     return result
@@ -224,3 +224,28 @@ def map_temperature_ranges_to_ph_cities(list_of_all_ph_city_tags: list[Beautiful
     :return: Selected Philippine city names with temperature ranges per weather dates dictionary
     :rtype: dict[str, dict]
     '''
+    result = ph_cities_with_weather_dates
+
+    # Using for-loop to access rows that contains the necessary html tags to get temperature ranges for selected Philippine cities
+    for ph_city_tag in list_of_all_ph_city_tags:
+        ph_city_name_tag = ph_city_tag.find('a')
+        ph_city_name = str(ph_city_name_tag.text).strip()
+
+        table_tag = ph_city_tag.find('table', attrs={'class': 'table'})
+        temperature_ranges_tag = table_tag.find('tr', attrs={'class': 'desktop-view-tr'})
+        # Using find_all() method to retrieve all temperature ranges for selected Philippine cities
+        list_of_all_table_data_tags = temperature_ranges_tag.find_all('td')
+        
+        temperature_ranges = []
+
+        for table_data_tag in list_of_all_table_data_tags:
+            minimum_temperature_tag = table_data_tag.find('span', attrs={'class': 'min'})
+            minimum_temperature = str(minimum_temperature_tag.text).strip()
+
+            maximum_temperature_tag = table_data_tag.find('span', attrs={'class': 'max'})
+            maximum_temperature = str(maximum_temperature_tag.text).strip()
+
+            temperature_ranges.append([minimum_temperature, maximum_temperature])
+
+        # Map temperature ranges per weather dates to selected Philippine cities
+        result[ph_city_name]['temperature_ranges'] = temperature_ranges
