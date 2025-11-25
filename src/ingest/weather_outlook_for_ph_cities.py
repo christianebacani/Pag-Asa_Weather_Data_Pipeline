@@ -119,7 +119,6 @@ def save_valid_period_to_json(valid_period: str) -> None:
     :param valid_period: Valid period of weather outlook for selected Philippine cities
     :type valid_period: str
     '''
-
     # Create a dictionary that stores the valid period of weather outlook for selected Philippine cities
     data = {
         "valid_period": valid_period
@@ -286,3 +285,27 @@ def map_chances_of_rain_pct_to_ph_cities(list_of_all_ph_city_tags: list[Beautifu
         result[ph_city_name]['chances_of_rain_percentages'] = chances_of_rain_percentages
 
     return result
+
+def save_ph_cities_weather_outlook_to_json(ph_cities_weather_outlook: dict[str, dict]) -> None:
+    '''
+    Function to save the weather outlook of selected Philippine cities to a dedicated json file 
+    of the data/raw/weather_outlook_for_ph_cities/ subdirectory from your local machine.
+
+    :param ph_cities_weather_outlook: Selected Philippine city names with temperature ranges and percentage of chances of rain per weather dates dictionary
+    :type ph_cities_weather_outlook: dict[str, dict]
+    '''
+    # Create a dictionary that stores the weather outlook for selected Philippine cities
+    data = {}
+
+    for ph_city_name, weather_outlook in ph_cities_weather_outlook.items():
+        data[ph_city_name] = {
+            "weather_dates": weather_outlook['weather_dates'],
+            "temperature_ranges": weather_outlook['temperature_ranges'],
+            "chances_of_rain_percentages": weather_outlook['chances_of_rain_percentages']
+        }
+
+    # Save the dictionary to a json file using open() method and json module    
+    with open('data/raw/weather_outlook_for_ph_cities.json', 'w') as json_file:
+        json.dump(data, json_file, indent=4)
+    
+    json_file.close()
