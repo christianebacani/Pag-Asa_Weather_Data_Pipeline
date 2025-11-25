@@ -35,4 +35,4 @@ def execute_functions_to_ingest_weather_outlook_for_ph_cities() -> None:
 
     ph_city_names = extract_ph_city_names(list_of_all_ph_city_tags)
     ph_cities_with_weather_dates = map_weather_dates_to_ph_cities(list_of_all_ph_city_tags, ph_city_names)
-    map_weather_dates_to_ph_cities(list_of_all_ph_city_tags, ph_cities_with_weather_dates)
+    ph_cities_weather_outlook = map_temperature_ranges_to_ph_cities(list_of_all_ph_city_tags, ph_cities_with_weather_dates)
