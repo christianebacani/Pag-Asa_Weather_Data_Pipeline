@@ -1,9 +1,9 @@
 {
     "place": [
-        "Eastern Visayas, Central Visayas, Negros Island Region, Caraga, Masbate, Iloilo, and Guimaras",
-        "MIMAROPA, the rest of Visayas, and the rest of Mindanao",
-        "Metro Manila, Cordillera Administrative Region, CALABARZON, Cagayan, Isabela, Quirino, Nueva Vizcaya, Nueva Ecija, Bulacan, Aurora, and the rest of Bicol Region",
-        "Pangasinan and the rest of Central Luzon",
+        "Visayas, MIMAROPA, Caraga, and Masbate",
+        "The rest of Bicol Region and the rest of Mindanao",
+        "Metro Manila, Cordillera Administrative Region, Central Luzon, CALABARZON, Cagayan, Isabela, Quirino, and Nueva Vizcaya",
+        "Pangasinan",
         "The rest of Luzon"
     ],
     "weather_condition": [
@@ -14,8 +14,8 @@
         "Partly cloudy to cloudy skies with isolated light rains"
     ],
     "caused_by": [
-        "TD VERBENA",
-        "Trough of TD VERBENA",
+        "TC VERBENA",
+        "TC VERBENA",
         "Shear Line",
         "Northeast Monsoon",
         "Northeast Monsoon"
