@@ -63,3 +63,13 @@ def extract_issued_datetime(soup: BeautifulSoup) -> str:
         issued_datetime = str(issued_datetime_tag.text).strip()
     
     return issued_datetime
+
+def save_issued_datetime_to_json(issued_datetime: str) -> None:
+    '''
+    Function to save the issued datetime of weather outlook for
+    selected Philippine tourist areas to a dedicated json file of the 
+    data/raw/weather_outlook_for_ph_tourist_areas/ subdirectory from your local machine.
+
+    :param issued_datetime:Issued datetime of weather outlook for selected Philippine tourist areas
+    :type issued_datetime: str
+    '''
