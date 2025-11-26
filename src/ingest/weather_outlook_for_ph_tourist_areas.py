@@ -24,6 +24,6 @@ def extract_beautiful_soup_object(url: str) -> BeautifulSoup:
 
     :param url: Url of the PAGASA-DOST website that consist of weather outlook for selected Philippine tourist areas
     :type url: str
-    :return:
+    :return: BeautifulSoup object to navigate and manipulate the entire content of the web-page
     :rtype: BeautifulSoup
     '''
