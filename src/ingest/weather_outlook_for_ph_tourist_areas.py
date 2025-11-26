@@ -84,3 +84,14 @@ def save_issued_datetime_to_json(issued_datetime: str) -> None:
         json.dump(data, json_file, indent=4)
     
     json_file.close()
+
+def extract_valid_period(soup: BeautifulSoup) -> str:
+    '''
+    Docstring
+
+    :param soup:
+    :type soup:
+    
+    :return:
+    :rtype:
+    '''
