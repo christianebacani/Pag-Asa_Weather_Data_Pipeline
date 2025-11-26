@@ -16,12 +16,13 @@ from ingest.weather_outlook_for_ph_cities import map_temperature_ranges_to_ph_ci
 from ingest.weather_outlook_for_ph_cities import map_chances_of_rain_pct_to_ph_cities
 from ingest.weather_outlook_for_ph_cities import save_ph_cities_weather_outlook_to_json
 
-def execute_functions_to_ingest_weather_outlook_for_ph_cities() -> None:
+def ingest_weather_outlook_for_ph_cities() -> None:
     '''
-        Function to execute all functions from the
-        weather_outlook_for_ph_cities module of src/ingest/ package
-        to ingest the data of weather outlook for selected Philippine
-        cities from the PAGASA-DOST website.
+        Function to ingest weather outlook for
+        selected Philippine cities from the PAGASA-DOST
+        website by executing all functions from the
+        weather_outlook_for_ph_cities module of src/ingest/
+        package.
     '''
     # Execute all the functions to ingest the data of weather outlook for selected Philippine cities from the PAGASA-DOST website
     create_subdir()
