@@ -17,4 +17,4 @@ def ingest_weather_outlook_for_ph_tourist_areas() -> None:
     create_subdir()
     soup = extract_beautiful_soup_object('https://www.pagasa.dost.gov.ph/weather/weather-outlook-selected-tourist-areas')
 
-    extract_issued_datetime(soup)
+    issued_datetime = extract_issued_datetime(soup)
