@@ -2,8 +2,8 @@
     Module to ingest the data of daily weather forecast
     from the PAGASA-DOST website.
 '''
-import requests
 import os
+import requests
 import json
 from bs4 import BeautifulSoup
 
