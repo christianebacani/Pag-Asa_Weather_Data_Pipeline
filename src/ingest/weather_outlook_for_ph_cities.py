@@ -20,7 +20,7 @@ def create_subdir() -> None:
 
 def extract_beautiful_soup_object(url: str) -> BeautifulSoup | None:
     '''
-    Function to extract the BeautifulSoup object of weather 
+    Function to extract the BeautifulSoup object of weather
     outlook for selected Philippine cities from the PAGASA-DOST 
     website.
 
