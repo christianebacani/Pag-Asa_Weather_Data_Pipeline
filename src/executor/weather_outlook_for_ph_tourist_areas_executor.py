@@ -5,6 +5,7 @@
 '''
 from ingest.weather_outlook_for_ph_tourist_areas import create_subdir
 from ingest.weather_outlook_for_ph_tourist_areas import extract_beautiful_soup_object
+from ingest.weather_outlook_for_ph_tourist_areas import extract_issued_datetime
 
 def ingest_weather_outlook_for_ph_tourist_areas() -> None:
     '''
@@ -15,3 +16,5 @@ def ingest_weather_outlook_for_ph_tourist_areas() -> None:
     # Execute all the functions to ingest the data of weather outlook for selected Philippine tourist areas from the PAGASA-DOST website
     create_subdir()
     soup = extract_beautiful_soup_object('https://www.pagasa.dost.gov.ph/weather/weather-outlook-selected-tourist-areas')
+
+    extract_issued_datetime(soup)
