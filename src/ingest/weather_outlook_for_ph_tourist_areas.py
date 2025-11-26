@@ -80,7 +80,7 @@ def save_issued_datetime_to_json(issued_datetime: str) -> None:
     }
 
     # Save the dictionary to a json file using open() method and json module
-    with open('data/raw/weather_outlook_for_ph_tourist_areas/issued_datetime.json') as json_file:
+    with open('data/raw/weather_outlook_for_ph_tourist_areas/issued_datetime.json', 'w') as json_file:
         json.dump(data, json_file, indent=4)
     
     json_file.close()
