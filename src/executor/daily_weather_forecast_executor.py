@@ -15,12 +15,12 @@ from ingest.daily_weather_forecast import save_forecast_wind_and_coastal_water_c
 from ingest.daily_weather_forecast import extract_temperature_and_relative_humidity
 from ingest.daily_weather_forecast import save_temperature_and_relative_humidity_to_json
 
-def execute_functions_to_ingest_daily_weather_forecast() -> None:
+def ingest_daily_weather_forecast() -> None:
     '''
-        Function to execute all functions from the
-        daily_weather_forecast module of src/ingest/ package
-        to ingest the data of daily weather forecast from the PAGASA-DOST
-        website.
+        Function to ingest daily weather forecast
+        from the PAGASA-DOST website by executing
+        all functions from the weather_outlook_for_ph_cities
+        module of src/ingest/ package.
     '''
     # Execute all the functions to ingest the data of daily weather forecast from the PAGASA-DOST website.
     create_subdir()
