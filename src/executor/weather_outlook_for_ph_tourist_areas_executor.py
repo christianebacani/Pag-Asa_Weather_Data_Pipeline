@@ -14,4 +14,4 @@ def ingest_weather_outlook_for_ph_tourist_areas() -> None:
     '''
     # Execute all the functions to ingest the data of weather outlook for selected Philippine tourist areas from the PAGASA-DOST website
     create_subdir()
-    ingest_weather_outlook_for_ph_tourist_areas()
+    soup = extract_beautiful_soup_object('https://www.pagasa.dost.gov.ph/weather/weather-outlook-selected-tourist-areas')
