@@ -4,6 +4,7 @@
 '''
 import os
 import requests
+import json
 from bs4 import BeautifulSoup
 
 def create_subdir() -> None:
@@ -73,3 +74,13 @@ def save_issued_datetime_to_json(issued_datetime: str) -> None:
     :param issued_datetime:Issued datetime of weather outlook for selected Philippine tourist areas
     :type issued_datetime: str
     '''
+    # Create a dictionary that stores the issued datetime of weather outlook for selected Philippine tourist areas
+    data = {
+        "issued_datetime": issued_datetime
+    }
+
+    # Save the dictionary to a json file using open() method and json module
+    with open('data/raw/weather_outlook_for_ph_tourist_areas/issued_datetime.json') as json_file:
+        json.dump(data, json_file, indent=4)
+    
+    json_file.close()
