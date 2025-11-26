@@ -3,6 +3,7 @@
     selected Philippine tourist areas from the PAGASA-DOST website.
 '''
 import os
+import requests
 from bs4 import BeautifulSoup
 
 def create_subdir() -> None:
@@ -16,7 +17,7 @@ def create_subdir() -> None:
     if not os.path.exists('data/raw/weather_outlook_for_ph_tourist_areas'):
         os.makedirs('data/raw/weather_outlook_for_ph_tourist_areas')
 
-def extract_beautiful_soup_object(url: str) -> BeautifulSoup:
+def extract_beautiful_soup_object(url: str) -> BeautifulSoup | None:
     '''
     Function to extract the BeautifulSoup object of weather
     outlook for selected Philippine cities from the PAGASA-DOST 
@@ -27,3 +28,12 @@ def extract_beautiful_soup_object(url: str) -> BeautifulSoup:
     :return: BeautifulSoup object to navigate and manipulate the entire content of the web-page
     :rtype: BeautifulSoup
     '''
+    response = requests.get(url)
+
+    # We need to check if the status code of the response for the request is unsuccessful
+    if response.status_code != 200:
+        return None
+    
+    # Parse as a BeautifulSoup object
+    soup = BeautifulSoup(response.text, 'html.parser')
+    return soup
