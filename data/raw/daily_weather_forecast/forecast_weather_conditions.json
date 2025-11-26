@@ -1,16 +1,18 @@
 {
     "place": [
-        "Palawan",
-        "Metro Manila, Zambales, Bataan, Cavite, Laguna, Batangas, Rizal, Aklan, Antique, and the rest of MIMAROPA",
-        "Cordillerra Administrative Region, Cagayan, Isabela, Quirino, Nueva Vizcaya, Quezon, and the rest of Central Luzon",
+        "Kalayaan Islands",
+        "The rest of Palawan",
+        "Cordillera Administrative Region, Cagayan, Isabela, Quirino, Nueva Vizcaya, Nueva Ecija, and Aurora",
         "Ilocos Region and Batanes",
-        "Mindanao, Bicol Region, and the rest of Visayas"
+        "Quezon and Camarines Norte",
+        "Metro Manila and the rest of the country"
     ],
     "weather_condition": [
         "Rains with gusty winds",
         "Cloudy skies with scattered rains and thunderstorms",
         "Cloudy skies with scattered rains and isolated thunderstorms",
         "Cloudy skies with rains",
+        "Cloudy skies with scattered rains and thunderstorms",
         "Partly cloudy to cloudy skies with isolated rainshowers or thunderstorms"
     ],
     "caused_by": [
@@ -18,12 +20,14 @@
         "Trough of TC VERBENA",
         "Shear Line",
         "Northeast Monsoon",
+        "Easterlies",
         "Localized Thunderstorms"
     ],
     "impacts": [
-        "Possible flash floods or landslides due to moderate to heavy with at times intense rains. Minimal to minor threat to life and property due to strong winds",
+        "Possible flash floods or landslides due to moderate to heavy rains with at times intense rains. Minimal to minor threat to life and property due to strong winds",
         "Possible flash floods or landslides due to moderate to at times heavy rains",
         "Possible flash floods or landslides due to moderate to heavy rains",
+        "Possible flash floods or landslides due to moderate to at times heavy rains",
         "Possible flash floods or landslides due to moderate to at times heavy rains",
         "Possible flash floods or landslides during severe thunderstorms"
     ]

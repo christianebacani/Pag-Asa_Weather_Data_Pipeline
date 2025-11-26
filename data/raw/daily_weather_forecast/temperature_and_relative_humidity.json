@@ -1,21 +1,21 @@
 {
     "temperature": {
         "max": [
-            "27.2 \u00b0C",
+            "32.6 \u00b0C",
             "2:00 PM"
         ],
         "min": [
-            "23.9 \u00b0C",
-            "6:00 AM"
+            "24.3 \u00b0C",
+            "6:20 AM"
         ]
     },
     "relative_humidity_percentage": {
         "max": [
-            "94 %",
-            "8:00 AM"
+            "96 %",
+            "5:00 AM"
         ],
         "min": [
-            "87 %",
+            "58 %",
             "2:00 PM"
         ]
     }
