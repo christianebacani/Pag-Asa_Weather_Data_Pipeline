@@ -37,3 +37,16 @@ def extract_beautiful_soup_object(url: str) -> BeautifulSoup | None:
     # Parse as a BeautifulSoup object
     soup = BeautifulSoup(response.text, 'html.parser')
     return soup
+
+def extract_issued_datetime(soup: BeautifulSoup) -> str:
+    '''
+    Function to extract the issued datetime of
+    weather outlook for selected Philippine tourist areas 
+    from the PAGASA-DOST website.
+
+    :param soup: BeautifulSoup object to navigate and manipulate the entire content of the web-page
+    :type soup: BeautifulSoup
+
+    :return: Issued datetime of weather outlook for selected Philippine tourist areas
+    :rtype: str
+    '''
