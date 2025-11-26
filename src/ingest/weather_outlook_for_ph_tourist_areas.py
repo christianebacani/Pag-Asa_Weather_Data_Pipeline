@@ -71,7 +71,7 @@ def save_issued_datetime_to_json(issued_datetime: str) -> None:
     selected Philippine tourist areas to a dedicated json file of the 
     data/raw/weather_outlook_for_ph_tourist_areas/ subdirectory from your local machine.
 
-    :param issued_datetime:Issued datetime of weather outlook for selected Philippine tourist areas
+    :param issued_datetime: Issued datetime of weather outlook for selected Philippine tourist areas
     :type issued_datetime: str
     '''
     # Create a dictionary that stores the issued datetime of weather outlook for selected Philippine tourist areas
