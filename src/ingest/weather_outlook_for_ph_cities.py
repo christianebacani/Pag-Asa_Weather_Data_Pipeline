@@ -203,6 +203,7 @@ def map_weather_dates_to_ph_cities(list_of_all_ph_city_tags: list[BeautifulSoup]
 
         for table_header_tag in list_of_all_table_header_tags:
             weather_date = str(table_header_tag.text).strip()
+            weather_date = ' '.join(weather_date.split())
             weather_dates.append(weather_date)
 
         # Map weather dates to each selected Philippine city
@@ -247,7 +248,7 @@ def map_temperature_ranges_to_ph_cities(list_of_all_ph_city_tags: list[Beautiful
 
         # Map temperature ranges to each selected Philippine city by weather date
         result[ph_city_name]['temperature_ranges'] = temperature_ranges
-    
+
     return result
 
 def map_chances_of_rain_pct_to_ph_cities(list_of_all_ph_city_tags: list[BeautifulSoup], ph_cities_weather_outlook: dict[str, dict]) -> dict[str, dict]:
