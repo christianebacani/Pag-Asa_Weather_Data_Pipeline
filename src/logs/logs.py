@@ -13,14 +13,17 @@ from executor.daily_weather_forecast_executor import ingest_daily_weather_foreca
 from executor.weather_outlook_for_ph_cities_executor import ingest_weather_outlook_for_ph_cities
 from executor.weather_outlook_for_ph_tourist_areas_executor import ingest_weather_outlook_for_ph_tourist_areas
 
-def generate_logs(log_message: str) -> None:
+def generate_logs(
+    log_message: str
+) -> None:
     '''
     Function for generating logs when
     executing different ETL Pipeline jobs
     that process data from the PAGASA-DOST
     website.
 
-    :param log_message: Log message when executing ETL Pipeline jobs
+    :param log_message: Log message when
+    executing ETL Pipeline jobs
     :type log_message: str
     '''
     format = '%Y-%m-%d %H:%M:%S' # Format: YYYY-MM-DD HH:MM:SS
@@ -41,12 +44,18 @@ def generate_logs(log_message: str) -> None:
 if __name__ == '__main__':
     # Ingest data for daily weather forecast
     ingest_daily_weather_forecast()
-    generate_logs('(DEV): Ingest the data for the daily weather forecast.')
+    generate_logs(
+        '(DEV): Ingest the data for the daily weather forecast.'
+    )
     
     # Ingest data for weather outlook for selected Philippine cities
     ingest_weather_outlook_for_ph_cities()
-    generate_logs('(DEV): Ingest the data for the weather outlook for selected Philippine cities.')
-    
+    generate_logs(
+        '(DEV): Ingest the data for the weather outlook for selected Philippine cities.'
+    )
+
     # Ingest data for weather outlook for selected Philippine tourist areas
     ingest_weather_outlook_for_ph_tourist_areas()
-    generate_logs('(DEV): Ingest the data for the weather outlook for selected Philippine tourist areas.')
+    generate_logs(
+        '(DEV): Ingest the data for the weather outlook for selected Philippine tourist areas.'
+    )
