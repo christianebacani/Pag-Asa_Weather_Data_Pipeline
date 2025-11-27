@@ -156,6 +156,74 @@ def save_synopsis_to_json(
 
     json_file.close()
 
+def extract_tc_information(
+        soup: BeautifulSoup
+) -> dict[str, str]:
+    '''
+    Function to extract the tropical cyclone information
+    of daily weather forecast from the PAGASA-DOST website.
+
+    :param soup: BeautifulSoup object to navigate and
+    manipulate the entire content of the web-page
+    :type soup: BeautifulSoup
+
+    :return: Tropical Cyclone information dictionary
+    :rtype: dict[str, str]
+    '''
+    tc_information = {
+        'current_update': '',
+        'tropical_cyclone_name': '',
+        'location': '',
+        'maximum_sustained_winds': '',
+        'gustiness': '',
+        'movement': ''
+    }
+
+    # Extract the necessary HTML tags to get the forecast weather conditions of daily weather forecast
+    div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
+    list_of_all_daily_weather_forecast_tags = div_tag_with_row_weather_page_class.find_all(
+        'div',
+        attrs={
+            'class': 'col-md-12 col-lg-12'
+        }
+    )
+
+    # Verify that the TC info section exists by checking if there are exactly 5 divs 
+    # with the 'col-md-12 col-lg-12' class
+    if len(list_of_all_daily_weather_forecast_tags) == 5:
+        tc_information_tag = list_of_all_daily_weather_forecast_tags[1]
+    
+    else:
+        return tc_information
+
+    tbody_tag = tc_information_tag.find('tbody')
+    list_of_all_table_data_row_tags = tbody_tag.find_all('tr')
+
+    # Using for-loop to access rows that contains the data of tropical cyclone information
+    for row_number, table_row_tag in enumerate(list_of_all_table_data_row_tags):
+        cell = str(table_row_tag.text)
+
+        list_of_text_to_remove = [
+            'LOCATION:',
+            'GUSTINESS:',
+            'MAXIMUM SUSTAINED WINDS:',
+            'GUSTINESS:',
+            'MOVEMENT:'
+        ]
+
+        # Loop through each string in the given list and remove it from the tropical cyclone
+        # information text data
+        for text_to_remove in list_of_text_to_remove:
+            cell = cell.replace(text_to_remove, '').strip()
+
+        # Use the current row index to access the correct key in the tc_information dictionary
+        tc_information_keys = list(tc_information.keys())
+        key = tc_information_keys[row_number]
+        value = cell
+        tc_information[key] = value
+
+    return tc_information
+
 def extract_forecast_weather_conditions(
         soup: BeautifulSoup
 ) -> dict[str, list]:
