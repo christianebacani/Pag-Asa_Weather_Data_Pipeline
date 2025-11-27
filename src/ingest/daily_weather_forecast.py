@@ -30,6 +30,7 @@ def extract_beautiful_soup_object(
     :param url: Url of the PAGASA-DOST website
     that consist of daily weather forecast
     :type url: str
+
     :return: BeautifulSoup object to navigate and
     manipulate the entire content of the web-page
     :rtype: BeautifulSoup | None
@@ -54,6 +55,7 @@ def extract_issued_datetime(
     :param soup: BeautifulSoup object to navigate and
     manipulate the entire content of the web-page
     :type soup: BeautifulSoup
+
     :return: Issued datetime of daily weather forecast
     :rtype: str
     '''
@@ -111,6 +113,7 @@ def extract_synopsis(
     :param soup: BeautifulSoup object to navigate and
     manipulate the entire content of the web-page
     :type soup: BeautifulSoup
+
     :return: Synopsis of daily weather forecast
     :rtype: str
     '''
@@ -163,6 +166,7 @@ def extract_forecast_weather_conditions(
     :param soup: BeautifulSoup object to navigate and
     manipulate the entire content of the web-page
     :type soup: BeautifulSoup
+
     :return: Forecast weather conditions dictionary
     :rtype: dict[str, list]
     '''
@@ -257,6 +261,7 @@ def extract_forecast_wind_and_coastal_water_conditions(
     :param soup: BeautifulSoup object to navigate and manipulate
     the entire content of the web-page
     :type soup: BeautifulSoup
+
     :return: Forecast wind and coastal water conditions dictionary
     :rtype: dict[str, list]
     '''
@@ -354,6 +359,7 @@ def extract_temperature_and_relative_humidity(
     :param soup: BeautifulSoup object to navigate and manipulate
     the entire content of the web-page
     :type soup: BeautifulSoup
+
     :return: Temperature and relative humidity dictionary
     :rtype: dict[str, str]
     '''

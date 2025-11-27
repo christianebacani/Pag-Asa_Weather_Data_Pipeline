@@ -13,9 +13,9 @@
     ],
     "direction": [
         "Northeast",
-        "Southwest to South",
+        "Southwest to Southeast",
         "Southeast to East",
-        "Southwest to Southeast"
+        "Southeast to East"
     ],
     "coastal_water": [
         "Moderate to Rough / (2.5 to 5.0 meters)",
