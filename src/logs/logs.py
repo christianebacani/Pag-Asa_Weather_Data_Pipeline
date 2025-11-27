@@ -29,7 +29,13 @@ def generate_logs(log_message: str) -> None:
 
     # Generate logs using pandas for logs dataset (csv format)
     logs = pd.read_csv('src/logs/logs.csv')
-    logs = pd.concat([logs, pd.DataFrame({'messages': [log_message], 'timestamps': [timestamp]})], ignore_index=True)
+    logs = pd.concat([
+        logs,
+        pd.DataFrame({
+            'messages': [log_message],
+            'timestamps': [timestamp]
+        })
+    ], ignore_index=True)
     logs.to_csv('src/logs/logs.csv', index=False)
 
 if __name__ == '__main__':
