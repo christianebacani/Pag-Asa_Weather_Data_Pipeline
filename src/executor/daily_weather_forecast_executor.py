@@ -25,7 +25,9 @@ def ingest_daily_weather_forecast(
     '''
     # Execute all the functions to ingest the data of daily weather forecast from the PAGASA-DOST website.
     create_subdir()
-    soup = extract_beautiful_soup_object('https://www.pagasa.dost.gov.ph/weather#daily-weather-forecast')
+    soup = extract_beautiful_soup_object(
+        'https://www.pagasa.dost.gov.ph/weather#daily-weather-forecast'
+    )
 
     issued_datetime = extract_issued_datetime(soup)
     save_issued_datetime_to_json(issued_datetime)
