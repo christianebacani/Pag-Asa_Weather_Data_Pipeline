@@ -153,5 +153,5 @@ def extract_valid_period(
     if div_tag_with_validity_class is not None:
         valid_period_tag = div_tag_with_validity_class.find_all('b')[1]
         valid_period = str(valid_period_tag.text).strip()
-    
+
     return valid_period
