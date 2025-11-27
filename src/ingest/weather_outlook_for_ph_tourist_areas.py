@@ -87,11 +87,26 @@ def save_issued_datetime_to_json(issued_datetime: str) -> None:
 
 def extract_valid_period(soup: BeautifulSoup) -> str:
     '''
-    Docstring
+    Function to extract the valid period of weather
+    outlook for selected Philippine tourist areas from the
+    PAGASA-DOST website.
 
-    :param soup:
-    :type soup:
-    
-    :return:
-    :rtype:
+    :param soup: BeautifulSoup object to navigate and manipulate the entire content of the web-page
+    :type soup: BeautifulSoup
+
+    :return: Valid period of weather outlook for selected Philippine tourist areas
+    :rtype: str
     '''
+    valid_period = ''
+
+    # Extract the necessary html tags to get the issued datetime of weather outlook for selected Philippine tourist areas
+    div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
+    issued_datetime_and_valid_period_tag = div_tag_with_row_weather_page_class.find('div', attrs={'class': 'col-md-12 col-lg-12 issue'})
+    div_tag_with_validity_class = issued_datetime_and_valid_period_tag.find('div', attrs={'class': 'validity'})
+
+    # We need to check if the div_tag_with_validity_class is not missing
+    if div_tag_with_validity_class is not None:
+        valid_period_tag = div_tag_with_validity_class.find_all('b')[1]
+        valid_period = str(valid_period_tag.text).strip()
+    
+    return valid_period
