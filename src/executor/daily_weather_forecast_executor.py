@@ -15,7 +15,8 @@ from ingest.daily_weather_forecast import save_forecast_wind_and_coastal_water_c
 from ingest.daily_weather_forecast import extract_temperature_and_relative_humidity
 from ingest.daily_weather_forecast import save_temperature_and_relative_humidity_to_json
 
-def ingest_daily_weather_forecast() -> None:
+def ingest_daily_weather_forecast(
+) -> None:
     '''
         Function to ingest daily weather forecast
         from the PAGASA-DOST website by executing
