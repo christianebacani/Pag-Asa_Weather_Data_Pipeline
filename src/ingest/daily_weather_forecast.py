@@ -59,7 +59,7 @@ def extract_issued_datetime(
     '''
     issued_datetime = ''
 
-    # Extract the necessary html tags to get the issued datetime of daily weather forecast
+    # Extract the necessary HTML tags to get the issued datetime of daily weather forecast
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
     issued_datetime_tag = div_tag_with_row_weather_page_class.find(
         'div',
@@ -116,7 +116,7 @@ def extract_synopsis(
     '''
     synopsis = ''
 
-    # Extract the necessary html tags to get the synopsis of daily weather forecast
+    # Extract the necessary HTML tags to get the synopsis of daily weather forecast
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
     synopsis_tag = div_tag_with_row_weather_page_class.find('div', attrs={'class': 'col-md-12 col-lg-12'})
     div_tag_with_panel_body_class = synopsis_tag.find('div', attrs={'class': 'panel-body'})
@@ -173,7 +173,7 @@ def extract_forecast_weather_conditions(
         'impacts': []
     }
 
-    # Extract the necessary html tags to get the forecast weather conditions of daily weather forecast
+    # Extract the necessary HTML tags to get the forecast weather conditions of daily weather forecast
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
     list_of_all_daily_weather_forecast_tags = div_tag_with_row_weather_page_class.find_all(
         'div',
@@ -267,7 +267,7 @@ def extract_forecast_wind_and_coastal_water_conditions(
         'coastal_water': []
     }
 
-    # Extract the necessary html tags to get the forecast wind and coastal water conditions 
+    # Extract the necessary HTML tags to get the forecast wind and coastal water conditions 
     # of daily weather forecast
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
     list_of_all_daily_weather_forecast_tags = div_tag_with_row_weather_page_class.find_all(
@@ -362,7 +362,7 @@ def extract_temperature_and_relative_humidity(
         'relative_humidity_percentage': {'max': [], 'min': []}
     }
     
-    # Extract the necessary html tags to get the temperature and relative humidity of daily weather forecast
+    # Extract the necessary HTML tags to get the temperature and relative humidity of daily weather forecast
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
     list_of_all_daily_weather_forecast_tags = div_tag_with_row_weather_page_class.find_all(
         'div',
