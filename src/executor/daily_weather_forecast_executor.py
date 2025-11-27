@@ -36,7 +36,7 @@ def ingest_daily_weather_forecast(
     synopsis = extract_synopsis(soup)
     save_synopsis_to_json(synopsis)
 
-    extract_tc_information(soup)
+    tc_information = extract_tc_information(soup)
 
     forecast_weather_conditions = extract_forecast_weather_conditions(soup)
     save_forecast_weather_conditions_to_json(forecast_weather_conditions)
