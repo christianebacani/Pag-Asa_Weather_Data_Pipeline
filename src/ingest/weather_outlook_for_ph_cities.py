@@ -438,7 +438,7 @@ def save_ph_cities_weather_outlook_to_json(
 
     # Save the dictionary to a json file using open() method and json module
     with open(
-        'data/raw/weather_outlook_for_ph_cities/ph_cities_weather_outlook.json'
+        'data/raw/weather_outlook_for_ph_cities/ph_cities_weather_outlook.json',
         'w'
     ) as json_file:
         json.dump(data, json_file, indent=4)
