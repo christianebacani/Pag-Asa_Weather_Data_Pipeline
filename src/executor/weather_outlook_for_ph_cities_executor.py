@@ -16,7 +16,8 @@ from ingest.weather_outlook_for_ph_cities import map_temperature_ranges_to_ph_ci
 from ingest.weather_outlook_for_ph_cities import map_chances_of_rain_pct_to_ph_cities
 from ingest.weather_outlook_for_ph_cities import save_ph_cities_weather_outlook_to_json
 
-def ingest_weather_outlook_for_ph_cities() -> None:
+def ingest_weather_outlook_for_ph_cities(
+) -> None:
     '''
         Function to ingest weather outlook for
         selected Philippine cities from the PAGASA-DOST
@@ -27,7 +28,9 @@ def ingest_weather_outlook_for_ph_cities() -> None:
     # Execute all the functions to ingest the data of weather outlook for selected 
     # Philippine cities from the PAGASA-DOST website
     create_subdir()
-    soup = extract_beautiful_soup_object('https://www.pagasa.dost.gov.ph/weather/weather-outlook-selected-philippine-cities')
+    soup = extract_beautiful_soup_object(
+        'https://www.pagasa.dost.gov.ph/weather/weather-outlook-selected-philippine-cities'
+    )
 
     issued_datetime = extract_issued_datetime(soup)
     save_issued_datetime_to_json(issued_datetime)
