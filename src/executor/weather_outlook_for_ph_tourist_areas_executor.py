@@ -23,4 +23,3 @@ def ingest_weather_outlook_for_ph_tourist_areas() -> None:
     save_issued_datetime_to_json(issued_datetime)
 
     valid_period = extract_valid_period(soup)
-    print(valid_period)
