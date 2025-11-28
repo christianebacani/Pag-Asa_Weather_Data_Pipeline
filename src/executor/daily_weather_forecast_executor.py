@@ -9,6 +9,7 @@ from ingest.daily_weather_forecast import save_issued_datetime_to_json
 from ingest.daily_weather_forecast import extract_synopsis
 from ingest.daily_weather_forecast import save_synopsis_to_json
 from ingest.daily_weather_forecast import extract_tc_information
+from ingest.daily_weather_forecast import save_tc_information_to_json
 from ingest.daily_weather_forecast import extract_forecast_weather_conditions
 from ingest.daily_weather_forecast import save_forecast_weather_conditions_to_json
 from ingest.daily_weather_forecast import extract_forecast_wind_and_coastal_water_conditions
@@ -37,6 +38,7 @@ def ingest_daily_weather_forecast(
     save_synopsis_to_json(synopsis)
 
     tc_information = extract_tc_information(soup)
+    save_tc_information_to_json(tc_information)
 
     forecast_weather_conditions = extract_forecast_weather_conditions(soup)
     save_forecast_weather_conditions_to_json(forecast_weather_conditions)
