@@ -220,6 +220,7 @@ def extract_ph_tourist_area_tags(
         return list_of_all_ph_tourist_area_tags
 
     tbody_tag = table_tag.find('tbody')
+    # Using find_all() method to access all selected Philippine tourist area HTML tags
     list_of_all_ph_tourist_area_tags = tbody_tag.find_all('tr')
 
     return list_of_all_ph_tourist_area_tags
