@@ -247,6 +247,8 @@ def extract_ph_tourist_area_names(
     for ph_tourist_area_tag in list_of_all_ph_tourist_area_tags:
         ph_tourist_area_name_tag = ph_tourist_area_tag.find('td')
         ph_tourist_area_name = str(ph_tourist_area_name_tag.text).strip()
+        # Remove unnecessary whitespace after the opening parenthesis of the name
+        # of all selected Philippine tourist area
         ph_tourist_area_name = ph_tourist_area_name.replace('( ', '(')
         result[ph_tourist_area_name] = {}
 
