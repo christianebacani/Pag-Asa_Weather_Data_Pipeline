@@ -155,3 +155,18 @@ def extract_valid_period(
         valid_period = str(valid_period_tag.text).strip()
 
     return valid_period
+
+def save_valid_period_to_json(
+        valid_period: str
+) -> None:
+    '''
+    Function to save the valid period of weather
+    outlook for selected Philippine tourist areas
+    to a dedicated json file of the
+    data/raw/weather_outlook_for_ph_tourist_areas/
+    subdirectory from your local machine.
+    
+    :param valid_period: Valid period of weather
+    outlook for selected Philippine tourist areas
+    :type valid_period: str
+    '''
