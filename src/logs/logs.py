@@ -1,6 +1,7 @@
 '''
-    Module for generating logs when executing different 
-    ETL pipeline jobs that process data from the PAGASA-DOST website.
+    Module for generating logs during the execution of
+    ETL pipeline jobs that process data from the
+    PAGASA-DOST website.
 '''
 import sys
 import os
@@ -17,13 +18,9 @@ def generate_logs(
     log_message: str
 ) -> None:
     '''
-    Function for generating logs when
-    executing different ETL Pipeline jobs
-    that process data from the PAGASA-DOST
-    website.
+    Generates logs for ETL pipeline jobs that process data from the PAGASA-DOST website.
 
-    :param log_message: Log message when
-    executing ETL Pipeline jobs
+    :param log_message: The message to log during ETL pipeline execution
     :type log_message: str
     '''
     format = '%Y-%m-%d %H:%M:%S' # Format: YYYY-MM-DD HH:MM:SS
