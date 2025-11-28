@@ -226,6 +226,7 @@ def extract_ph_city_tags(
             'class': 'panel panel-default panel-pagasa'
         }
     )
+
     return list_of_all_ph_city_tags
 
 def extract_ph_city_names(
