@@ -183,5 +183,22 @@ def save_valid_period_to_json(
         'w'
     ) as json_file:
         json.dump(data, json_file, indent=4)
-    
+
     json_file.close()
+
+def extract_ph_tourist_area_tags(
+        soup: BeautifulSoup
+) -> list[BeautifulSoup | None]:
+    '''
+    Function to extract selected Philippine tourist
+    area tags to get their weather outlook from the
+    PAGASA-DOST website.
+            
+    :param soup: BeautifulSoup object to navigate
+    and manipulate the entire content of the web-page
+    :type soup: BeautifulSoup
+
+    :return: List of all selected Philippine tourist area
+    HTML tags
+    :rtype: list[BeautifulSoup | None]
+    '''
