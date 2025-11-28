@@ -230,7 +230,7 @@ def extract_ph_tourist_area_names(
 ) -> dict[str, dict]:
     '''
     Function to extract all the name of selected Philippine
-    tourist area to get their weather outlook from the
+    tourist areas to get their weather outlook from the
     PAGASA-DOST website.
 
     :param list_of_all_ph_tourist_area_tags: List of all
@@ -253,3 +253,21 @@ def extract_ph_tourist_area_names(
         result[ph_tourist_area_name] = {}
 
     return result
+
+def map_weather_dates_to_ph_tourist_areas(
+        soup: BeautifulSoup,
+        ph_tourist_area_names: dict[str, dict]
+) -> dict[str, dict]:
+    '''
+    Function to map extracted weather dates for selected
+    Philippine tourist areas to get their weather outlook from
+    the PAGASA-DOST website.
+
+    :param ph_tourist_area_names: Selected Philippine tourist
+    area names dictionary
+    :type ph_tourist_area_names: dict[str, dict]
+
+    :return: Selected Philippine tourist area names with weather dates
+    dictionary
+    :rtype: dict[str, dict]
+    '''
