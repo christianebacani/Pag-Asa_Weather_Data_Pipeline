@@ -1,6 +1,6 @@
 '''
-    Module to ingest the data of the weather outlook for
-    selected Philippine cities from the PAGASA-DOST website.
+    Module to ingest weather outlook for selected
+    Philippine cities from the PAGASA-DOST website.
 '''
 import os
 import requests
@@ -10,10 +10,10 @@ from bs4 import BeautifulSoup
 def create_subdir(
 ) -> None:
     '''
-        Function to create data/raw/weather_outlook_for_ph_cities/
-        subdirectory to store dedicated json files
-        for the ingested data of weather outlook for selected
-        Philippine cities from the PAGASA-DOST website.
+        Creates the data/raw/weather_outlook_for_ph_cities/
+        subdirectory to store JSON files for daily
+        weather forecast data ingested from the
+        PAGASA-DOST website.
     '''
     # Create the data/raw/weather_outlook_for_ph_cities/ subdirectory if it doesn't exist
     if not os.path.exists('data/raw/weather_outlook_for_ph_cities'):
@@ -23,16 +23,18 @@ def extract_beautiful_soup_object(
         url: str
 ) -> BeautifulSoup | None:
     '''
-    Function to extract the BeautifulSoup object of weather
-    outlook for selected Philippine cities from the PAGASA-DOST 
-    website.
+    Extracts the BeautifulSoup object of the
+    weather outlook for selected Philippine
+    cities page from the PAGASA-DOST website.
 
-    :param url: Url of the PAGASA-DOST website that consist of
-    weather outlook for selected Philippine cities
+    :param url: URL of the PAGASA-DOST page
+    containing the weather outlook for selected
+    Philippine cities
     :type url: str
 
-    :return: BeautifulSoup object to navigate and manipulate the
-    entire content of the web-page
+    :return: BeautifulSoup object for navigating
+    and manipulating the page content, or None if
+    extraction fails
     :rtype: BeautifulSoup | None
     '''
     response = requests.get(url)
@@ -49,22 +51,21 @@ def extract_issued_datetime(
         soup: BeautifulSoup
 ) -> str:
     '''
-    Function to extract the issued datetime of
-    weather outlook for selected Philippine cities 
-    from the PAGASA-DOST website.
+    Extracts the issued datetime of the weather
+    outlook for selected Philippine cities from
+    the PAGASA-DOST website.
 
-    :param soup: BeautifulSoup object to navigate
-    and manipulate the entire content of the web-page
+    :param soup: BeautifulSoup object for navigating
+    and manipulating the page content
     :type soup: BeautifulSoup
 
-    :return: Issued datetime of weather outlook for
+    :return: Issued datetime of the weather outlook for
     selected Philippine cities
     :rtype: str
     '''
     issued_datetime = ''
 
-    # Extract the necessary HTML tags to get the issued datetime of
-    # weather outlook for selected Philippine cities
+    # Extract HTML tags for issued datetime of the weather outlook for selected Philippine cities
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
     issued_datetime_and_valid_period_tag = div_tag_with_row_weather_page_class.find(
         'div',
@@ -83,7 +84,7 @@ def extract_issued_datetime(
     if div_tag_with_validity_class is not None:
         issued_datetime_tag = div_tag_with_validity_class.find('b')
         issued_datetime = str(issued_datetime_tag.text).strip()
-        # Using split() method to remove extra whitespaces in between words
+        # Use split() method to remove extra whitespaces in between words
         issued_datetime = ' '.join(issued_datetime.split())
 
     return issued_datetime
@@ -92,16 +93,18 @@ def save_issued_datetime_to_json(
         issued_datetime: str
 ) -> None:
     '''
-    Function to save the issued datetime of weather outlook for
-    selected Philippine cities to a dedicated json file of the 
-    data/raw/weather_outlook_for_ph_cities/ subdirectory from
-    your local machine.
+    Saves the issued datetime of the
+    weather outlook for selected Philippine
+    cities to a JSON file in the
+    data/raw/weather_outlook_for_ph_cities/
+    subdirectory on the local machine.
 
-    :param issued_datetime: Issued datetime of weather outlook
-    for selected Philippine cities
+    :param issued_datetime: Issued datetime
+    of the weather outlook for selected
+    Philippine cities
     :type issued_datetime: str
     '''
-    # Create a dictionary that stores the issued datetime of weather outlook for selected Philippine cities
+    # Create a dictionary to store issued datetime of the weather outlook for selected Philippine cities
     data = {
         "issued_datetime": issued_datetime
     }
@@ -119,22 +122,21 @@ def extract_valid_period(
         soup: BeautifulSoup
 ) -> str:
     '''
-    Function to extract the valid period of weather
-    outlook for selected Philippine cities from the
-    PAGASA-DOST website.
+    Extracts the valid period of the weather
+    outlook for selected Philippine cities from
+    the PAGASA-DOST website.
 
-    :param soup: BeautifulSoup object to navigate and
-    manipulate the entire content of the web-page
+    :param soup: BeautifulSoup object for navigating
+    and manipulating the page content
     :type soup: BeautifulSoup
 
-    :return: Valid period of weather outlook for
+    :return: Valid period of the weather outlook for
     selected Philippine cities
     :rtype: str
     '''
     valid_period = ''
 
-    # Extract the necessary HTML tags to get the valid period of weather outlook for
-    # selected Philippine cities
+    # Extract HTML tags for valid period of the weather outlook for selected Philippine cities
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
     issued_datetime_and_valid_period_tag = div_tag_with_row_weather_page_class.find(
         'div',
@@ -160,16 +162,18 @@ def save_valid_period_to_json(
         valid_period: str
 ) -> None:
     '''
-    Function to save the valid period of weather outlook for
-    selected Philippine cities to a dedicated json file of the 
-    data/raw/weather_outlook_for_ph_cities/ subdirectory from
-    your local machine.
-        
-    :param valid_period: Valid period of weather outlook for
-    selected Philippine cities
-    :type valid_period: str
+    Saves the valid period of the
+    weather outlook for selected Philippine
+    cities to a JSON file in the
+    data/raw/weather_outlook_for_ph_cities/
+    subdirectory on the local machine.
+
+    :param issued_datetime: Valid period of
+    the weather outlook for selected Philippine
+    cities
+    :type issued_datetime: str
     '''
-    # Create a dictionary that stores the valid period of weather outlook for selected Philippine cities
+    # Create a dictionary to store valid period of the weather outlook for selected Philippine cities
     data = {
         "valid_period": valid_period
     }
@@ -187,20 +191,19 @@ def extract_ph_city_tags(
     soup: BeautifulSoup
 ) -> list[BeautifulSoup | None]:
     '''
-    Function to extract selected Philippine city
-    tags to get their weather outlook from the
-    PAGASA-DOST website.
-            
-    :param soup: BeautifulSoup object to navigate
-    and manipulate the entire content of the web-page
-    :type soup: BeautifulSoup
+    Extracts selected Philippine city tags to get their
+    weather outlook from the PAGASA-DOST website.
 
-    :return: List of all selected Philippine city HTML tags
+    :param soup: BeautifulSoup object for navigating and
+    manipulating the page content
+    :type soup: BeautifulSoup
+    
+    :return: List of selected Philippine city HTML tags
     :rtype: list[BeautifulSoup | None]
     '''
     list_of_all_ph_city_tags = []
 
-    # Extract the necessary HTML tags to get all selected Philippine city tags for their weather outlook
+    # Extract HTML tags for all selected Philippine cities to get their weather outlook
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
     weather_outlook_for_ph_city_tag = div_tag_with_row_weather_page_class.find(
         'div',
@@ -219,7 +222,7 @@ def extract_ph_city_tags(
     if div_tag_with_panel_group_class is None:
         return list_of_all_ph_city_tags
 
-    # Using find_all() method to access all selected Philippine city HTML tags
+    # Use find_all() method to access all selected Philippine city HTML tags
     list_of_all_ph_city_tags = div_tag_with_panel_group_class.find_all(
         'div',
         attrs={
@@ -233,21 +236,20 @@ def extract_ph_city_names(
         list_of_all_ph_city_tags: list[BeautifulSoup]
 ) -> dict[str, dict]:
     '''
-    Function to extract all the name of selected Philippine
-    cities to get their weather outlook from the PAGASA-DOST
+    Extracts the names of selected Philippine cities to
+    get their weather outlook from the PAGASA-DOST
     website.
 
-    :param list_of_all_ph_city_tags: List of all selected
+    :param list_of_all_ph_city_tags: List of selected
     Philippine city HTML tags
     :type list_of_all_ph_city_tags: list[BeautifulSoup]
 
-    :return: Selected Philippine city names dictionary
+    :return: Dictionary of selected Philippine city names
     :rtype: dict[str, dict]
     '''
     result = {}
 
-    # Using for-loop to access rows that contains the necessary HTML tags to get
-    # the name of all selected Philippine city
+    # Loop through rows containing HTML tags to extract the names of the selected Philippine cities
     for ph_city_tag in list_of_all_ph_city_tags:
         ph_city_name_tag = ph_city_tag.find('a')
         ph_city_name = str(ph_city_name_tag.text).strip()
@@ -260,30 +262,28 @@ def map_weather_dates_to_ph_cities(
         ph_city_names: dict[str, dict]
 ) -> dict[str, dict]:
     '''
-    Function to map extracted weather dates for selected
-    Philippine cities to get their weather outlook from
-    the PAGASA-DOST website.
+    Maps extracted weather dates to selected Philippine cities
+    for their weather outlook from the PAGASA-DOST website.
 
-    :param list_of_all_ph_city_tags: List of all selected
-    Philippine city HTML tags
+    :param list_of_all_ph_city_tags: List of selected Philippine
+    city HTML tags
     :type list_of_all_ph_city_tags: list[BeautifulSoup]
 
-    :param ph_city_names: Selected Philippine city names dictionary
+    :param ph_city_names: Dictionary of selected Philippine city names
     :type ph_city_names: dict[str, dict]
-
-    :return: Selected Philippine city names with weather dates dictionary
+    
+    :return: Dictionary of city names with corresponding weather dates
     :rtype: dict[str, dict]
     '''
     result = ph_city_names
 
-    # Using for-loop to access rows that contains the necessary HTML tags to
-    # get weather dates for selected Philippine cities
+    # Loop through rows with HTML tags to extract selected Philippine city names and their weather dates
     for ph_city_tag in list_of_all_ph_city_tags:
         ph_city_name_tag = ph_city_tag.find('a')
         ph_city_name = str(ph_city_name_tag.text).strip()
 
         table_tag = ph_city_tag.find('table', attrs={'class': 'table'})
-        # Using find_all() method to retrieve all weather dates for selected Philippine cities
+        # Use find_all() to retrieve all weather dates
         list_of_all_table_header_tags = table_tag.find_all('th')
 
         weather_dates = []
@@ -303,27 +303,24 @@ def map_temperature_ranges_to_ph_cities(
         ph_cities_with_weather_dates: dict[str, dict]
 ) -> dict[str, dict]:
     '''
-    Function to map extracted temperature ranges per
-    weather dates for selected Philippine cities to
-    get their weather outlook from the PAGASA-DOST
-    website.
+    Maps extracted temperature ranges per weather date
+    to selected Philippine cities for their weather
+    outlook from the PAGASA-DOST website.
 
-    :param list_of_all_ph_city_tags: List of all selected
+    :param list_of_all_ph_city_tags: List of selected
     Philippine city HTML tags
     :type list_of_all_ph_city_tags: list[BeautifulSoup]
-
-    :param ph_cities_with_weather_dates: Selected Philippine
-    city names with weather dates dictionary
+    
+    :param ph_cities_with_weather_dates: Dictionary of
+    selected city names with weather dates
     :type ph_cities_with_weather_dates: dict[str, dict]
-
-    :return: Selected Philippine city names with temperature
-    ranges per weather dates dictionary
+    
+    :return: Dictionary of city names with temperature ranges per weather date
     :rtype: dict[str, dict]
     '''
     result = ph_cities_with_weather_dates
 
-    # Using for-loop to access rows that contains the necessary HTML tags to
-    # get temperature ranges for selected Philippine cities
+    # Loop through rows with HTML tags to extract city names, weather dates, and temperature ranges
     for ph_city_tag in list_of_all_ph_city_tags:
         ph_city_name_tag = ph_city_tag.find('a')
         ph_city_name = str(ph_city_name_tag.text).strip()
@@ -335,7 +332,7 @@ def map_temperature_ranges_to_ph_cities(
                 'class': 'desktop-view-tr'
             }
         )
-        # Using find_all() method to retrieve all temperature ranges for selected Philippine cities
+        # Use find_all() to retrieve all temperature ranges data
         list_of_all_table_data_tags = temperature_ranges_and_chances_of_rain_pct_tag.find_all('td')
 
         temperature_ranges = []
@@ -359,29 +356,25 @@ def map_chances_of_rain_pct_to_ph_cities(
         ph_cities_weather_outlook: dict[str, dict]
 ) -> None:
     '''
-    Function to map extracted percentage of chances of
-    rain per weather dates for selected Philippine cities
-    to get their weather outlook from the PAGASA-DOST
-    website.
+    Maps extracted percentages of chance of rain per weather
+    date to selected Philippine cities for their weather
+    outlook from the PAGASA-DOST website.
 
-    :param list_of_all_ph_city_tags: List of all selected
+    :param list_of_all_ph_city_tags: List of selected
     Philippine city HTML tags
     :type list_of_all_ph_city_tags: list[BeautifulSoup]
     
-    :param ph_cities_weather_outlook: Description
-    :type ph_cities_weather_outlook: Selected Philippine
-    city names with temperature ranges per weather dates
-    dictionary
-
-    :return: Selected Philippine city names with temperature
-    ranges and percentage of chances of rain per weather
-    dates dictionary
+    :param ph_cities_weather_outlook: Dictionary of selected
+    city names with temperature ranges per weather date
+    :type ph_cities_weather_outlook: dict[str, dict]
+    
+    :return: Dictionary of city names with temperature ranges
+    and chance of rain per weather date
     :rtype: dict[str, dict]
     '''
     result = ph_cities_weather_outlook
 
-    # Using for-loop to access rows that contains the necessary HTML
-    # tags to get chances of rain percentages for selected Philippine cities
+    # Loop through rows with HTML tags to extract city names, weather dates, temperature ranges, and rain chance percentages  
     for ph_city_tag in list_of_all_ph_city_tags:
         ph_city_name_tag = ph_city_tag.find('a')
         ph_city_name = str(ph_city_name_tag.text).strip()
@@ -393,7 +386,7 @@ def map_chances_of_rain_pct_to_ph_cities(
                 'class': 'desktop-view-tr'
             }
         )
-        # Using find_all() method to retrieve all chances of rain percentages for selected Philippine cities
+        # Use find_all() to retrieve all rain chance percentages data
         list_of_all_table_data_tags = temperature_ranges_and_chances_of_rain_pct_tag.find_all('td')
 
         chances_of_rain_percentages = []
@@ -417,17 +410,17 @@ def save_ph_cities_weather_outlook_to_json(
         ph_cities_weather_outlook: dict[str, dict]
 ) -> None:
     '''
-    Function to save the weather outlook of selected
-    Philippine cities to a dedicated json file 
-    of the data/raw/weather_outlook_for_ph_cities/
-    subdirectory from your local machine.
+    Saves the weather outlook of selected Philippine
+    cities to a JSON file in the
+    data/raw/weather_outlook_for_ph_cities/ subdirectory
+    on the local machine.
 
-    :param ph_cities_weather_outlook: Selected Philippine
-    city names with temperature ranges and percentage
-    of chances of rain per weather dates dictionary
+    :param ph_cities_weather_outlook: Dictionary of city
+    names with temperature ranges and rain chances per
+    weather date
     :type ph_cities_weather_outlook: dict[str, dict]
     '''
-    # Create a dictionary that stores the weather outlook for selected Philippine cities
+    # Create a dictionary to store weather outlook of the selected Philippine cities
     data = {}
 
     for ph_city_name, weather_outlook in ph_cities_weather_outlook.items():
