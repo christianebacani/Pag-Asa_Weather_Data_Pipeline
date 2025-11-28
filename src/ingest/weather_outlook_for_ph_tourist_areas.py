@@ -224,3 +224,19 @@ def extract_ph_tourist_area_tags(
     list_of_all_ph_tourist_area_tags = tbody_tag.find_all('tr')
 
     return list_of_all_ph_tourist_area_tags
+
+def extract_ph_tourist_area_names(
+        list_of_all_ph_tourist_area_tags: list[BeautifulSoup]
+) -> dict[str, dict]:
+    '''
+    Function to extract all the name of selected Philippine
+    tourist area to get their weather outlook from the
+    PAGASA-DOST website.
+
+    :param list_of_all_ph_tourist_area_tags: List of all
+    selected Philippine tourist area HTML tags
+    :type list_of_all_ph_tourist_area_tags: list[BeautifulSoup]
+
+    :return: Selected Philippine tourist area names dictionary
+    :rtype: dict[str, dict]
+    '''
