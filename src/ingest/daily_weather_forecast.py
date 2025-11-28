@@ -236,6 +236,25 @@ def save_tc_information_to_json(
     :param tc_information: Tropical cyclone information dictionary
     :type forecast_weather_conditions: dict[str, str]
     '''
+    # Create a dictionary that stores the tropical cyclone information
+    # of daily weather forecast
+    data = {
+        "current_update": tc_information['current_update'],
+        "tropical_cyclone_name": tc_information['tropical_cyclone_name'],
+        "location": tc_information['location'],
+        "maximum_sustained_winds": tc_information['maximum_sustained_winds'],
+        "gustiness": tc_information['gustiness'],
+        "movement": tc_information['movement']
+    }
+
+    # Save the dictionary to a json file using open() method and json module
+    with open(
+        'data/raw/daily_weather_forecast/tropical_cyclone_information.json',
+        'w'
+    ) as json_file:
+        json.dump(data, json_file, indent=4)
+    
+    json_file.close()
 
 def extract_forecast_weather_conditions(
         soup: BeautifulSoup
