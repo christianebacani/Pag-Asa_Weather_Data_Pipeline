@@ -133,7 +133,7 @@ def extract_valid_period(
     '''
     valid_period = ''
 
-    # Extract the necessary HTML tags to get the issued datetime
+    # Extract the necessary HTML tags to get the valid period
     # of weather outlook for selected Philippine tourist areas
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
     issued_datetime_and_valid_period_tag = div_tag_with_row_weather_page_class.find(
@@ -254,20 +254,45 @@ def extract_ph_tourist_area_names(
 
     return result
 
-def map_weather_dates_to_ph_tourist_areas(
-        soup: BeautifulSoup,
-        ph_tourist_area_names: dict[str, dict]
-) -> dict[str, dict]:
+def extract_weather_dates(
+        soup: BeautifulSoup
+) -> list[str]:
     '''
-    Function to map extracted weather dates for selected
-    Philippine tourist areas to get their weather outlook from
-    the PAGASA-DOST website.
+    Function to extract all the weather dates for
+    weather outlook of selected Philippine tourist areas.
 
-    :param ph_tourist_area_names: Selected Philippine tourist
-    area names dictionary
-    :type ph_tourist_area_names: dict[str, dict]
+    :param soup: BeautifulSoup object to navigate and
+    manipulate the entire content of the web-page
+    :type soup: BeautifulSoup
 
-    :return: Selected Philippine tourist area names with weather dates
-    dictionary
-    :rtype: dict[str, dict]
+    :return: List of all the weather dates for weather
+    outlook of selected Philippine tourist areas
+    :rtype: list[str]
     '''
+    weather_dates = []
+
+    # Extract the necessary HTML tags to get all weather dates of
+    # selected Philippine tourist area for their weather outlook
+    div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
+    weather_outlook_for_ph_tourist_area_tag = div_tag_with_row_weather_page_class.find(
+        'div',
+        attrs={
+            'class': 'col-md-12 col-lg-12'
+        }
+    )
+    table_tag = weather_outlook_for_ph_tourist_area_tag.find('table', attrs={'class': 'table desktop'})
+
+    # We need to check if the table_tag is missing
+    if table_tag is None:
+        return weather_dates
+
+    thead_tag = table_tag.find('thead')
+    # Using find_all() method to access all weather dates 
+    list_of_all_table_header_tags = thead_tag.find_all('th')[1:]
+
+    for table_header_tag in list_of_all_table_header_tags:
+        weather_date = str(table_header_tag.text).strip()
+        weather_date = ' '.join(weather_date.split())
+        weather_dates.append(weather_date)
+    
+    return weather_dates
