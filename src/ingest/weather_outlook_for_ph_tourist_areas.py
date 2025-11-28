@@ -170,3 +170,18 @@ def save_valid_period_to_json(
     outlook for selected Philippine tourist areas
     :type valid_period: str
     '''
+    # Create a dictionary that stores the valid period
+    # of weather outlook for selected Philippine tourist areas
+    data = {
+        "valid_period": valid_period
+    }
+
+    # Save the dictionary to a json file using open() method
+    # and json module
+    with open(
+        'data/raw/weather_outlook_for_ph_tourist_areas/valid_period.json',
+        'w'
+    ) as json_file:
+        json.dump(data, json_file, indent=4)
+    
+    json_file.close()
