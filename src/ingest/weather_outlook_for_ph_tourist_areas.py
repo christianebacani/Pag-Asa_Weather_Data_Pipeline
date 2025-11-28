@@ -202,3 +202,24 @@ def extract_ph_tourist_area_tags(
     HTML tags
     :rtype: list[BeautifulSoup | None]
     '''
+    list_of_all_ph_tourist_area_tags = []
+
+    # Extract the necessary HTML tags to get all selected Philippine
+    # tourist area tags for their weather outlook
+    div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
+    weather_outlook_for_ph_tourist_area_tag = div_tag_with_row_weather_page_class.find(
+        'div',
+        attrs={
+            'class': 'col-md-12 col-lg-12'
+        }
+    )
+    table_tag = weather_outlook_for_ph_tourist_area_tag.find('table', attrs={'class': 'table desktop'})
+
+    # We need to check if the table_tag is missing
+    if table_tag is None:
+        return list_of_all_ph_tourist_area_tags
+
+    tbody_tag = table_tag.find('tbody')
+    list_of_all_ph_tourist_area_tags = tbody_tag.find_all('tr')
+
+    return list_of_all_ph_tourist_area_tags
