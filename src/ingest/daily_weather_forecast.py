@@ -224,6 +224,19 @@ def extract_tc_information(
 
     return tc_information
 
+def save_tc_information_to_json(
+        tc_information: dict[str, str]
+) -> None:
+    '''
+    Function to save the tropcial cyclone information
+    of daily weather forecast to a dedicated
+    json file of the data/raw/daily_weather_forecast/
+    subdirectory from your local machine.
+
+    :param tc_information: Tropical cyclone information dictionary
+    :type forecast_weather_conditions: dict[str, str]
+    '''
+
 def extract_forecast_weather_conditions(
         soup: BeautifulSoup
 ) -> dict[str, list]:
