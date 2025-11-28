@@ -44,7 +44,7 @@ if __name__ == '__main__':
     generate_logs(
         '(DEV): Ingest the data for the daily weather forecast.'
     )
-    
+
     # Ingest data for weather outlook for selected Philippine cities
     ingest_weather_outlook_for_ph_cities()
     generate_logs(
