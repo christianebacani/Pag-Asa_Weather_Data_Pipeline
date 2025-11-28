@@ -247,8 +247,7 @@ def extract_ph_tourist_area_names(
     for ph_tourist_area_tag in list_of_all_ph_tourist_area_tags:
         ph_tourist_area_name_tag = ph_tourist_area_tag.find('td')
         ph_tourist_area_name = str(ph_tourist_area_name_tag.text).strip()
-        # Using split() method to remove extra whitespaces in-between words
-        ph_tourist_area_name = ' '.join(ph_tourist_area_name.split())
+        ph_tourist_area_name = ph_tourist_area_name.replace('( ', '(')
         result[ph_tourist_area_name] = {}
 
     return result
