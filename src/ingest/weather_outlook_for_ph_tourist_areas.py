@@ -240,3 +240,15 @@ def extract_ph_tourist_area_names(
     :return: Selected Philippine tourist area names dictionary
     :rtype: dict[str, dict]
     '''
+    result = {}
+
+    # Using for-loop to access rows that contains the necessary HTML tags to get
+    # the name of all selected Philippine tourist area
+    for ph_tourist_area_tag in list_of_all_ph_tourist_area_tags:
+        ph_tourist_area_name_tag = ph_tourist_area_tag.find('td')
+        ph_tourist_area_name = str(ph_tourist_area_name_tag.text).strip()
+        # Using split() method to remove extra whitespaces in-between words
+        ph_tourist_area_name = ' '.join(ph_tourist_area_name.split())
+        result[ph_tourist_area_name] = {}
+
+    return result
