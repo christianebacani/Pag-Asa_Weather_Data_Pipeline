@@ -497,6 +497,8 @@ def extract_temperature_and_relative_humidity(
     # temperature and relative humidity of daily weather forecast
     for row_number, table_row_tag in enumerate(list_of_all_table_row_tags):
         row_number += 1
+        # Using find_all() method to retrieve all the necessary data of
+        # temperature and relative humidity
         list_of_all_table_data_tags = table_row_tag.find_all('td')[1:]
 
         first_instance_of_table_data_tag = str(list_of_all_table_data_tags[0].text).strip()
