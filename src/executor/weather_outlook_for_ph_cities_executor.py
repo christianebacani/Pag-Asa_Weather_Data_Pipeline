@@ -1,7 +1,8 @@
 '''
-    Module to execute functions for ingesting, transformation, 
-    loading, and etc. of weather outlook for selected Philippine
-    cities from the PAGASA-DOST website.
+    Module for executing ingestion, transformation,
+    and loading functions for the weather outlook of
+    selected Philippine cities from the PAGASA-DOST
+    website.
 '''
 from ingest.weather_outlook_for_ph_cities import create_subdir
 from ingest.weather_outlook_for_ph_cities import extract_beautiful_soup_object
@@ -19,14 +20,13 @@ from ingest.weather_outlook_for_ph_cities import save_ph_cities_weather_outlook_
 def ingest_weather_outlook_for_ph_cities(
 ) -> None:
     '''
-        Function to ingest weather outlook for
-        selected Philippine cities from the PAGASA-DOST
-        website by executing all functions from the
-        weather_outlook_for_ph_cities module of src/ingest/
-        package.
+        Ingests the weather outlook for selected
+        Philippine cities from the PAGASA-DOST
+        website by executing all functions in the
+        weather_outlook_for_ph_cities module of
+        the src/ingest package.
     '''
-    # Execute all the functions to ingest the data of weather outlook for selected 
-    # Philippine cities from the PAGASA-DOST website
+    # Run all functions to ingest weather outlook data for selected Philippine cities
     create_subdir()
     soup = extract_beautiful_soup_object(
         'https://www.pagasa.dost.gov.ph/weather/weather-outlook-selected-philippine-cities'
