@@ -9,6 +9,7 @@ from ingest.weather_outlook_for_ph_tourist_areas import extract_issued_datetime
 from ingest.weather_outlook_for_ph_tourist_areas import save_issued_datetime_to_json
 from ingest.weather_outlook_for_ph_tourist_areas import extract_valid_period
 from ingest.weather_outlook_for_ph_tourist_areas import save_valid_period_to_json
+from ingest.weather_outlook_for_ph_tourist_areas import extract_ph_tourist_area_tags
 
 def ingest_weather_outlook_for_ph_tourist_areas(
 ) -> None:
@@ -31,3 +32,5 @@ def ingest_weather_outlook_for_ph_tourist_areas(
 
     valid_period = extract_valid_period(soup)
     save_valid_period_to_json(valid_period)
+
+    list_of_all_ph_tourist_area_tags = extract_ph_tourist_area_tags(soup)
