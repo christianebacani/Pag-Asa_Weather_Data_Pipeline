@@ -219,7 +219,7 @@ def extract_ph_city_tags(
     if div_tag_with_panel_group_class is None:
         return list_of_all_ph_city_tags
 
-    # Using for-loop to access all selected Philippine city tags
+    # Using find_all() method to access all selected Philippine city HTML tags
     list_of_all_ph_city_tags = div_tag_with_panel_group_class.find_all(
         'div',
         attrs={
