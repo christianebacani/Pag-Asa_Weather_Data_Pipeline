@@ -1,6 +1,7 @@
 '''
-    Module to ingest the data of the weather outlook for
-    selected Philippine tourist areas from the PAGASA-DOST website.
+    Module to ingest weather outlook for selected
+    Philippine tourist areas from the PAGASA-DOST
+    website.
 '''
 import os
 import requests
@@ -10,10 +11,9 @@ from bs4 import BeautifulSoup
 def create_subdir(
 ) -> None:
     '''
-        Function to create data/raw/weather_outlook_for_ph_tourist_areas/
-        subdirectory to store dedicated json files
-        for the ingested data of weather outlook for selected
-        Philippine tourist areas from the PAGASA-DOST website.
+        Creates the data/raw/weather_outlook_for_ph_torist_areas/
+        subdirectory to store JSON files for daily weather
+        forecast data ingested from the PAGASA-DOST website.
     '''
     # Create the data/raw/weather_outlook_for_ph_cities/ subdirectory if it doesn't exist
     if not os.path.exists('data/raw/weather_outlook_for_ph_tourist_areas'):
@@ -23,17 +23,19 @@ def extract_beautiful_soup_object(
         url: str
 ) -> BeautifulSoup | None:
     '''
-    Function to extract the BeautifulSoup object of weather
-    outlook for selected Philippine cities from the PAGASA-DOST 
-    website.
+    Extracts the BeautifulSoup object of the
+    weather outlook for selected Philippine
+    tourist areas page from the PAGASA-DOST website.
 
-    :param url: Url of the PAGASA-DOST website that consist of
-    weather outlook for selected Philippine tourist areas
+    :param url: URL of the PAGASA-DOST page
+    containing the weather outlook for selected
+    Philippine tourist areas
     :type url: str
 
-    :return: BeautifulSoup object to navigate and manipulate the
-    entire content of the web-page
-    :rtype: BeautifulSoup
+    :return: BeautifulSoup object for navigating
+    and manipulating the page content, or None if
+    extraction fails
+    :rtype: BeautifulSoup | None
     '''
     response = requests.get(url)
 
@@ -49,22 +51,21 @@ def extract_issued_datetime(
     soup: BeautifulSoup
 ) -> str:
     '''
-    Function to extract the issued datetime of
-    weather outlook for selected Philippine tourist areas 
+    Extracts the issued datetime of the weather
+    outlook for selected Philippine tourist areas
     from the PAGASA-DOST website.
 
-    :param soup: BeautifulSoup object to navigate and
-    manipulate the entire content of the web-page
+    :param soup: BeautifulSoup object for navigating
+    and manipulating the page content
     :type soup: BeautifulSoup
 
-    :return: Issued datetime of weather outlook for selected
-    Philippine tourist areas
+    :return: Issued datetime of the weather outlook for
+    selected Philippine tourist areas
     :rtype: str
     '''
     issued_datetime = ''
 
-    # Extract the necessary HTML tags to get the issued datetime of
-    # weather outlook for selected Philippine tourist areas
+    # Extract HTML tags for issued datetime of the weather outlook for selected Philippine tourist areas
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
     issued_datetime_and_valid_period_tag = div_tag_with_row_weather_page_class.find(
         'div',
@@ -90,18 +91,18 @@ def save_issued_datetime_to_json(
         issued_datetime: str
 ) -> None:
     '''
-    Function to save the issued datetime of weather
-    outlook for selected Philippine tourist areas
-    to a dedicated json file of the
+    Saves the issued datetime of the
+    weather outlook for selected Philippine
+    tourist areas to a JSON file in the
     data/raw/weather_outlook_for_ph_tourist_areas/
-    subdirectory from your local machine.
+    subdirectory on the local machine.
 
-    :param issued_datetime: Issued datetime of weather
-    outlook for selected Philippine tourist areas
+    :param issued_datetime: Issued datetime
+    of the weather outlook for selected
+    Philippine tourist areas
     :type issued_datetime: str
     '''
-    # Create a dictionary that stores the issued datetime
-    # of weather outlook for selected Philippine tourist areas
+    # Create a dictionary to store issued datetime of the weather outlook for selected Philippine tourist areas
     data = {
         "issued_datetime": issued_datetime
     }
@@ -117,24 +118,23 @@ def save_issued_datetime_to_json(
 
 def extract_valid_period(
         soup: BeautifulSoup
-) -> str:
+) -> str:    
     '''
-    Function to extract the valid period of weather
-    outlook for selected Philippine tourist areas from the
-    PAGASA-DOST website.
+    Extracts the valid period of the weather
+    outlook for selected Philippine tourist areas
+    from the PAGASA-DOST website.
 
-    :param soup: BeautifulSoup object to navigate and
-    manipulate the entire content of the web-page
+    :param soup: BeautifulSoup object for navigating
+    and manipulating the page content
     :type soup: BeautifulSoup
 
-    :return: Valid period of weather outlook for selected
-    Philippine tourist areas
+    :return: Valid period of the weather outlook for
+    selected Philippine tourist areas
     :rtype: str
     '''
     valid_period = ''
 
-    # Extract the necessary HTML tags to get the valid period
-    # of weather outlook for selected Philippine tourist areas
+    # Extract HTML tags for valid period of the weather outlook for selected Philippine tourist areas
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
     issued_datetime_and_valid_period_tag = div_tag_with_row_weather_page_class.find(
         'div',
@@ -160,24 +160,23 @@ def save_valid_period_to_json(
         valid_period: str
 ) -> None:
     '''
-    Function to save the valid period of weather
-    outlook for selected Philippine tourist areas
-    to a dedicated json file of the
+    Saves the valid period of the
+    weather outlook for selected Philippine
+    tourist areas to a JSON file in the
     data/raw/weather_outlook_for_ph_tourist_areas/
-    subdirectory from your local machine.
-    
-    :param valid_period: Valid period of weather
-    outlook for selected Philippine tourist areas
-    :type valid_period: str
+    subdirectory on the local machine.
+
+    :param issued_datetime: Valid period of
+    the weather outlook for selected Philippine
+    tourist areas
+    :type issued_datetime: str
     '''
-    # Create a dictionary that stores the valid period
-    # of weather outlook for selected Philippine tourist areas
+    # Create a dictionary to store valid period of the weather outlook for selected Philippine tourist areas
     data = {
         "valid_period": valid_period
     }
 
-    # Save the dictionary to a json file using open() method
-    # and json module
+    # Save the dictionary to a json file using open() method and json module
     with open(
         'data/raw/weather_outlook_for_ph_tourist_areas/valid_period.json',
         'w'
@@ -190,22 +189,19 @@ def extract_ph_tourist_area_tags(
         soup: BeautifulSoup
 ) -> list[BeautifulSoup | None]:
     '''
-    Function to extract selected Philippine tourist
-    area tags to get their weather outlook from the
-    PAGASA-DOST website.
-            
-    :param soup: BeautifulSoup object to navigate
-    and manipulate the entire content of the web-page
-    :type soup: BeautifulSoup
+    Extracts selected Philippine tourist area tags to get their
+    weather outlook from the PAGASA-DOST website.
 
-    :return: List of all selected Philippine tourist area
-    HTML tags
+    :param soup: BeautifulSoup object for navigating and
+    manipulating the page content
+    :type soup: BeautifulSoup
+    
+    :return: List of selected Philippine tourist area HTML tags
     :rtype: list[BeautifulSoup | None]
     '''
     list_of_all_ph_tourist_area_tags = []
 
-    # Extract the necessary HTML tags to get all selected Philippine
-    # tourist area tags for their weather outlook
+    # Extract HTML tags for all selected Philippine tourist areas to get their weather outlook
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
     weather_outlook_for_ph_tourist_area_tag = div_tag_with_row_weather_page_class.find(
         'div',
@@ -220,7 +216,7 @@ def extract_ph_tourist_area_tags(
         return list_of_all_ph_tourist_area_tags
 
     tbody_tag = table_tag.find('tbody')
-    # Using find_all() method to access all selected Philippine tourist area HTML tags
+    # Use find_all() method to access all selected Philippine tourist area HTML tags
     list_of_all_ph_tourist_area_tags = tbody_tag.find_all('tr')
 
     return list_of_all_ph_tourist_area_tags
@@ -229,26 +225,24 @@ def extract_ph_tourist_area_names(
         list_of_all_ph_tourist_area_tags: list[BeautifulSoup]
 ) -> dict[str, dict]:
     '''
-    Function to extract all the name of selected Philippine
-    tourist areas to get their weather outlook from the
-    PAGASA-DOST website.
+    Extracts the names of selected Philippine tourist areas to
+    get their weather outlook from the PAGASA-DOST
+    website.
 
-    :param list_of_all_ph_tourist_area_tags: List of all
-    selected Philippine tourist area HTML tags
-    :type list_of_all_ph_tourist_area_tags: list[BeautifulSoup]
+    :param list_of_all_ph_city_tags: List of selected
+    Philippine tourist area HTML tags
+    :type list_of_all_ph_city_tags: list[BeautifulSoup]
 
-    :return: Selected Philippine tourist area names dictionary
+    :return: Dictionary of selected Philippine city tourist area names
     :rtype: dict[str, dict]
     '''
     result = {}
 
-    # Using for-loop to access rows that contains the necessary HTML tags to get
-    # the name of all selected Philippine tourist area
+    # Loop through rows containing HTML tags to extract the names of the selected Philippine tourist areas
     for ph_tourist_area_tag in list_of_all_ph_tourist_area_tags:
         ph_tourist_area_name_tag = ph_tourist_area_tag.find('td')
         ph_tourist_area_name = str(ph_tourist_area_name_tag.text).strip()
-        # Remove unnecessary whitespace after the opening parenthesis of the name
-        # of all selected Philippine tourist area
+        # Use replace() to remove extra whitespace after '(' in Philippine tourist area names
         ph_tourist_area_name = ph_tourist_area_name.replace('( ', '(')
         result[ph_tourist_area_name] = {}
 
@@ -258,21 +252,20 @@ def extract_weather_dates(
         soup: BeautifulSoup
 ) -> list[str]:
     '''
-    Function to extract all the weather dates for
-    weather outlook of selected Philippine tourist areas.
+    Extracts all weather dates for the weather
+    outlook of selected Philippine tourist areas.
 
-    :param soup: BeautifulSoup object to navigate and
-    manipulate the entire content of the web-page
+    :param soup: BeautifulSoup object for navigating
+    and manipulating the page content
     :type soup: BeautifulSoup
 
-    :return: List of all the weather dates for weather
-    outlook of selected Philippine tourist areas
+    :return: List of weather dates for the selected
+    Philippine tourist areas
     :rtype: list[str]
     '''
     weather_dates = []
 
-    # Extract the necessary HTML tags to get all weather dates of
-    # selected Philippine tourist area for their weather outlook
+    # Extract HTML tags to get all weather dates of selected Philippine tourist areas
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
     weather_outlook_for_ph_tourist_area_tag = div_tag_with_row_weather_page_class.find(
         'div',
@@ -287,12 +280,14 @@ def extract_weather_dates(
         return weather_dates
 
     thead_tag = table_tag.find('thead')
-    # Using find_all() method to access all weather dates 
+    # Use find_all() method to access all weather dates 
     list_of_all_table_header_tags = thead_tag.find_all('th')[1:]
 
+    # Loop through rows containing HTML tags to extract the weather dates of selected Philippine tourist areas
     for table_header_tag in list_of_all_table_header_tags:
         weather_date = str(table_header_tag.text).strip()
+        # Use split() method to remove extra whitespaces in between words
         weather_date = ' '.join(weather_date.split())
         weather_dates.append(weather_date)
-    
+
     return weather_dates
