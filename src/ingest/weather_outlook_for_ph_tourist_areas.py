@@ -315,7 +315,9 @@ def map_weather_dates_to_ph_tourist_areas(
     '''
     result = ph_tourist_area_names
 
-    for key, _ in result.items():
-        result[key]['weather_dates'] = weather_dates
+    list_of_all_ph_tourist_area_names = list(result.keys())
+
+    for ph_tourst_area_name in list_of_all_ph_tourist_area_names:
+        result[ph_tourst_area_name]['weather_dates'] = weather_dates
     
     return result
