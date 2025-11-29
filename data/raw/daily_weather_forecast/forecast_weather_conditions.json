@@ -1,30 +1,30 @@
 {
     "place": [
+        "Apayao, Kalinga, Cagayan, and Isabela",
         "Palawan",
-        "Apayao, Kalinga, Mountain Province, Ifugao, Cagayan, Isabela, Quirino, and Nueva Vizcaya",
         "Ilocos Region, Batanes, and the rest of Cordillera Administrative Region",
-        "Aurora and Quezon",
-        "Metro Manila and the rest of the country"
+        "Metro Manila and the rest of Luzon",
+        "The rest of the country"
     ],
     "weather_condition": [
-        "Cloudy skies with scattered rains and thunderstorms",
         "Cloudy skies with scattered rains and isolated thunderstorms",
-        "Cloudy skies with rains",
         "Cloudy skies with scattered rains and thunderstorms",
+        "Cloudy skies with rains",
+        "Partly cloudy to cloudy skies with isolated rainshowers or thunderstorms",
         "Partly cloudy to cloudy skies with isolated rainshowers or thunderstorms"
     ],
     "caused_by": [
-        "Trough of STS KOTO (FORMERLY VERBENA)",
         "Shear Line",
+        "Trough of STS KOTO (formerly VERBENA)",
         "Northeast Monsoon",
         "Easterlies",
         "Localized Thunderstorms"
     ],
     "impacts": [
-        "Possible flash floods or landslides due to moderate to at times heavy rains",
         "Possible flash floods or landslides due to moderate to heavy rains",
         "Possible flash floods or landslides due to moderate to at times heavy rains",
         "Possible flash floods or landslides due to moderate to at times heavy rains",
+        "Possible flash floods or landslides during severe thunderstorms",
         "Possible flash floods or landslides during severe thunderstorms"
     ]
 }

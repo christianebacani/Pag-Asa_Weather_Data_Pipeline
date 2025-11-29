@@ -1,26 +1,30 @@
 {
     "place": [
         "Northern Luzon",
-        "The western sections of Central and Southern Luzon",
+        "Palawan",
         "Visayas and the rest of Luzon",
-        "Mindanao"
+        "The western section of Mindanao",
+        "The rest of Mindanao"
     ],
     "speed": [
         "Moderate to Strong",
         "Moderate to Strong",
+        "Light to Moderate",
         "Light to Moderate",
         "Light to Moderate"
     ],
     "direction": [
         "Northeast",
         "Southwest to Southeast",
-        "Southeast to East",
-        "Northeast"
+        "Northeast to East",
+        "Northwest",
+        "Northeast to North"
     ],
     "coastal_water": [
-        "Moderate to Rough / (2.5 to 5.0 meters)",
-        "Moderate to Rough / (1.2 to 2.8 meters)",
-        "Slight to Moderate / (0.6 to 2.5 meters)",
+        "Moderate to Rough / (2.1 to 3.7 meters)",
+        "Moderate to Rough / (2.1 to 3.7 meters)",
+        "Slight to Moderate / (1.2 to 2.5 meters)",
+        "Slight to Moderate / (0.6 to 1.8 meters)",
         "Slight to Moderate / (0.6 to 1.8 meters)"
     ]
 }
