@@ -43,4 +43,4 @@ def ingest_weather_outlook_for_ph_cities(
     weather_dates = extract_weather_dates(soup)
     ph_cities_with_weather_dates = map_weather_dates_to_ph_cities(weather_dates, ph_city_names)
 
-    extract_temperature_ranges(soup)
+    extract_temperature_ranges(list_of_all_ph_city_tags)
