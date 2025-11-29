@@ -256,3 +256,23 @@ def extract_ph_city_names(
         result[ph_city_name] = {}
 
     return result
+
+def extract_weather_dates(
+        soup: BeautifulSoup
+) -> list[str]:
+    '''
+    Extracts all weather dates for the weather
+    outlook of selected Philippine cities.
+
+    :param soup: BeautifulSoup object for navigating
+    and manipulating the page content
+    :type soup: BeautifulSoup
+
+    :return: List of weather dates for the selected
+    Philippine cities
+    :rtype: list[str]
+    '''
+    weather_dates = []
+
+    # Extract HTML tags to get all weather dates of selected Philippine cities
+    div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
