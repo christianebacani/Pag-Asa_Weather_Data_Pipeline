@@ -337,18 +337,36 @@ def map_weather_dates_to_ph_cities(
     return result
 
 def extract_temperature_ranges(
-        soup: BeautifulSoup
+        list_of_all_ph_city_tags: list[BeautifulSoup]
 ) -> list:
     '''
     Extracts all temperature ranges for
     the weather outlook of selected
     Philippine cities.
-    
-    :param soup: BeautifulSoup object for navigating
-    and manipulating the page content
-    :type soup: BeautifulSoup
-
-    :return: List of temperature ranges for the selected
-    Philippine cities
-    :rtype: list
     '''
+    result = []
+    
+    # Loop through Philippine city tags to extract temperature range tags
+    for ph_city_tag in list_of_all_ph_city_tags:
+        table_tag = ph_city_tag.find('table', attrs={'class': 'table'})
+        temperature_ranges_tag = table_tag.find('tr', attrs={'class': 'desktop-view-tr'})
+        list_of_all_table_data_tags = temperature_ranges_tag.find_all('td')
+
+        temperature_ranges = {
+            'min': [],
+            'max': []
+        }
+
+        # Loop through temperature range tags to extract temperature ranges of selected Philippine cities
+        for table_data_tag in list_of_all_table_data_tags:
+            minimum_temperature_tag = table_data_tag.find('span', attrs={'class': 'min'})
+            minimum_temperature = str(minimum_temperature_tag.text).strip()
+            temperature_ranges['min'].append(minimum_temperature)
+
+            maximum_temperature_tag = table_data_tag.find('span', attrs={'class': 'max'})
+            maximum_temperature = str(maximum_temperature_tag.text).strip()
+            temperature_ranges['max'].append(maximum_temperature)
+
+        result.append(temperature_ranges)
+
+    return result
