@@ -335,3 +335,20 @@ def map_weather_dates_to_ph_cities(
         result[ph_city_name]['weather_dates'] = weather_dates
     
     return result
+
+def extract_temperature_ranges(
+        soup: BeautifulSoup
+) -> list:
+    '''
+    Extracts all temperature ranges for
+    the weather outlook of selected
+    Philippine cities.
+    
+    :param soup: BeautifulSoup object for navigating
+    and manipulating the page content
+    :type soup: BeautifulSoup
+
+    :return: List of temperature ranges for the selected
+    Philippine cities
+    :rtype: list
+    '''
