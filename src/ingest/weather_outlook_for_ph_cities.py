@@ -305,3 +305,33 @@ def extract_weather_dates(
         weather_dates.append(weather_date)
 
     return weather_dates
+
+def map_weather_dates_to_ph_cities(
+        weather_dates: list[str],
+        ph_city_names: dict[str, dict]
+) -> dict[str, dict]:
+    '''
+    Maps extracted weather dates to selected Philippine
+    cities for their weather outlook from the PAGASA-DOST
+    website.
+
+    :param weather_dates: List of weather dates for the
+    selected Philippine cities
+    :type weather_dates: list[str]
+
+    :param ph_tourist_area_names: Dictionary of selected
+    Philippine city names
+    :type ph_tourist_area_names: dict[str, dict]
+
+    :return: Dictionary of city names names with
+    corresponding weather dates
+    :rtype: dict[str, dict]
+    '''
+    result = ph_city_names
+
+    list_of_all_ph_city_names = list(result.keys())
+
+    for ph_city_name in list_of_all_ph_city_names:
+        result[ph_city_name]['weather_dates'] = weather_dates
+    
+    return result
