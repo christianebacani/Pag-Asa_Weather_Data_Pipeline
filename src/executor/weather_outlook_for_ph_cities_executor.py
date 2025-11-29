@@ -38,4 +38,4 @@ def ingest_weather_outlook_for_ph_cities(
     list_of_all_ph_city_tags = extract_ph_city_tags(soup)
 
     ph_city_names = extract_ph_city_names(list_of_all_ph_city_tags)
-    extract_weather_dates(soup)
+    weather_dates = extract_weather_dates(soup)
