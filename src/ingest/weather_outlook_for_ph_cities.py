@@ -427,4 +427,4 @@ def extract_chance_of_rain_percentages(
     :return: List of chance of rain percentages for the
     selected Philippine cities
     :rtype: list[list]
-    '''    
+    '''
