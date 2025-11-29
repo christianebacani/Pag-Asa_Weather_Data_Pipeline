@@ -487,5 +487,5 @@ def map_chance_of_rain_percentages_to_ph_cities(
         ph_city_name = list_of_all_ph_city_names[index]
         # Map rain chance percentage to the selected Philippine city
         result[ph_city_name]['chance_of_rain_percentages'] = chance_of_rain_percentages
-    
+
     return result
