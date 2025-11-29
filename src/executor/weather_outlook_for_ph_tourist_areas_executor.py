@@ -13,6 +13,7 @@ from ingest.weather_outlook_for_ph_tourist_areas import save_valid_period_to_jso
 from ingest.weather_outlook_for_ph_tourist_areas import extract_ph_tourist_area_tags
 from ingest.weather_outlook_for_ph_tourist_areas import extract_ph_tourist_area_names
 from ingest.weather_outlook_for_ph_tourist_areas import extract_weather_dates
+from ingest.weather_outlook_for_ph_tourist_areas import map_weather_dates_to_ph_tourist_areas
 
 def ingest_weather_outlook_for_ph_tourist_areas(
 ) -> None:
@@ -39,3 +40,7 @@ def ingest_weather_outlook_for_ph_tourist_areas(
 
     ph_tourist_area_names = extract_ph_tourist_area_names(list_of_all_ph_tourist_area_tags)
     weather_dates = extract_weather_dates(soup)
+    ph_tourist_areas_with_weather_dates = map_weather_dates_to_ph_tourist_areas(
+        weather_dates,
+        ph_tourist_area_names
+    )
