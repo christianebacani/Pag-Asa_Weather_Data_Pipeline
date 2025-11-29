@@ -313,3 +313,9 @@ def map_weather_dates_to_ph_tourist_areas(
     corresponding weather dates
     :rtype: dict[str, dict]
     '''
+    result = ph_tourist_area_names
+
+    for key, _ in result.items():
+        result[key]['weather_dates'] = weather_dates
+    
+    return result
