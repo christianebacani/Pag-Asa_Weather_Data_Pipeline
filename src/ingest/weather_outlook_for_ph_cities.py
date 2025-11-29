@@ -338,7 +338,7 @@ def map_weather_dates_to_ph_cities(
 
 def extract_temperature_ranges(
         list_of_all_ph_city_tags: list[BeautifulSoup]
-) -> list:
+) -> list[dict]:
     '''
     Extracts all temperature ranges for
     the weather outlook of selected
