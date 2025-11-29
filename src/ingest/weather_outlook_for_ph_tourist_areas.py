@@ -233,7 +233,7 @@ def extract_ph_tourist_area_names(
     Philippine tourist area HTML tags
     :type list_of_all_ph_city_tags: list[BeautifulSoup]
 
-    :return: Dictionary of selected Philippine city tourist area names
+    :return: Dictionary of selected Philippine tourist area names
     :rtype: dict[str, dict]
     '''
     result = {}
@@ -291,3 +291,25 @@ def extract_weather_dates(
         weather_dates.append(weather_date)
 
     return weather_dates
+
+def map_weather_dates_to_ph_tourist_areas(
+        weather_dates: list[str],
+        ph_tourist_area_names: dict[str, dict]
+) -> dict[str, dict]:
+    '''
+    Maps extracted weather dates to selected Philippine
+    tourist areas for their weather outlook from the
+    PAGASA-DOST website.
+
+    :param weather_dates: List of weather dates for the
+    selected Philippine tourist areas
+    :type weather_dates: list[str]
+
+    :param ph_tourist_area_names: Dictionary of selected
+    Philippine tourist area names
+    :type ph_tourist_area_names: dict[str, dict]
+
+    :return: Dictionary of tourist area names with
+    corresponding weather dates
+    :rtype: dict[str, dict]
+    '''
