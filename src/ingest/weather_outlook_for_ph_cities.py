@@ -271,7 +271,7 @@ def map_weather_dates_to_ph_cities(
 
     :param ph_city_names: Dictionary of selected Philippine city names
     :type ph_city_names: dict[str, dict]
-    
+
     :return: Dictionary of city names with corresponding weather dates
     :rtype: dict[str, dict]
     '''
