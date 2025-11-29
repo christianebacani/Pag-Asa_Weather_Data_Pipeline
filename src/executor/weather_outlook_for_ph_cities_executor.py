@@ -17,6 +17,7 @@ from ingest.weather_outlook_for_ph_cities import map_weather_dates_to_ph_cities
 from ingest.weather_outlook_for_ph_cities import extract_temperature_ranges
 from ingest.weather_outlook_for_ph_cities import map_temperature_ranges_to_ph_cities
 from ingest.weather_outlook_for_ph_cities import extract_chance_of_rain_percentages
+from ingest.weather_outlook_for_ph_cities import map_chance_of_rain_percentages_to_ph_cities
 
 def ingest_weather_outlook_for_ph_cities(
 ) -> None:
@@ -55,3 +56,7 @@ def ingest_weather_outlook_for_ph_cities(
     )
 
     chance_of_rain_percentages = extract_chance_of_rain_percentages(list_of_all_ph_city_tags)
+    ph_cities_weather_outlook = map_chance_of_rain_percentages_to_ph_cities(
+        chance_of_rain_percentages,
+        ph_cities_weather_outlook
+    )
