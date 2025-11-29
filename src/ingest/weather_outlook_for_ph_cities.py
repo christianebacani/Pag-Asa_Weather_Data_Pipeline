@@ -412,3 +412,19 @@ def map_temperature_ranges_to_ph_cities(
         result[ph_city_name]['temperature_ranges'] = temperature_ranges
 
     return result
+
+def extract_chance_of_rain_percentages(
+        list_of_all_ph_city_tags: list[BeautifulSoup]
+) -> list[list]:
+    '''
+    Extracts all chance of rain percentages for the weather
+    outlook of selected Philippine cities.
+    
+    :param list_of_all_ph_city_tags: List of selected
+    Philippine city HTML tags
+    :type list_of_all_ph_city_tags: list[BeautifulSoup]
+
+    :return: List of chance of rain percentages for the
+    selected Philippine cities
+    :rtype: list[list]
+    '''    
