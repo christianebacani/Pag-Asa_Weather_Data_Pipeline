@@ -14,6 +14,7 @@ from ingest.weather_outlook_for_ph_cities import extract_ph_city_tags
 from ingest.weather_outlook_for_ph_cities import extract_ph_city_names
 from ingest.weather_outlook_for_ph_cities import extract_weather_dates
 from ingest.weather_outlook_for_ph_cities import map_weather_dates_to_ph_cities
+from ingest.weather_outlook_for_ph_cities import extract_temperature_ranges
 
 def ingest_weather_outlook_for_ph_cities(
 ) -> None:
@@ -37,7 +38,9 @@ def ingest_weather_outlook_for_ph_cities(
     save_valid_period_to_json(valid_period)
 
     list_of_all_ph_city_tags = extract_ph_city_tags(soup)
-
     ph_city_names = extract_ph_city_names(list_of_all_ph_city_tags)
+
     weather_dates = extract_weather_dates(soup)
     ph_cities_with_weather_dates = map_weather_dates_to_ph_cities(weather_dates, ph_city_names)
+
+    extract_temperature_ranges(soup)
