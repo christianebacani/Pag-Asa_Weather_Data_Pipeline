@@ -450,5 +450,5 @@ def extract_chance_of_rain_percentages(
             chance_of_rain_percentages.append(chance_of_rain_percentage)
         
         result.append(chance_of_rain_percentages)
-    
+
     return result
