@@ -396,3 +396,13 @@ def map_temperature_ranges_to_ph_cities(
     temperature ranges
     :rtype: dict[str, dict]
     '''
+    result = ph_cities_with_weather_dates
+
+    list_of_all_temperature_ranges = temperature_ranges
+    list_of_all_ph_city_names = list(result.keys())
+
+    for index, temperature_ranges in enumerate(list_of_all_temperature_ranges):
+        ph_city_name = list_of_all_ph_city_names[index]
+        result[ph_city_name]['temperature_ranges'] = temperature_ranges
+
+    return result
