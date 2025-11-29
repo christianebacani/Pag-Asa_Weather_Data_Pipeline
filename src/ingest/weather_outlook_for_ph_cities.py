@@ -330,12 +330,12 @@ def map_weather_dates_to_ph_cities(
     result = ph_city_names
 
     list_of_all_ph_city_names = list(result.keys())
-    
-    # Loop through the selected Philippine cities to map it to the extracted weather dates
+
+    # Loop through the list of selected Philippine cities to map it to the extracted weather dates
     for ph_city_name in list_of_all_ph_city_names:
         # Map weather dates to the selected Philippine city
         result[ph_city_name]['weather_dates'] = weather_dates
-    
+
     return result
 
 def extract_temperature_ranges(
@@ -403,11 +403,10 @@ def map_temperature_ranges_to_ph_cities(
     list_of_all_temperature_ranges = temperature_ranges
     list_of_all_ph_city_names = list(result.keys())
 
-    # Loop through temperature ranges to map it to the selected Philippine cities
+    # Loop through the list of temperature ranges to map it to the selected Philippine cities
     for index, temperature_ranges in enumerate(list_of_all_temperature_ranges):
-        # Use the index of the temperature ranges to get the corresponding name of the Philippine city
+        # Use the index of temperature range to get the name of the Philippine city
         ph_city_name = list_of_all_ph_city_names[index]
-
         # Map temperature ranges to the selected Philippine city
         result[ph_city_name]['temperature_ranges'] = temperature_ranges
 
@@ -451,4 +450,42 @@ def extract_chance_of_rain_percentages(
         
         result.append(chance_of_rain_percentages)
 
+    return result
+
+def map_chance_of_rain_percentages_to_ph_cities(
+        chance_of_rain_percentages: list[list],
+        ph_cities_weather_outlook: dict[str, dict]
+) -> dict[str, dict]:
+    '''
+    Maps extracted chance of rain percentages to
+    selected Philippine cities for their weather
+    outlook from the PAGASA-DOST website.
+
+    :param chance_of_rain_percentages: List of
+    chance of rain percentages for the selected
+    Philippine cities
+    :type chance_of_rain_percentages: list[list]
+
+    :param ph_cities_weather_outlook: Dictionary of
+    city names with weather dates and temperature
+    ranges
+    :type ph_cities_weather_outlook: dict[str, dict]
+
+    :return: Dictionary of city names with weather
+    dates, temperature ranges, and chance of rain
+    percentages
+    :rtype: dict[str, dict]
+    '''
+    result = ph_cities_weather_outlook
+
+    list_of_all_chance_of_rain_percentages = chance_of_rain_percentages
+    list_of_all_ph_city_names = list(ph_cities_weather_outlook.keys())
+
+    # Loop through the list of rain chance percentage to map it to the selected Philippine cities
+    for index, chance_of_rain_percentages in enumerate(list_of_all_chance_of_rain_percentages):
+        # Use the index of rain chance percentage to get the name of the Philippine city
+        ph_city_name = list_of_all_ph_city_names[index]
+        # Map rain chance percentage to the selected Philippine city
+        result[ph_city_name]['chance_of_rain_percentages'] = chance_of_rain_percentages
+    
     return result
