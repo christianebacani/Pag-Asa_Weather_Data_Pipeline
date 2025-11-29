@@ -330,8 +330,10 @@ def map_weather_dates_to_ph_cities(
     result = ph_city_names
 
     list_of_all_ph_city_names = list(result.keys())
-
+    
+    # Loop through the selected Philippine cities to map it to the extracted weather dates
     for ph_city_name in list_of_all_ph_city_names:
+        # Map weather dates to the selected Philippine city
         result[ph_city_name]['weather_dates'] = weather_dates
     
     return result
@@ -401,8 +403,12 @@ def map_temperature_ranges_to_ph_cities(
     list_of_all_temperature_ranges = temperature_ranges
     list_of_all_ph_city_names = list(result.keys())
 
+    # Loop through temperature ranges to map it to the selected Philippine cities
     for index, temperature_ranges in enumerate(list_of_all_temperature_ranges):
+        # Use the index of the temperature ranges to get the corresponding name of the Philippine city
         ph_city_name = list_of_all_ph_city_names[index]
+
+        # Map temperature ranges to the selected Philippine city
         result[ph_city_name]['temperature_ranges'] = temperature_ranges
 
     return result
