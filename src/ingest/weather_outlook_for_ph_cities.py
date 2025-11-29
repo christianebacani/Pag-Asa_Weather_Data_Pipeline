@@ -489,3 +489,18 @@ def map_chance_of_rain_percentages_to_ph_cities(
         result[ph_city_name]['chance_of_rain_percentages'] = chance_of_rain_percentages
 
     return result
+
+def save_ph_cities_weather_outlook_to_json(
+        ph_cities_weather_outlook: dict[str, dict]
+) -> None:
+    '''
+    Saves the weather outlook for selected
+    Philippine cities to a JSON file in the
+    data/raw/weather_outlook_for_ph_cities/
+    subdirectory on the local machine.
+    
+    :param ph_cities_weather_outlook: Dictionary of
+    city names with weather dates, temperature ranges,
+    and chance of rain percentages
+    :type ph_cities_weather_outlook: dict[str, dict]
+    '''
