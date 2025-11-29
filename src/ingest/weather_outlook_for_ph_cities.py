@@ -276,3 +276,32 @@ def extract_weather_dates(
 
     # Extract HTML tags to get all weather dates of selected Philippine cities
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
+    weather_outlook_for_ph_city_tag = div_tag_with_row_weather_page_class.find(
+        'div', 
+        attrs={
+            'class': 'col-md-12 col-lg-12'
+        }
+    )
+    div_tag_with_panel_group_class = weather_outlook_for_ph_city_tag.find(
+        'div',
+        attrs={
+            'class': 'panel-group'
+        }
+    )
+
+    # We need to check if the div_tag_with_panel_group_class is missing
+    if div_tag_with_panel_group_class is None:
+        return weather_dates
+
+    ph_city_tag = div_tag_with_panel_group_class.find('div', attrs={'class': 'panel panel-default panel-pagasa'})
+    table_tag = ph_city_tag.find('table', attrs={'class': 'table'})
+    list_of_all_table_header_tags = table_tag.find_all('th')
+
+    # Loop through rows containing HTML tags to extract the weather dates of selected Philippine cities
+    for table_header_tag in list_of_all_table_header_tags:
+        weather_date = str(table_header_tag.text).strip()
+        # Use split() method to remove extra whitespaces in between words
+        weather_date = ' '.join(weather_date.split())
+        weather_dates.append(weather_date)
+
+    return weather_dates
