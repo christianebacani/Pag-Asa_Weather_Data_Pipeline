@@ -323,8 +323,8 @@ def map_weather_dates_to_ph_cities(
     Philippine city names
     :type ph_tourist_area_names: dict[str, dict]
 
-    :return: Dictionary of city names names with
-    corresponding weather dates
+    :return: Dictionary of city names with corresponding
+    weather dates
     :rtype: dict[str, dict]
     '''
     result = ph_city_names
@@ -340,9 +340,16 @@ def extract_temperature_ranges(
         list_of_all_ph_city_tags: list[BeautifulSoup]
 ) -> list[dict]:
     '''
-    Extracts all temperature ranges for
-    the weather outlook of selected
-    Philippine cities.
+    Extracts all temperature ranges for the weather
+    outlook of selected Philippine cities.
+    
+    :param list_of_all_ph_city_tags: List of selected
+    Philippine city HTML tags
+    :type list_of_all_ph_city_tags: list[BeautifulSoup]
+
+    :return: List of temperature ranges dictionary for the selected
+    Philippine cities
+    :rtype: list[dict]
     '''
     result = []
     
@@ -370,3 +377,25 @@ def extract_temperature_ranges(
         result.append(temperature_ranges)
 
     return result
+
+def map_temperature_ranges_to_ph_cities(
+        temperature_ranges: list[dict],
+        ph_cities_with_weather_dates: dict[str, dict]
+) -> dict[str, dict]:
+    '''
+    Maps extracted temperature ranges to selected Philippine
+    cities for their weather outlook from the PAGASA-DOST
+    website.
+
+    :param temperature_ranges: List of temperature ranges
+    dictionary for the selected Philippine cities
+    :type temperature_ranges: list[dict]
+
+    :param ph_cities_with_weather_dates: Dictionary of city
+    names with corresponding weather dates
+    :type ph_cities_with_weather_dates: dict[str, dict]
+
+    :return: Dictionary of city names with weather dates and
+    temperature ranges
+    :rtype: dict[str, dict]
+    '''
