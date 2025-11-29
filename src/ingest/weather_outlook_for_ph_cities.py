@@ -354,7 +354,7 @@ def extract_temperature_ranges(
     :rtype: list[list]
     '''
     result = []
-    
+
     # Loop through Philippine city tags to extract temperature range tags
     for ph_city_tag in list_of_all_ph_city_tags:
         table_tag = ph_city_tag.find('table', attrs={'class': 'table'})
@@ -428,3 +428,27 @@ def extract_chance_of_rain_percentages(
     selected Philippine cities
     :rtype: list[list]
     '''
+    result = []
+
+    # Loop through Philippine city tags to extract rain chance tags
+    for ph_city_tag in list_of_all_ph_city_tags:
+        table_tag = ph_city_tag.find('table', attrs={'class': 'table'})
+        chance_of_rain_percentages_tag = table_tag.find('tr', attrs={'class': 'desktop-view-tr'})
+        list_of_all_table_data_tags = chance_of_rain_percentages_tag.find_all('td')
+
+        chance_of_rain_percentages = []
+
+        # Loop through rain chance tags to extract rain chance percentage for selected Philippine cities
+        for table_data_tag in list_of_all_table_data_tags:
+            chance_of_rain_percentage_tag = table_data_tag.find(
+                'span',
+                attrs={
+                    'style': 'font-weight:bold; color: rgb(9, 73, 156);'
+                }
+            )
+            chance_of_rain_percentage = str(chance_of_rain_percentage_tag.text).strip()
+            chance_of_rain_percentages.append(chance_of_rain_percentage)
+        
+        result.append(chance_of_rain_percentages)
+    
+    return result
