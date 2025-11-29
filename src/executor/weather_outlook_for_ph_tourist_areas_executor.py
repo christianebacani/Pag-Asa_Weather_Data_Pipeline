@@ -37,8 +37,8 @@ def ingest_weather_outlook_for_ph_tourist_areas(
     save_valid_period_to_json(valid_period)
 
     list_of_all_ph_tourist_area_tags = extract_ph_tourist_area_tags(soup)
-
     ph_tourist_area_names = extract_ph_tourist_area_names(list_of_all_ph_tourist_area_tags)
+
     weather_dates = extract_weather_dates(soup)
     ph_tourist_areas_with_weather_dates = map_weather_dates_to_ph_tourist_areas(
         weather_dates,
