@@ -504,3 +504,12 @@ def save_ph_cities_weather_outlook_to_json(
     and chance of rain percentages
     :type ph_cities_weather_outlook: dict[str, dict]
     '''
+    data = ph_cities_weather_outlook
+
+    with open(
+        'data/raw/weather_outlook_for_ph_cities/ph_cities_weather_outlook.json',
+        'w'
+    ) as json_file:
+        json.dump(data, json_file, indent=4)
+    
+    json_file.close()
