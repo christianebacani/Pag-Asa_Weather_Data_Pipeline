@@ -7,20 +7,20 @@
     ],
     "speed": [
         "Moderate to Strong",
-        "Moderate to Strong",
+        "Moderate",
         "Light to Moderate",
         "Light to Moderate"
     ],
     "direction": [
         "Southwest to Southeast",
-        "Northeast",
+        "Northeast to East",
         "Northeast to East",
         "Northeast to North"
     ],
     "coastal_water": [
-        "Moderate to Rough / (1.8 to 3.4 meters)",
-        "Moderate to Rough / (1.8 to 3.1 meters)",
+        "Moderate to Rough / (1.5 to 3.1 meters)",
+        "Moderate / (1.5 to 2.5 meters)",
         "Slight to Moderate / (0.6 to 2.1 meters)",
-        "Slight to Moderate / (0.6 to 1.8 meters)"
+        "Slight to Moderate / (0.6 to 2.1 meters)"
     ]
 }
