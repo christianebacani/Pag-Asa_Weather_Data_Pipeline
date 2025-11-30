@@ -330,7 +330,7 @@ def extract_temperature_ranges(
     '''
     Extracts all temperature ranges for the weather
     outlook of selected Philippine cities.
-    
+
     :param list_of_all_ph_city_tags: List of selected
     Philippine city HTML tags
     :type list_of_all_ph_city_tags: list[BeautifulSoup]
