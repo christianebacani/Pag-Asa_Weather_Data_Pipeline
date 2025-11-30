@@ -317,7 +317,9 @@ def map_weather_dates_to_ph_tourist_areas(
 
     list_of_all_ph_tourist_area_names = list(result.keys())
 
+    # Loop through the list of selected Philippine tourist areas to map it to the extracted weather dates
     for ph_tourst_area_name in list_of_all_ph_tourist_area_names:
+        # Map weather dates to the selected Philippine tourist area
         result[ph_tourst_area_name]['weather_dates'] = weather_dates
-    
+
     return result
