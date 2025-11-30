@@ -341,11 +341,13 @@ def extract_temperature_ranges(
     '''
     result = []
 
+    # Loop through Philippine tourist area tags to extract temperature range tags
     for ph_tourist_area_tag in list_of_all_ph_tourist_area_tags:
         list_of_all_table_data_tags = ph_tourist_area_tag.find_all('td')[1:]
         
         temperature_ranges = []
 
+        # Loop through tags to extract temperature ranges for selected tourist areas
         for table_data_tag in list_of_all_table_data_tags:
             minimum_temperature_tag = table_data_tag.find('span', attrs={'class': 'min'})
             minimum_temperature = str(minimum_temperature_tag.text).strip()
