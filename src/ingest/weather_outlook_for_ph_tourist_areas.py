@@ -323,3 +323,27 @@ def map_weather_dates_to_ph_tourist_areas(
         result[ph_tourist_area_name]['weather_dates'] = weather_dates
 
     return result
+
+def extract_temperature_ranges(
+        list_of_all_ph_tourist_area_tags: list[BeautifulSoup]
+) -> list[list]:
+    '''
+    Extracts all temperature ranges for the weather
+    outlook of selected Philippine tourist areas.        
+
+    :param list_of_all_ph_tourist_area_tags: List
+    of selected Philippine tourist area HTML tags
+    :type list_of_all_ph_tourist_area_tags: list[BeautifulSoup]
+
+    :return: List of temperature ranges for the selected
+    Philippine tourist areas
+    :rtype: list[list]
+    '''
+    result = []
+
+    for ph_tourist_area_tag in list_of_all_ph_tourist_area_tags:
+        list_of_all_table_data_tags = ph_tourist_area_tag.find_all('td')[1:]
+
+        for table_data_tag in list_of_all_table_data_tags:
+            minimum_temperature_tag = table_data_tag.find('span', attrs={'class': 'min'})
+            maximum_temperature_tag = table_data_tag.find('span', attrs={'class': 'max'})
