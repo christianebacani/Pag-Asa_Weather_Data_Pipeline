@@ -43,7 +43,7 @@ def ingest_weather_outlook_for_ph_cities(
     list_of_all_ph_city_tags = extract_ph_city_tags(soup)
     ph_city_names = extract_ph_city_names(list_of_all_ph_city_tags)
 
-    weather_dates = extract_weather_dates(soup)
+    weather_dates = extract_weather_dates(list_of_all_ph_city_tags)
     ph_cities_with_weather_dates = map_weather_dates_to_ph_cities(
         weather_dates,
         ph_city_names
