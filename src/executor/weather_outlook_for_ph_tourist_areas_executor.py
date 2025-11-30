@@ -14,6 +14,7 @@ from ingest.weather_outlook_for_ph_tourist_areas import extract_ph_tourist_area_
 from ingest.weather_outlook_for_ph_tourist_areas import extract_ph_tourist_area_names
 from ingest.weather_outlook_for_ph_tourist_areas import extract_weather_dates
 from ingest.weather_outlook_for_ph_tourist_areas import map_weather_dates_to_ph_tourist_areas
+from ingest.weather_outlook_for_ph_tourist_areas import extract_temperature_ranges
 
 def ingest_weather_outlook_for_ph_tourist_areas(
 ) -> None:
@@ -44,3 +45,5 @@ def ingest_weather_outlook_for_ph_tourist_areas(
         weather_dates,
         ph_tourist_area_names
     )
+
+    extract_temperature_ranges(soup)
