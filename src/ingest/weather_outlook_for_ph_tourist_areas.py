@@ -382,3 +382,10 @@ def map_temperature_ranges_to_ph_tourist_areas(
     and temperature ranges
     :rtype: dict[str, dict]
     '''
+    result = ph_tourist_areas_with_weather_dates
+
+    list_of_all_temperature_ranges = temperature_ranges
+    list_of_all_ph_tourist_area_names = list(result.keys())
+
+    for temperature_range in list_of_all_temperature_ranges:
+        print(temperature_ranges)
