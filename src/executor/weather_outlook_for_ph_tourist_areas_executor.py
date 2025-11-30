@@ -16,6 +16,7 @@ from ingest.weather_outlook_for_ph_tourist_areas import extract_weather_dates
 from ingest.weather_outlook_for_ph_tourist_areas import map_weather_dates_to_ph_tourist_areas
 from ingest.weather_outlook_for_ph_tourist_areas import extract_temperature_ranges
 from ingest.weather_outlook_for_ph_tourist_areas import map_temperature_ranges_to_ph_tourist_areas
+from ingest.weather_outlook_for_ph_tourist_areas import save_ph_tourist_areas_weather_outlook_to_json
 
 def ingest_weather_outlook_for_ph_tourist_areas(
 ) -> None:
@@ -52,3 +53,5 @@ def ingest_weather_outlook_for_ph_tourist_areas(
         temperature_ranges,
         ph_tourist_areas_with_weather_dates
     )
+
+    save_ph_tourist_areas_weather_outlook_to_json(ph_tourist_areas_weather_outlook)
