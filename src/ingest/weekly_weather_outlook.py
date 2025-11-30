@@ -45,3 +45,20 @@ def extract_beautiful_soup_object(
     # Parse as a BeautifulSoup object
     soup = BeautifulSoup(response.text, 'html.parser')
     return soup
+
+def extract_issued_datetime(
+        soup: BeautifulSoup
+) -> str:
+    '''
+    Extracts the issued datetime of weekly
+    weather outlook from the PAGASA-DOST
+    website.
+
+    :param soup: BeautifulSoup object for navigating
+    and manipulating the page content
+    :type soup: BeautifulSoup
+
+    :return: Issued datetime of the weekly weather
+    outlook
+    :rtype: str
+    '''
