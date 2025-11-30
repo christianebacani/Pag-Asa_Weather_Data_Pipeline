@@ -13,6 +13,7 @@ from datetime import datetime
 from executor.daily_weather_forecast_executor import ingest_daily_weather_forecast
 from executor.weather_outlook_for_ph_cities_executor import ingest_weather_outlook_for_ph_cities
 from executor.weather_outlook_for_ph_tourist_areas_executor import ingest_weather_outlook_for_ph_tourist_areas
+from executor.weekly_weather_outlook_executor import ingest_weekly_weather_outlook
 
 def generate_logs(
     log_message: str
@@ -55,4 +56,10 @@ if __name__ == '__main__':
     ingest_weather_outlook_for_ph_tourist_areas()
     generate_logs(
         '(DEV): Ingest the data for the weather outlook for selected Philippine tourist areas.'
+    )
+
+    # Ingest data for weekly weather outlook
+    ingest_weekly_weather_outlook()
+    generate_logs(
+        '(DEV): Ingest the data for the weekly weather outlook.'
     )
