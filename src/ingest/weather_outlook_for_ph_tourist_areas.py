@@ -343,7 +343,18 @@ def extract_temperature_ranges(
 
     for ph_tourist_area_tag in list_of_all_ph_tourist_area_tags:
         list_of_all_table_data_tags = ph_tourist_area_tag.find_all('td')[1:]
+        
+        temperature_ranges = []
 
         for table_data_tag in list_of_all_table_data_tags:
             minimum_temperature_tag = table_data_tag.find('span', attrs={'class': 'min'})
+            minimum_temperature = str(minimum_temperature_tag.text).strip()
+
             maximum_temperature_tag = table_data_tag.find('span', attrs={'class': 'max'})
+            maximum_temperature = str(maximum_temperature_tag.text).strip()
+
+            temperature_ranges.append([minimum_temperature, maximum_temperature])
+        
+        result.append(temperature_ranges)
+    
+    return result
