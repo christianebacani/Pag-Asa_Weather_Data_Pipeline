@@ -46,4 +46,4 @@ def ingest_weather_outlook_for_ph_tourist_areas(
         ph_tourist_area_names
     )
 
-    extract_temperature_ranges(soup)
+    extract_temperature_ranges(list_of_all_ph_tourist_area_tags)
