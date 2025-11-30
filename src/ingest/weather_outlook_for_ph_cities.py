@@ -503,13 +503,15 @@ def save_ph_cities_weather_outlook_to_json(
     city names with weather dates, temperature ranges,
     and chance of rain percentages
     :type ph_cities_weather_outlook: dict[str, dict]
-    '''
+    '''    
+    # Create a dictionary to store weather outlook of selected Philippine cities
     data = ph_cities_weather_outlook
 
+    # Save the dictionary to a json file using open() method and json module
     with open(
         'data/raw/weather_outlook_for_ph_cities/ph_cities_weather_outlook.json',
         'w'
     ) as json_file:
         json.dump(data, json_file, indent=4)
-    
+
     json_file.close()
