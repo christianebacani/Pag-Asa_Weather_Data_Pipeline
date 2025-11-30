@@ -360,3 +360,25 @@ def extract_temperature_ranges(
         result.append(temperature_ranges)
     
     return result
+
+def map_temperature_ranges_to_ph_tourist_areas(
+        temperature_ranges: list[list],
+        ph_tourist_areas_with_weather_dates: dict[str, dict]
+) -> dict[str, dict]:
+    '''
+    Maps extracted temperature ranges to selected Philippine
+    tourist areas for their weather outlook from the
+    PAGASA-DOST website.
+
+    :param temperature_ranges: List of temperature ranges
+    for the selected Philippine tourist areas
+    :type temperature_ranges: list[list]
+    
+    :param ph_tourist_areas_with_weather_dates: Dictionary
+    of tourist area names with corresponding weather dates
+    :type ph_tourist_areas_with_weather_dates: dict[str, dict]
+
+    :return: Dictionary of tourist area names with weather dates
+    and temperature ranges
+    :rtype: dict[str, dict]
+    '''
