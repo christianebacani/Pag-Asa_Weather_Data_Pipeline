@@ -258,15 +258,14 @@ def extract_ph_city_names(
     return result
 
 def extract_weather_dates(
-        soup: BeautifulSoup
+        list_of_all_ph_city_tags: list[BeautifulSoup]
 ) -> list[str]:
     '''
     Extracts all weather dates for the weather
     outlook of selected Philippine cities.
 
-    :param soup: BeautifulSoup object for navigating
-    and manipulating the page content
-    :type soup: BeautifulSoup
+    :param list_of_all_ph_city_tags: List of selected Philippine city HTML tags
+    :type list_of_all_ph_city_tags: list[BeautifulSoup]
 
     :return: List of weather dates for the selected
     Philippine cities
@@ -274,30 +273,17 @@ def extract_weather_dates(
     '''
     weather_dates = []
 
-    # Extract HTML tags to get all weather dates of selected Philippine cities
-    div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
-    weather_outlook_for_ph_city_tag = div_tag_with_row_weather_page_class.find(
-        'div', 
-        attrs={
-            'class': 'col-md-12 col-lg-12'
-        }
-    )
-    div_tag_with_panel_group_class = weather_outlook_for_ph_city_tag.find(
-        'div',
-        attrs={
-            'class': 'panel-group'
-        }
-    )
-
-    # We need to check if the div_tag_with_panel_group_class is missing
-    if div_tag_with_panel_group_class is None:
+    ph_city_tag = list_of_all_ph_city_tags[0]
+    
+    # We need to check if the first instance of selected Philippine city HTML tags is missing
+    if ph_city_tag is None:
         return weather_dates
 
-    ph_city_tag = div_tag_with_panel_group_class.find('div', attrs={'class': 'panel panel-default panel-pagasa'})
+    # Extract HTML tags to get all weather dates of selected Philippine cities
     table_tag = ph_city_tag.find('table', attrs={'class': 'table'})
     list_of_all_table_header_tags = table_tag.find_all('th')
 
-    # Loop through rows containing HTML tags to extract the weather dates of selected Philippine cities
+    # Loop through rows containing HTML tags to extract all weather dates of selected Philippine cities
     for table_header_tag in list_of_all_table_header_tags:
         weather_date = str(table_header_tag.text).strip()
         # Use split() method to remove extra whitespaces in between words
