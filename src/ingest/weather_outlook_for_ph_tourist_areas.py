@@ -387,5 +387,11 @@ def map_temperature_ranges_to_ph_tourist_areas(
     list_of_all_temperature_ranges = temperature_ranges
     list_of_all_ph_tourist_area_names = list(result.keys())
 
-    for temperature_range in list_of_all_temperature_ranges:
-        print(temperature_ranges)
+    # Loop through the list of temperature ranges to map it to the selected Philippine tourist areas
+    for index, temperature_ranges in enumerate(list_of_all_temperature_ranges):
+        # Use the index of temperature range to get the name of the Philippine tourist area
+        ph_tourist_area_name = list_of_all_ph_tourist_area_names[index]
+        # Map temperature ranges to the selected Philippine tourist area
+        result[ph_tourist_area_name]['temperature_ranges'] = temperature_ranges
+    
+    return result
