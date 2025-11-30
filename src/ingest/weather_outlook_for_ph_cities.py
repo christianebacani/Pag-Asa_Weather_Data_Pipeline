@@ -349,7 +349,7 @@ def extract_temperature_ranges(
 
         temperature_ranges = []
 
-        # Loop through temperature range tags to extract temperature ranges of selected Philippine cities
+        # Loop through tags to extract temperature ranges for selected cities
         for table_data_tag in list_of_all_table_data_tags:
             minimum_temperature_tag = table_data_tag.find('span', attrs={'class': 'min'})
             minimum_temperature = str(minimum_temperature_tag.text).strip()
@@ -423,7 +423,7 @@ def extract_chance_of_rain_percentages(
 
         chance_of_rain_percentages = []
 
-        # Loop through rain chance tags to extract rain chance percentage for selected Philippine cities
+        # Loop through tags to extract chance of rain percentages for selected cities
         for table_data_tag in list_of_all_table_data_tags:
             chance_of_rain_percentage_tag = table_data_tag.find(
                 'span',
