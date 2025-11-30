@@ -11,7 +11,7 @@ from bs4 import BeautifulSoup
 def create_subdir(
 ) -> None:
     '''
-        Creates the data/raw/weather_outlook_for_ph_torist_areas/
+        Creates the data/raw/weather_outlook_for_ph_tourist_areas/
         subdirectory to store JSON files for daily weather
         forecast data ingested from the PAGASA-DOST website.
     '''
