@@ -4,6 +4,7 @@
     outlook from the PAGASA-DOST website.
 '''
 from ingest.weekly_weather_outlook import create_subdir
+from ingest.weekly_weather_outlook import extract_beautiful_soup_object
 
 def ingest_weekly_weather_outlook(
 ) -> None:
@@ -16,3 +17,6 @@ def ingest_weekly_weather_outlook(
     '''
     # Run all functions to ingest weekly weather outlook
     create_subdir()
+    soup = extract_beautiful_soup_object(
+        'https://www.pagasa.dost.gov.ph/weather/weather-outlook-weekly'
+    )
