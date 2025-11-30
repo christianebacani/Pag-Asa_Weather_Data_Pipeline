@@ -395,3 +395,29 @@ def map_temperature_ranges_to_ph_tourist_areas(
         result[ph_tourist_area_name]['temperature_ranges'] = temperature_ranges
     
     return result
+
+def save_ph_tourist_areas_weather_outlook_to_json(
+        ph_tourist_areas_weather_outlook: dict[str, dict]
+) -> None:
+    '''
+    Saves the weather outlook for selected Philippine
+    tourist areas to a JSON file in the
+    data/raw/weather_outlook_for_ph_tourist_areas/
+    subdirectory on the local machine.
+
+    :param ph_tourist_areas_weather_outlook: Dictionary
+    of tourist area names with weather dates and
+    temperature ranges
+    :type ph_tourust_areas_weather_outlook: dict[str, dict]
+    '''
+    # Create a dictionary to store weather outlook of selected Philippine tourist areas
+    data = ph_tourist_areas_weather_outlook
+
+    # Save the dictionary to a json file using open() method and json module
+    with open(
+        'data/raw/weather_outlook_for_ph_tourist_areas/ph_tourist_areas_weather_outlook.json',
+        'w'
+    ) as json_file:
+        json.dump(data, json_file, indent=4)
+    
+    json_file.close()
