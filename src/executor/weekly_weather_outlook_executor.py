@@ -3,6 +3,8 @@
     and loading functions for the weekly weather
     outlook from the PAGASA-DOST website.
 '''
+from ingest.weekly_weather_outlook import create_subdir
+
 def ingest_weekly_weather_outlook(
 ) -> None:
     '''
@@ -12,3 +14,5 @@ def ingest_weekly_weather_outlook(
         weekly_weather_outlook module of
         the src/ingest package..
     '''
+    # Run all functions to ingest weekly weather outlook
+    create_subdir()
