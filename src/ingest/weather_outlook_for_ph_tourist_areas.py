@@ -118,7 +118,7 @@ def save_issued_datetime_to_json(
 
 def extract_valid_period(
         soup: BeautifulSoup
-) -> str:    
+) -> str:
     '''
     Extracts the valid period of the weather
     outlook for selected Philippine tourist areas
