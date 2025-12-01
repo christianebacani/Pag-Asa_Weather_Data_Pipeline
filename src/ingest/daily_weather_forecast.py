@@ -28,12 +28,12 @@ def extract_beautiful_soup_object(
     PAGASA-DOST website.
 
     :param url: URL of the PAGASA-DOST page
-    containing the daily weather forecast
+        containing the daily weather forecast
     :type url: str
 
     :return: BeautifulSoup object for navigating
-    and manipulating the page content, or None if
-    extraction fails
+        and manipulating the page content, or
+        None if extraction fails
     :rtype: BeautifulSoup | None
     '''
     response = requests.get(url)
@@ -54,7 +54,7 @@ def extract_issued_datetime(
     weather forecast from the PAGASA-DOST website.
 
     :param soup: BeautifulSoup object for navigating
-    and manipulating the page content
+        and manipulating the page content
     :type soup: BeautifulSoup
 
     :return: Issued datetime of the daily weather forecast
@@ -87,7 +87,8 @@ def save_issued_datetime_to_json(
     data/raw/daily_weather_forecast/
     subdirectory on the local machine.
 
-    :param issued_datetime: Issued datetime of the daily weather forecast
+    :param issued_datetime: Issued datetime
+        of the daily weather forecast
     :type issued_datetime: str
     '''
     # Create a dictionary to store issued datetime of the daily weather forecast
@@ -112,7 +113,7 @@ def extract_synopsis(
     forecast from the PAGASA-DOST website.
 
     :param soup: BeautifulSoup object for navigating
-    and manipulating the page content
+        and manipulating the page content
     :type soup: BeautifulSoup
 
     :return: Synopsis of the daily weather forecast
@@ -164,10 +165,11 @@ def extract_tc_information(
     weather forecast on the PAGASA-DOST website.
 
     :param soup: BeautifulSoup object for navigating and
-    manipulating the page content
+        manipulating the page content
     :type soup: BeautifulSoup
 
-    :return: Dictionary containing tropical cyclone information
+    :return: Dictionary containing tropical cyclone
+        information
     :rtype: dict[str, str]
     '''
     tc_information = {
@@ -260,7 +262,7 @@ def extract_forecast_weather_conditions(
     forecast on the PAGASA-DOST website.
 
     :param soup: BeautifulSoup object for navigating and
-    manipulating the page content
+        manipulating the page content
     :type soup: BeautifulSoup
 
     :return: Dictionary containing forecast weather conditions
@@ -326,7 +328,7 @@ def save_forecast_weather_conditions_to_json(
     the local machine.
 
     :param forecast_weather_conditions: Dictionary
-    containing forecast weather conditions
+        containing forecast weather conditions
     :type forecast_weather_conditions: dict[str, list]
     '''
     # Create a dictionary to store forecast weather conditions from the daily weather forecast
@@ -355,11 +357,11 @@ def extract_forecast_wind_and_coastal_water_conditions(
     website.
 
     :param soup: BeautifulSoup object for navigating and
-    manipulating the page content
+        manipulating the page content
     :type soup: BeautifulSoup
     
     :return: Dictionary containing forecast wind and
-    coastal water conditions
+        coastal water conditions
     :rtype: dict[str, list]
     '''
     forecast_wind_and_coastal_water_conditions = {
@@ -422,7 +424,7 @@ def save_forecast_wind_and_coastal_water_conditions_to_json(
     machine.
 
     :param forecast_wind_and_coastal_water_conditions: Dictionary
-    containing forecast wind and coastal water conditions
+        containing forecast wind and coastal water conditions
     :type forecast_wind_and_coastal_water_conditions: dict[str, list]
     '''
     # Create a dictionary to store forecast wind and coastal water conditioons from the daily weather forecast
@@ -451,11 +453,11 @@ def extract_temperature_and_relative_humidity(
     website.
 
     :param soup: BeautifulSoup object for navigating
-    and manipulating the page content
+        and manipulating the page content
     :type soup: BeautifulSoup
 
     :return: Dictionary containing temperature and
-    relative humidity
+        relative humidity
     :rtype: dict[str, str]
     '''
     temperature_and_relative_humidity = {
@@ -539,7 +541,7 @@ def save_temperature_and_relative_humidity_to_json(
     machine.
 
     :param temperature_and_relative_humidity: Dictionary
-    containing temperature and relative humidity data
+        containing temperature and relative humidity data
     :type temperature_and_relative_humidity: dict[str, dict]
     '''
     # Create a dictionary to store temperature and relative humidity from the daily weather forecast
