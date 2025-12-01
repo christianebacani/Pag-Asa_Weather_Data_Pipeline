@@ -196,6 +196,7 @@ def extract_date_ranges(
     '''
     date_ranges = {}
 
+    # Extract HTML tags to get all date ranges for weekly weather outlook
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
     weekly_weather_outlook_tag = div_tag_with_row_weather_page_class.find(
         'div',
@@ -205,15 +206,19 @@ def extract_date_ranges(
     )
     table_tag = weekly_weather_outlook_tag.find('table', attrs={'class': 'table'})
 
+    # We need to check if the table_tag is missing
     if table_tag is None:
         return date_ranges
     
+    # Use find_all() method to access all date ranges
     list_of_all_table_row_tags = table_tag.find_all('tr')
 
+    # Loop through rows containing HTML tags to extract the date ranges of weekly weather outlook
     for table_row_tag in list_of_all_table_row_tags:
         date_range_tag = table_row_tag.find('td')
         date_range = str(date_range_tag.text).strip()
-        
+
+        # We need to check if the date_range is not empty string
         if date_range != '':
             date_ranges[date_range] = {}
     
