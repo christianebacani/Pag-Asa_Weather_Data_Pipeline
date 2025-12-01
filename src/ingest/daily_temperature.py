@@ -63,3 +63,28 @@ def extract_lowest_temperature_recorded_date(
         content
     :type soup: BeautifulSoup
     '''
+    lowest_temperature_recorded_date = ''
+
+    div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
+    lowest_temperature_table_tag = div_tag_with_row_weather_page_class.find(
+        'div',
+        attrs={
+            'class': 'col-md-6'
+        }
+    )
+    div_tag_with_panel_class = lowest_temperature_table_tag.find('div', attrs={'class': 'panel'})
+
+    if div_tag_with_panel_class is not None:
+        lowest_temperature_header_tag = div_tag_with_panel_class.find(
+            'div',
+            attrs={
+                'class': 'panel-heading'
+            }
+        )
+        lowest_temperature_header = str(lowest_temperature_header_tag.text)
+        lowest_temperature_recorded_date = lowest_temperature_header.replace(
+            'Top 10 Lowest Temperature as of',
+            ''
+        ).strip()
+    
+    return lowest_temperature_recorded_date
