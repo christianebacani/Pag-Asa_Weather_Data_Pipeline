@@ -1,9 +1,9 @@
 '''
     Module for executing ingestion, transformation,
     and loading functions for the daily temperature
-    including top 10 lowest and top 10 highest recored
-    across different weather stations from the PAGASA-DOST
-    website.
+    including top 10 lowest and top 10 highest
+    temperatures recorded across different weather
+    stations from the PAGASA-DOST website.
 '''
 from ingest.daily_temperature import create_subdir
 from ingest.daily_temperature import extract_beautiful_soup_object
