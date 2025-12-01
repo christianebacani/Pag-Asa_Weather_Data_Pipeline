@@ -36,7 +36,7 @@ def ingest_weekly_weather_outlook(
 
     date_ranges = extract_date_ranges(soup)
     weather_outlooks = extract_weather_outlooks(soup)
-    weekly_weather_outlooks = map_date_ranges_to_weather_outlooks(
+    weekly_weather_outlook = map_date_ranges_to_weather_outlooks(
         date_ranges,
         weather_outlooks
     )
