@@ -67,3 +67,15 @@ def extract_lowest_temp_table_tag(
         HTML tag
     :rtype: BeautifulSoup | None
     '''
+    # Extract HTML tags to get the data for the top 10 lowest temperature table
+    div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
+    lowest_temperature_table_tag = div_tag_with_row_weather_page_class.find(
+        'div',
+        attrs={
+            'class': 'col-md-6'
+        }
+    )
+    div_tag_with_panel_class = lowest_temperature_table_tag.find('div', attrs={'class': 'panel'})
+    lowest_temperature_table_tag = div_tag_with_panel_class
+
+    return lowest_temperature_table_tag
