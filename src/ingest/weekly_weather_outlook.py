@@ -85,3 +85,18 @@ def extract_issued_datetime(
         issued_datetime = str(issued_datetime_tag.text).strip()
     
     return issued_datetime
+
+def save_issued_datetime_to_json(
+        issued_datetime: str
+) -> None:
+    '''
+    Saves the issued datetime of the
+    weekly weather outlook to a JSON
+    file in the data/raw/weeekly_weather_outlook/
+    subdirectory on the local machine.
+
+    :param issued_datetime: Issued datetime
+    of the weekly weather outlook
+    :type issued_datetime: str
+    '''
+    
