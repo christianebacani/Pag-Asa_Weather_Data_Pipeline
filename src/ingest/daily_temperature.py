@@ -21,3 +21,21 @@ def create_subdir(
     # Create the data/raw/daily_temperature/ subdirectory if it doesn't exist
     if not os.path.exists('data/raw/daily_temperature'):
         os.makedirs('data/raw/daily_temperature')
+
+def extract_beautiful_soup_object(
+        url: str
+) -> BeautifulSoup | None:
+    '''
+    Extracts the BeautifulSoup object of
+    the daily temperature page from the
+    PAGASA-DOST website.
+    
+    :param url: URL of the PAGASA-DOST page
+        containing the daily temperature
+    :type url: str
+
+    :return: BeautifulSoup object for navigating
+        and manipulating the page content, or None if
+        extraction fails
+    :rtype: BeautifulSoup | None
+    '''
