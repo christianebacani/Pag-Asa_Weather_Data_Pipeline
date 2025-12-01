@@ -50,41 +50,20 @@ def extract_beautiful_soup_object(
     soup = BeautifulSoup(response.text, 'html.parser')
     return soup
 
-def extract_lowest_temperature_recorded_date(
+def extract_lowest_temp_table_tag(
         soup: BeautifulSoup
-) -> str:
+) -> BeautifulSoup | None:
     '''
-    Extracts the recorded date for the top 10
-    lowest temperature table from the daily
-    temperature page of PAGASA-DOST website.
+    Extracts top 10 lowest temperature table
+    tag to get it's corresponding data from the
+    PAGASA-DOST website.
 
     :param soup: BeautifulSoup object for
         navigating and manipulating the page
         content
     :type soup: BeautifulSoup
+
+    :return: Top 10 lowest temperature table
+        HTML tag
+    :rtype: BeautifulSoup | None
     '''
-    lowest_temperature_recorded_date = ''
-
-    div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
-    lowest_temperature_table_tag = div_tag_with_row_weather_page_class.find(
-        'div',
-        attrs={
-            'class': 'col-md-6'
-        }
-    )
-    div_tag_with_panel_class = lowest_temperature_table_tag.find('div', attrs={'class': 'panel'})
-
-    if div_tag_with_panel_class is not None:
-        lowest_temperature_header_tag = div_tag_with_panel_class.find(
-            'div',
-            attrs={
-                'class': 'panel-heading'
-            }
-        )
-        lowest_temperature_header = str(lowest_temperature_header_tag.text)
-        lowest_temperature_recorded_date = lowest_temperature_header.replace(
-            'Top 10 Lowest Temperature as of',
-            ''
-        ).strip()
-
-    return lowest_temperature_recorded_date
