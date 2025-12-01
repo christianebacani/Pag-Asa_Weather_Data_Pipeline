@@ -8,6 +8,7 @@
 from ingest.daily_temperature import create_subdir
 from ingest.daily_temperature import extract_beautiful_soup_object
 from ingest.daily_temperature import extract_lowest_temperature_table_tag
+from ingest.daily_temperature import extract_lowest_temperature_recorded_date
 
 def ingest_daily_temperature(
 ) -> None:
@@ -25,3 +26,5 @@ def ingest_daily_temperature(
     )
 
     lowest_temperature_table_tag = extract_lowest_temperature_table_tag(soup)
+    
+    lowest_temperature_recorded_date = extract_lowest_temperature_recorded_date(lowest_temperature_table_tag)
