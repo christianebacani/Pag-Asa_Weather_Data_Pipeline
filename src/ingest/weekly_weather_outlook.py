@@ -99,4 +99,16 @@ def save_issued_datetime_to_json(
     of the weekly weather outlook
     :type issued_datetime: str
     '''
+    # Create a dictionary to store issued datetime of the weekly weather outlook
+    data = {
+        "issued_datetime": issued_datetime
+    }
+
+    # Save the dictionary to a json file using open() method and json module
+    with open(
+        'data/raw/weekly_weather_outlook/issued_datetime.json',
+        'w'
+    ) as json_file:
+        json.dump(data, json_file, indent=4)
     
+    json_file.close()
