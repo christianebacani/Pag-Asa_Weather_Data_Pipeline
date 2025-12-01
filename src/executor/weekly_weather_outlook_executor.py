@@ -21,7 +21,7 @@ def ingest_weekly_weather_outlook(
         from the PAGASA-DOST website by
         executing all functions in the
         weekly_weather_outlook module of
-        the src/ingest package..
+        the src/ingest package.
     '''
     # Run all functions to ingest weekly weather outlook
     create_subdir()
