@@ -6,6 +6,7 @@
     website.
 '''
 from ingest.daily_temperature import create_subdir
+from ingest.daily_temperature import extract_beautiful_soup_object
 
 def ingest_daily_temperature(
 ) -> None:
@@ -18,3 +19,6 @@ def ingest_daily_temperature(
     '''
     # Run all functions to ingest daily temperature
     create_subdir()
+    soup = extract_beautiful_soup_object(
+        'https://www.pagasa.dost.gov.ph/weather/low-high-temperature'
+    )
