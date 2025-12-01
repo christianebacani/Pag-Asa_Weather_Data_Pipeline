@@ -315,7 +315,7 @@ def map_date_ranges_to_weather_outlooks(
     return result
 
 def save_weekly_weather_outlooks_to_json(
-        weekly_weather_outlooks: dict[str, str]
+        weekly_weather_outlook: dict[str, str]
 ) -> None:
     '''
     Saves the weekly weather outlook to a JSON
