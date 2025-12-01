@@ -2,3 +2,4 @@ from . import daily_weather_forecast
 from . import weather_outlook_for_ph_cities
 from . import weather_outlook_for_ph_tourist_areas
 from . import weekly_weather_outlook
+from . import daily_temperature
