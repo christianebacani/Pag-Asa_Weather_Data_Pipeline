@@ -27,4 +27,6 @@ def ingest_daily_temperature(
 
     lowest_temperature_table_tag = extract_lowest_temperature_table_tag(soup)
     
-    lowest_temperature_recorded_date = extract_lowest_temperature_recorded_date(lowest_temperature_table_tag)
+    lowest_temperature_recorded_date = extract_lowest_temperature_recorded_date(
+        lowest_temperature_table_tag
+    )
