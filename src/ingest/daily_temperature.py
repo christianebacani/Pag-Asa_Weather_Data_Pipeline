@@ -117,6 +117,5 @@ def extract_lowest_temperature_recorded_date(
     
     return lowest_temperature_recorded_date
 
-    # TODO: 
-    # - Test the function extract_lowest_temperature_recorded_date
+    # TODO:
     # - Check every function inside the ingest package to validate if the BeautifulSoup object is missing
