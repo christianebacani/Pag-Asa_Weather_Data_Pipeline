@@ -327,3 +327,14 @@ def save_weekly_weather_outlook_to_json(
         ranges
     :type weekly_weather_outlooks: dict[str, str]
     '''
+    # Create a dictionary to store weekly weather outlook
+    data = weekly_weather_outlook
+
+    # Save the dictionary to a json file using open() method and json module
+    with open(
+        'data/raw/weekly_weather_outlook/weekly_weather_outlook.json',
+        'w'
+    ) as json_file:
+        json.dump(data, json_file, indent=4)
+
+    json_file.close()
