@@ -64,6 +64,7 @@ def extract_issued_datetime(
     '''
     issued_datetime = ''
 
+    # Extract HTML tags for issued datetime of the weekly weather outlook
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
     issued_datetime_and_valid_period_tag = div_tag_with_row_weather_page_class.find(
         'div',
@@ -78,6 +79,7 @@ def extract_issued_datetime(
         }
     )
     
+    # We need to check if the div_tag_with_validity_class is not missing
     if div_tag_with_validity_class is not None:
         issued_datetime_tag = div_tag_with_validity_class.find('b')
         issued_datetime = str(issued_datetime_tag.text).strip()
