@@ -112,3 +112,19 @@ def save_issued_datetime_to_json(
         json.dump(data, json_file, indent=4)
     
     json_file.close()
+
+def extract_valid_period(
+        soup: BeautifulSoup
+) -> str:    
+    '''
+    Extracts the valid period of the weekly
+    weather outlook from the PAGASA-DOST website.
+
+    :param soup: BeautifulSoup object for navigating
+    and manipulating the page content
+    :type soup: BeautifulSoup
+
+    :return: Valid period of the weekly weather outlook
+    :rtype: str
+    '''
+    
