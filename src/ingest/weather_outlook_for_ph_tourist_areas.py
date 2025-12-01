@@ -282,7 +282,7 @@ def extract_weather_dates(
         return weather_dates
 
     thead_tag = table_tag.find('thead')
-    # Use find_all() method to access all weather dates 
+    # Use find_all() method to access all weather dates
     list_of_all_table_header_tags = thead_tag.find_all('th')[1:]
 
     # Loop through rows containing HTML tags to extract the weather dates of selected Philippine tourist areas
