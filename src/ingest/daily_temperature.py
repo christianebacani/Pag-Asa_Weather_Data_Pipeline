@@ -17,7 +17,7 @@ def create_subdir(
         subdirectory to store JSON files for top
         10 lowest and top 10 highest temperature
         data ingested from the daily temperature
-        page of PAGASA-DOST website.
+        page of the PAGASA-DOST website.
     '''
     # Create the data/raw/daily_temperature/ subdirectory if it doesn't exist
     if not os.path.exists('data/raw/daily_temperature'):
@@ -56,7 +56,8 @@ def extract_lowest_temperature_table_tag(
     '''
     Extracts top 10 lowest temperature table
     tag to get it's corresponding data from the
-    PAGASA-DOST website.
+    daily temperature page of the PAGASA-DOST
+    website.
 
     :param soup: BeautifulSoup object for
         navigating and manipulating the page
@@ -79,3 +80,38 @@ def extract_lowest_temperature_table_tag(
     lowest_temperature_table_tag = div_tag_with_panel_class
 
     return lowest_temperature_table_tag
+
+def extract_lowest_temperature_recorded_date(
+        lowest_temperature_table_tag: BeautifulSoup
+) -> str:
+    '''
+    Extracts the recorded date of the top 10 lowest
+    temperature table from the daily temperature page
+    of the PAGASA-DOST website.
+
+    :param lowest_temperature_table_tag: Top 10 lowest
+        temperature table HTML tag
+    :type lowest_temperature_table_tag: BeautifulSoup
+
+    :return: Top 10 lowest temperature recorded date
+    :rtype: str
+    '''
+    lowest_temperature_recorded_date = ''
+
+    # We need to check if the top 10 lowest teperature table HTML tag is missing
+    if lowest_temperature_table_tag is None:
+        return lowest_temperature_recorded_date
+
+    lowest_temperature_header_tag = lowest_temperature_table_tag.find(
+        'div',
+        attrs={
+            'class': 'panel-heading'
+        }
+    )
+    lowest_temperature_header = str(lowest_temperature_header_tag.text)
+    lowest_temperature_recorded_date = lowest_temperature_header.replace(
+        'Top 10 Lowest Temperature as of',
+        ''
+    ).strip()
+    
+    return lowest_temperature_recorded_date
