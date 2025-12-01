@@ -223,3 +223,59 @@ def extract_date_ranges(
             date_ranges[date_range] = {}
     
     return date_ranges
+
+def extract_weather_outlooks(
+        soup: BeautifulSoup
+) -> list[str]:
+    '''
+    Extracts the weather outlooks
+    for every date ranges from the
+    PAGASA-DOST website.
+
+    :param soup: BeautifulSoup
+        object for navigating and
+        manipulating the page
+        content
+    :type soup: BeautifulSoup
+
+    :return: List of weather outlooks
+        for every date ranges
+    :rtype: list[str]
+    '''
+    weather_outlooks = []
+
+    # Extract HTML tags to get all weather outlooks
+    div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
+    weekly_weather_outlook_tag = div_tag_with_row_weather_page_class.find(
+        'div',
+        attrs={
+            'class': 'col-lg-12 col-md-12'
+        }
+    )
+    table_tag = weekly_weather_outlook_tag.find('table', attrs={'class': 'table'})
+
+    # We need to check if the table_tag is missing
+    if table_tag is None:
+        return weather_outlooks
+
+    # Use find_all() method to access all date ranges    
+    list_of_all_table_row_tags = table_tag.find_all('tr')
+
+    # Loop through rows containing HTML tags to extract the date ranges and weather outlooks
+    for table_row_tag in list_of_all_table_row_tags:
+        # Use find_all() method to access all date ranges and weather outlooks
+        list_of_all_table_data_tags = table_row_tag.find_all('td')
+
+        date_range_tag = list_of_all_table_data_tags[0]
+        date_range = str(date_range_tag.text).strip()
+
+        # We need to check if date_range is not empty string
+        if date_range == '':
+            continue
+
+        # Get the weather outlook if the date_range is not empty string
+        weather_outlook_tag = list_of_all_table_data_tags[1]
+        weather_outlook = str(weather_outlook_tag.text).strip()
+        weather_outlooks.append(weather_outlook)
+
+    return weather_outlooks
