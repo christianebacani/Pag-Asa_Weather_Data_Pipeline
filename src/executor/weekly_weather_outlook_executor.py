@@ -8,6 +8,7 @@ from ingest.weekly_weather_outlook import extract_beautiful_soup_object
 from ingest.weekly_weather_outlook import extract_issued_datetime
 from ingest.weekly_weather_outlook import save_issued_datetime_to_json
 from ingest.weekly_weather_outlook import extract_valid_period
+from ingest.weekly_weather_outlook import save_valid_period_to_json
 
 def ingest_weekly_weather_outlook(
 ) -> None:
@@ -27,4 +28,5 @@ def ingest_weekly_weather_outlook(
     issued_datetime = extract_issued_datetime(soup)
     save_issued_datetime_to_json(issued_datetime)
 
-    extract_valid_period(soup)
+    valid_period = extract_valid_period(soup)
+    save_valid_period_to_json(valid_period)
