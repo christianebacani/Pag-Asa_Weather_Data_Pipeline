@@ -18,7 +18,7 @@ def create_subdir(
     # Create the data/raw/weekly_weather_outlook/ subdirectory if it doesn't exist
     if not os.path.exists('data/raw/weekly_weather_outlook'):
         os.makedirs('data/raw/weekly_weather_outlook')
-    
+
 def extract_beautiful_soup_object(
         url: str
 ) -> BeautifulSoup | None:
