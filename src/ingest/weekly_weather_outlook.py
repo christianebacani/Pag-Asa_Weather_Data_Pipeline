@@ -28,12 +28,12 @@ def extract_beautiful_soup_object(
     PAGASA-DOST website.
 
     :param url: URL of the PAGASA-DOST page
-    containing the weekly weather outlook
+        containing the weekly weather outlook
     :type url: str
 
     :return: BeautifulSoup object for navigating
-    and manipulating the page content, or None if
-    extraction fails
+        and manipulating the page content, or None if
+        extraction fails
     :rtype: BeautifulSoup | None
     '''
     response = requests.get(url)
@@ -55,11 +55,11 @@ def extract_issued_datetime(
     website.
 
     :param soup: BeautifulSoup object for navigating
-    and manipulating the page content
+        and manipulating the page content
     :type soup: BeautifulSoup
 
     :return: Issued datetime of the weekly weather
-    outlook
+        outlook
     :rtype: str
     '''
     issued_datetime = ''
@@ -96,7 +96,7 @@ def save_issued_datetime_to_json(
     subdirectory on the local machine.
 
     :param issued_datetime: Issued datetime
-    of the weekly weather outlook
+        of the weekly weather outlook
     :type issued_datetime: str
     '''
     # Create a dictionary to store issued datetime of the weekly weather outlook
@@ -121,7 +121,7 @@ def extract_valid_period(
     weather outlook from the PAGASA-DOST website.
 
     :param soup: BeautifulSoup object for navigating
-    and manipulating the page content
+        and manipulating the page content
     :type soup: BeautifulSoup
 
     :return: Valid period of the weekly weather outlook
