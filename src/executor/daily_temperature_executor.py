@@ -7,7 +7,6 @@
 '''
 from ingest.daily_temperature import create_subdir
 from ingest.daily_temperature import extract_beautiful_soup_object
-from ingest.daily_temperature import extract_lowest_temperature_recorded_date
 
 def ingest_daily_temperature(
 ) -> None:
@@ -23,5 +22,3 @@ def ingest_daily_temperature(
     soup = extract_beautiful_soup_object(
         'https://www.pagasa.dost.gov.ph/weather/low-high-temperature'
     )
-
-    lowest_temperature_recorded_date = extract_lowest_temperature_recorded_date(soup)
