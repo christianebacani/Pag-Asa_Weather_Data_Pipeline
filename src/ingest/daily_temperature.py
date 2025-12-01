@@ -86,5 +86,5 @@ def extract_lowest_temperature_recorded_date(
             'Top 10 Lowest Temperature as of',
             ''
         ).strip()
-    
+
     return lowest_temperature_recorded_date
