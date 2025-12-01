@@ -11,6 +11,7 @@ from ingest.weekly_weather_outlook import extract_valid_period
 from ingest.weekly_weather_outlook import save_valid_period_to_json
 from ingest.weekly_weather_outlook import extract_date_ranges
 from ingest.weekly_weather_outlook import extract_weather_outlooks
+from ingest.weekly_weather_outlook import map_date_ranges_to_weather_outlooks
 
 def ingest_weekly_weather_outlook(
 ) -> None:
@@ -35,3 +36,7 @@ def ingest_weekly_weather_outlook(
 
     date_ranges = extract_date_ranges(soup)
     weather_outlooks = extract_weather_outlooks(soup)
+    weekly_weather_outlooks = map_date_ranges_to_weather_outlooks(
+        date_ranges,
+        weather_outlooks
+    )
