@@ -146,7 +146,35 @@ def extract_valid_period(
     
     # We need to check if the div_tag_with_validity_class is not missing
     if div_tag_with_validity_class is not None:
-        valid_period_tag = div_tag_with_validity_class.find_all('b')
+        valid_period_tag = div_tag_with_validity_class.find_all('b')[1]
         valid_period = str(valid_period_tag.text).strip()
-    
+
     return valid_period
+
+def save_valid_period_to_json(
+        valid_period: str
+) -> None:
+    '''
+    Saves the valid period of the
+    weekly weather outlook to a
+    JSON file in the
+    data/raw/weekly_weather_outlook/
+    subdirectory on the local machine.
+
+    :param issued_datetime: Valid period of
+        weekly weather outlook
+    :type issued_datetime: str
+    '''
+    # Create a dictionary to store valid period of the weekly weather outlook
+    data = {
+        "valid_period": valid_period
+    }
+
+    # Save the dictionary to a json file using open() method and json module
+    with open(
+        'data/raw/weekly_weather_outlook/valid_period.json',
+        'w'
+    ) as json_file:
+        json.dump(data, json_file, indent=4)
+
+    json_file.close()
