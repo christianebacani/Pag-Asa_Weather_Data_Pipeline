@@ -93,7 +93,8 @@ def extract_lowest_temperature_recorded_date(
         temperature table HTML tag
     :type lowest_temperature_table_tag: BeautifulSoup
 
-    :return: Top 10 lowest temperature recorded date
+    :return: Recorded date of the top 10 lowest temperature
+        table
     :rtype: str
     '''
     lowest_temperature_recorded_date = ''
