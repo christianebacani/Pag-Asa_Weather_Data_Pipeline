@@ -12,6 +12,7 @@ from ingest.weekly_weather_outlook import save_valid_period_to_json
 from ingest.weekly_weather_outlook import extract_date_ranges
 from ingest.weekly_weather_outlook import extract_weather_outlooks
 from ingest.weekly_weather_outlook import map_date_ranges_to_weather_outlooks
+from ingest.weekly_weather_outlook import save_weekly_weather_outlook_to_json
 
 def ingest_weekly_weather_outlook(
 ) -> None:
@@ -40,3 +41,5 @@ def ingest_weekly_weather_outlook(
         date_ranges,
         weather_outlooks
     )
+
+    save_weekly_weather_outlook_to_json(weekly_weather_outlook)
