@@ -313,3 +313,17 @@ def map_date_ranges_to_weather_outlooks(
         result[date_range] = weather_outlook
 
     return result
+
+def save_weekly_weather_outlooks_to_json(
+        weekly_weather_outlooks: dict[str, str]
+) -> None:
+    '''
+    Saves the weekly weather outlook to a JSON
+    file in the data/raw/weekly_weather_outlook/
+    subdirectory on the local machine.
+    
+    :param weekly_weather_outlooks: Dictionary
+        of weekly weather outlook for every date
+        ranges
+    :type weekly_weather_outlooks: dict[str, str]
+    '''
