@@ -301,3 +301,15 @@ def map_date_ranges_to_weather_outlooks(
         for every date ranges
     :rtype: dict[str, str]
     '''
+    result = date_ranges
+
+    list_of_all_date_ranges = list(date_ranges.keys())
+
+    # Loop through the list of date ranges to map it to the extracted date ranges
+    for index, date_range in enumerate(list_of_all_date_ranges):
+        # Use the index of date range to get the corresponding weather outlook
+        weather_outlook = weather_outlooks[index]
+        # Map date range to the selected weather outlook
+        result[date_range] = weather_outlook
+
+    return result
