@@ -62,3 +62,24 @@ def extract_issued_datetime(
     outlook
     :rtype: str
     '''
+    issued_datetime = ''
+
+    div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
+    issued_datetime_and_valid_period_tag = div_tag_with_row_weather_page_class.find(
+        'div',
+        attrs={
+            'class': 'col-md-12 col-lg-12 issue'
+        }
+    )
+    div_tag_with_validity_class = issued_datetime_and_valid_period_tag.find(
+        'div',
+        attrs={
+            'class': 'validity'
+        }
+    )
+    
+    if div_tag_with_validity_class is not None:
+        issued_datetime_tag = div_tag_with_validity_class.find('b')
+        issued_datetime = str(issued_datetime_tag.text).strip()
+    
+    return issued_datetime
