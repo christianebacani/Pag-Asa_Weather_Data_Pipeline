@@ -50,7 +50,7 @@ def extract_beautiful_soup_object(
     soup = BeautifulSoup(response.text, 'html.parser')
     return soup
 
-def extract_lowest_temp_table_tag(
+def extract_lowest_temperature_table_tag(
         soup: BeautifulSoup
 ) -> BeautifulSoup | None:
     '''
