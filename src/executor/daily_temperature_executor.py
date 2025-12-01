@@ -5,6 +5,8 @@
     across different weather stations from the PAGASA-DOST
     website.
 '''
+from ingest.daily_temperature import create_subdir
+
 def ingest_daily_temperature(
 ) -> None:
     '''
@@ -14,3 +16,5 @@ def ingest_daily_temperature(
         daily_temperature module of
         src/ingest package.
     '''
+    # Run all functions to ingest daily temperature
+    create_subdir()
