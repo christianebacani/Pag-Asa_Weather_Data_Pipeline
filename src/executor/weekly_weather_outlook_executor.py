@@ -5,6 +5,7 @@
 '''
 from ingest.weekly_weather_outlook import create_subdir
 from ingest.weekly_weather_outlook import extract_beautiful_soup_object
+from ingest.weekly_weather_outlook import extract_issued_datetime
 
 def ingest_weekly_weather_outlook(
 ) -> None:
@@ -20,3 +21,5 @@ def ingest_weekly_weather_outlook(
     soup = extract_beautiful_soup_object(
         'https://www.pagasa.dost.gov.ph/weather/weather-outlook-weekly'
     )
+
+    issued_datetime = extract_issued_datetime(soup)
