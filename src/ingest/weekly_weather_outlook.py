@@ -220,8 +220,8 @@ def extract_date_ranges(
 
         # We need to check if the date_range is not empty string
         if date_range != '':
-            date_ranges[date_range] = {}
-    
+            date_ranges[date_range] = ''
+
     return date_ranges
 
 def extract_weather_outlooks(
@@ -279,3 +279,25 @@ def extract_weather_outlooks(
         weather_outlooks.append(weather_outlook)
 
     return weather_outlooks
+
+def map_date_ranges_to_weather_outlooks(
+        date_ranges: dict[str, str],
+        weather_outlooks: list[str]
+) -> dict[str, str]:
+    '''
+    Maps extracted date ranges for their
+    corresponding weekly weather outlook
+    from the PAGASA-DOST website.
+
+    :param date_ranges: Dictionary of date
+        ranges for weekly weather outlook
+    :type date_ranges: dict[str, str]
+
+    :param weather_outlooks: List of weather
+        outlooks for every date ranges
+    :type weather_outlooks:
+
+    :return: Dictionary of weekly weather outlook
+        for every date ranges
+    :rtype: dict[str, str]
+    '''
