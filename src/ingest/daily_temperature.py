@@ -81,8 +81,8 @@ def extract_top_10_lowest_temp_table_tag(
 
     return top_10_lowest_temp_table_tag
 
-def extract_lowest_temperature_recorded_date(
-        lowest_temperature_table_tag: BeautifulSoup
+def extract_top_10_lowest_temp_recorded_date(
+        top_10_lowest_temp_table_tag: BeautifulSoup | None
 ) -> str:
     '''
     Extracts the recorded date of the top 10 lowest
@@ -91,7 +91,7 @@ def extract_lowest_temperature_recorded_date(
 
     :param lowest_temperature_table_tag: Top 10 lowest
         temperature table HTML tag
-    :type lowest_temperature_table_tag: BeautifulSoup
+    :type lowest_temperature_table_tag: BeautifulSoup | None
 
     :return: Recorded date of the top 10 lowest temperature
         table
@@ -100,10 +100,10 @@ def extract_lowest_temperature_recorded_date(
     lowest_temperature_recorded_date = ''
 
     # We need to check if the top 10 lowest teperature table HTML tag is missing
-    if lowest_temperature_table_tag is None:
+    if top_10_lowest_temp_table_tag is None:
         return lowest_temperature_recorded_date
 
-    lowest_temperature_header_tag = lowest_temperature_table_tag.find(
+    lowest_temperature_header_tag = top_10_lowest_temp_table_tag.find(
         'div',
         attrs={
             'class': 'panel-heading'
@@ -116,6 +116,3 @@ def extract_lowest_temperature_recorded_date(
     ).strip()
     
     return lowest_temperature_recorded_date
-
-    # TODO:
-    # - Check every function inside the ingest package to validate if the BeautifulSoup object is missing
