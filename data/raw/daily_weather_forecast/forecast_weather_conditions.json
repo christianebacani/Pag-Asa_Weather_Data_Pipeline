@@ -1,25 +1,29 @@
 {
     "place": [
-        "Kalayaan Islands",
-        "Batanes and Babuyan Islands",
-        "Visayas, Mindanao, and the rest of Palawan",
+        "Eastern Visayas, Caraga, and Davao Region",
+        "Batanes",
+        "The rest of Mindanao",
+        "Palawan and the rest of Visayas",
         "Metro Manila and the rest of Luzon"
     ],
     "weather_condition": [
         "Cloudy skies with scattered rains and thunderstorms",
         "Cloudy skies with light rains",
         "Partly cloudy to cloudy skies with isolated rainshowers or thunderstorms",
+        "Partly cloudy to cloudy skies with isolated rainshowers or thunderstorms",
         "Partly cloudy to cloudy skies with isolated rainshowers or thunderstorms"
     ],
     "caused_by": [
-        "Trough of TS KOTO",
+        "ITCZ",
         "Northeast Monsoon",
+        "ITCZ",
         "Localized Thunderstorms",
         "Easterlies"
     ],
     "impacts": [
         "Possible flash floods or landslides due to moderate to at times heavy rains",
         "No significant impact",
+        "Possible flash floods or landslides during severe thunderstorms",
         "Possible flash floods or landslides during severe thunderstorms",
         "Possible flash floods or landslides during severe thunderstorms"
     ]
