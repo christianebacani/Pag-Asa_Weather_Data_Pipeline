@@ -178,3 +178,43 @@ def save_valid_period_to_json(
         json.dump(data, json_file, indent=4)
 
     json_file.close()
+
+def extract_date_ranges(
+        soup: BeautifulSoup
+) -> dict[str, str]:
+    '''
+    Extracts the date ranges of the weekly
+    weather outlook from the PAGASA-DOST website.
+
+    :param soup: BeautifulSoup object for navigating
+        and manipulating the page content
+    :type soup: BeautifulSoup
+
+    :return: Dictionary of date ranges for weekly
+        weather outlook
+    :rtype: dict[str, str]
+    '''
+    date_ranges = {}
+
+    div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
+    weekly_weather_outlook_tag = div_tag_with_row_weather_page_class.find(
+        'div',
+        attrs={
+            'class': 'col-lg-12 col-md-12'
+        }
+    )
+    table_tag = weekly_weather_outlook_tag.find('table', attrs={'class': 'table'})
+
+    if table_tag is None:
+        return date_ranges
+    
+    list_of_all_table_row_tags = table_tag.find_all('tr')
+
+    for table_row_tag in list_of_all_table_row_tags:
+        date_range_tag = table_row_tag.find('td')
+        date_range = str(date_range_tag.text).strip()
+        
+        if date_range != '':
+            date_ranges[date_range] = {}
+    
+    return date_ranges
