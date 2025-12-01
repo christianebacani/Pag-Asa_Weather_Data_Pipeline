@@ -50,7 +50,7 @@ def extract_beautiful_soup_object(
     soup = BeautifulSoup(response.text, 'html.parser')
     return soup
 
-def extract_lowest_temperature_table_tag(
+def extract_top_10_lowest_temp_table_tag(
         soup: BeautifulSoup
 ) -> BeautifulSoup | None:
     '''
@@ -70,16 +70,16 @@ def extract_lowest_temperature_table_tag(
     '''
     # Extract HTML tags to get the data for the top 10 lowest temperature table
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
-    lowest_temperature_table_tag = div_tag_with_row_weather_page_class.find(
+    top_10_lowest_temp_table_tag = div_tag_with_row_weather_page_class.find(
         'div',
         attrs={
             'class': 'col-md-6'
         }
     )
-    div_tag_with_panel_class = lowest_temperature_table_tag.find('div', attrs={'class': 'panel'})
-    lowest_temperature_table_tag = div_tag_with_panel_class
+    div_tag_with_panel_class = top_10_lowest_temp_table_tag.find('div', attrs={'class': 'panel'})
+    top_10_lowest_temp_table_tag = div_tag_with_panel_class
 
-    return lowest_temperature_table_tag
+    return top_10_lowest_temp_table_tag
 
 def extract_lowest_temperature_recorded_date(
         lowest_temperature_table_tag: BeautifulSoup
