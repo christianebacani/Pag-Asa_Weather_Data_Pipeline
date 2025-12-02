@@ -323,9 +323,10 @@ def map_weather_dates_to_ph_tourist_areas(
         ph_tourist_area_names: dict[str, dict]
 ) -> dict[str, dict]:
     '''
-    Maps extracted weather dates to selected Philippine
-    tourist areas for their weather outlook from the
-    PAGASA-DOST website.
+    Maps extracted list of weather dates to the
+    dictionary of selected Philippine tourist areas
+    for their weather outlook from the PAGASA-DOST
+    website.
 
     :param weather_dates: List of weather dates for the
         selected Philippine tourist areas
@@ -400,9 +401,9 @@ def map_temperature_ranges_to_ph_tourist_areas(
         ph_tourist_areas_with_weather_dates: dict[str, dict]
 ) -> dict[str, dict]:
     '''
-    Maps extracted temperature ranges to selected Philippine
-    tourist areas for their weather outlook from the
-    PAGASA-DOST website.
+    Maps extracted list of temperature ranges to the dictionary
+    of selected Philippine tourist area names with weather dates
+    for their weather outlook from the PAGASA-DOST website.
 
     :param temperature_ranges: List of temperature ranges
         for the selected Philippine tourist areas
