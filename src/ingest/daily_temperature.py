@@ -164,3 +164,20 @@ def extract_station_names_for_top_10_lowest_temp(
         top_10_lowest_temp_station_names.append(station_name)
 
     return top_10_lowest_temp_station_names
+
+def extract_temperatures_for_top_10_lowest_temp(
+        top_10_lowest_temp_table_tag: BeautifulSoup | None
+) -> list[str]:
+    '''
+    Extracts the list of temperatures from the the top 10
+    lowest temperature table of the daily temperature page
+    from the PAGASA-DOST website.
+
+    :param lowest_temperature_table_tag: Top 10 lowest
+        temperature table HTML tag, or None if extration fails
+    :type lowest_temperature_table_tag: BeautifulSoup | None
+
+    :return: List of temperatures from the top 10 lowest
+        temperature table
+    :rtype: list[str]
+    '''
