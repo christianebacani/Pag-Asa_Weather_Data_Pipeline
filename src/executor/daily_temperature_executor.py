@@ -10,6 +10,7 @@ from ingest.daily_temperature import extract_beautiful_soup_object
 from ingest.daily_temperature import extract_top_10_lowest_temp_table_tag
 from ingest.daily_temperature import extract_recorded_date_for_top_10_lowest_temp
 from ingest.daily_temperature import extract_station_names_for_top_10_lowest_temp
+from ingest.daily_temperature import extract_temperatures_for_top_10_lowest_temp
 
 def ingest_daily_temperature(
 ) -> None:
@@ -31,6 +32,9 @@ def ingest_daily_temperature(
     recorded_date_for_top_10_lowest_temp = extract_recorded_date_for_top_10_lowest_temp(
         top_10_lowest_temp_table_tag
     )
-    top_10_lowest_temp_station_names = extract_station_names_for_top_10_lowest_temp(
+    station_names_for_top_10_lowest_temp = extract_station_names_for_top_10_lowest_temp(
+        top_10_lowest_temp_table_tag
+    )
+    temperatures_for_top_10_lowest_temp = extract_temperatures_for_top_10_lowest_temp(
         top_10_lowest_temp_table_tag
     )
