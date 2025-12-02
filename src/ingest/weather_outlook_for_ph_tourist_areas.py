@@ -256,7 +256,7 @@ def extract_ph_tourist_area_names(
     result = {}
 
     # We need to check if the list of all selected PH tourist area HTML tags is missing
-    if list_of_all_ph_tourist_area_tags:
+    if list_of_all_ph_tourist_area_tags is None:
         return result
 
     # Loop through rows containing HTML tags to extract the names of the selected PH tourist areas
