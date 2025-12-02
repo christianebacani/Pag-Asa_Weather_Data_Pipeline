@@ -47,7 +47,7 @@ def extract_beautiful_soup_object(
     return soup
 
 def extract_issued_datetime(
-        soup: BeautifulSoup
+        soup: BeautifulSoup | None
 ) -> str:
     '''
     Extracts the issued datetime of weekly
@@ -55,14 +55,19 @@ def extract_issued_datetime(
     website.
 
     :param soup: BeautifulSoup object for navigating
-        and manipulating the page content
-    :type soup: BeautifulSoup
+        and manipulating the page content, or None
+        if extraction fails
+    :type soup: BeautifulSoup | None
 
     :return: Issued datetime of the weekly weather
         outlook
     :rtype: str
     '''
     issued_datetime = ''
+
+    # We need to check if the BeautifulSoup object is missing
+    if soup is None:
+        return issued_datetime
 
     # Extract HTML tags for issued datetime of the weekly weather outlook
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
@@ -114,20 +119,25 @@ def save_issued_datetime_to_json(
     json_file.close()
 
 def extract_valid_period(
-        soup: BeautifulSoup
+        soup: BeautifulSoup | None
 ) -> str:    
     '''
     Extracts the valid period of the weekly
     weather outlook from the PAGASA-DOST website.
 
     :param soup: BeautifulSoup object for navigating
-        and manipulating the page content
-    :type soup: BeautifulSoup
+        and manipulating the page content, or None if
+        extraction fails
+    :type soup: BeautifulSoup | None
 
     :return: Valid period of the weekly weather outlook
     :rtype: str
     '''
     valid_period = ''
+
+    # We need to check if the BeautifulSoup object is missing
+    if soup is None:
+        return valid_period
 
     # Extract HTML tags for valid period of the weekly weather outlook
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
@@ -180,21 +190,26 @@ def save_valid_period_to_json(
     json_file.close()
 
 def extract_date_ranges(
-        soup: BeautifulSoup
+        soup: BeautifulSoup | None
 ) -> dict[str, str]:
     '''
     Extracts the date ranges of the weekly
     weather outlook from the PAGASA-DOST website.
 
     :param soup: BeautifulSoup object for navigating
-        and manipulating the page content
-    :type soup: BeautifulSoup
+        and manipulating the page content, or None if
+        extraction fails
+    :type soup: BeautifulSoup | None
 
     :return: Dictionary of date ranges for weekly
         weather outlook
     :rtype: dict[str, str]
     '''
     date_ranges = {}
+
+    # We need to check if the BeautifulSoup object is missing
+    if soup is None:
+        return date_ranges
 
     # Extract HTML tags to get all date ranges for weekly weather outlook
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
@@ -225,7 +240,7 @@ def extract_date_ranges(
     return date_ranges
 
 def extract_weather_outlooks(
-        soup: BeautifulSoup
+        soup: BeautifulSoup | None
 ) -> list[str]:
     '''
     Extracts the weather outlooks
@@ -235,14 +250,19 @@ def extract_weather_outlooks(
     :param soup: BeautifulSoup
         object for navigating and
         manipulating the page
-        content
-    :type soup: BeautifulSoup
+        content, or None if extraction
+        fails
+    :type soup: BeautifulSoup | None
 
     :return: List of weather outlooks
         for every date ranges
     :rtype: list[str]
     '''
     weather_outlooks = []
+
+    # We need to check if the BeautifulSoup object is missing
+    if soup is None:
+        return weather_outlooks
 
     # Extract HTML tags to get all weather outlooks
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
@@ -301,6 +321,10 @@ def map_date_ranges_to_weather_outlooks(
         for every date ranges
     :rtype: dict[str, str]
     '''
+    # We need to check if date ranges list or weather outlook list is missing
+    if date_ranges == {} or weather_outlooks == []:
+        return {}
+
     result = date_ranges
 
     list_of_all_date_ranges = list(date_ranges.keys())
