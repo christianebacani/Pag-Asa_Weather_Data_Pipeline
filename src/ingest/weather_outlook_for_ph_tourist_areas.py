@@ -339,7 +339,7 @@ def map_weather_dates_to_ph_tourist_areas(
         corresponding weather dates
     :rtype: dict[str, dict]
     '''
-    # We need to check if the weather date list or PH tourist area names dict is misisng
+    # We need to check if the weather dates list or PH tourist area names dict is misisng
     if weather_dates == [] or ph_tourist_area_names == {}:
         return {}
 
@@ -416,7 +416,7 @@ def map_temperature_ranges_to_ph_tourist_areas(
         and temperature ranges
     :rtype: dict[str, dict]
     '''
-    # We need to check if the temperature range list or PH tourist area with weather dates dict is missing
+    # We need to check if the temperature ranges list or PH tourist areas with weather dates dict is missing
     if temperature_ranges == [] or ph_tourist_areas_with_weather_dates == {}:
         return {}
 
@@ -457,5 +457,5 @@ def save_ph_tourist_areas_weather_outlook_to_json(
         'w'
     ) as json_file:
         json.dump(data, json_file, indent=4)
-    
+
     json_file.close()
