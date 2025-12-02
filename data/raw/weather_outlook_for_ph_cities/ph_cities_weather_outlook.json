@@ -30,11 +30,11 @@
             ]
         ],
         "chance_of_rain_percentages": [
-            "Chance of rain: %",
-            "Chance of rain: %",
-            "Chance of rain: %",
-            "Chance of rain: %",
-            "Chance of rain: %"
+            "Chance of rain: 40%",
+            "Chance of rain: 40%",
+            "Chance of rain: 40%",
+            "Chance of rain: 40%",
+            "Chance of rain: 80%"
         ]
     },
     "Baguio City": {
@@ -68,11 +68,11 @@
             ]
         ],
         "chance_of_rain_percentages": [
-            "Chance of rain: %",
-            "Chance of rain: %",
-            "Chance of rain: %",
-            "Chance of rain: %",
-            "Chance of rain: %"
+            "Chance of rain: 40%",
+            "Chance of rain: 20%",
+            "Chance of rain: 60%",
+            "Chance of rain: 60%",
+            "Chance of rain: 60%"
         ]
     },
     "Cagayan De Oro City": {
@@ -106,11 +106,11 @@
             ]
         ],
         "chance_of_rain_percentages": [
-            "Chance of rain: %",
-            "Chance of rain: %",
-            "Chance of rain: %",
-            "Chance of rain: %",
-            "Chance of rain: %"
+            "Chance of rain: 60%",
+            "Chance of rain: 40%",
+            "Chance of rain: 40%",
+            "Chance of rain: 40%",
+            "Chance of rain: 40%"
         ]
     },
     "Iloilo City": {
@@ -220,11 +220,11 @@
             ]
         ],
         "chance_of_rain_percentages": [
-            "Chance of rain: %",
-            "Chance of rain: %",
-            "Chance of rain: %",
-            "Chance of rain: %",
-            "Chance of rain: %"
+            "Chance of rain: 20%",
+            "Chance of rain: 20%",
+            "Chance of rain: 20%",
+            "Chance of rain: 40%",
+            "Chance of rain: 40%"
         ]
     },
     "Legazpi City": {
@@ -258,11 +258,11 @@
             ]
         ],
         "chance_of_rain_percentages": [
-            "Chance of rain: %",
-            "Chance of rain: %",
-            "Chance of rain: %",
-            "Chance of rain: %",
-            "Chance of rain: %"
+            "Chance of rain: 40%",
+            "Chance of rain: 40%",
+            "Chance of rain: 80%",
+            "Chance of rain: 90%",
+            "Chance of rain: 90%"
         ]
     },
     "Lipa City": {
@@ -296,11 +296,11 @@
             ]
         ],
         "chance_of_rain_percentages": [
-            "Chance of rain: %",
-            "Chance of rain: %",
-            "Chance of rain: %",
-            "Chance of rain: %",
-            "Chance of rain: %"
+            "Chance of rain: 30%",
+            "Chance of rain: 40%",
+            "Chance of rain: 10%",
+            "Chance of rain: 10%",
+            "Chance of rain: 20%"
         ]
     },
     "Metro Cebu": {
@@ -334,11 +334,11 @@
             ]
         ],
         "chance_of_rain_percentages": [
-            "Chance of rain: %",
-            "Chance of rain: %",
-            "Chance of rain: %",
-            "Chance of rain: %",
-            "Chance of rain: %"
+            "Chance of rain: 40%",
+            "Chance of rain: 40%",
+            "Chance of rain: 40%",
+            "Chance of rain: 40%",
+            "Chance of rain: 70%"
         ]
     },
     "Metro Davao": {
@@ -372,11 +372,11 @@
             ]
         ],
         "chance_of_rain_percentages": [
-            "Chance of rain: %",
-            "Chance of rain: %",
-            "Chance of rain: %",
-            "Chance of rain: %",
-            "Chance of rain: %"
+            "Chance of rain: 60%",
+            "Chance of rain: 60%",
+            "Chance of rain: 40%",
+            "Chance of rain: 40%",
+            "Chance of rain: 30%"
         ]
     },
     "Metro Manila": {
@@ -410,11 +410,11 @@
             ]
         ],
         "chance_of_rain_percentages": [
-            "Chance of rain: %",
-            "Chance of rain: %",
-            "Chance of rain: %",
-            "Chance of rain: %",
-            "Chance of rain: %"
+            "Chance of rain: 40%",
+            "Chance of rain: 40%",
+            "Chance of rain: 10%",
+            "Chance of rain: 20%",
+            "Chance of rain: 10%"
         ]
     },
     "Puerto Princesa City": {
@@ -448,11 +448,11 @@
             ]
         ],
         "chance_of_rain_percentages": [
-            "Chance of rain: %",
-            "Chance of rain: %",
-            "Chance of rain: %",
-            "Chance of rain: %",
-            "Chance of rain: %"
+            "Chance of rain: 10%",
+            "Chance of rain: 20%",
+            "Chance of rain: 20%",
+            "Chance of rain: 20%",
+            "Chance of rain: 20%"
         ]
     },
     "Sbma (Olongapo)": {
@@ -486,11 +486,11 @@
             ]
         ],
         "chance_of_rain_percentages": [
-            "Chance of rain: %",
-            "Chance of rain: %",
-            "Chance of rain: %",
-            "Chance of rain: %",
-            "Chance of rain: %"
+            "Chance of rain: 40%",
+            "Chance of rain: 20%",
+            "Chance of rain: 20%",
+            "Chance of rain: 40%",
+            "Chance of rain: 10%"
         ]
     },
     "Tacloban City": {
@@ -524,11 +524,11 @@
             ]
         ],
         "chance_of_rain_percentages": [
-            "Chance of rain: %",
-            "Chance of rain: %",
-            "Chance of rain: %",
-            "Chance of rain: %",
-            "Chance of rain: %"
+            "Chance of rain: 40%",
+            "Chance of rain: 40%",
+            "Chance of rain: 40%",
+            "Chance of rain: 80%",
+            "Chance of rain: 60%"
         ]
     },
     "Tagaytay City": {
@@ -600,11 +600,11 @@
             ]
         ],
         "chance_of_rain_percentages": [
-            "Chance of rain: %",
-            "Chance of rain: %",
-            "Chance of rain: %",
-            "Chance of rain: %",
-            "Chance of rain: %"
+            "Chance of rain: 20%",
+            "Chance of rain: 60%",
+            "Chance of rain: 60%",
+            "Chance of rain: 60%",
+            "Chance of rain: 60%"
         ]
     },
     "Valencia City": {
@@ -638,11 +638,11 @@
             ]
         ],
         "chance_of_rain_percentages": [
-            "Chance of rain: %",
-            "Chance of rain: %",
-            "Chance of rain: %",
-            "Chance of rain: %",
-            "Chance of rain: %"
+            "Chance of rain: 60%",
+            "Chance of rain: 40%",
+            "Chance of rain: 40%",
+            "Chance of rain: 40%",
+            "Chance of rain: 40%"
         ]
     },
     "Zamboanga City": {
@@ -676,11 +676,11 @@
             ]
         ],
         "chance_of_rain_percentages": [
-            "Chance of rain: %",
-            "Chance of rain: %",
-            "Chance of rain: %",
-            "Chance of rain: %",
-            "Chance of rain: %"
+            "Chance of rain: 60%",
+            "Chance of rain: 60%",
+            "Chance of rain: 30%",
+            "Chance of rain: 40%",
+            "Chance of rain: 40%"
         ]
     }
 }
