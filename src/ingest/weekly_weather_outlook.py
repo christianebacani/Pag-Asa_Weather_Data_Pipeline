@@ -305,8 +305,8 @@ def map_date_ranges_to_weather_outlooks(
         weather_outlooks: list[str]
 ) -> dict[str, str]:
     '''
-    Maps extracted date ranges for their
-    corresponding weekly weather outlook
+    Maps dictionary of date ranges to their
+    corresponding list of weather outlooks
     from the PAGASA-DOST website.
 
     :param date_ranges: Dictionary of date
