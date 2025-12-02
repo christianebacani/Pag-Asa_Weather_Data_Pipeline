@@ -70,7 +70,7 @@ def extract_issued_datetime(
     if soup is None:
         return issued_datetime
 
-    # Extract HTML tags for issued datetime of the weather outlook for selected Philippine cities
+    # Extract HTML tags for issued datetime of the weather outlook for selected PH cities
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
     issued_datetime_and_valid_period_tag = div_tag_with_row_weather_page_class.find(
         'div',
@@ -109,7 +109,7 @@ def save_issued_datetime_to_json(
         Philippine cities
     :type issued_datetime: str
     '''
-    # Create a dictionary to store issued datetime of the weather outlook for selected Philippine cities
+    # Create a dictionary to store issued datetime of the weather outlook for selected PH cities
     data = {
         "issued_datetime": issued_datetime
     }
@@ -146,7 +146,7 @@ def extract_valid_period(
     if soup is None:
         return valid_period
 
-    # Extract HTML tags for valid period of the weather outlook for selected Philippine cities
+    # Extract HTML tags for valid period of the weather outlook for selected PH cities
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
     issued_datetime_and_valid_period_tag = div_tag_with_row_weather_page_class.find(
         'div',
@@ -183,7 +183,7 @@ def save_valid_period_to_json(
         cities
     :type issued_datetime: str
     '''
-    # Create a dictionary to store valid period of the weather outlook for selected Philippine cities
+    # Create a dictionary to store valid period of the weather outlook for selected PH cities
     data = {
         "valid_period": valid_period
     }
@@ -218,7 +218,7 @@ def extract_ph_city_tags(
     if soup is None:
         return list_of_all_ph_city_tags
 
-    # Extract HTML tags for all selected Philippine cities to get their weather outlook
+    # Extract HTML tags for all selected PH cities to get their weather outlook
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
     weather_outlook_for_ph_city_tag = div_tag_with_row_weather_page_class.find(
         'div',
@@ -264,11 +264,11 @@ def extract_ph_city_names(
     '''
     result = {}
 
-    # We need to check if the list of all selected Philippine city HTML tags is missing
+    # We need to check if the list of all selected PH city HTML tags is missing
     if list_of_all_ph_city_tags == []:
         return result
 
-    # Loop through rows containing HTML tags to extract the names of the selected Philippine cities
+    # Loop through rows containing HTML tags to extract the names of the selected PH cities
     for ph_city_tag in list_of_all_ph_city_tags:
         ph_city_name_tag = ph_city_tag.find('a')
         ph_city_name = str(ph_city_name_tag.text).strip()
@@ -293,17 +293,17 @@ def extract_weather_dates(
     '''
     weather_dates = []
 
-    # We need to check if the list of all selected Philippine city HTML tags is missing
+    # We need to check if the list of all selected PH city HTML tags is missing
     if list_of_all_ph_city_tags == []:
         return weather_dates
 
     ph_city_tag = list_of_all_ph_city_tags[0]
 
-    # Extract HTML tags to get all weather dates of selected Philippine cities
+    # Extract HTML tags to get all weather dates of selected PH cities
     table_tag = ph_city_tag.find('table', attrs={'class': 'table'})
     list_of_all_table_header_tags = table_tag.find_all('th')
 
-    # Loop through rows containing HTML tags to extract all weather dates of selected Philippine cities
+    # Loop through rows containing HTML tags to extract all weather dates of selected PH cities
     for table_header_tag in list_of_all_table_header_tags:
         weather_date = str(table_header_tag.text).strip()
         # Use split() method to remove extra whitespaces in between words
@@ -341,9 +341,9 @@ def map_weather_dates_to_ph_cities(
 
     list_of_all_ph_city_names = list(result.keys())
 
-    # Loop through the list of selected Philippine cities to map it to the extracted weather dates
+    # Loop through the list of selected PH cities to map it to the extracted weather dates
     for ph_city_name in list_of_all_ph_city_names:
-        # Map weather dates to the selected Philippine city
+        # Map weather dates to the selected PH city
         result[ph_city_name]['weather_dates'] = weather_dates
 
     return result
@@ -365,11 +365,11 @@ def extract_temperature_ranges(
     '''
     result = []
 
-    # We need to check if the list of all selected Philippine city HTML tags is missing
+    # We need to check if the list of all selected PH city HTML tags is missing
     if list_of_all_ph_city_tags == []:
         return result
 
-    # Loop through Philippine city tags to extract temperature range tags
+    # Loop through PH city tags to extract temperature range tags
     for ph_city_tag in list_of_all_ph_city_tags:
         table_tag = ph_city_tag.find('table', attrs={'class': 'table'})
         temperature_ranges_tag = table_tag.find('tr', attrs={'class': 'desktop-view-tr'})
@@ -377,7 +377,7 @@ def extract_temperature_ranges(
 
         temperature_ranges = []
 
-        # Loop through tags to extract temperature ranges for selected cities
+        # Loop through tags to extract temperature ranges for selected PH cities
         for table_data_tag in list_of_all_table_data_tags:
             minimum_temperature_tag = table_data_tag.find('span', attrs={'class': 'min'})
             minimum_temperature = str(minimum_temperature_tag.text).strip()
@@ -421,11 +421,11 @@ def map_temperature_ranges_to_ph_cities(
     list_of_all_temperature_ranges = temperature_ranges
     list_of_all_ph_city_names = list(result.keys())
 
-    # Loop through the list of temperature ranges to map it to the selected Philippine cities
+    # Loop through the list of temperature ranges to map it to the selected PH cities
     for index, temperature_ranges in enumerate(list_of_all_temperature_ranges):
-        # Use the index of temperature range to get the name of the Philippine city
+        # Use the index of temperature range to get the name of the PH city
         ph_city_name = list_of_all_ph_city_names[index]
-        # Map temperature ranges to the selected Philippine city
+        # Map temperature ranges to the selected PH city
         result[ph_city_name]['temperature_ranges'] = temperature_ranges
 
     return result
@@ -447,11 +447,11 @@ def extract_chance_of_rain_percentages(
     '''
     result = []
 
-    # We need to check if list of all selected Philippine city HTML tas is missing
+    # We need to check if list of all selected PH city HTML tags is missing
     if list_of_all_ph_city_tags == []:
         return result
 
-    # Loop through Philippine city tags to extract rain chance tags
+    # Loop through PH city tags to extract rain chance tags
     for ph_city_tag in list_of_all_ph_city_tags:
         table_tag = ph_city_tag.find('table', attrs={'class': 'table'})
         chance_of_rain_percentages_tag = table_tag.find('tr', attrs={'class': 'desktop-view-tr'})
@@ -459,7 +459,7 @@ def extract_chance_of_rain_percentages(
 
         chance_of_rain_percentages = []
 
-        # Loop through tags to extract chance of rain percentages for selected cities
+        # Loop through tags to extract chance of rain percentages for selected PH cities
         for table_data_tag in list_of_all_table_data_tags:
             chance_of_rain_percentage_tag = table_data_tag.find(
                 'span',
@@ -498,7 +498,7 @@ def map_chance_of_rain_percentages_to_ph_cities(
         percentages
     :rtype: dict[str, dict]
     '''
-    # We need to check if the rain chance pct list or PH cties weather outlook dict is missing
+    # We need to check if the rain chance pct list or PH cities weather outlook dict is missing
     if chance_of_rain_percentages == [] or ph_cities_weather_outlook == {}:
         return {}
 
@@ -507,11 +507,11 @@ def map_chance_of_rain_percentages_to_ph_cities(
     list_of_all_chance_of_rain_percentages = chance_of_rain_percentages
     list_of_all_ph_city_names = list(ph_cities_weather_outlook.keys())
 
-    # Loop through the list of rain chance percentage to map it to the selected Philippine cities
+    # Loop through the list of rain chance percentage to map it to the selected PH cities
     for index, chance_of_rain_percentages in enumerate(list_of_all_chance_of_rain_percentages):
-        # Use the index of rain chance percentage to get the name of the Philippine city
+        # Use the index of rain chance percentage to get the name of the PH city
         ph_city_name = list_of_all_ph_city_names[index]
-        # Map rain chance percentage to the selected Philippine city
+        # Map rain chance percentage to the selected PH city
         result[ph_city_name]['chance_of_rain_percentages'] = chance_of_rain_percentages
 
     return result
@@ -530,7 +530,7 @@ def save_ph_cities_weather_outlook_to_json(
         and chance of rain percentages
     :type ph_cities_weather_outlook: dict[str, dict]
     '''    
-    # Create a dictionary to store weather outlook of selected Philippine cities
+    # Create a dictionary to store weather outlook of selected PH cities
     data = ph_cities_weather_outlook
 
     # Save the dictionary to a json file using open() method and json module
