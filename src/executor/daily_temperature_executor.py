@@ -28,7 +28,7 @@ def ingest_daily_temperature(
 
     top_10_lowest_temp_table_tag = extract_top_10_lowest_temp_table_tag(soup)
 
-    lowest_temperature_recorded_date = extract_recorded_date_for_top_10_lowest_temp(
+    recorded_date_for_top_10_lowest_temp = extract_recorded_date_for_top_10_lowest_temp(
         top_10_lowest_temp_table_tag
     )
     top_10_lowest_temp_station_names = extract_station_names_for_top_10_lowest_temp(
