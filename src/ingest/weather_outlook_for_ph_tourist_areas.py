@@ -35,7 +35,7 @@ def extract_beautiful_soup_object(
 
     :return: BeautifulSoup object for navigating
         the page content, or None if extraction
-        fails.
+        fails
     :rtype: BeautifulSoup | None
     '''
     response = requests.get(url)
@@ -49,7 +49,7 @@ def extract_beautiful_soup_object(
     return soup
 
 def extract_issued_datetime(
-    soup: BeautifulSoup
+    soup: BeautifulSoup | None
 ) -> str:
     '''
     Extracts the issued datetime of the weather
@@ -57,14 +57,19 @@ def extract_issued_datetime(
     from the PAGASA-DOST website.
 
     :param soup: BeautifulSoup object for navigating
-        and manipulating the page content
-    :type soup: BeautifulSoup
+        and manipulating the page content, or None if
+        extraction fails
+    :type soup: BeautifulSoup | None
 
     :return: Issued datetime of the weather outlook for
         selected Philippine tourist areas
     :rtype: str
     '''
     issued_datetime = ''
+
+    # We need to check if the BeautifulSoup object is missing
+    if soup is None:
+        return issued_datetime
 
     # Extract HTML tags for issued datetime of the weather outlook for selected Philippine tourist areas
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
@@ -118,7 +123,7 @@ def save_issued_datetime_to_json(
     json_file.close()
 
 def extract_valid_period(
-        soup: BeautifulSoup
+        soup: BeautifulSoup | None
 ) -> str:
     '''
     Extracts the valid period of the weather
@@ -126,14 +131,19 @@ def extract_valid_period(
     from the PAGASA-DOST website.
 
     :param soup: BeautifulSoup object for navigating
-        and manipulating the page content
-    :type soup: BeautifulSoup
+        and manipulating the page content, or None if
+        extraction fails
+    :type soup: BeautifulSoup | None
 
     :return: Valid period of the weather outlook for
         selected Philippine tourist areas
     :rtype: str
     '''
     valid_period = ''
+
+    # We need to check if the BeautifulSoup object is missing
+    if soup is None:
+        return valid_period
 
     # Extract HTML tags for valid period of the weather outlook for selected Philippine tourist areas
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
@@ -187,21 +197,26 @@ def save_valid_period_to_json(
     json_file.close()
 
 def extract_ph_tourist_area_tags(
-        soup: BeautifulSoup
-) -> list[BeautifulSoup | None]:
+        soup: BeautifulSoup | None
+) -> list[BeautifulSoup]:
     '''
     Extracts selected Philippine tourist area tags to get
     their weather outlook from the PAGASA-DOST website.
 
     :param soup: BeautifulSoup object for navigating and
-        manipulating the page content
-    :type soup: BeautifulSoup
-    
+        manipulating the page content, or None if extraction
+        fails
+    :type soup: BeautifulSoup | None
+
     :return: List of selected Philippine tourist area HTML
         tags
-    :rtype: list[BeautifulSoup | None]
+    :rtype: list[BeautifulSoup]
     '''
     list_of_all_ph_tourist_area_tags = []
+
+    # We need to check if the BeautifulSoup object is missing
+    if soup is None:
+        return list_of_all_ph_tourist_area_tags
 
     # Extract HTML tags for all selected Philippine tourist areas to get their weather outlook
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
@@ -240,6 +255,10 @@ def extract_ph_tourist_area_names(
     '''
     result = {}
 
+    # We need to check if the list of all selected Philippine tourist area HTML tags is missing
+    if list_of_all_ph_tourist_area_tags:
+        return result
+
     # Loop through rows containing HTML tags to extract the names of the selected Philippine tourist areas
     for ph_tourist_area_tag in list_of_all_ph_tourist_area_tags:
         ph_tourist_area_name_tag = ph_tourist_area_tag.find('td')
@@ -251,21 +270,26 @@ def extract_ph_tourist_area_names(
     return result
 
 def extract_weather_dates(
-        soup: BeautifulSoup
+        soup: BeautifulSoup | None
 ) -> list[str]:
     '''
     Extracts all weather dates for the weather
     outlook of selected Philippine tourist areas.
 
     :param soup: BeautifulSoup object for navigating
-        and manipulating the page content
-    :type soup: BeautifulSoup
+        and manipulating the page content, or None if
+        extraction fails
+    :type soup: BeautifulSoup | None
 
     :return: List of weather dates for the selected
         Philippine tourist areas
     :rtype: list[str]
     '''
     weather_dates = []
+
+    # We need to check if the BeautifulSoup object is missing
+    if soup is None:
+        return weather_dates
 
     # Extract HTML tags to get all weather dates of selected Philippine tourist areas
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
@@ -315,6 +339,10 @@ def map_weather_dates_to_ph_tourist_areas(
         corresponding weather dates
     :rtype: dict[str, dict]
     '''
+    # We need to check if the weather date list or PH tourist area names dict is misisng
+    if weather_dates == [] or ph_tourist_area_names == {}:
+        return {}
+
     result = ph_tourist_area_names
 
     list_of_all_ph_tourist_area_names = list(result.keys())
@@ -343,6 +371,10 @@ def extract_temperature_ranges(
     '''
     result = []
 
+    # We need to check if the list of all selected Philippine tourist area HTML tags is missing
+    if list_of_all_ph_tourist_area_tags == []:
+        return result
+
     # Loop through Philippine tourist area tags to extract temperature range tags
     for ph_tourist_area_tag in list_of_all_ph_tourist_area_tags:
         list_of_all_table_data_tags = ph_tourist_area_tag.find_all('td')[1:]
@@ -358,7 +390,7 @@ def extract_temperature_ranges(
             maximum_temperature = str(maximum_temperature_tag.text).strip()
 
             temperature_ranges.append([minimum_temperature, maximum_temperature])
-        
+
         result.append(temperature_ranges)
     
     return result
@@ -384,6 +416,10 @@ def map_temperature_ranges_to_ph_tourist_areas(
         and temperature ranges
     :rtype: dict[str, dict]
     '''
+    # We need to check if the temperature range list or PH tourist area with weather dates dict is missing
+    if temperature_ranges == [] or ph_tourist_areas_with_weather_dates == {}:
+        return {}
+
     result = ph_tourist_areas_with_weather_dates
 
     list_of_all_temperature_ranges = temperature_ranges
