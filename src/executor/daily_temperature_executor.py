@@ -11,6 +11,7 @@ from ingest.daily_temperature import extract_top_10_lowest_temp_table_tag
 from ingest.daily_temperature import extract_recorded_date_for_top_10_lowest_temp
 from ingest.daily_temperature import extract_station_names_for_top_10_lowest_temp
 from ingest.daily_temperature import extract_temperatures_for_top_10_lowest_temp
+from ingest.daily_temperature import map_station_names_to_lowest_temps
 
 def ingest_daily_temperature(
 ) -> None:
@@ -37,4 +38,9 @@ def ingest_daily_temperature(
     )
     temperatures_for_top_10_lowest_temp = extract_temperatures_for_top_10_lowest_temp(
         top_10_lowest_temp_table_tag
+    )
+
+    map_station_names_to_lowest_temps(
+        station_names_for_top_10_lowest_temp,
+        temperatures_for_top_10_lowest_temp
     )
