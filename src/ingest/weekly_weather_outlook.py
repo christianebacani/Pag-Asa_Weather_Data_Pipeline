@@ -321,7 +321,7 @@ def map_date_ranges_to_weather_outlooks(
         for every date ranges
     :rtype: dict[str, str]
     '''
-    # We need to check if date ranges list or weather outlook list is missing
+    # We need to check if date ranges dict or weather outlooks list is missing
     if date_ranges == {} or weather_outlooks == []:
         return {}
 
@@ -329,7 +329,7 @@ def map_date_ranges_to_weather_outlooks(
 
     list_of_all_date_ranges = list(date_ranges.keys())
 
-    # Loop through the list of date ranges to map it to the extracted date ranges
+    # Loop through the list of date ranges to map it to the extracted list of weather outlooks
     for index, date_range in enumerate(list_of_all_date_ranges):
         # Use the index of date range to get the corresponding weather outlook
         weather_outlook = weather_outlooks[index]
