@@ -48,22 +48,27 @@ def extract_beautiful_soup_object(
     return soup
 
 def extract_issued_datetime(
-        soup: BeautifulSoup
+        soup: BeautifulSoup | None
 ) -> str:
     '''
     Extracts the issued datetime of the weather
     outlook for selected Philippine cities from
     the PAGASA-DOST website.
 
-    :param soup: BeautifulSoup object for navigating
-        and manipulating the page content
-    :type soup: BeautifulSoup
+    :param soup: BeautifulSoup object for
+        navigating and manipulating the page content,
+        or None if extraction fails
+    :type soup: BeautifulSoup | None
 
     :return: Issued datetime of the weather outlook
         for selected Philippine cities
     :rtype: str
     '''
     issued_datetime = ''
+
+    # We need to check if the BeautifulSoup object is missing
+    if soup is None:
+        return issued_datetime
 
     # Extract HTML tags for issued datetime of the weather outlook for selected Philippine cities
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
@@ -119,22 +124,27 @@ def save_issued_datetime_to_json(
     json_file.close()
 
 def extract_valid_period(
-        soup: BeautifulSoup
+        soup: BeautifulSoup | None
 ) -> str:
     '''
     Extracts the valid period of the weather
     outlook for selected Philippine cities from
     the PAGASA-DOST website.
 
-    :param soup: BeautifulSoup object for navigating
-        and manipulating the page content
-    :type soup: BeautifulSoup
+    :param soup: BeautifulSoup object for
+        navigating and manipulating the page
+        content, or None if extraction fails
+    :type soup: BeautifulSoup | None
 
     :return: Valid period of the weather outlook for
         selected Philippine cities
     :rtype: str
     '''
     valid_period = ''
+
+    # We need to check if the BeautifulSoup object is missing
+    if soup is None:
+        return valid_period
 
     # Extract HTML tags for valid period of the weather outlook for selected Philippine cities
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
@@ -188,20 +198,25 @@ def save_valid_period_to_json(
     json_file.close()
 
 def extract_ph_city_tags(
-    soup: BeautifulSoup
-) -> list[BeautifulSoup | None]:
+    soup: BeautifulSoup | None
+) -> list[BeautifulSoup]:
     '''
     Extracts selected Philippine city tags to get their
     weather outlook from the PAGASA-DOST website.
 
     :param soup: BeautifulSoup object for navigating and
-        manipulating the page content
-    :type soup: BeautifulSoup
-    
+        manipulating the page content, or None if extraction
+        fails
+    :type soup: BeautifulSoup | None
+
     :return: List of selected Philippine city HTML tags
-    :rtype: list[BeautifulSoup | None]
+    :rtype: list[BeautifulSoup]
     '''
     list_of_all_ph_city_tags = []
+
+    # We need to check if the BeautifulSoup object is missing
+    if soup is None:
+        return list_of_all_ph_city_tags
 
     # Extract HTML tags for all selected Philippine cities to get their weather outlook
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
@@ -249,6 +264,10 @@ def extract_ph_city_names(
     '''
     result = {}
 
+    # We need to check if the list of all selected Philippine city HTML tags is missing
+    if list_of_all_ph_city_tags == []:
+        return result
+
     # Loop through rows containing HTML tags to extract the names of the selected Philippine cities
     for ph_city_tag in list_of_all_ph_city_tags:
         ph_city_name_tag = ph_city_tag.find('a')
@@ -274,11 +293,11 @@ def extract_weather_dates(
     '''
     weather_dates = []
 
-    ph_city_tag = list_of_all_ph_city_tags[0]
-    
-    # We need to check if the first instance of selected Philippine city HTML tags is missing
-    if ph_city_tag is None:
+    # We need to check if the list of all selected Philippine city HTML tags is missing
+    if list_of_all_ph_city_tags == []:
         return weather_dates
+
+    ph_city_tag = list_of_all_ph_city_tags[0]
 
     # Extract HTML tags to get all weather dates of selected Philippine cities
     table_tag = ph_city_tag.find('table', attrs={'class': 'table'})
@@ -306,7 +325,7 @@ def map_weather_dates_to_ph_cities(
         selected Philippine cities
     :type weather_dates: list[str]
 
-    :param ph_tourist_area_names: Dictionary of selected
+    :param ph_city_names: Dictionary of selected
         Philippine city names
     :type ph_tourist_area_names: dict[str, dict]
 
@@ -314,6 +333,10 @@ def map_weather_dates_to_ph_cities(
         weather dates
     :rtype: dict[str, dict]
     '''
+    # We need to check if weather date list or PH city names dict is missing
+    if weather_dates == [] or ph_city_names == {}:
+        return {}
+
     result = ph_city_names
 
     list_of_all_ph_city_names = list(result.keys())
@@ -341,6 +364,10 @@ def extract_temperature_ranges(
     :rtype: list[list]
     '''
     result = []
+
+    # We need to check if the list of all selected Philippine city HTML tags is missing
+    if list_of_all_ph_city_tags == []:
+        return result
 
     # Loop through Philippine city tags to extract temperature range tags
     for ph_city_tag in list_of_all_ph_city_tags:
@@ -385,6 +412,10 @@ def map_temperature_ranges_to_ph_cities(
         temperature ranges
     :rtype: dict[str, dict]
     '''
+    # We need to check if the temperature range list or PH city names with weather dates dict is missing
+    if temperature_ranges == [] or ph_cities_with_weather_dates == {}:
+        return {}
+
     result = ph_cities_with_weather_dates
 
     list_of_all_temperature_ranges = temperature_ranges
@@ -415,6 +446,10 @@ def extract_chance_of_rain_percentages(
     :rtype: list[list]
     '''
     result = []
+
+    # We need to check if list of all selected Philippine city HTML tas is missing
+    if list_of_all_ph_city_tags == []:
+        return result
 
     # Loop through Philippine city tags to extract rain chance tags
     for ph_city_tag in list_of_all_ph_city_tags:
@@ -463,6 +498,10 @@ def map_chance_of_rain_percentages_to_ph_cities(
         percentages
     :rtype: dict[str, dict]
     '''
+    # We need to check if the rain chance pct list or PH cties weather outlook dict is missing
+    if chance_of_rain_percentages == [] or ph_cities_weather_outlook == {}:
+        return {}
+
     result = ph_cities_weather_outlook
 
     list_of_all_chance_of_rain_percentages = chance_of_rain_percentages
