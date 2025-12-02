@@ -31,4 +31,6 @@ def ingest_daily_temperature(
     lowest_temperature_recorded_date = extract_top_10_lowest_temp_recorded_date(
         top_10_lowest_temp_table_tag
     )
-    extract_top_10_lowest_temp_station_names(top_10_lowest_temp_table_tag)
+    top_10_lowest_temp_station_names = extract_top_10_lowest_temp_station_names(
+        top_10_lowest_temp_table_tag
+    )
