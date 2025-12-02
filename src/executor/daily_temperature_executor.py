@@ -9,6 +9,7 @@ from ingest.daily_temperature import create_subdir
 from ingest.daily_temperature import extract_beautiful_soup_object
 from ingest.daily_temperature import extract_top_10_lowest_temp_table_tag
 from ingest.daily_temperature import extract_top_10_lowest_temp_recorded_date
+from ingest.daily_temperature import extract_top_10_lowest_temp_station_names
 
 def ingest_daily_temperature(
 ) -> None:
@@ -30,3 +31,4 @@ def ingest_daily_temperature(
     lowest_temperature_recorded_date = extract_top_10_lowest_temp_recorded_date(
         top_10_lowest_temp_table_tag
     )
+    extract_top_10_lowest_temp_station_names(top_10_lowest_temp_table_tag)
