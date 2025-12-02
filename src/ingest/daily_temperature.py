@@ -181,3 +181,54 @@ def extract_temperatures_for_top_10_lowest_temp(
         temperature table
     :rtype: list[str]
     '''
+    temperatures_for_top_10_lowest_temp = []
+
+    # We need to check if the top 10 lowest temperature table HTML tag is missing
+    if top_10_lowest_temp_table_tag is None:
+        return temperatures_for_top_10_lowest_temp
+    
+    tbody_tag = top_10_lowest_temp_table_tag.find('tbody')
+    
+    # We need to check if the tbody_tag is missing
+    if tbody_tag is None:
+        return temperatures_for_top_10_lowest_temp
+
+    # Use find_all() method to access all temperatures
+    list_of_all_table_row_tags = tbody_tag.find_all('tr')
+
+    # Loop through rows containing HTML tags to extract all temperatures from top 10 lowest temp table
+    for table_row_tag in list_of_all_table_row_tags:
+        temperature_tag = table_row_tag.find_all('td')[1]
+        temperature = str(temperature_tag.text).strip()
+        temperatures_for_top_10_lowest_temp.append(temperature)
+
+    return temperatures_for_top_10_lowest_temp
+
+def map_station_names_to_lowest_temps(
+        station_names_for_top_10_lowest_temp: list[str],
+        temperatures_for_top_10_lowest_temp: list[str]
+) -> dict[str, str]:
+    '''
+    Maps extracted list of station names to 
+    the list of extracted temperatures from
+    top 10 lowest temperature table of
+    daily temperature page from PAGASA-DOST
+    website.
+
+    :param station_names_for_top_10_lowest_temp:
+        List of station names from the top 10
+        lowest temperature table        
+    :type station_names_for_top_10_lowest_temp:
+        list[str]
+
+    :param temperatures_for_top_10_lowest_temp:
+        List of temperatures from the top 10 lowest
+        temperature table
+    :type temperatures_for_top_10_lowest_temp:
+        list[str]
+
+    :return: Dictionary of station names with
+        temperatures from the top 10 lowest temperature
+        table
+    :rtype: dict[str, str]
+    '''
