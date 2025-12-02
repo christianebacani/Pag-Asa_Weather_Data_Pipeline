@@ -47,20 +47,25 @@ def extract_beautiful_soup_object(
     return soup
 
 def extract_issued_datetime(
-    soup: BeautifulSoup
+    soup: BeautifulSoup | None
 ) -> str:
     '''
     Extracts the issued datetime of the daily
     weather forecast from the PAGASA-DOST website.
 
     :param soup: BeautifulSoup object for navigating
-        and manipulating the page content
-    :type soup: BeautifulSoup
+        and manipulating the page content, or
+        None if extraction fails
+    :type soup: BeautifulSoup | None
 
     :return: Issued datetime of the daily weather forecast
     :rtype: str
     '''
     issued_datetime = ''
+
+    # We need to check if the BeautifulSoup object is missing
+    if soup is None:
+        return issued_datetime
 
     # Extract HTML tags for issued datetime of the daily weather forecast
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
@@ -106,20 +111,25 @@ def save_issued_datetime_to_json(
     json_file.close()
 
 def extract_synopsis(
-        soup: BeautifulSoup
+        soup: BeautifulSoup | None
 ) -> str:
     '''
     Extracts the synopsis of the daily weather
     forecast from the PAGASA-DOST website.
 
-    :param soup: BeautifulSoup object for navigating
-        and manipulating the page content
-    :type soup: BeautifulSoup
+    :param soup: BeautifulSoup object for
+        navigating and manipulating the page
+        content, or None if extraction fails
+    :type soup: BeautifulSoup | None
 
     :return: Synopsis of the daily weather forecast
     :rtype: str
     '''
     synopsis = ''
+
+    # We need to check if the BeautifulSoup object is missing
+    if soup is None:
+        return synopsis
 
     # Extract HTML tags for synopsis of the daily weather forecast
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
@@ -158,15 +168,16 @@ def save_synopsis_to_json(
     json_file.close()
 
 def extract_tc_information(
-        soup: BeautifulSoup
+        soup: BeautifulSoup | None
 ) -> dict[str, str]:
     '''
     Extracts tropical cyclone information from the daily
     weather forecast on the PAGASA-DOST website.
 
-    :param soup: BeautifulSoup object for navigating and
-        manipulating the page content
-    :type soup: BeautifulSoup
+    :param soup: BeautifulSoup object for navigating
+        and manipulating the page content, or
+        None if extraction fails
+    :type soup: BeautifulSoup | None
 
     :return: Dictionary containing tropical cyclone
         information
@@ -180,6 +191,10 @@ def extract_tc_information(
         'gustiness': '',
         'movement': ''
     }
+
+    # We need to check if the BeautifulSoup object is missing    
+    if soup is None:
+        return tc_information
 
     # Extract HTML tags for tropical cyclone information from the daily weather forecast
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
@@ -255,15 +270,16 @@ def save_tc_information_to_json(
     json_file.close()
 
 def extract_forecast_weather_conditions(
-        soup: BeautifulSoup
+        soup: BeautifulSoup | None
 ) -> dict[str, list]:
     ''' 
     Extracts forecast weather conditions from the daily weather
     forecast on the PAGASA-DOST website.
 
-    :param soup: BeautifulSoup object for navigating and
-        manipulating the page content
-    :type soup: BeautifulSoup
+    :param soup: BeautifulSoup object for navigating and 
+        manipulating the page content, or None if extraction
+        fails
+    :type soup: BeautifulSoup | None
 
     :return: Dictionary containing forecast weather conditions
     :rtype: dict[str, list]
@@ -274,6 +290,10 @@ def extract_forecast_weather_conditions(
         'caused_by': [],
         'impacts': []
     }
+
+    # We need to check if the BeautifulSoup object is missing
+    if soup is None:
+        return forecast_weather_conditions
 
     # Extract HTML tags for forecast weather conditions from the daily weather forecast
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
@@ -349,17 +369,18 @@ def save_forecast_weather_conditions_to_json(
     json_file.close()
 
 def extract_forecast_wind_and_coastal_water_conditions(
-        soup: BeautifulSoup
+        soup: BeautifulSoup | None
 ) -> dict[str, list]:
     '''
     Extracts forecast wind and coastal water conditions
     from the daily weather forecast on the PAGASA-DOST
     website.
 
-    :param soup: BeautifulSoup object for navigating and
-        manipulating the page content
-    :type soup: BeautifulSoup
-    
+    :param soup: BeautifulSoup object for navigating
+        and manipulating the page content, or None if
+        extraction fails
+    :type soup: BeautifulSoup | None
+
     :return: Dictionary containing forecast wind and
         coastal water conditions
     :rtype: dict[str, list]
@@ -370,6 +391,10 @@ def extract_forecast_wind_and_coastal_water_conditions(
         'direction': [],
         'coastal_water': []
     }
+
+    # We need to check if the BeautifulSoup object is missing
+    if soup is None:
+        return forecast_wind_and_coastal_water_conditions
 
     # Extract HTML tags for forecast wind and coastal water conditions from the daily weather forecast
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
@@ -445,16 +470,17 @@ def save_forecast_wind_and_coastal_water_conditions_to_json(
     json_file.close()
 
 def extract_temperature_and_relative_humidity(
-        soup: BeautifulSoup
+        soup: BeautifulSoup | None
 ) -> dict[str, str]:
     '''
     Extracts temperature and relative humidity from
     the daily weather forecast on the PAGASA-DOST
     website.
-
+    
     :param soup: BeautifulSoup object for navigating
-        and manipulating the page content
-    :type soup: BeautifulSoup
+        and manipulating the page content, or None if
+        extraction fails
+    :type soup: BeautifulSoup | None
 
     :return: Dictionary containing temperature and
         relative humidity
@@ -464,7 +490,11 @@ def extract_temperature_and_relative_humidity(
         'temperature': {'max': [], 'min': []},
         'relative_humidity_percentage': {'max': [], 'min': []}
     }
-    
+
+    # We need to check if the BeautifulSoup object is missing
+    if soup is None:
+        return temperature_and_relative_humidity
+
     # Extract HTML tags for temperature and relative humidity from the daily weather forecast
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
     list_of_all_daily_weather_forecast_tags = div_tag_with_row_weather_page_class.find_all(
