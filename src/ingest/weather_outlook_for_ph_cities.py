@@ -317,12 +317,13 @@ def map_weather_dates_to_ph_cities(
         ph_city_names: dict[str, dict]
 ) -> dict[str, dict]:
     '''
-    Maps extracted weather dates to selected Philippine
-    cities for their weather outlook from the PAGASA-DOST
-    website.
+    Maps extracted list of weather dates to
+    the dictionary of selected Philippine city
+    names for their weather outlook from the
+    PAGASA-DOST website.
 
-    :param weather_dates: List of weather dates for the
-        selected Philippine cities
+    :param weather_dates: List of weather dates
+        for the selected Philippine cities
     :type weather_dates: list[str]
 
     :param ph_city_names: Dictionary of selected
@@ -396,9 +397,10 @@ def map_temperature_ranges_to_ph_cities(
         ph_cities_with_weather_dates: dict[str, dict]
 ) -> dict[str, dict]:
     '''
-    Maps extracted temperature ranges to selected Philippine
-    cities for their weather outlook from the PAGASA-DOST
-    website.
+    Maps extracted list of temperature ranges to the
+    dictionary of selected Philippine city names with
+    weather dates for their weather outlook from the
+    PAGASA-DOST website.
 
     :param temperature_ranges: List of temperature ranges for
         the selected Philippine cities
@@ -479,9 +481,10 @@ def map_chance_of_rain_percentages_to_ph_cities(
         ph_cities_weather_outlook: dict[str, dict]
 ) -> dict[str, dict]:
     '''
-    Maps extracted chance of rain percentages to
-    selected Philippine cities for their weather
-    outlook from the PAGASA-DOST website.
+    Maps extracted list of chance of rain percentages
+    to the dictionary of selected Philippine city names
+    with weather dates and temperature ranges for their
+    weather outlook from the PAGASA-DOST website.
 
     :param chance_of_rain_percentages: List of
         chance of rain percentages for the selected
