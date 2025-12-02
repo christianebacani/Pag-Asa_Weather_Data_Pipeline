@@ -452,7 +452,7 @@ def save_forecast_wind_and_coastal_water_conditions_to_json(
         containing forecast wind and coastal water conditions
     :type forecast_wind_and_coastal_water_conditions: dict[str, list]
     '''
-    # Create a dictionary to store forecast wind and coastal water conditioons from the daily weather forecast
+    # Create a dictionary to store forecast wind and coastal water conditions from the daily weather forecast
     data = {
         "place": forecast_wind_and_coastal_water_conditions['place'],
         "speed": forecast_wind_and_coastal_water_conditions['speed'],
