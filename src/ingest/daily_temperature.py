@@ -102,29 +102,29 @@ def extract_recorded_date_for_top_10_lowest_temp(
         table
     :rtype: str
     '''
-    lowest_temperature_recorded_date = ''
+    recorded_date_for_top_10_lowest_temp = ''
 
     # We need to check if the top 10 lowest temperature table HTML tag is missing
     if top_10_lowest_temp_table_tag is None:
-        return lowest_temperature_recorded_date
+        return recorded_date_for_top_10_lowest_temp
 
     # We need to check if the top 10 lowest teperature table HTML tag is missing
     if top_10_lowest_temp_table_tag is None:
-        return lowest_temperature_recorded_date
+        return recorded_date_for_top_10_lowest_temp
 
-    lowest_temperature_header_tag = top_10_lowest_temp_table_tag.find(
+    top_10_lowest_temperature_header_tag = top_10_lowest_temp_table_tag.find(
         'div',
         attrs={
             'class': 'panel-heading'
         }
     )
-    lowest_temperature_header = str(lowest_temperature_header_tag.text)
-    lowest_temperature_recorded_date = lowest_temperature_header.replace(
+    top_10_lowest_temperature_header = str(top_10_lowest_temperature_header_tag.text)
+    recorded_date_for_top_10_lowest_temp = top_10_lowest_temperature_header.replace(
         'Top 10 Lowest Temperature as of',
         ''
     ).strip()
-    
-    return lowest_temperature_recorded_date
+
+    return recorded_date_for_top_10_lowest_temp
 
 def extract_station_names_for_top_10_lowest_temp(
         top_10_lowest_temp_table_tag: BeautifulSoup | None
