@@ -142,17 +142,17 @@ def extract_station_names_for_top_10_lowest_temp(
         temperature table
     :rtype: list[str]
     '''
-    top_10_lowest_temp_station_names = []
+    station_names_for_top_10_lowest_temp = []
 
     # We need to check if the top 10 lowest temperature table HTML tag is missing
     if top_10_lowest_temp_table_tag is None:
-        return top_10_lowest_temp_station_names
+        return station_names_for_top_10_lowest_temp
     
     tbody_tag = top_10_lowest_temp_table_tag.find('tbody')
 
     # We need to check if the tbody_tag is missing
     if tbody_tag is None:
-        return top_10_lowest_temp_station_names
+        return station_names_for_top_10_lowest_temp
 
     # Use find_all() method to access all station names
     list_of_all_table_row_tags = tbody_tag.find_all('tr')
@@ -161,9 +161,9 @@ def extract_station_names_for_top_10_lowest_temp(
     for table_row_tag in list_of_all_table_row_tags:
         station_name_tag = table_row_tag.find('td')
         station_name = str(station_name_tag.text).strip()
-        top_10_lowest_temp_station_names.append(station_name)
-
-    return top_10_lowest_temp_station_names
+        station_names_for_top_10_lowest_temp.append(station_name)
+    
+    return station_names_for_top_10_lowest_temp
 
 def extract_temperatures_for_top_10_lowest_temp(
         top_10_lowest_temp_table_tag: BeautifulSoup | None
