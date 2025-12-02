@@ -333,7 +333,7 @@ def map_weather_dates_to_ph_cities(
         weather dates
     :rtype: dict[str, dict]
     '''
-    # We need to check if weather date list or PH city names dict is missing
+    # We need to check if weather dates list or PH city names dict is missing
     if weather_dates == [] or ph_city_names == {}:
         return {}
 
@@ -341,9 +341,9 @@ def map_weather_dates_to_ph_cities(
 
     list_of_all_ph_city_names = list(result.keys())
 
-    # Loop through the list of selected PH cities to map it to the extracted weather dates
+    # Loop through the list of selected PH cities to map it to the list of extracted weather dates
     for ph_city_name in list_of_all_ph_city_names:
-        # Map weather dates to the selected PH city
+        # Map the list of extracted weather dates to the selected PH city
         result[ph_city_name]['weather_dates'] = weather_dates
 
     return result
@@ -412,7 +412,7 @@ def map_temperature_ranges_to_ph_cities(
         temperature ranges
     :rtype: dict[str, dict]
     '''
-    # We need to check if the temperature range list or PH city names with weather dates dict is missing
+    # We need to check if the temperature ranges list or PH city names with weather dates dict is missing
     if temperature_ranges == [] or ph_cities_with_weather_dates == {}:
         return {}
 
@@ -498,7 +498,7 @@ def map_chance_of_rain_percentages_to_ph_cities(
         percentages
     :rtype: dict[str, dict]
     '''
-    # We need to check if the rain chance pct list or PH cities weather outlook dict is missing
+    # We need to check if the rain chance pcts list or PH cities weather outlook dict is missing
     if chance_of_rain_percentages == [] or ph_cities_weather_outlook == {}:
         return {}
 
@@ -507,7 +507,7 @@ def map_chance_of_rain_percentages_to_ph_cities(
     list_of_all_chance_of_rain_percentages = chance_of_rain_percentages
     list_of_all_ph_city_names = list(ph_cities_weather_outlook.keys())
 
-    # Loop through the list of rain chance percentage to map it to the selected PH cities
+    # Loop through the list of rain chance percentages to map it to the selected PH cities
     for index, chance_of_rain_percentages in enumerate(list_of_all_chance_of_rain_percentages):
         # Use the index of rain chance percentage to get the name of the PH city
         ph_city_name = list_of_all_ph_city_names[index]
