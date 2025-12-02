@@ -85,7 +85,7 @@ def extract_top_10_lowest_temp_table_tag(
 
     return top_10_lowest_temp_table_tag
 
-def extract_top_10_lowest_temp_recorded_date(
+def extract_recorded_date_for_top_10_lowest_temp(
         top_10_lowest_temp_table_tag: BeautifulSoup | None
 ) -> str:
     '''
@@ -126,7 +126,7 @@ def extract_top_10_lowest_temp_recorded_date(
     
     return lowest_temperature_recorded_date
 
-def extract_top_10_lowest_temp_station_names(
+def extract_station_names_for_top_10_lowest_temp(
         top_10_lowest_temp_table_tag: BeautifulSoup | None
 ) -> list[str]:
     '''
