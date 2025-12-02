@@ -160,3 +160,7 @@ def extract_top_10_lowest_temp_station_names(
     # Loop through rows containing HTML tags to extract all station names from top 10 lowest temp table
     for table_row_tag in list_of_all_table_row_tags:
         station_name_tag = table_row_tag.find('td')
+        station_name = str(station_name_tag.text).strip()
+        top_10_lowest_temp_station_names.append([station_name])
+
+    return top_10_lowest_temp_station_names
