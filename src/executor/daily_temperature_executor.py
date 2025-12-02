@@ -7,8 +7,8 @@
 '''
 from ingest.daily_temperature import create_subdir
 from ingest.daily_temperature import extract_beautiful_soup_object
-from ingest.daily_temperature import extract_lowest_temperature_table_tag
-from ingest.daily_temperature import extract_lowest_temperature_recorded_date
+from ingest.daily_temperature import extract_top_10_lowest_temp_table_tag
+from ingest.daily_temperature import extract_top_10_lowest_temp_recorded_date
 
 def ingest_daily_temperature(
 ) -> None:
@@ -25,8 +25,8 @@ def ingest_daily_temperature(
         'https://www.pagasa.dost.gov.ph/weather/low-high-temperature'
     )
 
-    lowest_temperature_table_tag = extract_lowest_temperature_table_tag(soup)
-    
-    lowest_temperature_recorded_date = extract_lowest_temperature_recorded_date(
-        lowest_temperature_table_tag
+    top_10_lowest_temp_table_tag = extract_top_10_lowest_temp_table_tag(soup)
+
+    lowest_temperature_recorded_date = extract_top_10_lowest_temp_recorded_date(
+        top_10_lowest_temp_table_tag
     )
