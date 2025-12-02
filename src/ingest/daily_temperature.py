@@ -51,7 +51,7 @@ def extract_beautiful_soup_object(
     return soup
 
 def extract_top_10_lowest_temp_table_tag(
-        soup: BeautifulSoup
+        soup: BeautifulSoup | None
 ) -> BeautifulSoup | None:
     '''
     Extracts top 10 lowest temperature table
@@ -61,13 +61,17 @@ def extract_top_10_lowest_temp_table_tag(
 
     :param soup: BeautifulSoup object for
         navigating and manipulating the page
-        content
-    :type soup: BeautifulSoup
+        content, or None if extraction fails
+    :type soup: BeautifulSoup | None
 
     :return: Top 10 lowest temperature table
-        HTML tag
+        HTML tag, or None if extraction fails
     :rtype: BeautifulSoup | None
     '''
+    # We need to check if the BeautifulSoup object is missing
+    if soup is None:
+        return None
+
     # Extract HTML tags to get the data for the top 10 lowest temperature table
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
     top_10_lowest_temp_table_tag = div_tag_with_row_weather_page_class.find(
@@ -90,7 +94,8 @@ def extract_top_10_lowest_temp_recorded_date(
     of the PAGASA-DOST website.
 
     :param lowest_temperature_table_tag: Top 10 lowest
-        temperature table HTML tag
+        temperature table HTML tag, or None if extration
+        fails
     :type lowest_temperature_table_tag: BeautifulSoup | None
 
     :return: Recorded date of the top 10 lowest temperature
@@ -98,6 +103,10 @@ def extract_top_10_lowest_temp_recorded_date(
     :rtype: str
     '''
     lowest_temperature_recorded_date = ''
+
+    # We need to check if the top 10 lowest temperature table HTML tag is missing
+    if top_10_lowest_temp_table_tag is None:
+        return lowest_temperature_recorded_date
 
     # We need to check if the top 10 lowest teperature table HTML tag is missing
     if top_10_lowest_temp_table_tag is None:
