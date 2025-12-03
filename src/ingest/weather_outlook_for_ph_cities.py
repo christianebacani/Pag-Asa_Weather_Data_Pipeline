@@ -264,7 +264,7 @@ def extract_ph_city_names(
     '''
     result = {}
 
-    # We need to check if the list of all selected PH city HTML tags is missing
+    # We need ot check if the selected PH city HTML tags list is missing
     if list_of_all_ph_city_tags == []:
         return result
 
@@ -293,7 +293,7 @@ def extract_weather_dates(
     '''
     weather_dates = []
 
-    # We need to check if the list of all selected PH city HTML tags is missing
+    # We need to check if the selected PH city HTML tags list is missing
     if list_of_all_ph_city_tags == []:
         return weather_dates
 
@@ -342,9 +342,9 @@ def map_weather_dates_to_ph_cities(
 
     list_of_all_ph_city_names = list(result.keys())
 
-    # Loop through the list of selected PH cities to map it to the list of extracted weather dates
+    # Loop the through the selected PH cities list to map it to the weather dates list
     for ph_city_name in list_of_all_ph_city_names:
-        # Map the list of extracted weather dates to the selected PH city
+        # Map the selected PH city to the weather dates list
         result[ph_city_name]['weather_dates'] = weather_dates
 
     return result
@@ -366,7 +366,7 @@ def extract_temperature_ranges(
     '''
     result = []
 
-    # We need to check if the list of all selected PH city HTML tags is missing
+    # We need to check if the selected PH city HTML tags list is missing
     if list_of_all_ph_city_tags == []:
         return result
 
@@ -423,11 +423,11 @@ def map_temperature_ranges_to_ph_cities(
     list_of_all_temperature_ranges = temperature_ranges
     list_of_all_ph_city_names = list(result.keys())
 
-    # Loop through the list of temperature ranges to map it to the selected PH cities
+    # Loop through the temperature ranges list to map it to the selected PH cities list
     for index, temperature_ranges in enumerate(list_of_all_temperature_ranges):
         # Use the index of temperature range to get the name of the PH city
         ph_city_name = list_of_all_ph_city_names[index]
-        # Map temperature ranges to the selected PH city
+        # Map selected PH city to the temperature ranges list
         result[ph_city_name]['temperature_ranges'] = temperature_ranges
 
     return result
@@ -449,11 +449,11 @@ def extract_chance_of_rain_percentages(
     '''
     result = []
 
-    # We need to check if list of all selected PH city HTML tags is missing
+    # We need to check if the selected PH city HTML tags list is missing
     if list_of_all_ph_city_tags == []:
         return result
 
-    # Loop through PH city tags to extract rain chance tags
+    # Loop through the selected Ph city HTML tags list to extract rain chance pct tags
     for ph_city_tag in list_of_all_ph_city_tags:
         table_tag = ph_city_tag.find('table', attrs={'class': 'table'})
         chance_of_rain_percentages_tag = table_tag.find('tr', attrs={'class': 'desktop-view-tr'})
@@ -461,7 +461,7 @@ def extract_chance_of_rain_percentages(
 
         chance_of_rain_percentages = []
 
-        # Loop through tags to extract chance of rain percentages for selected PH cities
+        # Loop through tags to extract rain chance pcts for selected PH cities
         for table_data_tag in list_of_all_table_data_tags:
             chance_of_rain_percentage_tag = table_data_tag.find(
                 'span',
@@ -510,11 +510,11 @@ def map_chance_of_rain_percentages_to_ph_cities(
     list_of_all_chance_of_rain_percentages = chance_of_rain_percentages
     list_of_all_ph_city_names = list(ph_cities_weather_outlook.keys())
 
-    # Loop through the list of rain chance percentages to map it to the selected PH cities
+    # Loop through the rain chance pcts list to map it to the selected PH cities list
     for index, chance_of_rain_percentages in enumerate(list_of_all_chance_of_rain_percentages):
-        # Use the index of rain chance percentage to get the name of the PH city
+        # Use the index of rain chance pct to get the name of the PH city
         ph_city_name = list_of_all_ph_city_names[index]
-        # Map rain chance percentage to the selected PH city
+        # Map selected PH city to the rain chance pcts list
         result[ph_city_name]['chance_of_rain_percentages'] = chance_of_rain_percentages
 
     return result
