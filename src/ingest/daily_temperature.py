@@ -263,3 +263,12 @@ def save_top_10_lowest_temps_to_dict(
         10 lowest temperature table
     :type top_10_lowest_temperatures: dict[str, str]
     '''
+    data = top_10_lowest_temperatures
+
+    with open(
+        'data/raw/daily_temperature/top_10_lowest_temperatures.json',
+        'w'
+    ) as json_file:
+        json.dump(data, json_file, indent=4)
+
+    json_file.close()
