@@ -243,7 +243,7 @@ def map_station_names_to_lowest_temps(
 
     # Loop through the station names list to map it to the temperatures list
     for index, station_name in enumerate(list_of_all_station_names):
-        # Use the index of station name to get the corresponding temperature
+        # Use the index of station names list to get the temperature
         temperature = list_of_all_temperatures[index]
         # Map station name to the selected temperature
         result[station_name] = temperature
