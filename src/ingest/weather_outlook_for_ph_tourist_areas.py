@@ -255,11 +255,11 @@ def extract_ph_tourist_area_names(
     '''
     result = {}
 
-    # We need to check if the list of all selected PH tourist area HTML tags is missing
+    # We need to check if the selected PH tourist area HTML tags list is missing
     if list_of_all_ph_tourist_area_tags is None:
         return result
 
-    # Loop through rows containing HTML tags to extract the names of the selected PH tourist areas
+    # Loop through the PH tourist area HTML tags to extract the names of the selected PH tourist area
     for ph_tourist_area_tag in list_of_all_ph_tourist_area_tags:
         ph_tourist_area_name_tag = ph_tourist_area_tag.find('td')
         ph_tourist_area_name = str(ph_tourist_area_name_tag.text).strip()
@@ -348,9 +348,9 @@ def map_weather_dates_to_ph_tourist_areas(
 
     list_of_all_ph_tourist_area_names = list(result.keys())
 
-    # Loop through the list of selected PH tourist areas to map it to the extracted weather dates
+    # Loop through the selected PH tourist areas list to map it to the weather dates list
     for ph_tourist_area_name in list_of_all_ph_tourist_area_names:
-        # Map weather dates to the selected PH tourist area
+        # Map selected PH tourist area to the weather dates list
         result[ph_tourist_area_name]['weather_dates'] = weather_dates
 
     return result
@@ -372,17 +372,17 @@ def extract_temperature_ranges(
     '''
     result = []
 
-    # We need to check if the list of all selected PH tourist area HTML tags is missing
+    # We need to check if the selected PH tourist area HTML tags list is missing
     if list_of_all_ph_tourist_area_tags == []:
         return result
 
-    # Loop through PH tourist area tags to extract temperature range tags
+    # Loop through the PH tourist area HTML tags to extract temperature range tags
     for ph_tourist_area_tag in list_of_all_ph_tourist_area_tags:
         list_of_all_table_data_tags = ph_tourist_area_tag.find_all('td')[1:]
-        
+
         temperature_ranges = []
 
-        # Loop through tags to extract temperature ranges for selected PH tourist areas
+        # Loop through tags to extract temperature ranges list for selected PH tourist areas
         for table_data_tag in list_of_all_table_data_tags:
             minimum_temperature_tag = table_data_tag.find('span', attrs={'class': 'min'})
             minimum_temperature = str(minimum_temperature_tag.text).strip()
@@ -426,11 +426,11 @@ def map_temperature_ranges_to_ph_tourist_areas(
     list_of_all_temperature_ranges = temperature_ranges
     list_of_all_ph_tourist_area_names = list(result.keys())
 
-    # Loop through the list of temperature ranges to map it to the selected PH tourist areas
+    # Loop through the temperature ranges list to map it to the selected PH tourist area
     for index, temperature_ranges in enumerate(list_of_all_temperature_ranges):
-        # Use the index of temperature range to get the name of the PH tourist area
+        # Use the index of temperature ranges list to get the name of the PH tourist area
         ph_tourist_area_name = list_of_all_ph_tourist_area_names[index]
-        # Map temperature ranges to the selected PH tourist area
+        # Map selected PH tourist area to the temperature ranges list
         result[ph_tourist_area_name]['temperature_ranges'] = temperature_ranges
     
     return result
