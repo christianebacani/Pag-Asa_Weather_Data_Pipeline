@@ -232,3 +232,17 @@ def map_station_names_to_lowest_temps(
         table
     :rtype: dict[str, str]
     '''
+    result = {}
+
+    # We need to check if station names list or temperatures list for top 10 lowest temp table is missing
+    if station_names_for_top_10_lowest_temp == [] or temperatures_for_top_10_lowest_temp == []:
+        return {}
+
+    list_of_all_station_names = station_names_for_top_10_lowest_temp
+    list_of_all_temperatures = temperatures_for_top_10_lowest_temp
+
+    for index, station_name in enumerate(list_of_all_station_names):
+        temperature = list_of_all_temperatures[index]
+        result[station_name] = temperature
+
+    return result
