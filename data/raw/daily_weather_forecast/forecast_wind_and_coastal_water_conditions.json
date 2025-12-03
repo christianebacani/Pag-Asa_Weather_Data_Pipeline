@@ -1,18 +1,22 @@
 {
     "place": [
-        "Luzon",
+        "Northern Luzon",
+        "The rest of Luzon",
         "The rest of the country"
     ],
     "speed": [
+        "Moderate to Strong",
         "Light to Moderate",
         "Light to Moderate"
     ],
     "direction": [
         "Northeast to North",
+        "Northeast to North",
         "North to Northwest"
     ],
     "coastal_water": [
-        "Slight to Moderate / (0.6 to 2.1 meters)",
+        "Moderate to Rough / (2.5 to 4.0 meters)",
+        "Slight to Moderate / (1.2 to 2.1 meters)",
         "Slight to Moderate / (0.6 to 1.8 meters)"
     ]
 }
