@@ -127,7 +127,7 @@ def extract_recorded_date_for_top_10_lowest_temp(
     return recorded_date_for_top_10_lowest_temp
 
 def save_recorded_date_for_lowest_temp_to_json(
-        recorded_date_for_top_10_lowest_teml: str
+        recorded_date_for_top_10_lowest_temp: str
 ) -> None:
     '''
     Saves the recorded date of the top 10 lowest
