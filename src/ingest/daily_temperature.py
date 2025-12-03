@@ -332,3 +332,15 @@ def extract_top_10_highest_temps_table_tag(
     top_10_highest_temps_table_tag = div_tag_with_panel_class
 
     return top_10_highest_temps_table_tag
+
+def extract_recorded_date_from_top_10_highest_temps(
+        top_10_highest_temps_table_tag: BeautifulSoup | None        
+) -> str:
+    '''
+    Docstring for extract_recorded_date_from_top_10_highest_temps
+    
+    :param top_10_highest_temps_table_tag: Description
+    :type top_10_highest_temps_table_tag: BeautifulSoup | None
+    :return: Description
+    :rtype: str
+    '''
