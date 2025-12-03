@@ -136,6 +136,19 @@ def save_recorded_date_from_lowest_temps_to_json(
         temperatures table
     :type recorded_date_of_top_10_lowest_temps: str
     '''
+    # Create a dictionary to store the recorded date from top 10 lowest temperatures table
+    data = {
+        "recorded_date_from_top_10_lowest_temps_table": recorded_date_from_top_10_lowest_temps
+    }
+
+    # Save the dictionary to a json file using open() method and json module
+    with open(
+        'data/raw/daily_temperature/recorded_date_from_top_10_lowest_temps_table.json',
+        'w'
+    ) as json_file:
+        json.dump(data, json_file, indent=4)
+
+    json_file.close()
 
 def extract_station_names_from_top_10_lowest_temps(
         top_10_lowest_temps_table_tag: BeautifulSoup | None
