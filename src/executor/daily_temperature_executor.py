@@ -14,6 +14,7 @@ from ingest.daily_temperature import extract_station_names_from_top_10_lowest_te
 from ingest.daily_temperature import extract_temperatures_from_top_10_lowest_temps
 from ingest.daily_temperature import map_station_names_to_lowest_temps
 from ingest.daily_temperature import save_top_10_lowest_temps_to_json
+from ingest.daily_temperature import extract_top_10_highest_temps_table_tag
 
 def ingest_daily_temperature(
 ) -> None:
@@ -51,4 +52,8 @@ def ingest_daily_temperature(
     )
     save_top_10_lowest_temps_to_json(
         top_10_lowest_temperatures
+    )
+
+    top_10_highest_temps_table_tag = extract_top_10_highest_temps_table_tag(
+        soup
     )
