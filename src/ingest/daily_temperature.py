@@ -276,7 +276,7 @@ def save_top_10_lowest_temps_to_json(
         top 10 lowest temperatures table
     :type top_10_lowest_temperatures: dict[str, str]
     '''
-    # Create a dictionary to store the top 10 lowest temperature table
+    # Create a dictionary to store the top 10 lowest temperatures table
     data = top_10_lowest_temperatures
 
     # Save the dictionary to a json file using open() method and json module
