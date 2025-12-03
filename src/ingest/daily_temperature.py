@@ -297,3 +297,22 @@ def save_top_10_lowest_temps_to_json(
         json.dump(data, json_file, indent=4)
 
     json_file.close()
+
+def extract_top_10_highest_temps_table_tag(
+        soup: BeautifulSoup | None
+) -> BeautifulSoup | None:
+    '''
+    Extracts top 10 highest temperatures table
+    tag to get it's corresponding data from the
+    daily temperature page of the PAGASA-DOST
+    website.
+
+    :param soup: BeautifulSoup object for
+        navigating and manipulating the page
+        content, or None if extraction fails
+    :type soup: BeautifulSoup | None
+
+    :return: Top 10 highest temperatures table
+        HTML tag, or None if extraction fails
+    :rtype: BeautifulSoup | None
+    '''
