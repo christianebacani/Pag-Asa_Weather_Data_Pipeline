@@ -74,16 +74,16 @@ def extract_top_10_lowest_temps_table_tag(
 
     # Extract HTML tags to get the data for the top 10 lowest temperatures table
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
-    top_10_lowest_temp_table_tag = div_tag_with_row_weather_page_class.find(
+    top_10_lowest_temps_table_tag = div_tag_with_row_weather_page_class.find(
         'div',
         attrs={
             'class': 'col-md-6'
         }
     )
-    div_tag_with_panel_class = top_10_lowest_temp_table_tag.find('div', attrs={'class': 'panel'})
-    top_10_lowest_temp_table_tag = div_tag_with_panel_class
+    div_tag_with_panel_class = top_10_lowest_temps_table_tag.find('div', attrs={'class': 'panel'})
+    top_10_lowest_temps_table_tag = div_tag_with_panel_class
 
-    return top_10_lowest_temp_table_tag
+    return top_10_lowest_temps_table_tag
 
 def extract_recorded_date_from_top_10_lowest_temps(
         top_10_lowest_temps_table_tag: BeautifulSoup | None
@@ -316,3 +316,17 @@ def extract_top_10_highest_temps_table_tag(
         HTML tag, or None if extraction fails
     :rtype: BeautifulSoup | None
     '''
+    if soup is None:
+        return None
+
+    div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
+    top_10_highest_temps_table_tag = div_tag_with_row_weather_page_class.find_all(
+        'div',
+        attrs={
+            'class': 'col-md-6'
+        }
+    )[1]
+    div_tag_with_panel_class = top_10_highest_temps_table_tag.find('div', attrs={'class': 'panel'})    
+    top_10_highest_temps_table_tag = div_tag_with_panel_class
+
+    return top_10_highest_temps_table_tag
