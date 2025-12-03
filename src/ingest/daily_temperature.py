@@ -50,11 +50,11 @@ def extract_beautiful_soup_object(
     soup = BeautifulSoup(response.text, 'html.parser')
     return soup
 
-def extract_top_10_lowest_temp_table_tag(
+def extract_top_10_lowest_temps_table_tag(
         soup: BeautifulSoup | None
 ) -> BeautifulSoup | None:
     '''
-    Extracts top 10 lowest temperature table
+    Extracts top 10 lowest temperatures table
     tag to get it's corresponding data from the
     daily temperature page of the PAGASA-DOST
     website.
@@ -64,7 +64,7 @@ def extract_top_10_lowest_temp_table_tag(
         content, or None if extraction fails
     :type soup: BeautifulSoup | None
 
-    :return: Top 10 lowest temperature table
+    :return: Top 10 lowest temperatures table
         HTML tag, or None if extraction fails
     :rtype: BeautifulSoup | None
     '''
@@ -72,7 +72,7 @@ def extract_top_10_lowest_temp_table_tag(
     if soup is None:
         return None
 
-    # Extract HTML tags to get the data for the top 10 lowest temperature table
+    # Extract HTML tags to get the data for the top 10 lowest temperatures table
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
     top_10_lowest_temp_table_tag = div_tag_with_row_weather_page_class.find(
         'div',
@@ -85,161 +85,158 @@ def extract_top_10_lowest_temp_table_tag(
 
     return top_10_lowest_temp_table_tag
 
-def extract_recorded_date_for_top_10_lowest_temp(
-        top_10_lowest_temp_table_tag: BeautifulSoup | None
+def extract_recorded_date_for_top_10_lowest_temps(
+        top_10_lowest_temps_table_tag: BeautifulSoup | None
 ) -> str:
     '''
     Extracts the recorded date of the top 10 lowest
-    temperature table from the daily temperature page
+    temperatures table from the daily temperature page
     of the PAGASA-DOST website.
 
     :param lowest_temperature_table_tag: Top 10 lowest
-        temperature table HTML tag, or None if extration
+        temperatures table HTML tag, or None if extration
         fails
     :type lowest_temperature_table_tag: BeautifulSoup | None
 
-    :return: Recorded date of the top 10 lowest temperature
+    :return: Recorded date of the top 10 lowest temperatures
         table
     :rtype: str
     '''
-    recorded_date_for_top_10_lowest_temp = ''
+    recorded_date_for_top_10_lowest_temps = ''
 
-    # We need to check if the top 10 lowest temperature table HTML tag is missing
-    if top_10_lowest_temp_table_tag is None:
-        return recorded_date_for_top_10_lowest_temp
+    # We need to check if the top 10 lowest temperatures table HTML tag is missing
+    if top_10_lowest_temps_table_tag:
+        return recorded_date_for_top_10_lowest_temps
 
-    # We need to check if the top 10 lowest teperature table HTML tag is missing
-    if top_10_lowest_temp_table_tag is None:
-        return recorded_date_for_top_10_lowest_temp
-
-    top_10_lowest_temperature_header_tag = top_10_lowest_temp_table_tag.find(
+    top_10_lowest_temperatures_header_tag = top_10_lowest_temps_table_tag.find(
         'div',
         attrs={
             'class': 'panel-heading'
         }
     )
-    top_10_lowest_temperature_header = str(top_10_lowest_temperature_header_tag.text)
-    recorded_date_for_top_10_lowest_temp = top_10_lowest_temperature_header.replace(
+    top_10_lowest_temperatures_header = str(top_10_lowest_temperatures_header_tag.text)
+    recorded_date_for_top_10_lowest_temps = top_10_lowest_temperatures_header.replace(
         'Top 10 Lowest Temperature as of',
         ''
     ).strip()
 
-    return recorded_date_for_top_10_lowest_temp
+    return recorded_date_for_top_10_lowest_temps
 
-def save_recorded_date_for_lowest_temp_to_json(
-        recorded_date_for_top_10_lowest_temp: str
+def save_recorded_date_for_lowest_temps_to_json(
+        recorded_date_for_top_10_lowest_temps: str
 ) -> None:
     '''
     Saves the recorded date of the top 10 lowest
-    temperature table to a JSON file in the
+    temperatures table to a JSON file in the
     data/raw/daily_temperature/ subdirectory on
     the local machine.
 
-    :param recorded_date_for_top_10_lowest_teml:
+    :param recorded_date_for_top_10_lowest_temp:
         Recorded date of the top 10 lowest
-        temperature table
-    :type recorded_date_for_top_10_lowest_teml: str
+        temperatures table
+    :type recorded_date_for_top_10_lowest_temps: str
     '''
 
-def extract_station_names_for_top_10_lowest_temp(
-        top_10_lowest_temp_table_tag: BeautifulSoup | None
+def extract_station_names_for_top_10_lowest_temps(
+        top_10_lowest_temps_table_tag: BeautifulSoup | None
 ) -> list[str]:
     '''
     Extracts the list of station names from the the top 10
-    lowest temperature table of the daily temperature page
+    lowest temperatures table of the daily temperature page
     from the PAGASA-DOST website.
 
-    :param lowest_temperature_table_tag: Top 10 lowest
-        temperature table HTML tag, or None if extration fails
-    :type lowest_temperature_table_tag: BeautifulSoup | None
+    :param top_10_lowest_temps_table_tag: Top 10 lowest
+        temperatures table HTML tag, or None if extraction
+        fails    
+    :type top_10_lowest_temps_table_tag: BeautifulSoup | None
 
     :return: List of station names from the top 10 lowest
-        temperature table
+        temperatures table
     :rtype: list[str]
     '''
-    station_names_for_top_10_lowest_temp = []
+    station_names_for_top_10_lowest_temps = []
 
-    # We need to check if the top 10 lowest temperature table HTML tag is missing
-    if top_10_lowest_temp_table_tag is None:
-        return station_names_for_top_10_lowest_temp
+    # We need to check if the top 10 lowest temperatures table HTML tag is missing
+    if top_10_lowest_temps_table_tag:
+        return station_names_for_top_10_lowest_temps
     
-    tbody_tag = top_10_lowest_temp_table_tag.find('tbody')
+    tbody_tag = top_10_lowest_temps_table_tag.find('tbody')
 
     # We need to check if the tbody_tag is missing
     if tbody_tag is None:
-        return station_names_for_top_10_lowest_temp
+        return station_names_for_top_10_lowest_temps
 
     # Use find_all() method to access all station names
     list_of_all_table_row_tags = tbody_tag.find_all('tr')
 
-    # Loop through rows containing HTML tags to extract all station names from top 10 lowest temp table
+    # Loop through rows containing HTML tags to extract all station names from top 10 lowest temps table
     for table_row_tag in list_of_all_table_row_tags:
         station_name_tag = table_row_tag.find('td')
         station_name = str(station_name_tag.text).strip()
-        station_names_for_top_10_lowest_temp.append(station_name)
-    
-    return station_names_for_top_10_lowest_temp
+        station_names_for_top_10_lowest_temps.append(station_name)
 
-def extract_temperatures_for_top_10_lowest_temp(
-        top_10_lowest_temp_table_tag: BeautifulSoup | None
+    return station_names_for_top_10_lowest_temps
+
+def extract_temperatures_for_top_10_lowest_temps(
+        top_10_lowest_temps_table_tag: BeautifulSoup | None
 ) -> list[str]:
     '''
     Extracts the list of temperatures from the the top 10
-    lowest temperature table of the daily temperature page
+    lowest temperatures table of the daily temperature page
     from the PAGASA-DOST website.
 
-    :param lowest_temperature_table_tag: Top 10 lowest
-        temperature table HTML tag, or None if extration fails
-    :type lowest_temperature_table_tag: BeautifulSoup | None
+    :param top_10_lowest_temps_table_tag: Top 10 lowest
+        temperatures table HTML tag, or None if extraction fails
+    :type top_10_lowest_temps_table_tag: BeautifulSoup | None
 
     :return: List of temperatures from the top 10 lowest
-        temperature table
+        temperatures table
     :rtype: list[str]
     '''
-    temperatures_for_top_10_lowest_temp = []
+    temperatures_for_top_10_lowest_temps = []
 
     # We need to check if the top 10 lowest temperature table HTML tag is missing
-    if top_10_lowest_temp_table_tag is None:
-        return temperatures_for_top_10_lowest_temp
-    
-    tbody_tag = top_10_lowest_temp_table_tag.find('tbody')
+    if top_10_lowest_temps_table_tag:
+        return top_10_lowest_temps_table_tag
+
+    tbody_tag = top_10_lowest_temps_table_tag.find('tbody')
     
     # We need to check if the tbody_tag is missing
     if tbody_tag is None:
-        return temperatures_for_top_10_lowest_temp
+        return temperatures_for_top_10_lowest_temps
 
     # Use find_all() method to access all temperatures
     list_of_all_table_row_tags = tbody_tag.find_all('tr')
 
-    # Loop through rows containing HTML tags to extract all temperatures from top 10 lowest temp table
+    # Loop through rows containing HTML tags to extract all temperatures from top 10 lowest temps table
     for table_row_tag in list_of_all_table_row_tags:
         temperature_tag = table_row_tag.find_all('td')[1]
         temperature = str(temperature_tag.text).strip()
-        temperatures_for_top_10_lowest_temp.append(temperature)
+        temperatures_for_top_10_lowest_temps.append(temperature)
 
-    return temperatures_for_top_10_lowest_temp
+    return temperatures_for_top_10_lowest_temps
 
 def map_station_names_to_lowest_temps(
-        station_names_for_top_10_lowest_temp: list[str],
-        temperatures_for_top_10_lowest_temp: list[str]
+        station_names_for_top_10_lowest_temps: list[str],
+        temperatures_for_top_10_lowest_temps: list[str]
 ) -> dict[str, str]:
     '''
     Maps extracted list of station names to 
     the list of extracted temperatures from
-    top 10 lowest temperature table of
+    top 10 lowest temperatures table of
     daily temperature page from PAGASA-DOST
     website.
 
-    :param station_names_for_top_10_lowest_temp:
+    :param station_names_for_top_10_lowest_temps:
         List of station names from the top 10
-        lowest temperature table        
-    :type station_names_for_top_10_lowest_temp:
+        lowest temperatures table
+    :type station_names_for_top_10_lowest_temps:
         list[str]
 
-    :param temperatures_for_top_10_lowest_temp:
-        List of temperatures from the top 10 lowest
-        temperature table
-    :type temperatures_for_top_10_lowest_temp:
+    :param temperatures_for_top_10_lowest_temps:
+        List of temperatures from the top 10
+        lowest temperatures table
+    :type temperatures_for_top_10_lowest_temps:
         list[str]
 
     :return: Dictionary of top 10 lowest temperatures
@@ -249,11 +246,11 @@ def map_station_names_to_lowest_temps(
     result = {}
 
     # We need to check if station names list or temperatures list for top 10 lowest temp table is missing
-    if station_names_for_top_10_lowest_temp == [] or temperatures_for_top_10_lowest_temp == []:
+    if station_names_for_top_10_lowest_temps == [] or temperatures_for_top_10_lowest_temps == []:
         return {}
 
-    list_of_all_station_names = station_names_for_top_10_lowest_temp
-    list_of_all_temperatures = temperatures_for_top_10_lowest_temp
+    list_of_all_station_names = station_names_for_top_10_lowest_temps
+    list_of_all_temperatures = temperatures_for_top_10_lowest_temps
 
     # Loop through the station names list to map it to the temperatures list
     for index, station_name in enumerate(list_of_all_station_names):
@@ -268,7 +265,7 @@ def save_top_10_lowest_temps_to_json(
         top_10_lowest_temperatures: dict[str, str]
 ) -> None:
     '''
-    Saves the top 10 lowest temperature table
+    Saves the top 10 lowest temperatures table
     to a JSON file in the data/raw/daily_temperature/
     subdirectory on the local machine.
 
