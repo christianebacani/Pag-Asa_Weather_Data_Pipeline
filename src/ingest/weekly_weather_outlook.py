@@ -329,11 +329,11 @@ def map_date_ranges_to_weather_outlooks(
 
     list_of_all_date_ranges = list(date_ranges.keys())
 
-    # Loop through the list of date ranges to map it to the extracted list of weather outlooks
+    # Loop through the date ranges list to map it to the weather outlooks list
     for index, date_range in enumerate(list_of_all_date_ranges):
-        # Use the index of date range to get the corresponding weather outlook
+        # Use the index of date ranges list to get the weather outlooks list
         weather_outlook = weather_outlooks[index]
-        # Map date range to the selected weather outlook
+        # Map date range to the weather outlooks list
         result[date_range] = weather_outlook
 
     return result
