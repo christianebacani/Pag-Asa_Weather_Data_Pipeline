@@ -316,9 +316,11 @@ def extract_top_10_highest_temps_table_tag(
         HTML tag, or None if extraction fails
     :rtype: BeautifulSoup | None
     '''
+    # We need to check if the BeautifulSoup object is missing
     if soup is None:
         return None
 
+    # Extract HTML tags to get the data for the top 10 highest temperatures table
     div_tag_with_row_weather_page_class = soup.find('div', attrs={'class': 'row weather-page'})
     top_10_highest_temps_table_tag = div_tag_with_row_weather_page_class.find_all(
         'div',
