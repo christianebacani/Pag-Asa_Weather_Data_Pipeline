@@ -7,12 +7,8 @@
 '''
 from ingest.daily_temperature import create_subdir
 from ingest.daily_temperature import extract_beautiful_soup_object
-from ingest.daily_temperature import extract_top_10_lowest_temp_table_tag
-from ingest.daily_temperature import extract_recorded_date_for_top_10_lowest_temp
-from ingest.daily_temperature import extract_station_names_for_top_10_lowest_temp
-from ingest.daily_temperature import extract_temperatures_for_top_10_lowest_temp
-from ingest.daily_temperature import map_station_names_to_lowest_temps
-from ingest.daily_temperature import save_top_10_lowest_temps_to_json
+from ingest.daily_temperature import extract_top_10_lowest_temps_table_tag
+from ingest.daily_temperature import extract_recorded_date_for_top_10_lowest_temps
 
 def ingest_daily_temperature(
 ) -> None:
@@ -29,21 +25,7 @@ def ingest_daily_temperature(
         'https://www.pagasa.dost.gov.ph/weather/low-high-temperature'
     )
 
-    top_10_lowest_temp_table_tag = extract_top_10_lowest_temp_table_tag(soup)
-
-    recorded_date_for_top_10_lowest_temp = extract_recorded_date_for_top_10_lowest_temp(
-        top_10_lowest_temp_table_tag
+    top_10_lowest_temps_table_tag = extract_top_10_lowest_temps_table_tag(soup)
+    recorded_date_for_top_10_lowest_temps = extract_recorded_date_for_top_10_lowest_temps(
+        top_10_lowest_temps_table_tag
     )
-    station_names_for_top_10_lowest_temp = extract_station_names_for_top_10_lowest_temp(
-        top_10_lowest_temp_table_tag
-    )
-    temperatures_for_top_10_lowest_temp = extract_temperatures_for_top_10_lowest_temp(
-        top_10_lowest_temp_table_tag
-    )
-
-    top_10_lowest_temperatures = map_station_names_to_lowest_temps(
-        station_names_for_top_10_lowest_temp,
-        temperatures_for_top_10_lowest_temp
-    )
-
-    save_top_10_lowest_temps_to_json(top_10_lowest_temperatures)
