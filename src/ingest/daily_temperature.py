@@ -242,8 +242,7 @@ def map_station_names_to_lowest_temps(
     :type temperatures_for_top_10_lowest_temp:
         list[str]
 
-    :return: Dictionary of station names with
-        temperatures from the top 10 lowest temperature
+    :return: Dictionary of top 10 lowest temperatures
         table
     :rtype: dict[str, str]
     '''
@@ -274,12 +273,13 @@ def save_top_10_lowest_temps_to_json(
     subdirectory on the local machine.
 
     :param top_10_lowest_temperatures: Dictionary of
-        station names with temperatures from the top
-        10 lowest temperature table
+        top 10 lowest temperatures table
     :type top_10_lowest_temperatures: dict[str, str]
     '''
+    # Create a dictionary to store the top 10 lowest temperature table
     data = top_10_lowest_temperatures
 
+    # Save the dictionary to a json file using open() method and json module
     with open(
         'data/raw/daily_temperature/top_10_lowest_temperatures.json',
         'w'
