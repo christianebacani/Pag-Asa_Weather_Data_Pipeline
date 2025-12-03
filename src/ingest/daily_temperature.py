@@ -126,6 +126,21 @@ def extract_recorded_date_for_top_10_lowest_temp(
 
     return recorded_date_for_top_10_lowest_temp
 
+def save_recorded_date_for_lowest_temp_to_json(
+        recorded_date_for_top_10_lowest_teml: str
+) -> None:
+    '''
+    Saves the recorded date of the top 10 lowest
+    temperature table to a JSON file in the
+    data/raw/daily_temperature/ subdirectory on
+    the local machine.
+
+    :param recorded_date_for_top_10_lowest_teml:
+        Recorded date of the top 10 lowest
+        temperature table
+    :type recorded_date_for_top_10_lowest_teml: str
+    '''
+
 def extract_station_names_for_top_10_lowest_temp(
         top_10_lowest_temp_table_tag: BeautifulSoup | None
 ) -> list[str]:
