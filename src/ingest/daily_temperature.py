@@ -250,7 +250,7 @@ def map_station_names_to_lowest_temps(
 
     return result
 
-def save_top_10_lowest_temps_to_dict(
+def save_top_10_lowest_temps_to_json(
         top_10_lowest_temperatures: dict[str, str]
 ) -> None:
     '''
