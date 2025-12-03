@@ -40,7 +40,7 @@ def ingest_daily_temperature(
         top_10_lowest_temp_table_tag
     )
 
-    top_10_lowest_temperature = map_station_names_to_lowest_temps(
+    top_10_lowest_temperatures = map_station_names_to_lowest_temps(
         station_names_for_top_10_lowest_temp,
         temperatures_for_top_10_lowest_temp
     )
