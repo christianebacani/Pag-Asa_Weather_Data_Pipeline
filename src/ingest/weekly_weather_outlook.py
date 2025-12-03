@@ -345,7 +345,7 @@ def save_weekly_weather_outlook_to_json(
     Saves the weekly weather outlook to a JSON
     file in the data/raw/weekly_weather_outlook/
     subdirectory on the local machine.
-    
+
     :param weekly_weather_outlooks: Dictionary
         of weekly weather outlook for every date
         ranges
