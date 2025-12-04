@@ -8,14 +8,15 @@
 from ingest.daily_temperature import create_subdir
 from ingest.daily_temperature import extract_beautiful_soup_object
 from ingest.daily_temperature import extract_top_10_lowest_temps_table_tag
-from ingest.daily_temperature import extract_recorded_date_from_top_10_lowest_temps
-from ingest.daily_temperature import save_recorded_date_from_lowest_temps_to_json
+from ingest.daily_temperature import extract_recorded_date_of_lowest_temp
+from ingest.daily_temperature import save_recorded_date_of_lowest_temp_to_json
 from ingest.daily_temperature import extract_station_names_from_top_10_lowest_temps
 from ingest.daily_temperature import extract_temperatures_from_top_10_lowest_temps
 from ingest.daily_temperature import map_station_names_to_lowest_temps
 from ingest.daily_temperature import save_top_10_lowest_temps_to_json
 from ingest.daily_temperature import extract_top_10_highest_temps_table_tag
-from ingest.daily_temperature import extract_recorded_date_from_top_10_highest_temps
+from ingest.daily_temperature import extract_recorded_date_of_highest_temp
+from ingest.daily_temperature import save_recorded_date_of_highest_temp_to_json
 
 def ingest_daily_temperature(
 ) -> None:
@@ -34,11 +35,11 @@ def ingest_daily_temperature(
 
     top_10_lowest_temps_table_tag = extract_top_10_lowest_temps_table_tag(soup)
 
-    recorded_date_from_top_10_lowest_temps = extract_recorded_date_from_top_10_lowest_temps(
+    recorded_date_of_lowest_temp = extract_recorded_date_of_lowest_temp(
         top_10_lowest_temps_table_tag
     )
-    save_recorded_date_from_lowest_temps_to_json(
-        recorded_date_from_top_10_lowest_temps
+    save_recorded_date_of_lowest_temp_to_json(
+        recorded_date_of_lowest_temp        
     )
 
     station_names_from_top_10_lowest_temps = extract_station_names_from_top_10_lowest_temps(
@@ -59,6 +60,9 @@ def ingest_daily_temperature(
         soup
     )
 
-    recorded_date_from_top_10_highest_temps = extract_recorded_date_from_top_10_highest_temps(
+    recorded_date_of_highest_temp = extract_recorded_date_of_highest_temp(
         top_10_highest_temps_table_tag
+    )
+    save_recorded_date_of_highest_temp_to_json(
+        recorded_date_of_highest_temp
     )
