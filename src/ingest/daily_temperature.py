@@ -384,3 +384,16 @@ def save_recorded_date_from_highest_temps_to_json(
         temperatures table
     :type recorded_date_from_top_10_highest_temps: str
     '''
+    # Create a dictionary to store the recorded date from top 10 highest temperatures table
+    data = {
+        "recorded_date_from_top_10_highest_table": recorded_date_from_top_10_highest_temps
+    }
+
+    # Save the dictionary to a json file using open() method and json module
+    with open(
+        'data/raw/daily_temperature/recorded_date_from_top_10_highest_temps_table.json',
+        'w'
+    ) as json_file:
+        json.dump(data, json_file, indent=4)
+    
+    json_file.close()
