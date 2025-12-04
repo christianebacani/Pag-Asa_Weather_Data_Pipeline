@@ -17,6 +17,6 @@ def ingest_weather_advisory(
     '''
     # Run all functions to ingest weather advisory data
     create_subdir()
-    extract_beautiful_soup_object(
+    soup = extract_beautiful_soup_object(
         'https://www.pagasa.dost.gov.ph/weather/weather-advisory'
     )
