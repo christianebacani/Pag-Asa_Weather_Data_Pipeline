@@ -18,6 +18,7 @@ from ingest.daily_temperature import extract_top_10_highest_temps_table_tag
 from ingest.daily_temperature import extract_recorded_date_of_highest_temp
 from ingest.daily_temperature import save_recorded_date_of_highest_temp_to_json
 from ingest.daily_temperature import extract_station_names_from_top_10_highest_temps
+from ingest.daily_temperature import extract_temperatures_from_top_10_highest_temps
 
 def ingest_daily_temperature(
 ) -> None:
@@ -71,6 +72,6 @@ def ingest_daily_temperature(
     station_names_from_top_10_highest_temps = extract_station_names_from_top_10_highest_temps(
         top_10_highest_temps_table_tag
     )
-
-    for station_name in station_names_from_top_10_highest_temps:
-        print(station_name)
+    temperatures_from_top_10_highest_temps = extract_temperatures_from_top_10_highest_temps(
+        top_10_highest_temps_table_tag
+    )
