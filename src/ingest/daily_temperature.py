@@ -429,3 +429,42 @@ def extract_station_names_from_top_10_highest_temps(
         station_names_from_top_10_highest_temps.append(station_name)
 
     return station_names_from_top_10_highest_temps
+
+def extract_temperatures_from_top_10_highest_temps(
+        top_10_highest_temps_table_tag: BeautifulSoup | None
+) -> list[str]:
+    '''
+    Extracts the list of temperatures from the the top 10
+    highest temperatures table of the daily temperature page
+    from the PAGASA-DOST website.
+
+    :param top_10_highest_temps_table_tag: Top 10 highest
+        temperatures table HTML tag, or None if extraction fails
+    :type top_10_highest_temps_table_tag: BeautifulSoup | None
+
+    :return: List of temperatures from the top 10 highest
+        temperatures table
+    :rtype: list[str]
+    '''
+    temperatures_from_top_10_highest_temps = []
+
+    # We need to check if the top 10 highest temperatures table HTML tag is missing
+    if top_10_highest_temps_table_tag is None:
+        return top_10_highest_temps_table_tag
+
+    tbody_tag = top_10_highest_temps_table_tag.find('tbody')
+
+    # We need to check if the tbody_tag is missing
+    if tbody_tag is None:
+        return temperatures_from_top_10_highest_temps
+
+    # Use find_all() method to access all temperatures
+    list_of_all_table_row_tags = tbody_tag.find_all('tr')
+
+    # Loop through rows containing HTML tags to extract all temperatures from top 10 highest temps table
+    for table_row_tag in list_of_all_table_row_tags:
+        temperature_tag = table_row_tag.find_all('td')[1]
+        temperature = str(temperature_tag.text).strip()
+        temperatures_from_top_10_highest_temps.append(temperature)
+    
+    return temperatures_from_top_10_highest_temps
