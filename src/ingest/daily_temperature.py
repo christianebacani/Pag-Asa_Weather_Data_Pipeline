@@ -85,28 +85,26 @@ def extract_top_10_lowest_temps_table_tag(
 
     return top_10_lowest_temps_table_tag
 
-def extract_recorded_date_from_top_10_lowest_temps(
+def extract_recorded_date_of_lowest_temp(
         top_10_lowest_temps_table_tag: BeautifulSoup | None
 ) -> str:
     '''
-    Extracts the recorded date from the top 10 lowest
-    temperatures table of daily temperature page from
-    the PAGASA-DOST website.
+    Extracts the recorded date of lowest temperature
+    from daily temperature page of PAGASA-DOST website.
 
     :param lowest_temperature_table_tag: Top 10 lowest
         temperatures table HTML tag, or None if extration
         fails
     :type lowest_temperature_table_tag: BeautifulSoup | None
 
-    :return: Recorded date from the top 10 lowest temperatures
-        table
+    :return: Recorded date of lowest temperature
     :rtype: str
     '''
-    recorded_date_from_top_10_lowest_temps = ''
+    recorded_date_of_lowest_temp = ''
 
     # We need to check if the top 10 lowest temperatures table HTML tag is missing
     if top_10_lowest_temps_table_tag is None:
-        return recorded_date_from_top_10_lowest_temps
+        return recorded_date_of_lowest_temp
 
     top_10_lowest_temps_header_tag = top_10_lowest_temps_table_tag.find(
         'div',
@@ -115,35 +113,33 @@ def extract_recorded_date_from_top_10_lowest_temps(
         }
     )
     top_10_lowest_temps_header = str(top_10_lowest_temps_header_tag.text)
-    recorded_date_from_top_10_lowest_temps = top_10_lowest_temps_header.replace(
+    recorded_date_of_lowest_temp = top_10_lowest_temps_header.replace(
         'Top 10 Lowest Temperature as of',
         ''
     ).strip()
 
-    return recorded_date_from_top_10_lowest_temps
+    return recorded_date_of_lowest_temp
 
-def save_recorded_date_from_lowest_temps_to_json(
-        recorded_date_from_top_10_lowest_temps: str
+def save_recorded_date_of_lowest_temp_to_json(
+        recorded_date_of_lowest_temp: str
 ) -> None:
     '''
-    Saves the recorded date from the top 10 lowest
-    temperatures table to a JSON file in the
-    data/raw/daily_temperature/ subdirectory on
-    the local machine.
+    Saves the recorded date of lowest temperature
+    to a JSON file in the data/raw/daily_temperature/
+    subdirectory on the local machine.
 
-    :param recorded_date_from_top_10_lowest_temp:
-        Recorded date from the top 10 lowest
-        temperatures table
-    :type recorded_date_of_top_10_lowest_temps: str
+    :param recorded_date_of_lowest_temp: Recorded
+        date of lowest temperature
+    :type recorded_date_of_lowest_temp: str
     '''
-    # Create a dictionary to store the recorded date from top 10 lowest temperatures table
+    # Create a dictionary to store the recorded date of lowest temperature
     data = {
-        "recorded_date_from_top_10_lowest_temps_table": recorded_date_from_top_10_lowest_temps
+        "recorded_date_of_lowest_temp": recorded_date_of_lowest_temp
     }
 
     # Save the dictionary to a json file using open() method and json module
     with open(
-        'data/raw/daily_temperature/recorded_date_from_top_10_lowest_temps_table.json',
+        'data/raw/daily_temperature/recorded_date_of_lowest_temp.json',
         'w'
     ) as json_file:
         json.dump(data, json_file, indent=4)
@@ -333,28 +329,26 @@ def extract_top_10_highest_temps_table_tag(
 
     return top_10_highest_temps_table_tag
 
-def extract_recorded_date_from_top_10_highest_temps(
-        top_10_highest_temps_table_tag: BeautifulSoup | None        
+def extract_recorded_date_of_highest_temp(
+        top_10_highest_temps_table_tag: BeautifulSoup | None
 ) -> str:
     '''
-    Extracts the recorded date from the top 10 highest
-    temperatures table of daily temperature page from
-    the PAGASA-DOST website.
+    Extracts the recorded date of highest temperature
+    from daily temperature page of PAGASA-DOST website.
 
     :param top_10_highest_temps_table_tag: Top 10 highest
         temperatures table HTML tag, or None if extration
         fails
     :type top_10_highest_temps_table_tag: BeautifulSoup | None
 
-    :return: Recorded date from the top 10 highest
-        temperatures table
+    :return: Recorded date of highest temperature 
     :rtype: str
     '''
-    recorded_date_from_highest_temps = ''
+    recorded_date_of_highest_temp = ''
 
     # We need to check if the top 10 highest temperatures table HTML tag is missing
     if top_10_highest_temps_table_tag is None:
-        return recorded_date_from_highest_temps
+        return recorded_date_of_highest_temp
 
     top_10_highest_temps_header_tag = top_10_highest_temps_table_tag.find(
         'div',
@@ -363,35 +357,33 @@ def extract_recorded_date_from_top_10_highest_temps(
         }
     )
     top_10_highest_temps_header = str(top_10_highest_temps_header_tag.text)
-    recorded_date_from_highest_temps = top_10_highest_temps_header.replace(
+    recorded_date_of_highest_temp = top_10_highest_temps_header.replace(
         'Top 10 Highest Temperature as of',
         ''
     ).strip()
 
-    return recorded_date_from_highest_temps
+    return recorded_date_of_highest_temp
 
-def save_recorded_date_from_highest_temps_to_json(
-        recorded_date_from_top_10_highest_temps: str
+def save_recorded_date_of_highest_temp_to_json(
+        recorded_date_of_highest_temp: str    
 ) -> None:
     '''
-    Saves the recorded date from the top 10 highest
-    temperatures table to a JSON file in the
-    data/raw/daily_temperature/ subdirectory on
-    the local machine.
+    Saves the recorded date of highest temperature
+    to a JSON file in the data/raw/daily_temperature/
+    subdirectory on the local machine.
 
-    :param recorded_date_from_top_10_highest_temps:
-        Recorded date from the top 10 highest
-        temperatures table
-    :type recorded_date_from_top_10_highest_temps: str
+    :param recorded_date_of_highest_temp: Recorded
+        date of highest temperature
+    :type recorded_date_of_highest_temp: str
     '''
-    # Create a dictionary to store the recorded date from top 10 highest temperatures table
+    # Create a dictionary to store the recorded date of highest temperature
     data = {
-        "recorded_date_from_top_10_highest_table": recorded_date_from_top_10_highest_temps
+        "recorded_date_of_highest_temperature": recorded_date_of_highest_temp
     }
 
     # Save the dictionary to a json file using open() method and json module
     with open(
-        'data/raw/daily_temperature/recorded_date_from_top_10_highest_temps_table.json',
+        'data/raw/daily_temperature/recorded_date_of_highest_temp.json',
         'w'
     ) as json_file:
         json.dump(data, json_file, indent=4)
