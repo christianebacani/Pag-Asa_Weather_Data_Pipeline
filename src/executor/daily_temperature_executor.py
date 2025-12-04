@@ -20,6 +20,7 @@ from ingest.daily_temperature import save_recorded_date_of_highest_temp_to_json
 from ingest.daily_temperature import extract_station_names_from_top_10_highest_temps
 from ingest.daily_temperature import extract_temperatures_from_top_10_highest_temps
 from ingest.daily_temperature import map_station_names_to_highest_temps
+from ingest.daily_temperature import save_top_10_highest_temps_to_json
 
 def ingest_daily_temperature(
 ) -> None:
@@ -76,7 +77,10 @@ def ingest_daily_temperature(
     temperatures_from_top_10_highest_temps = extract_temperatures_from_top_10_highest_temps(
         top_10_highest_temps_table_tag
     )
-    top_10_highest_temperatures_table = map_station_names_to_highest_temps(
+    top_10_highest_temperatures = map_station_names_to_highest_temps(
         station_names_from_top_10_highest_temps,
         temperatures_from_top_10_highest_temps
+    )
+    save_top_10_highest_temps_to_json(
+        top_10_highest_temperatures
     )
