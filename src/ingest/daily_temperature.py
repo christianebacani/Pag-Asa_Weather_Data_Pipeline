@@ -389,3 +389,21 @@ def save_recorded_date_of_highest_temp_to_json(
         json.dump(data, json_file, indent=4)
 
     json_file.close()
+
+def extract_station_names_from_top_10_highest_temps(
+        top_10_hightest_temps_table_tag: BeautifulSoup | None        
+) -> list[str]:
+    '''    
+    Extracts the list of station names from the top 10
+    highest temperatures table of daily temperature page
+    from the PAGASA-DOST website.
+
+    :param top_10_hightest_temps_table_tag: Top 10 highest
+        temperatures table HTML tag, or None if extraction
+        fails
+    :type top_10_hightest_temps_table_tag: BeautifulSoup | None
+
+    :return: List of station names from the top 10 lowest
+        temperatures table
+    :rtype: list[str]
+    '''
