@@ -513,3 +513,27 @@ def map_station_names_to_highest_temps(
         result[station_name] = temperature
 
     return result
+
+def save_top_10_highest_temps_to_json(
+        top_10_highest_temperatures: dict[str, str]
+) -> None:
+    '''
+    Saves the top 10 highest temperatures table
+    to a JSON file in the data/raw/daily_temperature/
+    subdirectory on the local machine.
+
+    :param top_10_highest_temperatures: Dictionary of
+        top 10 highest temperatures table
+    :type top_10_highest_temperatures: dict[str, str]
+    '''
+    # Create a dictionary to store the top 10 highest temperatures table
+    data = top_10_highest_temperatures
+
+    # Save the dictionary to a json file using open() method and json module
+    with open(
+        'data/raw/daily_temperature/top_10_highest_temperatures.json',
+        'w'
+    ) as json_file:
+        json.dump(data, json_file, indent=4)
+
+    json_file.close()
