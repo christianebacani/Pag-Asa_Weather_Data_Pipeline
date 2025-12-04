@@ -1,24 +1,24 @@
 {
     "place": [
-        "Basilan, Sulu, and Tawi-Tawi",
-        "Cagayan Valley, Ilocos Norte, Apayao, Kalinga, and Aurora",
-        "The rest of Ilocos Region, the rest of Cordillera Administrative Region, and the rest of Central Luzon",
-        "Metro Manila and the rest of the country"
+        "Catanduanes, Albay, Sorsogon, Northern Samar, Eastern Samar, and Samar",
+        "Cagayan Valley, Cordillera Administrative Region, Aurora, and Quezon",
+        "Metro Manila and the rest of Luzon",
+        "The rest of the country"
     ],
     "weather_condition": [
-        "Cloudy skies with scattered rains and thunderstorms",
+        "Cloudy skies with scattered rains and isolated thunderstorms",
         "Cloudy skies with rains",
         "Partly cloudy to cloudy skies with isolated light rains",
         "Partly cloudy to cloudy skies with isolated rainshowers or thunderstorms"
     ],
     "caused_by": [
-        "ITCZ",
+        "Shear Line",
         "Northeast Monsoon",
         "Northeast Monsoon",
         "Localized Thunderstorms"
     ],
     "impacts": [
-        "Possible flash floods or landslides due to moderate to at times heavy rains",
+        "Possible flash floods or landslides due to moderate to at heavy rains",
         "Possible flash floods or landslides due to moderate to at times heavy rains",
         "No significant impact",
         "Possible flash floods or landslides during severe thunderstorms"
