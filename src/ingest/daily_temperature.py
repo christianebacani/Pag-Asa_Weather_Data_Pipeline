@@ -337,10 +337,16 @@ def extract_recorded_date_from_top_10_highest_temps(
         top_10_highest_temps_table_tag: BeautifulSoup | None        
 ) -> str:
     '''
-    Docstring for extract_recorded_date_from_top_10_highest_temps
-    
-    :param top_10_highest_temps_table_tag: Description
+    Extracts the recorded date from the top 10 highest
+    temperatures table of daily temperature page from
+    the PAGASA-DOST website.
+
+    :param top_10_highest_temps_table_tag: Top 10 highest
+        temperatures table HTML tag, or None if extration
+        fails
     :type top_10_highest_temps_table_tag: BeautifulSoup | None
-    :return: Description
+
+    :return: Recorded date from the top 10 highest
+        temperatures table
     :rtype: str
     '''
