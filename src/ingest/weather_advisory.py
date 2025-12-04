@@ -108,7 +108,7 @@ def save_weather_advisory_to_json(
 
     # Save the dictionary to a json file using open() method and json module
     with open(
-        'data/raw/weather_advisory/weather_advisory.json'
+        'data/raw/weather_advisory/weather_advisory.json',
         'w'
     ) as json_file:
         json.dump(data, json_file, indent=4)
