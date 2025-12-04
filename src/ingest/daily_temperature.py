@@ -108,14 +108,14 @@ def extract_recorded_date_from_top_10_lowest_temps(
     if top_10_lowest_temps_table_tag is None:
         return recorded_date_from_top_10_lowest_temps
 
-    top_10_lowest_temperatures_header_tag = top_10_lowest_temps_table_tag.find(
+    top_10_lowest_temps_header_tag = top_10_lowest_temps_table_tag.find(
         'div',
         attrs={
             'class': 'panel-heading'
         }
     )
-    top_10_lowest_temperatures_header = str(top_10_lowest_temperatures_header_tag.text)
-    recorded_date_from_top_10_lowest_temps = top_10_lowest_temperatures_header.replace(
+    top_10_lowest_temps_header = str(top_10_lowest_temps_header_tag.text)
+    recorded_date_from_top_10_lowest_temps = top_10_lowest_temps_header.replace(
         'Top 10 Lowest Temperature as of',
         ''
     ).strip()
@@ -350,3 +350,21 @@ def extract_recorded_date_from_top_10_highest_temps(
         temperatures table
     :rtype: str
     '''
+    recorded_date_from_highest_temps = ''
+
+    if top_10_highest_temps_table_tag is None:
+        return recorded_date_from_highest_temps
+
+    top_10_highest_temps_header_tag = top_10_highest_temps_table_tag.find(
+        'div',
+        attrs={
+            'class': 'panel-heading'
+        }
+    )
+    top_10_highest_temps_header = str(top_10_highest_temps_header_tag.text)
+    recorded_date_from_highest_temps = top_10_highest_temps_header.replace(
+        'Top 10 Highest Temperature as of',
+        ''
+    ).strip()
+
+    return recorded_date_from_highest_temps
