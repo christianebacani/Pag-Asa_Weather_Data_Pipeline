@@ -466,5 +466,5 @@ def extract_temperatures_from_top_10_highest_temps(
         temperature_tag = table_row_tag.find_all('td')[1]
         temperature = str(temperature_tag.text).strip()
         temperatures_from_top_10_highest_temps.append(temperature)
-    
+
     return temperatures_from_top_10_highest_temps
