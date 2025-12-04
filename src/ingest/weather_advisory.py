@@ -80,9 +80,37 @@ def extract_weather_advisory(
     # We need to check if weather_advisory_tag is missing
     if weather_advisory_tag is None:
         return weather_advisory
-    
+
     iframe_tag = weather_advisory_tag.find('iframe')
     weather_advisory = iframe_tag['src']
     weather_advisory = str(weather_advisory).strip()
 
     return weather_advisory
+
+def save_weather_advisory_to_json(
+        weather_advisory: str
+) -> None:
+    '''
+    Saves the weather advisory
+    to a JSON file in the
+    data/raw/weather_advisory/
+    subdirectory on the local
+    machine.
+
+    :param weather_advisory:
+        Weather Advisory
+    :type weather_advisory: str
+    '''
+    # Create a dictionary to store the weather advisory
+    data = {
+        "weather_advisory": weather_advisory
+    }
+
+    # Save the dictionary to a json file using open() method and json module
+    with open(
+        'data/raw/weather_advisory/weather_advisory.json'
+        'w'
+    ) as json_file:
+        json.dump(data, json_file, indent=4)
+
+    json_file.close()
