@@ -407,3 +407,25 @@ def extract_station_names_from_top_10_highest_temps(
         temperatures table
     :rtype: list[str]
     '''
+    station_names_from_top_10_highest_temps = []
+
+    # We need to check if the top 10 highest temperatures table HTML tag is missing
+    if top_10_hightest_temps_table_tag is None:
+        return station_names_from_top_10_highest_temps
+
+    tbody_tag = top_10_hightest_temps_table_tag.find('tbody')
+
+    # We need to check if the tbody_tag is missing
+    if tbody_tag is None:
+        return station_names_from_top_10_highest_temps
+
+    # Use find_all() method to access all station names
+    list_of_all_table_row_tags = tbody_tag.find_all('tr')
+
+    # Loop through rows containing HTML tags to extract all station names from top 10 highest temps table
+    for table_row_tag in list_of_all_table_row_tags:
+        station_name_tag = table_row_tag.find('td')
+        station_name = str(station_name_tag.text).strip()
+        station_names_from_top_10_highest_temps.append(station_name)
+
+    return station_names_from_top_10_highest_temps
