@@ -352,6 +352,7 @@ def extract_recorded_date_from_top_10_highest_temps(
     '''
     recorded_date_from_highest_temps = ''
 
+    # We need to check if the top 10 highest temperatures table HTML tag is missing
     if top_10_highest_temps_table_tag is None:
         return recorded_date_from_highest_temps
 
