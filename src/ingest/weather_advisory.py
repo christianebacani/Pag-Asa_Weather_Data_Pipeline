@@ -45,3 +45,20 @@ def extract_beautiful_soup_object(
     # Parse as a BeautifulSoup object
     soup = BeautifulSoup(response.text, 'html.parser')
     return soup
+
+def extract_weather_advisory(
+        soup: BeautifulSoup | None
+) -> str:
+    '''
+    Extracts the weather advisory
+    from the PAGASA-DOST website.
+
+    :param soup: BeautifulSoup object
+        for navigating and manipulating
+        the page content, or None if
+        extraction fails
+    :type soup: BeautifulSoup | None
+
+    :return: Weather Advisory 
+    :rtype: str
+    '''
