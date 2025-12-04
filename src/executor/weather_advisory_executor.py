@@ -5,6 +5,7 @@
 '''
 from ingest.weather_advisory import create_subdir
 from ingest.weather_advisory import extract_beautiful_soup_object
+from ingest.weather_advisory import extract_weather_advisory
 
 def ingest_weather_advisory(
 ) -> None:
@@ -20,3 +21,5 @@ def ingest_weather_advisory(
     soup = extract_beautiful_soup_object(
         'https://www.pagasa.dost.gov.ph/weather/weather-advisory'
     )
+
+    weather_advisory = extract_weather_advisory(soup)
