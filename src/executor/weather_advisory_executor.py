@@ -6,6 +6,7 @@
 from ingest.weather_advisory import create_subdir
 from ingest.weather_advisory import extract_beautiful_soup_object
 from ingest.weather_advisory import extract_weather_advisory
+from ingest.weather_advisory import save_weather_advisory_to_json
 
 def ingest_weather_advisory(
 ) -> None:
@@ -23,3 +24,4 @@ def ingest_weather_advisory(
     )
 
     weather_advisory = extract_weather_advisory(soup)
+    save_weather_advisory_to_json(weather_advisory)
