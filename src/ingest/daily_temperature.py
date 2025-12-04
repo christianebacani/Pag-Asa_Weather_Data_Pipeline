@@ -468,3 +468,48 @@ def extract_temperatures_from_top_10_highest_temps(
         temperatures_from_top_10_highest_temps.append(temperature)
 
     return temperatures_from_top_10_highest_temps
+
+def map_station_names_to_highest_temps(
+        station_names_from_top_10_highest_temps: list[str],
+        temperatures_from_top_10_highest_temps: list[str]
+) -> dict[str, str]:
+    '''
+    Maps extracted list of station names to 
+    the list of extracted temperatures from
+    the top 10 highest temperatures table of
+    daily temperature page from PAGASA-DOST
+    website.
+
+    :param station_names_from_top_10_highest_temps:
+        List of station names from the top 10
+        highest temperatures table
+    :type station_names_from_top_10_highest_temps:
+        list[str]
+
+    :param temperatures_from_top_10_highest_temps:
+        List of temperatures from the top 10
+        highest temperatures table
+    :type temperatures_from_top_10_highest_temps:
+        list[str]
+
+    :return: Dictionary of top 10 highest
+        temperatures table
+    :rtype: dict[str, str]
+    '''
+    result = {}
+
+    # We need to check if station names list or temperatures list for top 10 highest temp table is missing
+    if station_names_from_top_10_highest_temps == [] or temperatures_from_top_10_highest_temps == []:
+        return result
+
+    list_of_all_station_names = station_names_from_top_10_highest_temps
+    list_of_all_temperatures = temperatures_from_top_10_highest_temps
+
+    # Loop through the station names list to map it to the temperatures list
+    for index, station_name in enumerate(list_of_all_station_names):
+        # Use the index of station names list to get the temperature
+        temperature = list_of_all_temperatures[index]
+        # Map station name to the selected temperature
+        result[station_name] = temperature
+
+    return result
