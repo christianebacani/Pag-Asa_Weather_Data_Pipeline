@@ -395,5 +395,5 @@ def save_recorded_date_from_highest_temps_to_json(
         'w'
     ) as json_file:
         json.dump(data, json_file, indent=4)
-    
+
     json_file.close()
