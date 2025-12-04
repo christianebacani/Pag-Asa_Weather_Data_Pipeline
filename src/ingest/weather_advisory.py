@@ -17,3 +17,22 @@ def create_subdir(
     # Create the data/raw/weather_advisory/ subdirectory if it doesn't exist
     if not os.path.exists('data/raw/weather_advisory'):
         os.makedirs('data/raw/weather_advisory')
+
+def extract_beautiful_soup_object(
+        url: str
+) -> BeautifulSoup | None:
+    '''
+    Extracts the BeautifulSoup object
+    of the weather advisory from the
+    PAGASA-DOST website.
+
+    :param url: URL of the PAGASA-DOST
+        page containing the weather
+        advisory
+    :type url: str
+
+    :return: BeautifulSoup object for navigating
+        the page content, or None if extraction
+        fails
+    :rtype: BeautifulSoup | None
+    '''
