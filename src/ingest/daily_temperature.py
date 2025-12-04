@@ -369,3 +369,18 @@ def extract_recorded_date_from_top_10_highest_temps(
     ).strip()
 
     return recorded_date_from_highest_temps
+
+def save_recorded_date_from_highest_temps_to_json(
+        recorded_date_from_top_10_highest_temps: str
+) -> None:
+    '''
+    Saves the recorded date from the top 10 highest
+    temperatures table to a JSON file in the
+    data/raw/daily_temperature/ subdirectory on
+    the local machine.
+
+    :param recorded_date_from_top_10_highest_temps:
+        Recorded date from the top 10 highest
+        temperatures table
+    :type recorded_date_from_top_10_highest_temps: str
+    '''
