@@ -36,3 +36,12 @@ def extract_beautiful_soup_object(
         fails
     :rtype: BeautifulSoup | None
     '''
+    response = requests.get(url)
+
+    # We need to check if the status code of the response for the request is unsuccessful
+    if response.status_code != 200:
+        return None
+
+    # Parse as a BeautifulSoup object
+    soup = BeautifulSoup(response.text, 'html.parser')
+    return soup
