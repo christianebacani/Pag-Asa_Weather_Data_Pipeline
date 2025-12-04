@@ -59,6 +59,30 @@ def extract_weather_advisory(
         extraction fails
     :type soup: BeautifulSoup | None
 
-    :return: Weather Advisory 
+    :return: Weather Advisory
     :rtype: str
     '''
+    weather_advisory = ''
+
+    # We need to check if the BeautifulSoup object is missing
+    if soup is None:
+        return weather_advisory
+
+    # Extract HTML tags for weather advisory
+    div_tag_with_row_marine_class = soup.find('div', attrs={'class': 'row marine'})
+    weather_advisory_tag = div_tag_with_row_marine_class.find(
+        'div',
+        attrs={
+            'class': 'weekly-content-adv'
+        }
+    )
+
+    # We need to check if weather_advisory_tag is missing
+    if weather_advisory_tag is None:
+        return weather_advisory
+    
+    iframe_tag = weather_advisory_tag.find('iframe')
+    weather_advisory = iframe_tag['src']
+    weather_advisory = str(weather_advisory).strip()
+
+    return weather_advisory
