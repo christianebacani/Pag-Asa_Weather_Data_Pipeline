@@ -10,6 +10,6 @@ def ingest_tropical_cyclone_advisory(
         Ingest the tropical cyclone
         advisory from the PAGASA-DOST
         website by executing all functions
-        in the weather_advisory module
+        in the tropical_cyclone_advisory module
         of the src/ingest package.
     '''
