@@ -114,3 +114,16 @@ def save_tropical_cyclone_associated_rainfall_to_json(
         Rainfall
     :type weather_advisory: str
     '''
+    # Create a dictionary to store the tropical cyclone associated rainfall
+    data = {
+        "tropical_cyclone_associated_rainfall": tropical_cyclone_associated_rainfall
+    }
+
+    # Save the dictionary to a json file using open() method and json module
+    with open(
+        'data/raw/tropical_cyclone_associated_rainfall/tropical_cyclone_associated_rainfall.json',
+        'w'
+    ) as json_file:
+        json.dump(data, json_file, indent=4)
+
+    json_file.close()
