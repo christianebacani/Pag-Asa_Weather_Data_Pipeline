@@ -49,3 +49,21 @@ def extract_beautiful_soup_object(
 
     soup = BeautifulSoup(response.text, 'html.parser')
     return soup
+
+def extract_issued_datetime_of_tarlac_weather_forecast(
+        soup: BeautifulSoup | None
+) -> str:
+    '''
+    Extracts the issued datetime of the regional forecast
+    specifically for the Province of Tarlac from the
+    PAGASA-DOST website.
+
+    :param soup: BeautifulSoup object for navigating
+        and manipulating the page content, or
+        None if extraction fails
+    :type soup: BeautifulSoup | None
+
+    :return: Issued datetime of the weather forecast for the
+        Province of Bataan
+    :rtype: str
+    '''
