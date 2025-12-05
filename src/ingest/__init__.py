@@ -4,3 +4,4 @@ from . import weather_outlook_for_ph_tourist_areas
 from . import weather_advisory
 from . import tropical_cyclone_advisory
 from . import tropical_cyclone_associated_rainfall
+from . import regional_forecast
