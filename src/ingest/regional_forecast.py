@@ -18,3 +18,6 @@ def create_subdir(
         for the Province of Tarlac and Bataan
         from the PAGASA-DOST website.
     '''
+    # Create the data/raw/regional_forecast/ subdirectory if it doesn't exist
+    if not os.path.exists('data/raw/regional_forecast'):
+        os.makedirs('data/raw/regional_forecast')
