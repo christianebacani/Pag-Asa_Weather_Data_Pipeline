@@ -64,3 +64,37 @@ def extract_tropical_cyclone_associated_rainfall(
     :return: Tropical Cyclone Associated Rainfall
     :rtype: str
     '''
+    tropical_cyclone_associated_rainfall = ''
+
+    # We need to check if the BeautifulSoup object is missing
+    if soup is None:
+        return tropical_cyclone_associated_rainfall
+
+    # Extract HTML tags for tropical cyclone associated rainfall
+    div_tag_with_row_climate_page_class = soup.find('div', attrs={'class': 'row climate-page'})
+    tropical_cyclone_associated_rainfall_tag = div_tag_with_row_climate_page_class.find(
+        'div',
+        attrs={
+            'class': 'col-md-12 article-content'
+        }
+    )
+    div_tag_with_panel_class = tropical_cyclone_associated_rainfall_tag.find(
+        'div',
+        attrs={
+            'class': 'panel'
+        }
+    )
+
+    # We need to check if div_tag_with_panel_class is missing
+    if div_tag_with_panel_class is None:
+        return tropical_cyclone_associated_rainfall
+
+    select_tag_with_form_control_class = div_tag_with_panel_class.find(
+        'select', attrs={
+            'class': 'form-control tc_select'
+        }
+    )
+    list_of_all_option_tags = select_tag_with_form_control_class.find_all('option')[1:]
+
+    for option_tag in list_of_all_option_tags:
+        print(option_tag)
