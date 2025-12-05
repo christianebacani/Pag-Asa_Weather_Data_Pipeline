@@ -7,3 +7,14 @@ import os
 import requests
 import json
 from bs4 import BeautifulSoup
+
+def create_subdir(
+) -> None:
+    '''
+        Creates the
+        data/raw/regional_forecast/
+        subdirectory to store JSON files
+        for regional forecast specifically
+        for the Province of Tarlac and Bataan
+        from the PAGASA-DOST website.
+    '''
