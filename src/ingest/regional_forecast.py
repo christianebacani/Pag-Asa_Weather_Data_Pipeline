@@ -67,3 +67,4 @@ def extract_issued_datetime_of_tarlac_weather_forecast(
         Province of Bataan
     :rtype: str
     '''
+    issued_datetime = ''
