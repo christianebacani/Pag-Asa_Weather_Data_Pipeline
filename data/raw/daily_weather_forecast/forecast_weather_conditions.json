@@ -1,24 +1,32 @@
 {
     "place": [
-        "Catanduanes, Albay, Sorsogon, Northern Samar, Eastern Samar, and Samar",
-        "Cagayan Valley, Cordillera Administrative Region, Aurora, and Quezon",
+        "Eastern Visayas, Central Visayas, Masbate, Camiguin, Surigao del Norte, Surigao del Sur, and Dinagat Islands",
+        "The rest of Bicol Region, Quezon, Occidental Mindoro, Oriental Mindoro, Marinduque, and Romblon",
+        "Northern Mindanao, Zamboanga Peninsula, the rest of Visayas, and the rest of Caraga",
+        "Cagayan Valley, Cordillera Administrative Region, and Aurora",
         "Metro Manila and the rest of Luzon",
-        "The rest of the country"
+        "The rest of Mindanao"
     ],
     "weather_condition": [
+        "Rains with gusty winds",
         "Cloudy skies with scattered rains and isolated thunderstorms",
+        "Cloudy skies with scattered rains and thunderstorms",
         "Cloudy skies with rains",
         "Partly cloudy to cloudy skies with isolated light rains",
         "Partly cloudy to cloudy skies with isolated rainshowers or thunderstorms"
     ],
     "caused_by": [
+        "TD Wilma",
         "Shear Line",
+        "TD Wilma",
         "Northeast Monsoon",
         "Northeast Monsoon",
         "Localized Thunderstorms"
     ],
     "impacts": [
-        "Possible flash floods or landslides due to moderate to at heavy rains",
+        "Possible flash floods or landslides due to moderate to heavy rains with at times intense rains. Minimal to minor threat to life and property due to strong winds.",
+        "Possible flash floods or landslides due to moderate to heavy with at times intense rains",
+        "Possible flash floods or landslides due to moderate to heavy rains",
         "Possible flash floods or landslides due to moderate to at times heavy rains",
         "No significant impact",
         "Possible flash floods or landslides during severe thunderstorms"
