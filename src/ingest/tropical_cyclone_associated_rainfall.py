@@ -8,7 +8,8 @@ import requests
 import json
 from bs4 import BeautifulSoup
 
-def create_subdir():
+def create_subdir(
+) -> None:
     '''
         Creates the
         data/raw/tropical_cyclone_associated_rainfall/
