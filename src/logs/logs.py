@@ -16,6 +16,7 @@ from executor.weather_outlook_for_ph_tourist_areas_executor import ingest_weathe
 from executor.weather_advisory_executor import ingest_weather_advisory
 from executor.tropical_cyclone_advisory_executor import ingest_tropical_cyclone_advisory
 from executor.tropical_cyclone_associated_rainfall_executor import ingest_tropical_cyclone_associated_rainfall
+from executor.regional_forecast_executor import ingest_regional_forecast
 
 def generate_logs(
     log_message: str
@@ -80,3 +81,8 @@ if __name__ == '__main__':
     generate_logs(
         '(DEV): Ingest the data for the tropical cyclone associated rainfall'
     )
+
+    ingest_regional_forecast()
+    generate_logs(
+        '(DEV): Ingest the data for the regional forecast specifally for the Province of Bataan and Tarlac'
+   )
