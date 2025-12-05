@@ -5,6 +5,7 @@
     from the PAGASA-DOST website.
 '''
 from ingest.regional_forecast import create_subdir
+from ingest.regional_forecast import extract_beautiful_soup_object
 
 def ingest_regional_forecast(
 ) -> None:
@@ -18,3 +19,6 @@ def ingest_regional_forecast(
     '''
     # Run all functions to ingest weather advisory data
     create_subdir()
+    soup = extract_beautiful_soup_object(
+        'https://www.pagasa.dost.gov.ph/regional-forecast/ncrprsd'
+    )
