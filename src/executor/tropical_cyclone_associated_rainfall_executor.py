@@ -23,6 +23,6 @@ def ingest_tropical_cyclone_associated_rainfall(
         'https://www.pagasa.dost.gov.ph/climate/tropical-cyclone-associated-rainfall'
     )
 
-    extract_tropical_cyclone_associated_rainfall(
+    tropical_cyclone_associated_rainfall = extract_tropical_cyclone_associated_rainfall(
         soup
     )
