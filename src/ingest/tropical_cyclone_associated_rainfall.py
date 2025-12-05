@@ -100,3 +100,17 @@ def extract_tropical_cyclone_associated_rainfall(
     tropical_cyclone_associated_rainfall = str(tropical_cyclone_associated_rainfall).strip()
 
     return tropical_cyclone_associated_rainfall
+
+def save_tropical_cyclone_associated_rainfall_to_json(
+        tropical_cyclone_associated_rainfall: str
+) -> None:
+    '''
+    Saves the tropical cyclone associated rainfall
+    to a JSON file in the
+    data/raw/tropical_cyclone_associated_rainfall
+    subdirectory on the local machine.
+
+    :param weather_advisory: Tropical Cyclone Associated
+        Rainfall
+    :type weather_advisory: str
+    '''
