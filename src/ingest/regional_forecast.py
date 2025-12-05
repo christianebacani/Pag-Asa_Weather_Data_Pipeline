@@ -64,7 +64,7 @@ def extract_issued_datetime_of_tarlac_weather_forecast(
     :type soup: BeautifulSoup | None
 
     :return: Issued datetime of the weather forecast for the
-        Province of Bataan
+        Province of Tarlac
     :rtype: str
     '''
     issued_datetime = ''
