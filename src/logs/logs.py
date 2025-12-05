@@ -84,5 +84,5 @@ if __name__ == '__main__':
 
     ingest_regional_forecast()
     generate_logs(
-        '(DEV): Ingest the data for the regional forecast specifally for the Province of Bataan and Tarlac'
+        '(DEV): Ingest the data for the regional forecast specifally for the Province of Tarlac and Bataan'
    )
