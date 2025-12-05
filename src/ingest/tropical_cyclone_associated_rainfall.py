@@ -89,12 +89,14 @@ def extract_tropical_cyclone_associated_rainfall(
     if div_tag_with_panel_class is None:
         return tropical_cyclone_associated_rainfall
 
-    select_tag_with_form_control_class = div_tag_with_panel_class.find(
-        'select', attrs={
-            'class': 'form-control tc_select'
+    tropical_cyclone_associated_rainfall_tag = div_tag_with_panel_class.find(
+        'div',
+        attrs={
+            'class': 'col-md-8'
         }
     )
-    list_of_all_option_tags = select_tag_with_form_control_class.find_all('option')[1:]
+    img_tag = tropical_cyclone_associated_rainfall_tag.find('img')
+    tropical_cyclone_associated_rainfall = img_tag['src']
+    tropical_cyclone_associated_rainfall = str(tropical_cyclone_associated_rainfall).strip()
 
-    for option_tag in list_of_all_option_tags:
-        print(option_tag)
+    return tropical_cyclone_associated_rainfall
