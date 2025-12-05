@@ -47,3 +47,20 @@ def extract_beautiful_soup_object(
     # Parse as a BeautifulSoup object
     soup = BeautifulSoup(response.text, 'html.parser')
     return soup
+
+def extract_tropical_cyclone_associated_rainfall(
+        soup: BeautifulSoup | None
+) -> str:
+    '''
+    Extracts the tropical cyclone associated
+    rainfall from the PAGASA-DOST website.
+
+    :param soup: BeautifulSoup object
+        for navigating and manipulating
+        the page content, or None if
+        extraction fails
+    :type soup: BeautifulSoup | None
+
+    :return: Tropical Cyclone Associated Rainfall
+    :rtype: str
+    '''
