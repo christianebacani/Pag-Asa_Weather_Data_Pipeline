@@ -49,3 +49,20 @@ def extract_beautiful_soup_object(
 
     soup = BeautifulSoup(response.text, 'html.parser')
     return soup
+
+def extract_tarlac_weather_forecast_tag(
+        soup: BeautifulSoup | None
+) -> BeautifulSoup | None:
+    '''
+    Extracts the Tarlac weather forecast
+    HTML tag to get the weather forecast
+    from the PAGASA-DOST website.
+
+    :param soup: BeautifulSoup object for navigating
+        and manipulating the page content, or None if
+        extraction fails
+    :type soup: BeautifulSoup | None
+
+    :return: Tarlac weather forecast HTML tag
+    :rtype: BeautifulSoup | None
+    '''
