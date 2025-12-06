@@ -135,3 +135,14 @@ def extract_tarlac_weather_forecast_early_period(
         of Tarlac
     :rtype: dict[str, str | list]
     '''
+    tarlac_weather_forecast_early_period = {
+        'weather_condition': '',
+        'temperature_ranges': [],
+        'wind_speed': '',
+        'direction': '',
+        'coastal_condition': ''
+    }
+
+    # We need to check if the tarlac_weather_forecast_tag is missing
+    if tarlac_weather_forecast_tag is None:
+        return tarlac_weather_forecast_early_period
