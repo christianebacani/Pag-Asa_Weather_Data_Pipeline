@@ -93,3 +93,6 @@ def extract_issued_datetime_of_tarlac_weather_forecast(
             'class': 'col-md-12'
         }
     )[1]
+
+    issued_datetime_tag = weather_forecast_tag.find('span')
+    print(issued_datetime_tag)
