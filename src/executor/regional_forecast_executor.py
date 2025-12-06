@@ -24,6 +24,6 @@ def ingest_regional_forecast(
         'https://www.pagasa.dost.gov.ph/regional-forecast/ncrprsd'
     )
 
-    extract_issued_datetime_of_tarlac_weather_forecast(
+    issued_datetime_of_tarlac_weather_forecast = extract_issued_datetime_of_tarlac_weather_forecast(
         soup
     )
