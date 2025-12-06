@@ -6,7 +6,6 @@
 '''
 from ingest.regional_forecast import create_subdir
 from ingest.regional_forecast import extract_beautiful_soup_object
-from ingest.regional_forecast import extract_issued_datetime_of_tarlac_weather_forecast
 
 def ingest_regional_forecast(
 ) -> None:
@@ -22,8 +21,4 @@ def ingest_regional_forecast(
     create_subdir()
     soup = extract_beautiful_soup_object(
         'https://www.pagasa.dost.gov.ph/regional-forecast/ncrprsd'
-    )
-
-    issued_datetime_of_tarlac_weather_forecast = extract_issued_datetime_of_tarlac_weather_forecast(
-        soup
     )
