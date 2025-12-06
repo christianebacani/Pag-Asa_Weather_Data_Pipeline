@@ -146,3 +146,32 @@ def extract_tarlac_weather_forecast_early_period(
     # We need to check if the tarlac_weather_forecast_tag is missing
     if tarlac_weather_forecast_tag is None:
         return tarlac_weather_forecast_early_period
+
+    # Extract HTML tags for tarlac weather forecast early period
+    weather_forecast_tag = tarlac_weather_forecast_tag.find_all('div', attrs={'class': 'col-md-12'})[1]
+    div_tag_with_row_class = weather_forecast_tag.find('div', attrs={'class': 'row'})
+    tarlac_weather_forecast_early_period_tag = div_tag_with_row_class.find_all(
+        'div',
+        attrs={
+            'class': 'col-md-6'
+        }
+    )[1]
+
+    # We need to check if the tarlac_weather_forecast_early_period_tag is missing
+    if tarlac_weather_forecast_early_period_tag is None:
+        return tarlac_weather_forecast_early_period
+
+    weather_condition_and_temperature_ranges_tag = tarlac_weather_forecast_early_period_tag.find(
+        'div',
+        attrs={
+            'class': 'forecast-container'
+        }
+    )
+
+    weather_condition_tag = weather_condition_and_temperature_ranges_tag.find(
+        'span', attrs={'class': 'description'}
+    )
+    weather_condition = str(weather_condition_tag.text).strip()
+
+    temperature_ranges_tag = weather_condition_tag.find('span', attrs={'class': 'temperature'})
+    print(temperature_ranges_tag)
