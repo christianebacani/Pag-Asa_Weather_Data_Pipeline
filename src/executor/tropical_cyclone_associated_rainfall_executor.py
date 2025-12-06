@@ -3,10 +3,10 @@
     and loading functions for the tropical cyclone
     associated rainfall from the PAGASA-DOST website.
 '''
-from ingest.tropical_cyclone_associated_rainfall import create_subdir
-from ingest.tropical_cyclone_associated_rainfall import extract_beautiful_soup_object
-from ingest.tropical_cyclone_associated_rainfall import extract_tropical_cyclone_associated_rainfall
-from ingest.tropical_cyclone_associated_rainfall import save_tropical_cyclone_associated_rainfall_to_json
+from ingest.ingest_tropical_cyclone_associated_rainfall import create_subdir
+from ingest.ingest_tropical_cyclone_associated_rainfall import extract_beautiful_soup_object
+from ingest.ingest_tropical_cyclone_associated_rainfall import extract_tropical_cyclone_associated_rainfall
+from ingest.ingest_tropical_cyclone_associated_rainfall import save_tropical_cyclone_associated_rainfall_to_json
 
 def ingest_tropical_cyclone_associated_rainfall(
 ) -> None:
