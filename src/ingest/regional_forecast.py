@@ -127,9 +127,6 @@ def extract_tarlac_early_period_weather_forecast(
     Extracts the weather forecast of the early period for
     the Province of Tarlac from the PAGASA-DOST website.
 
-    Extracts the issued datetime of the weather forecast
-    for the Province of Tarlac from the PAGASA-DOST website.
-
     :param tarlac_weather_forecast_tag: Tarlac weather forecast
         HTML tag
     :type tarlac_weather_forecast_tag: BeautifulSoup | None
