@@ -344,7 +344,7 @@ def map_weather_dates_to_ph_cities(
 
     # Loop the through the selected PH cities list to map it to the weather dates list
     for ph_city_name in list_of_all_ph_city_names:
-        # Map the selected PH city to the weather dates list
+        # Map weather dates list to the selected PH city
         result[ph_city_name]['weather_dates'] = weather_dates
 
     return result
@@ -427,7 +427,7 @@ def map_temperature_ranges_to_ph_cities(
     for index, temperature_ranges in enumerate(list_of_all_temperature_ranges):
         # Use the index of temperature range to get the name of the PH city
         ph_city_name = list_of_all_ph_city_names[index]
-        # Map selected PH city to the temperature ranges list
+        # Map temperature ranges list to the selected PH city
         result[ph_city_name]['temperature_ranges'] = temperature_ranges
 
     return result
@@ -514,7 +514,7 @@ def map_chance_of_rain_percentages_to_ph_cities(
     for index, chance_of_rain_percentages in enumerate(list_of_all_chance_of_rain_percentages):
         # Use the index of rain chance pct to get the name of the PH city
         ph_city_name = list_of_all_ph_city_names[index]
-        # Map selected PH city to the rain chance pcts list
+        # Map rain chance pcts list to the selected PH city
         result[ph_city_name]['chance_of_rain_percentages'] = chance_of_rain_percentages
 
     return result
