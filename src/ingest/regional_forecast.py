@@ -79,3 +79,15 @@ def extract_tarlac_weather_forecast_tag(
             'class': 'container-fluid container-space'
         }
     )
+    div_tag_with_prsd_page_class = div_tag_with_container_fluid_class.find(
+        'div',
+        attrs={
+            'class': 'col-md-12 prsd-page'
+        }
+    )
+    tarlac_weather_forecast_tag = div_tag_with_prsd_page_class.find(
+        'div',
+        attrs={'class': 'col-md-6'}
+    )
+
+    return tarlac_weather_forecast_tag
