@@ -350,7 +350,7 @@ def map_weather_dates_to_ph_tourist_areas(
 
     # Loop through the selected PH tourist areas list to map it to the weather dates list
     for ph_tourist_area_name in list_of_all_ph_tourist_area_names:
-        # Map selected PH tourist area to the weather dates list
+        # Map weather dates list to the selected PH tourist area
         result[ph_tourist_area_name]['weather_dates'] = weather_dates
 
     return result
@@ -430,9 +430,9 @@ def map_temperature_ranges_to_ph_tourist_areas(
     for index, temperature_ranges in enumerate(list_of_all_temperature_ranges):
         # Use the index of temperature ranges list to get the name of the PH tourist area
         ph_tourist_area_name = list_of_all_ph_tourist_area_names[index]
-        # Map selected PH tourist area to the temperature ranges list
+        # Map temperature ranges list to the selected PH tourist area
         result[ph_tourist_area_name]['temperature_ranges'] = temperature_ranges
-    
+
     return result
 
 def save_ph_tourist_areas_weather_outlook_to_json(
