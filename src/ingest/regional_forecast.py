@@ -74,6 +74,7 @@ def extract_issued_datetime_of_tarlac_weather_forecast(
     if soup is None:
         return issued_datetime
 
+    # Extract HTML tags for issued datetime of tarlac weather forecast
     div_tag_with_container_fluid_class = soup.find(
         'div',
         attrs={
