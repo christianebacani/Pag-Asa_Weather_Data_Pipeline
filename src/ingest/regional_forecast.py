@@ -120,7 +120,7 @@ def extract_issued_datetime_of_tarlac_weather_forecast(
 
     return issued_datetime
 
-def extract_tarlac_early_period_weather_forecast(
+def extract_tarlac_weather_forecast_early_period(
         tarlac_weather_forecast_tag: BeautifulSoup | None
 ) -> dict[str, str | list]:
     '''
