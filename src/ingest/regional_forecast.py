@@ -94,6 +94,11 @@ def extract_issued_datetime_of_tarlac_weather_forecast(
         }
     )[1]
     issued_datetime_tag = weather_forecast_tag.find_all('span')[1]
+
+    # We need to check if the issued_datetime_tag is missing
+    if issued_datetime_tag is None:
+        return issued_datetime
+
     issued_datetime = str(issued_datetime_tag.text).strip()
 
     return issued_datetime
