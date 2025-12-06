@@ -58,11 +58,13 @@ def extract_tarlac_weather_forecast_tag(
     HTML tag to get the weather forecast
     from the PAGASA-DOST website.
 
-    :param soup: BeautifulSoup object for navigating
-        and manipulating the page content, or None if
-        extraction fails
+    :param soup: BeautifulSoup object for
+        navigating and manipulating the
+        page content, or None if extraction
+        fails
     :type soup: BeautifulSoup | None
 
-    :return: Tarlac weather forecast HTML tag
+    :return: Tarlac weather forecast HTML
+        tag
     :rtype: BeautifulSoup | None
     '''
