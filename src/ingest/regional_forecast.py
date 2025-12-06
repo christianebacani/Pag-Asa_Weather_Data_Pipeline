@@ -103,3 +103,19 @@ def extract_issued_datetime_of_tarlac_weather_forecast(
     issued_datetime = str(issued_datetime_tag.text).strip()
 
     return issued_datetime
+
+def extract_tarlac_early_period_weather_forecast(
+        soup: BeautifulSoup | None
+) -> dict[str, str | list]:
+    '''
+    Docstring for extract_tarlac_early_period_weather_forecast
+
+    :param soup: BeautifulSoup object for navigating and
+        manipulating the page content, or None if extraction
+        fails
+    :type soup: BeautifulSoup | None
+
+    :return: Early Period of Weather Forecast for the Province
+        of Tarlac
+    :rtype: dict[str, str | list]
+    '''
