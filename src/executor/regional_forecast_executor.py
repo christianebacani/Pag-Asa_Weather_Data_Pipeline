@@ -7,6 +7,7 @@
 from ingest.regional_forecast import create_subdir
 from ingest.regional_forecast import extract_beautiful_soup_object
 from ingest.regional_forecast import extract_tarlac_weather_forecast_tag
+from ingest.regional_forecast import extract_issued_datetime_of_tarlac_weather_forecast
 
 def ingest_regional_forecast(
 ) -> None:
@@ -26,4 +27,7 @@ def ingest_regional_forecast(
 
     tarlac_weather_forecast_tag = extract_tarlac_weather_forecast_tag(
         soup
+    )
+    issued_datetime_of_tarlac_weather_forecast = extract_issued_datetime_of_tarlac_weather_forecast(
+        tarlac_weather_forecast_tag
     )
