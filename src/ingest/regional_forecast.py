@@ -107,3 +107,15 @@ def extract_issued_datetime_of_tarlac_weather_forecast(
         of Tarlac
     :rtype: str
     '''
+    issued_datetime = ''
+
+    # We need to check if the tarlac_weather_forecast_tag is missing
+    if tarlac_weather_forecast_tag is None:
+        return issued_datetime
+
+    # Extract HTML tags for issued datetime of the weather forecast for the province of Tarlac
+    weather_forecast_tag = tarlac_weather_forecast_tag.find_all('div', attrs={'class': 'col-md-12'})[1]
+    issued_datetime_tag = weather_forecast_tag.find_all('span')[1]
+    issued_datetime = str(issued_datetime_tag.text).strip()
+
+    return issued_datetime
