@@ -10,7 +10,7 @@ def stage_issued_datetime(
     '''
     Stages the JSON file that contains
     the issued datetime of the daily weather
-    forecast into the data/stage subdirectory
+    forecast in the data/stage subdirectory
     on the local machine.
 
     :param issued_datetime_filepath: Relative
