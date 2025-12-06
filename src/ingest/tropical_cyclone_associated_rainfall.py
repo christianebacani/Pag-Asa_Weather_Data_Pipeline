@@ -122,7 +122,7 @@ def save_tropical_cyclone_associated_rainfall_to_json(
 
     # Save the dictionary to a json file using open() method and json module
     with open(
-        'data/raw/tropical_cyclone_associated_rainfall/tropical_cyclone_associated_rainfall.json',
+        'data/raw/tropical_cyclone_associated_rainfall/current_tropical_cyclone_associated_rainfall.json',
         'w'
     ) as json_file:
         json.dump(data, json_file, indent=4)
