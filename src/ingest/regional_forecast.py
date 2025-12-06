@@ -68,3 +68,28 @@ def extract_issued_datetime_of_tarlac_weather_forecast(
     :rtype: str
     '''
     issued_datetime = ''
+
+    # We need to check if the BeautifulSoup object is missing
+
+    if soup is None:
+        return issued_datetime
+
+    div_tag_with_container_fluid_class = soup.find(
+        'div',
+        attrs={
+            'class': 'container-fluid container-space'
+        }
+    )
+    regional_forecast_tag = div_tag_with_container_fluid_class.find(
+        'div',
+        attrs={
+            'class': 'col-md-12 prsd-page'
+        }
+    )
+    div_tag_with_column_markdown_tag = regional_forecast_tag.find('div',attrs={'class': 'col-md-6'})
+    weather_forecast_tag = div_tag_with_column_markdown_tag.find_all(
+        'div',
+        attrs={
+            'class': 'col-md-12'
+        }
+    )[1]
