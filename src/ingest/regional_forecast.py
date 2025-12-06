@@ -55,7 +55,7 @@ def extract_tarlac_weather_forecast_tag(
 ) -> BeautifulSoup | None:
     '''
     Extracts the Tarlac weather forecast
-    HTML tag to get the weather forecast
+    HTML tag to get its weather forecasts
     from the PAGASA-DOST website.
 
     :param soup: BeautifulSoup object for
@@ -68,3 +68,14 @@ def extract_tarlac_weather_forecast_tag(
         tag
     :rtype: BeautifulSoup | None
     '''
+    # We need to check if the BeautifulSoup object is missing
+    if soup is None:
+        return None
+    
+    # Extract HTML tag for the Province of Tarlac to get the weather forecasts
+    div_tag_with_container_fluid_class = soup.find(
+        'div',
+        attrs={
+            'class': 'container-fluid container-space'
+        }
+    )
