@@ -155,7 +155,7 @@ def extract_tarlac_weather_forecast_early_period(
         attrs={
             'class': 'col-md-6'
         }
-    )[1]
+    )[0]
 
     # We need to check if the tarlac_weather_forecast_early_period_tag is missing
     if tarlac_weather_forecast_early_period_tag is None:
