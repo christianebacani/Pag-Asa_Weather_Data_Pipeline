@@ -119,3 +119,10 @@ def extract_tarlac_early_period_weather_forecast(
         of Tarlac
     :rtype: dict[str, str | list]
     '''
+    tarlac_early_period_weather_forecast = {
+        'weather_condition': '',
+        'temperature_ranges': [],
+        'wind_speed': '',
+        'direction': '',
+        'coastal_condition': ''
+    }
