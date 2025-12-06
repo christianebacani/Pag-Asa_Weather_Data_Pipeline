@@ -92,7 +92,7 @@ def extract_tarlac_weather_forecast_tag(
 
     return tarlac_weather_forecast_tag
 
-def extract_issued_datetime_of_tarlac_weather_forecast(
+def extract_tarlac_weather_forecast_issued_datetime(
         tarlac_weather_forecast_tag: BeautifulSoup | None
 ) -> str:
     '''
