@@ -3,10 +3,10 @@
     and loading functions for the weather advisory
     from the PAGASA-DOST website.
 '''
-from ingest.weather_advisory import create_subdir
-from ingest.weather_advisory import extract_beautiful_soup_object
-from ingest.weather_advisory import extract_weather_advisory
-from ingest.weather_advisory import save_weather_advisory_to_json
+from ingest.ingest_weather_advisory import create_subdir
+from ingest.ingest_weather_advisory import extract_beautiful_soup_object
+from ingest.ingest_weather_advisory import extract_weather_advisory
+from ingest.ingest_weather_advisory import save_weather_advisory_to_json
 
 def ingest_weather_advisory(
 ) -> None:
