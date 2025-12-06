@@ -91,3 +91,19 @@ def extract_tarlac_weather_forecast_tag(
     )
 
     return tarlac_weather_forecast_tag
+
+def extract_issued_datetime_of_tarlac_weather_forecast(
+        tarlac_weather_forecast_tag: BeautifulSoup | None
+) -> str:
+    '''
+    Extracts the issued datetime of the weather forecast
+    for the Province of Tarlac from the PAGASA-DOST website.
+
+    :param tarlac_weather_forecast_tag: Tarlac weather forecast
+        HTML tag
+    :type tarlac_weather_forecast_tag: BeautifulSoup | None
+
+    :return: Issued datetime of the weather forecast for the Province
+        of Tarlac
+    :rtype: str
+    '''
