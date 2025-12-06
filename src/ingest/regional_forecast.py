@@ -71,7 +71,7 @@ def extract_tarlac_weather_forecast_tag(
     # We need to check if the BeautifulSoup object is missing
     if soup is None:
         return None
-    
+
     # Extract HTML tag for the Province of Tarlac to get the weather forecasts
     div_tag_with_container_fluid_class = soup.find(
         'div',
@@ -119,3 +119,22 @@ def extract_issued_datetime_of_tarlac_weather_forecast(
     issued_datetime = str(issued_datetime_tag.text).strip()
 
     return issued_datetime
+
+def extract_tarlac_early_period_weather_forecast(
+        tarlac_weather_forecast_tag: BeautifulSoup | None
+) -> dict[str, str | list]:
+    '''
+    Extracts the weather forecast of the early period for
+    the Province of Tarlac from the PAGASA-DOST website.
+
+    Extracts the issued datetime of the weather forecast
+    for the Province of Tarlac from the PAGASA-DOST website.
+
+    :param tarlac_weather_forecast_tag: Tarlac weather forecast
+        HTML tag
+    :type tarlac_weather_forecast_tag: BeautifulSoup | None
+
+    :return: Weater forecast of the early period for the Province
+        of Tarlac
+    :rtype: dict[str, str | list]
+    '''
